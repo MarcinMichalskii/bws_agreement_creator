@@ -1,13 +1,15 @@
-import 'package:bws_agreement_creator/colors.dart';
+import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class SelectPhotoButton extends StatelessWidget {
   const SelectPhotoButton({
     Key? key,
     required this.onTap,
+    required this.title,
   }) : super(key: key);
 
   final VoidCallback onTap;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +23,8 @@ class SelectPhotoButton extends StatelessWidget {
         onPressed: onTap,
         child: Container(
           padding: const EdgeInsets.fromLTRB(12, 24, 12, 24),
-          child: const Text('Dodaj zdjęcie',
-              style: TextStyle(
+          child: Text(title,
+              style: const TextStyle(
                   fontSize: 14,
                   color: CustomColors.gray,
                   fontWeight: FontWeight.w400)),

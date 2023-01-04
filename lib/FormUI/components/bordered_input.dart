@@ -1,4 +1,4 @@
-import 'package:bws_agreement_creator/colors.dart';
+import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

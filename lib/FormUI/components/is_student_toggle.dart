@@ -1,23 +1,27 @@
-import 'package:bws_agreement_creator/colors.dart';
+import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-class IsStudentToggle extends StatelessWidget {
-  const IsStudentToggle(
-      {super.key, required this.areYouAStudent, required this.onChanged});
-  final bool areYouAStudent;
+class FormToggle extends StatelessWidget {
+  const FormToggle(
+      {super.key,
+      required this.isOn,
+      required this.onChanged,
+      required this.title});
+  final bool isOn;
   final void Function(bool) onChanged;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 4),
       child: Row(children: [
-        const Text(
-          "Czy jesteś studentem?",
-          style: TextStyle(color: CustomColors.gray, fontSize: 14),
+        Text(
+          title,
+          style: const TextStyle(color: CustomColors.gray, fontSize: 14),
         ),
         Switch(
-          value: areYouAStudent,
+          value: isOn,
           onChanged: onChanged,
           inactiveTrackColor:
               CustomColors.applicationColorMain.withOpacity(0.3),

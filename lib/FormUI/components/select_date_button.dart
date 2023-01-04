@@ -1,4 +1,4 @@
-import 'package:bws_agreement_creator/colors.dart';
+import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
@@ -19,8 +19,8 @@ class SelectDateButton extends HookWidget {
       final value = await showDatePicker(
           context: context,
           initialDate: DateTime.now(),
-          firstDate: DateTime.now().add(const Duration(days: -365)),
-          lastDate: DateTime.now().add(const Duration(days: 365)));
+          firstDate: DateTime.now().add(const Duration(days: -365 * 100)),
+          lastDate: DateTime.now().add(const Duration(days: 365 * 100)));
 
       onDateSelected(value ?? DateTime.now());
     }, []);
