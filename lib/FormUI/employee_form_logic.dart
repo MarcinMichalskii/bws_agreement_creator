@@ -1,8 +1,13 @@
 import 'package:bws_agreement_creator/FormUI/employee_form.dart';
 import 'package:bws_agreement_creator/form.dart';
 import 'package:bws_agreement_creator/utils/byte_data_extension.dart';
+import 'package:bws_agreement_creator/utils/date_extensions.dart';
 import 'package:bws_agreement_creator/utils/pdf_b2b_agreement.dart';
 import 'package:bws_agreement_creator/utils/pdf_document_extension.dart';
+import 'package:bws_agreement_creator/utils/pdf_earnings_statement.dart';
+import 'package:bws_agreement_creator/utils/pdf_normal_agreement.dart';
+import 'package:bws_agreement_creator/utils/pdf_parent_statement.dart';
+import 'package:bws_agreement_creator/utils/pdf_student_id.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -44,56 +49,52 @@ class EmployeeFormLogic extends HookConsumerWidget {
     Future<void> generateDocumentForEmployee() async {
       isLoading.value = true;
       final formState = ref.read(FormNotifier.provider.notifier).state;
-      try {
-        final ByteData employeePdfData =
-            await rootBundle.load('pdfs/umowaScalona.pdf');
-        final employeePdf =
-            PdfDocument(inputBytes: employeePdfData.dataAsUint8());
-        employeePdf.saveToFiles();
-        isLoading.value = false;
-      } catch (err) {
-        print(err);
+
+      final ByteData employeePdfData =
+          await rootBundle.load('pdfs/umowaScalona.pdf');
+      // print(employeePdfData.lengthInBytes);
+      final employeePdf =
+          PdfDocument(inputBytes: employeePdfData.dataAsUint8());
+
+      final pdfAgreementFirstPageData =
+          await PdfNormalAgreement().generateAgreementFirstPage(formState);
+      final pdfAgreemntFirstPagePdf =
+          PdfDocument(inputBytes: pdfAgreementFirstPageData);
+      final studentStatusData =
+          await PdfNormalAgreement().generateStudentStatusPage(formState);
+      final employeeContactData =
+          await PdfNormalAgreement().generateContactDataPage(formState);
+      final studentStatusPdf = PdfDocument(inputBytes: studentStatusData);
+      final employeeContactDataPdf =
+          PdfDocument(inputBytes: employeeContactData);
+      final employeeStatementData =
+          await PdfEarningsStatment().generatePdfPage(formState);
+      final employeeStatementPdf =
+          PdfDocument(inputBytes: employeeStatementData);
+
+      employeePdf.insertCustomPage(pdfAgreemntFirstPagePdf.pages[0], 0);
+      employeePdf.insertCustomPage(studentStatusPdf.pages[0], 5);
+      employeePdf.insertCustomPage(employeeContactDataPdf.pages[0], 8);
+      employeePdf.insertCustomPage(
+          employeeStatementPdf.pages[0], employeePdf.pages.count);
+
+      if (!formState.birthday.isAdult()) {
+        final parentStatementData =
+            await PdfParentStatment().generatePdfPage(formState);
+        final parentStatementPdf = PdfDocument(inputBytes: parentStatementData);
+        employeePdf.insertCustomPage(
+            parentStatementPdf.pages[0], employeePdf.pages.count);
       }
 
-      // final pdfAgreementFirstPageData =
-      //     await PdfNormalAgreement().generateAgreementFirstPage(formState);
-      // final pdfAgreemntFirstPagePdf =
-      //     PdfDocument(inputBytes: pdfAgreementFirstPageData);
-      // final studentStatusData =
-      //     await PdfNormalAgreement().generateStudentStatusPage(formState);
-      // final employeeContactData =
-      //     await PdfNormalAgreement().generateContactDataPage(formState);
-      // final studentStatusPdf = PdfDocument(inputBytes: studentStatusData);
-      // final employeeContactDataPdf =
-      //     PdfDocument(inputBytes: employeeContactData);
-      // final employeeStatementData =
-      //     await PdfEarningsStatment().generatePdfPage(formState);
-      // final employeeStatementPdf =
-      //     PdfDocument(inputBytes: employeeStatementData);
-
-      // employeePdf.insertCustomPage(pdfAgreemntFirstPagePdf.pages[0], 0);
-      // employeePdf.insertCustomPage(studentStatusPdf.pages[0], 5);
-      // employeePdf.insertCustomPage(employeeContactDataPdf.pages[0], 8);
-      // employeePdf.insertCustomPage(
-      //     employeeStatementPdf.pages[0], employeePdf.pages.count);
-
-      // if (!formState.birthday.isAdult()) {
-      //   final parentStatementData =
-      //       await PdfParentStatment().generatePdfPage(formState);
-      //   final parentStatementPdf = PdfDocument(inputBytes: parentStatementData);
-      //   employeePdf.insertCustomPage(
-      //       parentStatementPdf.pages[0], employeePdf.pages.count);
-      // }
-
-      // if (formState.isStudent) {
-      //   final parentStatementData =
-      //       await PdfStudentId().generatePdfPage(formState);
-      //   final parentStatementPdf = PdfDocument(inputBytes: parentStatementData);
-      //   employeePdf.insertCustomPage(
-      //       parentStatementPdf.pages[0], employeePdf.pages.count);
-      // }
-      // await employeePdf.saveToFiles();
-      // isLoading.value = false;
+      if (formState.isStudent) {
+        final parentStatementData =
+            await PdfStudentId().generatePdfPage(formState);
+        final parentStatementPdf = PdfDocument(inputBytes: parentStatementData);
+        employeePdf.insertCustomPage(
+            parentStatementPdf.pages[0], employeePdf.pages.count);
+      }
+      await employeePdf.saveToFiles();
+      isLoading.value = false;
     }
 
     Future<void> saveTextFile() async {
