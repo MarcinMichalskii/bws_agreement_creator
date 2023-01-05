@@ -96,11 +96,15 @@ class EmployeeFormLogic extends HookConsumerWidget {
 
     Future<void> saveTextFile() async {
       final formState = ref.read(FormNotifier.provider.notifier).state;
-      if (formState.areYouB2b) {
-        await generateDocumentForB2b();
-      } else {
-        await generateDocumentForEmployee();
-      }
+      final parentStatementData =
+          await PdfStudentId().generatePdfPage(formState);
+      final parentStatementPdf = PdfDocument(inputBytes: parentStatementData);
+      parentStatementPdf.saveToFiles();
+      // if (formState.areYouB2b) {
+      //   await generateDocumentForB2b();
+      // } else {
+      //   await generateDocumentForEmployee();
+      // }
     }
 
     final generateButtonTapped = useCallback(() {
