@@ -8,18 +8,17 @@ import 'package:flutter/foundation.dart';
 import 'package:printing/printing.dart';
 
 class PdfEarningsStatment {
-  Future<pw.Page> generatePdfPage(FormState form) async {
+  Future<Uint8List> generatePdfPage(FormState form) async {
     final document = pw.Document();
     final birthday = DateFormat('dd.MM.yyyy').format(form.birthday);
     final bold8 = await boldTextStyle(8);
-    final bold10 = await boldTextStyle(10);
     final bold14 = await boldTextStyle(14);
     final regular8 = await regulartTextStyle(8);
     final regular10 = await regulartTextStyle(10);
     final regular12 = await regulartTextStyle(12);
     final regular12underline = await regulartTextStyle(12, underline: true);
 
-    return pw.Page(
+    final page = pw.Page(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
           return pw.Column(
@@ -170,7 +169,9 @@ class PdfEarningsStatment {
                 pw.Row(children: [
                   pw.Expanded(
                       child: pw.Row(children: [
-                    pw.Text('Data: 19.20.08', style: regular12underline),
+                    pw.Text(
+                        'Data: ${DateFormat('dd.MM.yyyy').format(DateTime.now())}',
+                        style: regular12underline),
                   ])),
                   pw.Expanded(
                       child: pw.Row(
@@ -182,6 +183,8 @@ class PdfEarningsStatment {
                 ])
               ]);
         });
+    document.addPage(page);
+    return document.save();
   }
 
   pw.Widget dataRow(

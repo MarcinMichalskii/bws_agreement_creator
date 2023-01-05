@@ -16,6 +16,7 @@ class StudentIdRow extends HookConsumerWidget {
           await FilePicker.platform.pickFiles(type: FileType.image);
       final image = result?.files.first.bytes;
       if (image != null) {
+        ref.read(FormNotifier.provider.notifier).setFrontStudentIdData(image);
         ref
             .read(FormNotifier.provider.notifier)
             .setFrontStudentIdImage(Image.memory(image));
@@ -23,6 +24,7 @@ class StudentIdRow extends HookConsumerWidget {
     }, []);
 
     final onFrontRemoveTapped = useCallback(() {
+      ref.read(FormNotifier.provider.notifier).setFrontStudentIdData(null);
       ref.read(FormNotifier.provider.notifier).setFrontStudentIdImage(null);
     }, []);
 
@@ -32,6 +34,7 @@ class StudentIdRow extends HookConsumerWidget {
           await FilePicker.platform.pickFiles(type: FileType.image);
       final image = result?.files.first.bytes;
       if (image != null) {
+        ref.read(FormNotifier.provider.notifier).setBackStudentIdData(image);
         ref
             .read(FormNotifier.provider.notifier)
             .setBackStudentIdImage(Image.memory(image));
@@ -39,6 +42,7 @@ class StudentIdRow extends HookConsumerWidget {
     }, []);
 
     final onBackRemoveTapped = useCallback(() {
+      ref.read(FormNotifier.provider.notifier).setBackStudentIdData(null);
       ref.read(FormNotifier.provider.notifier).setBackStudentIdImage(null);
     }, []);
 

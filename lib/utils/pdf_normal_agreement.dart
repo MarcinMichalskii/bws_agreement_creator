@@ -8,14 +8,8 @@ import 'package:printing/printing.dart';
 class PdfNormalAgreement {
   Future<Uint8List> generateAgreementFirstPage(FormState form) async {
     final document = pw.Document();
-    final birthday = DateFormat('dd.MM.yyyy').format(form.birthday);
-    final bold8 = await boldTextStyle(8);
     final bold10 = await boldTextStyle(10);
-    final bold14 = await boldTextStyle(14);
-    final regular8 = await regulartTextStyle(8);
     final regular11 = await regulartTextStyle(11);
-    final regular12 = await regulartTextStyle(12);
-    final regular12underline = await regulartTextStyle(12, underline: true);
 
     final page = pw.Page(
         pageFormat: PdfPageFormat.a4,
@@ -93,14 +87,8 @@ class PdfNormalAgreement {
 
   Future<Uint8List> generateStudentStatusPage(FormState form) async {
     final document = pw.Document();
-    final birthday = DateFormat('dd.MM.yyyy').format(form.birthday);
-    final bold8 = await boldTextStyle(8);
     final bold10 = await boldTextStyle(10);
-    final bold14 = await boldTextStyle(14);
-    final regular8 = await regulartTextStyle(8);
     final regular11 = await regulartTextStyle(11);
-    final regular12 = await regulartTextStyle(12);
-    final regular12underline = await regulartTextStyle(12, underline: true);
 
     final page = pw.Page(
         pageFormat: PdfPageFormat.a4,
@@ -131,7 +119,115 @@ class PdfNormalAgreement {
                     'Zapłata przez BWS należnego Usługodawcy wynagrodzenia za wykonanie Umowy Szczegółowej zostanie dokonana najpóźniej w terminie 14 (słownie: czternastu) dni od dnia zakończenia wykonywania przez Usługodawcę danej Umowy Szczegółowej.',
                 pointTextStyle: regular11,
                 valueTextStyle: regular11),
-            para
+            boldParagraph(point: '6', value: 'Status studenta', style: bold10),
+            enumRow(
+                point: '1.',
+                value:
+                    'Usługodawca oświadcza, że ${form.isStudent ? 'posiada' : 'nie posiada'} status/u studenta lub ucznia, w rozumieniu ustawy z dnia z dnia 13 października 1998 r. o systemie ubezpieczeń społecznych oraz ${worksForOtherCompanyText(form.worksForOtherEmployee, form.earnsMoreThanMinimalWage)}',
+                pointTextStyle: regular11,
+                valueTextStyle: regular11),
+            enumRow(
+                point: '2.',
+                value:
+                    'Usługodawca oświadcza, iż ${form.sickInsurance ? 'chce' : 'nie chce'}, aby BWS odprowadzał za niego składkę chorobową.',
+                pointTextStyle: regular11,
+                valueTextStyle: regular11),
+            enumRow(
+                point: '3.',
+                value:
+                    'Usługodawca zobowiązuje się do niezwłocznego powiadomienia płatnika o każdej zmianie stanu faktycznego wynikającego z powyższych punktów § 7 pod rygorem przeniesienia na Usługodawcę odpowiedzialności finansowej za nieopłacone składki i podatki, wynikające ze zmianu stanu faktycznego.',
+                pointTextStyle: regular11,
+                valueTextStyle: regular11),
+            boldParagraph(point: '7', value: 'Poufność', style: bold10),
+            enumRow(
+                point: '1.',
+                value:
+                    'Przez Informacje Poufne rozumie się treść niniejszej Umowy oraz wszystkie dokumenty i informacje, w tym w szczególności informacje handlowe, techniczne, know-how o technicznym, handlowym, finansowym i każdym innym charakterze, materiały, graficzne komunikaty, specyfikacje, rysunki, elektroniczne i inne informacje, związane z działalnością BWS, partnerów BWS lub klientów BWS, ujawnione, udostępnione lub przekazane przez BWS, partnerów BWS lub klientów BWS Usługodawcy ustnie, na piśmie lub w jakikolwiek inny sposób, jak również uzyskane przy wykonywaniu lub w związku z wykonywaniem niniejszej Umowy przez Usługodawcę w jakikolwiek formie i w jakikolwiek sposób. Usługodawca zobowiązuje się Informacje Poufne zabezpieczyć przed dostępem osób trzecich, nie ujawniać, nie przekazywać ani nie udostępniać, w całości lub części, osobom trzecim bez uprzedniej pisemnej zgody BWS.',
+                pointTextStyle: regular11,
+                valueTextStyle: regular11),
+          ]);
+        });
+    document.addPage(page);
+    return document.save();
+  }
+
+  Future<Uint8List> generateContactDataPage(FormState form) async {
+    final document = pw.Document();
+    final bold10 = await boldTextStyle(10);
+    final bold11 = await boldTextStyle(11);
+    final regular11 = await regulartTextStyle(11);
+
+    final page = pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return pw.Column(children: [
+            boldParagraph(point: '11', value: 'Dane kontaktowe', style: bold10),
+            enumRow(
+                point: '1.',
+                value:
+                    'Usługodawca wskazuje następujące dane kontaktowe:\n1) Adres do doręczeń: ${form.placeOfDomicile.city}, ul. ${form.placeOfDomicile.street} ${form.placeOfDomicile.street} ${form.placeOfDomicile.houseNumber} / ${form.placeOfDomicile.flatNumber} \n2) Numer telefonu: ${form.phoneNumber}\n3) Adres e-mail: ${form.emailAddress}',
+                pointTextStyle: bold11,
+                valueTextStyle: bold11),
+            enumRow(
+                point: '2.',
+                value:
+                    'BWS wskazuje następujące dane kontaktowe:\n1) Adres do doręczeń: ul. Na Szaniec 7, Kraków\n2) Numer telefonu: 794-222-311\n3) Adres e-mail: office@bws.net.pl ',
+                pointTextStyle: regular11,
+                valueTextStyle: regular11),
+            enumRow(
+                point: '3.',
+                value:
+                    'Każda ze Stron w przypadku zmiany adresu do doręczeń wskazanego w niniejszym paragrafie jest zobowiązana niezwłocznie, w terminie nie dłuższym niż 14 (słownie: czternaście) dni poinformować drugą Stronę o tej zmianie. Pismo doręczone na adres wskazany w Umowie, prawidłowo awizowane przez Urząd Pocztowy, a nie podjęte w terminie i zwrócone Stronie, traktowane będzie jako doręczone w dacie pierwszego wezwania',
+                pointTextStyle: regular11,
+                valueTextStyle: regular11),
+            enumRow(
+                point: '4.',
+                value:
+                    'Zmiany danych kontaktowych wskazanych w ust. 1 i 2 niniejszego paragrafu nie wymagają zmiany niniejszej Umowy.',
+                pointTextStyle: regular11,
+                valueTextStyle: regular11),
+            boldParagraph(
+                point: '12', value: 'Postanowienie końcowe', style: bold10),
+            enumRow(
+                point: '1.',
+                value:
+                    'W zakresie nieuregulowanym w niniejszej Umowie znajdują zastosowanie właściwe przepisy obowiązującego prawa polskiego, w tym w szczególności przepisy ustawy z dnia 23 kwietnia 1964 roku - Kodeks cywilny.',
+                pointTextStyle: regular11,
+                valueTextStyle: regular11),
+            enumRow(
+                point: '2.',
+                value:
+                    'Wszelkie zmiany niniejszej Umowy wymagają zachowania formy pisemnej lub dokumentowej pod rygorem nieważności.',
+                pointTextStyle: regular11,
+                valueTextStyle: regular11),
+            enumRow(
+                point: '3.',
+                value:
+                    'Tytuły poszczególnych paragrafów Umowy mają znaczenie jedynie informacyjne. Tytuły poszczególnych paragrafów Umowy nie stanowią wiążących postanowień umownych, jak również nie stanowią wskazówek interpretacyjnych i nie mogą zostać wykorzystane do wykładni Umowy.',
+                pointTextStyle: regular11,
+                valueTextStyle: regular11),
+            enumRow(
+                point: '4.',
+                value:
+                    'Niniejszą Umowę sporządzono w dwóch jednobrzmiących egzemplarzach, po jednym dla każdej ze Stron.',
+                pointTextStyle: regular11,
+                valueTextStyle: regular11),
+            pw.Container(
+                margin: pw.EdgeInsets.only(top: 24),
+                child: pw.Row(children: [
+                  pw.Expanded(
+                      child: pw.Row(children: [
+                    pw.Text('................... \n   Bws', style: bold10),
+                  ])),
+                  pw.Expanded(
+                      child: pw.Row(
+                          mainAxisAlignment: pw.MainAxisAlignment.end,
+                          children: [
+                        pw.Text(
+                            '........................................ \n     Usługodawca',
+                            style: bold10)
+                      ]))
+                ])),
           ]);
         });
     document.addPage(page);
@@ -194,6 +290,29 @@ class PdfNormalAgreement {
         fontSize: size,
         decoration:
             underline ? pw.TextDecoration.underline : pw.TextDecoration.none);
+  }
+
+  pw.Widget boldParagraph({
+    required String point,
+    required String value,
+    required pw.TextStyle style,
+  }) {
+    return pw.Container(
+        margin: pw.EdgeInsets.symmetric(vertical: 12),
+        child: pw.Column(children: [
+          pw.Center(child: pw.Text('§ $point', style: style)),
+          pw.Center(child: pw.Text(value, style: style)),
+        ]));
+  }
+
+  String worksForOtherCompanyText(
+      bool worksForOtherCompany, bool earnsMoreThanMinimum) {
+    final earnsMoreThanMimimalText = earnsMoreThanMinimum
+        ? 'gdzie, zarabia gdzie zarabia co najmniej minimalną krajową w skali miesiąca (3010zł brutto)'
+        : 'gdzie zarabia mniej niż minimalną krajową w skali miesiąca (3010zł brutto).';
+    final worksForOtherCompanyText =
+        '${worksForOtherCompany ? 'jest' : 'nie jest'} zatrudniony w innym przedsiębiorstwie ${worksForOtherCompany ? earnsMoreThanMimimalText : ''}';
+    return worksForOtherCompanyText;
   }
 }
 

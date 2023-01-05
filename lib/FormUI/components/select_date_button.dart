@@ -18,7 +18,7 @@ class SelectDateButton extends HookWidget {
     final onPress = useCallback(() async {
       final value = await showDatePicker(
           context: context,
-          initialDate: DateTime.now(),
+          initialDate: dateText,
           firstDate: DateTime.now().add(const Duration(days: -365 * 100)),
           lastDate: DateTime.now().add(const Duration(days: 365 * 100)));
 

@@ -1,9 +1,13 @@
 import 'package:bws_agreement_creator/FormUI/employee_form.dart';
 import 'package:bws_agreement_creator/form.dart';
 import 'package:bws_agreement_creator/utils/byte_data_extension.dart';
+import 'package:bws_agreement_creator/utils/date_extensions.dart';
+import 'package:bws_agreement_creator/utils/pdf_b2b_agreement.dart';
 import 'package:bws_agreement_creator/utils/pdf_document_extension.dart';
-import 'package:bws_agreement_creator/utils/pdf_helper.dart';
+import 'package:bws_agreement_creator/utils/pdf_earnings_statement.dart';
 import 'package:bws_agreement_creator/utils/pdf_normal_agreement.dart';
+import 'package:bws_agreement_creator/utils/pdf_parent_statement.dart';
+import 'package:bws_agreement_creator/utils/pdf_student_id.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -15,28 +19,88 @@ class EmployeeFormLogic extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    Future<void> saveTextFile() async {
+    final isLoading = useState(false);
+    Future<void> generateDocumentForB2b() async {
+      isLoading.value = true;
       final formState = ref.read(FormNotifier.provider.notifier).state;
-      final helper = GeneratePdfHelper();
-      final pdfInBytes = await helper.generatePdf(formState);
-      final ByteData pdfFromMemory =
+      final ByteData b2bAgreementData =
+          await rootBundle.load('pdfs/umowaScalonaB2b.pdf');
+      final b2bPdf = PdfDocument(inputBytes: b2bAgreementData.dataAsUint8());
+      final b2bFirstPageData =
+          await PdfB2bAgreement().generateAgreementFirstPage(formState);
+      final b2bFirstPagePdf = PdfDocument(inputBytes: b2bFirstPageData);
+      final b2bFirstContactData =
+          await PdfB2bAgreement().generateAgreementContactData(formState);
+      final b2bFirstContactPdf = PdfDocument(inputBytes: b2bFirstContactData);
+      final b2bAttachmentPageData =
+          await PdfB2bAgreement().generateAgreementAttachment(formState);
+      final b2bAttachmentPagePdf =
+          PdfDocument(inputBytes: b2bAttachmentPageData);
+      b2bPdf.insertCustomPage(b2bFirstPagePdf.pages[0], 0);
+      b2bPdf.insertCustomPage(b2bFirstContactPdf.pages[0], 8);
+      if (formState.additionalEmployees.isNotEmpty) {
+        b2bPdf.insertCustomPage(
+            b2bAttachmentPagePdf.pages[0], b2bPdf.pages.count);
+      }
+      await b2bPdf.saveToFiles();
+      isLoading.value = false;
+    }
+
+    Future<void> generateDocumentForEmployee() async {
+      isLoading.value = true;
+      final formState = ref.read(FormNotifier.provider.notifier).state;
+      final ByteData employeePdfData =
           await rootBundle.load('pdfs/umowaScalona.pdf');
+      final employeePdf =
+          PdfDocument(inputBytes: employeePdfData.dataAsUint8());
       final pdfAgreementFirstPageData =
           await PdfNormalAgreement().generateAgreementFirstPage(formState);
-      final pdfAgreemntFirstPageDoc =
+      final pdfAgreemntFirstPagePdf =
           PdfDocument(inputBytes: pdfAgreementFirstPageData);
       final studentStatusData =
           await PdfNormalAgreement().generateStudentStatusPage(formState);
+      final employeeContactData =
+          await PdfNormalAgreement().generateContactDataPage(formState);
       final studentStatusPdf = PdfDocument(inputBytes: studentStatusData);
-      final pdfAsUint8 = pdfFromMemory.dataAsUint8();
+      final employeeContactDataPdf =
+          PdfDocument(inputBytes: employeeContactData);
+      final employeeStatementData =
+          await PdfEarningsStatment().generatePdfPage(formState);
+      final employeeStatementPdf =
+          PdfDocument(inputBytes: employeeStatementData);
 
-      final docMemory = PdfDocument(inputBytes: pdfAsUint8);
-      docMemory.insertCustomPage(pdfAgreemntFirstPageDoc.pages[0], 0);
-      docMemory.insertCustomPage(studentStatusPdf.pages[0], 0);
+      employeePdf.insertCustomPage(pdfAgreemntFirstPagePdf.pages[0], 0);
+      employeePdf.insertCustomPage(studentStatusPdf.pages[0], 5);
+      employeePdf.insertCustomPage(employeeContactDataPdf.pages[0], 8);
+      employeePdf.insertCustomPage(
+          employeeStatementPdf.pages[0], employeePdf.pages.count);
 
-      final doc2 = PdfDocument(inputBytes: pdfInBytes);
-      docMemory.insertCustomPage(doc2.pages[0], docMemory.pages.count);
-      await docMemory.saveToFiles();
+      if (!formState.birthday.isAdult()) {
+        final parentStatementData =
+            await PdfParentStatment().generatePdfPage(formState);
+        final parentStatementPdf = PdfDocument(inputBytes: parentStatementData);
+        employeePdf.insertCustomPage(
+            parentStatementPdf.pages[0], employeePdf.pages.count);
+      }
+
+      if (formState.isStudent) {
+        final parentStatementData =
+            await PdfStudentId().generatePdfPage(formState);
+        final parentStatementPdf = PdfDocument(inputBytes: parentStatementData);
+        employeePdf.insertCustomPage(
+            parentStatementPdf.pages[0], employeePdf.pages.count);
+      }
+      await employeePdf.saveToFiles();
+      isLoading.value = false;
+    }
+
+    Future<void> saveTextFile() async {
+      final formState = ref.read(FormNotifier.provider.notifier).state;
+      if (formState.areYouB2b) {
+        await generateDocumentForB2b();
+      } else {
+        await generateDocumentForEmployee();
+      }
     }
 
     final generateButtonTapped = useCallback(() {
@@ -44,7 +108,6 @@ class EmployeeFormLogic extends HookConsumerWidget {
     }, []);
 
     return EmployeeForm(
-      generateButtonTapped: generateButtonTapped,
-    );
+        generateButtonTapped: generateButtonTapped, isLoading: isLoading.value);
   }
 }

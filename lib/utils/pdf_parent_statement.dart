@@ -1,18 +1,20 @@
 import 'package:bws_agreement_creator/form.dart';
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
 class PdfParentStatment {
-  Future<pw.Page> generatePdfPage(FormState form) async {
+  Future<Uint8List> generatePdfPage(FormState form) async {
+    final document = pw.Document();
     final bold10 = await boldTextStyle(10);
     final bold12 = await boldTextStyle(12);
     final regular10 = await regulartTextStyle(10);
     final regular12 = await regulartTextStyle(12);
     final regular12underline = await regulartTextStyle(12, underline: true);
 
-    return pw.Page(
+    final page = pw.Page(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
           return pw.Column(
@@ -70,6 +72,8 @@ class PdfParentStatment {
                         style: regular12))
               ]);
         });
+    document.addPage(page);
+    return document.save();
   }
 
   Future<pw.TextStyle> boldTextStyle(double size) async {

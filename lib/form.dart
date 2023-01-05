@@ -1,5 +1,7 @@
+import 'package:bws_agreement_creator/additional_employee_data.dart';
 import 'package:bws_agreement_creator/address_data.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -16,6 +18,8 @@ class FormState {
       required this.isStudent,
       required this.worksForOtherEmployee,
       required this.companyName,
+      required this.companyAddress,
+      required this.companyCity,
       required this.nip,
       this.frontStudentIdImage,
       this.backStudentIdImage,
@@ -46,7 +50,14 @@ class FormState {
       required this.parentName,
       required this.parentAdres,
       required this.parentPesel,
-      required this.parentId});
+      required this.parentId,
+      required this.additionalEmployees,
+      required this.krs,
+      required this.internetComunicator,
+      required this.phoneNumber,
+      required this.emailAddress,
+      this.frontStudentIdData,
+      this.backStudentIdData});
   final String name;
   final String lastName;
   final bool areYouB2b;
@@ -86,6 +97,15 @@ class FormState {
   final String parentAdres;
   final String parentPesel;
   final String parentId;
+  final String companyAddress;
+  final String companyCity;
+  final List<AdditionalEmployeeData> additionalEmployees;
+  final String krs;
+  final String internetComunicator;
+  final String phoneNumber;
+  final String emailAddress;
+  final Uint8List? frontStudentIdData;
+  final Uint8List? backStudentIdData;
 }
 
 class FormNotifier extends StateNotifier<FormState> {
@@ -95,7 +115,7 @@ class FormNotifier extends StateNotifier<FormState> {
             lastName: '',
             areYouB2b: false,
             city: '',
-            birthday: DateTime.now().add(Duration(days: -365 * 18 - 1)),
+            birthday: DateTime.now().add(Duration(days: -365 * 18 - 4)),
             isStudent: false,
             worksForOtherEmployee: false,
             companyName: '',
@@ -127,7 +147,16 @@ class FormNotifier extends StateNotifier<FormState> {
             parentName: '',
             parentAdres: '',
             parentPesel: '',
-            parentId: ''));
+            parentId: '',
+            companyAddress: '',
+            companyCity: '',
+            additionalEmployees: [],
+            krs: '',
+            phoneNumber: '',
+            emailAddress: '',
+            internetComunicator: '',
+            backStudentIdData: null,
+            frontStudentIdData: null));
 
   static final provider =
       StateNotifierProvider.autoDispose<FormNotifier, FormState>((ref) {
@@ -156,6 +185,14 @@ class FormNotifier extends StateNotifier<FormState> {
 
   void setCompanyNip(String value) {
     state = state.copyWith(nip: value);
+  }
+
+  void setCompanyCity(String value) {
+    state = state.copyWith(companyCity: value);
+  }
+
+  void setCompanyAddress(String value) {
+    state = state.copyWith(companyAddress: value);
   }
 
   void setBirthDay(DateTime value) {
@@ -288,5 +325,48 @@ class FormNotifier extends StateNotifier<FormState> {
 
   void setParentIdNumber(String value) {
     state = state.copyWith(parentId: value);
+  }
+
+  void setAdditionalEmployee(AdditionalEmployeeData value) {
+    var employees = state.additionalEmployees;
+    final employeeIndex =
+        employees.indexWhere((element) => element.id == value.id);
+
+    if (employeeIndex == -1) {
+      employees.add(value);
+    } else {
+      employees[employeeIndex] = value;
+    }
+    state = state.copyWith(additionalEmployees: employees);
+  }
+
+  void removeAdditionalEmployee(String id) {
+    var employees = state.additionalEmployees;
+    employees.removeWhere((element) => element.id == id);
+    state = state.copyWith(additionalEmployees: employees);
+  }
+
+  void setKrs(String value) {
+    state = state.copyWith(krs: value);
+  }
+
+  void setPhoneNumber(String value) {
+    state = state.copyWith(phoneNumber: value);
+  }
+
+  void setEmailAddress(String value) {
+    state = state.copyWith(emailAddress: value);
+  }
+
+  void setInternetComunicator(String value) {
+    state = state.copyWith(internetComunicator: value);
+  }
+
+  void setBackStudentIdData(Uint8List? value) {
+    state = state.copyWith(backStudentIdData: value);
+  }
+
+  void setFrontStudentIdData(Uint8List? value) {
+    state = state.copyWith(frontStudentIdData: value);
   }
 }

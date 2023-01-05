@@ -7,6 +7,9 @@ part of 'form.dart';
 // **************************************************************************
 
 abstract class _$FormStateCWProxy {
+  FormState additionalEmployees(
+      List<AdditionalEmployeeData> additionalEmployees);
+
   FormState agreementWithTime(bool agreementWithTime);
 
   FormState agreementWithTimeEnd(DateTime agreementWithTimeEnd);
@@ -15,17 +18,27 @@ abstract class _$FormStateCWProxy {
 
   FormState areYouB2b(bool areYouB2b);
 
+  FormState backStudentIdData(Uint8List? backStudentIdData);
+
   FormState backStudentIdImage(Image? backStudentIdImage);
 
   FormState birthday(DateTime birthday);
 
   FormState city(String city);
 
+  FormState companyAddress(String companyAddress);
+
+  FormState companyCity(String companyCity);
+
   FormState companyName(String companyName);
 
   FormState earnsMoreThanMinimalWage(bool earnsMoreThanMinimalWage);
 
+  FormState emailAddress(String emailAddress);
+
   FormState familyName(String familyName);
+
+  FormState frontStudentIdData(Uint8List? frontStudentIdData);
 
   FormState frontStudentIdImage(Image? frontStudentIdImage);
 
@@ -35,9 +48,13 @@ abstract class _$FormStateCWProxy {
 
   FormState hasTwoAdresses(bool hasTwoAdresses);
 
+  FormState internetComunicator(String internetComunicator);
+
   FormState invalidStatus(bool invalidStatus);
 
   FormState isStudent(bool isStudent);
+
+  FormState krs(String krs);
 
   FormState lastName(String lastName);
 
@@ -60,6 +77,8 @@ abstract class _$FormStateCWProxy {
   FormState passportOrIdNumber(String passportOrIdNumber);
 
   FormState pesel(String pesel);
+
+  FormState phoneNumber(String phoneNumber);
 
   FormState placeOfDomicile(AdressData placeOfDomicile);
 
@@ -92,22 +111,30 @@ abstract class _$FormStateCWProxy {
   /// FormState(...).copyWith(id: 12, name: "My name")
   /// ````
   FormState call({
+    List<AdditionalEmployeeData>? additionalEmployees,
     bool? agreementWithTime,
     DateTime? agreementWithTimeEnd,
     DateTime? agreementWithTimeStart,
     bool? areYouB2b,
+    Uint8List? backStudentIdData,
     Image? backStudentIdImage,
     DateTime? birthday,
     String? city,
+    String? companyAddress,
+    String? companyCity,
     String? companyName,
     bool? earnsMoreThanMinimalWage,
+    String? emailAddress,
     String? familyName,
+    Uint8List? frontStudentIdData,
     Image? frontStudentIdImage,
     bool? hasRent,
     bool? hasRetiring,
     bool? hasTwoAdresses,
+    String? internetComunicator,
     bool? invalidStatus,
     bool? isStudent,
+    String? krs,
     String? lastName,
     String? name,
     String? nip,
@@ -119,6 +146,7 @@ abstract class _$FormStateCWProxy {
     String? parentPesel,
     String? passportOrIdNumber,
     String? pesel,
+    String? phoneNumber,
     AdressData? placeOfDomicile,
     AdressData? placeOfLiving,
     DateTime? rentDecisizionDate,
@@ -141,6 +169,11 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
   const _$FormStateCWProxyImpl(this._value);
 
   @override
+  FormState additionalEmployees(
+          List<AdditionalEmployeeData> additionalEmployees) =>
+      this(additionalEmployees: additionalEmployees);
+
+  @override
   FormState agreementWithTime(bool agreementWithTime) =>
       this(agreementWithTime: agreementWithTime);
 
@@ -156,6 +189,10 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
   FormState areYouB2b(bool areYouB2b) => this(areYouB2b: areYouB2b);
 
   @override
+  FormState backStudentIdData(Uint8List? backStudentIdData) =>
+      this(backStudentIdData: backStudentIdData);
+
+  @override
   FormState backStudentIdImage(Image? backStudentIdImage) =>
       this(backStudentIdImage: backStudentIdImage);
 
@@ -166,6 +203,13 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
   FormState city(String city) => this(city: city);
 
   @override
+  FormState companyAddress(String companyAddress) =>
+      this(companyAddress: companyAddress);
+
+  @override
+  FormState companyCity(String companyCity) => this(companyCity: companyCity);
+
+  @override
   FormState companyName(String companyName) => this(companyName: companyName);
 
   @override
@@ -173,7 +217,15 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
       this(earnsMoreThanMinimalWage: earnsMoreThanMinimalWage);
 
   @override
+  FormState emailAddress(String emailAddress) =>
+      this(emailAddress: emailAddress);
+
+  @override
   FormState familyName(String familyName) => this(familyName: familyName);
+
+  @override
+  FormState frontStudentIdData(Uint8List? frontStudentIdData) =>
+      this(frontStudentIdData: frontStudentIdData);
 
   @override
   FormState frontStudentIdImage(Image? frontStudentIdImage) =>
@@ -190,11 +242,18 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
       this(hasTwoAdresses: hasTwoAdresses);
 
   @override
+  FormState internetComunicator(String internetComunicator) =>
+      this(internetComunicator: internetComunicator);
+
+  @override
   FormState invalidStatus(bool invalidStatus) =>
       this(invalidStatus: invalidStatus);
 
   @override
   FormState isStudent(bool isStudent) => this(isStudent: isStudent);
+
+  @override
+  FormState krs(String krs) => this(krs: krs);
 
   @override
   FormState lastName(String lastName) => this(lastName: lastName);
@@ -231,6 +290,9 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
 
   @override
   FormState pesel(String pesel) => this(pesel: pesel);
+
+  @override
+  FormState phoneNumber(String phoneNumber) => this(phoneNumber: phoneNumber);
 
   @override
   FormState placeOfDomicile(AdressData placeOfDomicile) =>
@@ -286,22 +348,30 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
   /// FormState(...).copyWith(id: 12, name: "My name")
   /// ````
   FormState call({
+    Object? additionalEmployees = const $CopyWithPlaceholder(),
     Object? agreementWithTime = const $CopyWithPlaceholder(),
     Object? agreementWithTimeEnd = const $CopyWithPlaceholder(),
     Object? agreementWithTimeStart = const $CopyWithPlaceholder(),
     Object? areYouB2b = const $CopyWithPlaceholder(),
+    Object? backStudentIdData = const $CopyWithPlaceholder(),
     Object? backStudentIdImage = const $CopyWithPlaceholder(),
     Object? birthday = const $CopyWithPlaceholder(),
     Object? city = const $CopyWithPlaceholder(),
+    Object? companyAddress = const $CopyWithPlaceholder(),
+    Object? companyCity = const $CopyWithPlaceholder(),
     Object? companyName = const $CopyWithPlaceholder(),
     Object? earnsMoreThanMinimalWage = const $CopyWithPlaceholder(),
+    Object? emailAddress = const $CopyWithPlaceholder(),
     Object? familyName = const $CopyWithPlaceholder(),
+    Object? frontStudentIdData = const $CopyWithPlaceholder(),
     Object? frontStudentIdImage = const $CopyWithPlaceholder(),
     Object? hasRent = const $CopyWithPlaceholder(),
     Object? hasRetiring = const $CopyWithPlaceholder(),
     Object? hasTwoAdresses = const $CopyWithPlaceholder(),
+    Object? internetComunicator = const $CopyWithPlaceholder(),
     Object? invalidStatus = const $CopyWithPlaceholder(),
     Object? isStudent = const $CopyWithPlaceholder(),
+    Object? krs = const $CopyWithPlaceholder(),
     Object? lastName = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
     Object? nip = const $CopyWithPlaceholder(),
@@ -313,6 +383,7 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
     Object? parentPesel = const $CopyWithPlaceholder(),
     Object? passportOrIdNumber = const $CopyWithPlaceholder(),
     Object? pesel = const $CopyWithPlaceholder(),
+    Object? phoneNumber = const $CopyWithPlaceholder(),
     Object? placeOfDomicile = const $CopyWithPlaceholder(),
     Object? placeOfLiving = const $CopyWithPlaceholder(),
     Object? rentDecisizionDate = const $CopyWithPlaceholder(),
@@ -327,6 +398,12 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
     Object? worksOnUop = const $CopyWithPlaceholder(),
   }) {
     return FormState(
+      additionalEmployees:
+          additionalEmployees == const $CopyWithPlaceholder() ||
+                  additionalEmployees == null
+              ? _value.additionalEmployees
+              // ignore: cast_nullable_to_non_nullable
+              : additionalEmployees as List<AdditionalEmployeeData>,
       agreementWithTime: agreementWithTime == const $CopyWithPlaceholder() ||
               agreementWithTime == null
           ? _value.agreementWithTime
@@ -348,6 +425,10 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
           ? _value.areYouB2b
           // ignore: cast_nullable_to_non_nullable
           : areYouB2b as bool,
+      backStudentIdData: backStudentIdData == const $CopyWithPlaceholder()
+          ? _value.backStudentIdData
+          // ignore: cast_nullable_to_non_nullable
+          : backStudentIdData as Uint8List?,
       backStudentIdImage: backStudentIdImage == const $CopyWithPlaceholder()
           ? _value.backStudentIdImage
           // ignore: cast_nullable_to_non_nullable
@@ -360,6 +441,16 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
           ? _value.city
           // ignore: cast_nullable_to_non_nullable
           : city as String,
+      companyAddress: companyAddress == const $CopyWithPlaceholder() ||
+              companyAddress == null
+          ? _value.companyAddress
+          // ignore: cast_nullable_to_non_nullable
+          : companyAddress as String,
+      companyCity:
+          companyCity == const $CopyWithPlaceholder() || companyCity == null
+              ? _value.companyCity
+              // ignore: cast_nullable_to_non_nullable
+              : companyCity as String,
       companyName:
           companyName == const $CopyWithPlaceholder() || companyName == null
               ? _value.companyName
@@ -371,11 +462,20 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
               ? _value.earnsMoreThanMinimalWage
               // ignore: cast_nullable_to_non_nullable
               : earnsMoreThanMinimalWage as bool,
+      emailAddress:
+          emailAddress == const $CopyWithPlaceholder() || emailAddress == null
+              ? _value.emailAddress
+              // ignore: cast_nullable_to_non_nullable
+              : emailAddress as String,
       familyName:
           familyName == const $CopyWithPlaceholder() || familyName == null
               ? _value.familyName
               // ignore: cast_nullable_to_non_nullable
               : familyName as String,
+      frontStudentIdData: frontStudentIdData == const $CopyWithPlaceholder()
+          ? _value.frontStudentIdData
+          // ignore: cast_nullable_to_non_nullable
+          : frontStudentIdData as Uint8List?,
       frontStudentIdImage: frontStudentIdImage == const $CopyWithPlaceholder()
           ? _value.frontStudentIdImage
           // ignore: cast_nullable_to_non_nullable
@@ -394,6 +494,12 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
           ? _value.hasTwoAdresses
           // ignore: cast_nullable_to_non_nullable
           : hasTwoAdresses as bool,
+      internetComunicator:
+          internetComunicator == const $CopyWithPlaceholder() ||
+                  internetComunicator == null
+              ? _value.internetComunicator
+              // ignore: cast_nullable_to_non_nullable
+              : internetComunicator as String,
       invalidStatus:
           invalidStatus == const $CopyWithPlaceholder() || invalidStatus == null
               ? _value.invalidStatus
@@ -403,6 +509,10 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
           ? _value.isStudent
           // ignore: cast_nullable_to_non_nullable
           : isStudent as bool,
+      krs: krs == const $CopyWithPlaceholder() || krs == null
+          ? _value.krs
+          // ignore: cast_nullable_to_non_nullable
+          : krs as String,
       lastName: lastName == const $CopyWithPlaceholder() || lastName == null
           ? _value.lastName
           // ignore: cast_nullable_to_non_nullable
@@ -453,6 +563,11 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
           ? _value.pesel
           // ignore: cast_nullable_to_non_nullable
           : pesel as String,
+      phoneNumber:
+          phoneNumber == const $CopyWithPlaceholder() || phoneNumber == null
+              ? _value.phoneNumber
+              // ignore: cast_nullable_to_non_nullable
+              : phoneNumber as String,
       placeOfDomicile: placeOfDomicile == const $CopyWithPlaceholder() ||
               placeOfDomicile == null
           ? _value.placeOfDomicile
