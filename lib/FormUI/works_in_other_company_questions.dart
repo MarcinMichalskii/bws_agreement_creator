@@ -1,5 +1,5 @@
 import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
-import 'package:bws_agreement_creator/FormUI/components/is_student_toggle.dart';
+import 'package:bws_agreement_creator/FormUI/components/form_toggle.dart';
 import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';
 import 'package:bws_agreement_creator/form.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';

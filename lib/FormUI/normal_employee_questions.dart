@@ -1,6 +1,6 @@
 import 'package:bws_agreement_creator/FormUI/adress_data_questions.dart';
 import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
-import 'package:bws_agreement_creator/FormUI/components/is_student_toggle.dart';
+import 'package:bws_agreement_creator/FormUI/components/form_toggle.dart';
 import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';
 import 'package:bws_agreement_creator/FormUI/components/student_id_row.dart';
 import 'package:bws_agreement_creator/FormUI/works_in_other_company_questions.dart';

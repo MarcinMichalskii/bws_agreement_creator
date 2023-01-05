@@ -16,9 +16,11 @@ class FormToggle extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 4),
       child: Row(children: [
-        Text(
-          title,
-          style: const TextStyle(color: CustomColors.gray, fontSize: 14),
+        Flexible(
+          child: Text(
+            title,
+            style: const TextStyle(color: CustomColors.gray, fontSize: 14),
+          ),
         ),
         Switch(
           value: isOn,
