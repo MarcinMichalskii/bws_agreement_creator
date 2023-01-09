@@ -22,8 +22,8 @@ class AdressData {
       this.country = '',
       this.citizenship = ''});
 
-  bool get isEmpty {
-    final allComponents = [
+  List<String> get allComponents {
+    return [
       district,
       street,
       houseNumber,
@@ -33,7 +33,27 @@ class AdressData {
       country,
       citizenship
     ];
+  }
 
+  bool get isFilledInCorrectly {
+    final components = [
+      district,
+      street,
+      houseNumber,
+      zipCode,
+      citizenship,
+      country,
+      citizenship
+    ];
+    for (String element in components) {
+      if (element.isEmpty) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool get isEmpty {
     for (String element in allComponents) {
       if (element.isNotEmpty) {
         return false;

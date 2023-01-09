@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/FormUI/employee_form.dart';
 import 'package:bws_agreement_creator/FormUI/outbording_information.dart';
+import 'package:bws_agreement_creator/FormUI/validation_error.dart';
 import 'package:bws_agreement_creator/form.dart';
 import 'package:bws_agreement_creator/utils/byte_data_extension.dart';
 import 'package:bws_agreement_creator/utils/date_extensions.dart';
@@ -44,6 +45,7 @@ class EmployeeFormLogic extends HookConsumerWidget {
             b2bAttachmentPagePdf.pages[0], b2bPdf.pages.count);
       }
       b2bPdf.insertPageNumbers();
+      await b2bPdf.saveToFiles();
       isLoading.value = false;
     }
 
@@ -112,8 +114,21 @@ class EmployeeFormLogic extends HookConsumerWidget {
     final generateButtonTapped = useCallback(() {
       saveTextFile();
     }, []);
+    final validationErrorText =
+        ref.watch(FormNotifier.provider).validationErrorText;
+
+    final onInvalidFormGenerateTapped = useCallback(() {
+      showDialog(
+          context: context,
+          builder: (_) => ValidationError(
+                errorText: validationErrorText ?? "",
+              ));
+    }, [validationErrorText]);
 
     return EmployeeForm(
-        generateButtonTapped: generateButtonTapped, isLoading: isLoading.value);
+        generateButtonTapped: validationErrorText == null
+            ? generateButtonTapped
+            : onInvalidFormGenerateTapped,
+        isLoading: isLoading.value);
   }
 }

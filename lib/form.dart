@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/additional_employee_data.dart';
 import 'package:bws_agreement_creator/address_data.dart';
+import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -106,6 +107,60 @@ class FormState {
   final String emailAddress;
   final Uint8List? frontStudentIdData;
   final Uint8List? backStudentIdData;
+
+  bool get isBasicDataEmpty {
+    return (name.isEmpty ||
+        lastName.isEmpty ||
+        pesel.isEmpty ||
+        passportOrIdNumber.isEmpty ||
+        phoneNumber.isEmpty ||
+        emailAddress.isEmpty);
+  }
+
+  bool get invalidStudentData {
+    return frontStudentIdImage == null ||
+        backStudentIdImage == null ||
+        schoolName.isEmpty;
+  }
+
+  bool get invalidOtherCompanyData {
+    return otherCompanyName.isEmpty ||
+        otherCompanyNip.isEmpty ||
+        !otherCompanyNip.isValidNip();
+  }
+
+  bool get invalidB2b {
+    return companyName.isEmpty ||
+        nip.isEmpty ||
+        !nip.isValidNip() ||
+        companyAddress.isEmpty ||
+        companyCity.isEmpty ||
+        internetComunicator.isEmpty;
+  }
+
+  String? get validationErrorText {
+    if (isBasicDataEmpty) {
+      return "Sprawdź dane osobowe";
+    } else if (areYouB2b && !invalidB2b) {
+      return null;
+    } else if (areYouB2b && invalidB2b) {
+      return "Sprawdź dane adresowe Twojej firmy";
+    } else if (placeOfDomicile.isFilledInCorrectly) {
+      return "Sprawdź miejsce zameldowania";
+    } else if (placeOfLiving.isFilledInCorrectly && hasTwoAdresses) {
+      return "Sprawdź miejsce zamieszkania";
+    } else if (isStudent && invalidStudentData) {
+      return "Sprawdź dane statusu studenta";
+    } else if (hasRetiring && retiringSignature.isEmpty) {
+      return "Sprawdź sygnaturę emyrtury";
+    } else if (hasRent && rentSignature.isEmpty) {
+      return "Sprawdź sygnaturę renty";
+    } else if (worksInOtherCompany && invalidOtherCompanyData) {
+      return "Sprawdź czy podałeś poprawne dane firmy w której jesteś zatrudniony";
+    } else {
+      return null;
+    }
+  }
 }
 
 class FormNotifier extends StateNotifier<FormState> {
@@ -240,7 +295,7 @@ class FormNotifier extends StateNotifier<FormState> {
   }
 
   void setRentSignature(String value) {
-    state = state.copyWith(retiringSignature: value);
+    state = state.copyWith(rentSignature: value);
   }
 
   void setRentDecisionDate(DateTime value) {
@@ -248,7 +303,7 @@ class FormNotifier extends StateNotifier<FormState> {
   }
 
   void setRetiringSignature(String value) {
-    state = state.copyWith(rentSignature: value);
+    state = state.copyWith(retiringSignature: value);
   }
 
   void setRetiringDecisionDate(DateTime value) {

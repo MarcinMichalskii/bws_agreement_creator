@@ -72,20 +72,20 @@ class EmployeeForm extends HookConsumerWidget {
                     ),
                   ],
                 ),
-                if (!areYouB2B)
-                  BorderedInput(
-                    placeholder: "Pesel",
-                    onChanged: (value) {
-                      ref.read(provider.notifier).setPesel(value ?? '');
-                    },
-                  ),
-                if (!areYouB2B)
-                  BorderedInput(
-                    placeholder: "Nazwisko rodowe",
-                    onChanged: (value) {
-                      ref.read(provider.notifier).setFamilyName(value ?? '');
-                    },
-                  ),
+
+                BorderedInput(
+                  placeholder: "Pesel",
+                  onChanged: (value) {
+                    ref.read(provider.notifier).setPesel(value ?? '');
+                  },
+                ),
+                // if (!areYouB2B)
+                //   BorderedInput(
+                //     placeholder: "Nazwisko rodowe",
+                //     onChanged: (value) {
+                //       ref.read(provider.notifier).setFamilyName(value ?? '');
+                //     },
+                //   ),
                 BorderedInput(
                   placeholder: "Numer dowodu lub paszportu",
                   onChanged: (value) {

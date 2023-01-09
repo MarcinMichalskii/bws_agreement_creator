@@ -72,9 +72,13 @@ class B2BEmployeeQuestions extends HookConsumerWidget {
                   child: const Icon(
                     Icons.add,
                     color: CustomColors.gray,
-                  ))
+                  )),
           ],
         ),
+      ),
+      Text(
+        '(*Jeśli masz podwykonawcę, który razem z Tobą będzie świadczył usługi na rzecz BWS i będzie rozliczany przez Twoją działalność/spółkę, wpisz jego dane tutaj.)',
+        style: TextStyle(color: CustomColors.gray, fontSize: 11),
       ),
       ...ref
           .watch(provider)
