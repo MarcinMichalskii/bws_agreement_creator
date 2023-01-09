@@ -6,6 +6,7 @@ import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 extension InsertCustomPage on PdfDocument {
   insertCustomPage(PdfPage customPage, int index) {
+    pageSettings.margins.bottom = 0;
     pages.insert(index);
     final emptyPage = pages[index];
     emptyPage.graphics
