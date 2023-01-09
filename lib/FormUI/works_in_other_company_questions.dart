@@ -29,7 +29,7 @@ class WorksInOtherCompanyQuestions extends HookConsumerWidget {
       FormToggle(
         isOn: earnsMoreThanMinimalWage,
         onChanged: ref.read(provider.notifier).setEarnsMoreThanMinimalWage,
-        title: "Osiągam dochód wyższy niż pensja minimalna",
+        title: "Osiągam dochód wyższy niż pensja minimalna (3490 zł brutto)",
       ),
       if (agreementWithTime)
         Row(

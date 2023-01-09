@@ -1,4 +1,5 @@
 import 'package:bws_agreement_creator/FormUI/employee_form.dart';
+import 'package:bws_agreement_creator/FormUI/outbording_information.dart';
 import 'package:bws_agreement_creator/form.dart';
 import 'package:bws_agreement_creator/utils/byte_data_extension.dart';
 import 'package:bws_agreement_creator/utils/date_extensions.dart';
@@ -42,7 +43,7 @@ class EmployeeFormLogic extends HookConsumerWidget {
         b2bPdf.insertCustomPage(
             b2bAttachmentPagePdf.pages[0], b2bPdf.pages.count);
       }
-      await b2bPdf.saveToFiles();
+      b2bPdf.insertPageNumbers();
       isLoading.value = false;
     }
 
@@ -93,6 +94,7 @@ class EmployeeFormLogic extends HookConsumerWidget {
         employeePdf.insertCustomPage(
             parentStatementPdf.pages[0], employeePdf.pages.count);
       }
+      employeePdf.insertPageNumbers();
       await employeePdf.saveToFiles();
       isLoading.value = false;
     }
@@ -104,6 +106,7 @@ class EmployeeFormLogic extends HookConsumerWidget {
       } else {
         await generateDocumentForEmployee();
       }
+      showDialog(context: context, builder: (_) => OutbordingInformation());
     }
 
     final generateButtonTapped = useCallback(() {

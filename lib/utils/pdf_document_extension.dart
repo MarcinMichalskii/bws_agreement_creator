@@ -27,3 +27,27 @@ extension SavePdfFile on PdfDocument {
     html.document.body?.children.add(anchor);
   }
 }
+
+extension InsertPageNumbers on PdfDocument {
+  insertPageNumbers() {
+    for (int i = 0; i < pages.count; i++) {
+      final page = pages[i];
+      page.graphics.drawString(
+          "Strona ${i + 1}/${pages.count}",
+          PdfStandardFont(PdfFontFamily.helvetica, 9,
+              style: PdfFontStyle.regular),
+          bounds: Rect.fromLTWH(page.size.width - 140, 740, 60, 20));
+    }
+  }
+}
+
+extension CopyAllPages on PdfDocument {
+  copyAllPages(PdfDocument fromPdf) {
+    for (int i = 0; i < fromPdf.pages.count; i++) {
+      pages.add();
+      final emptyPage = pages[i];
+      emptyPage.graphics.drawPdfTemplate(
+          fromPdf.pages[i].createTemplate(), const Offset(-40, 0));
+    }
+  }
+}

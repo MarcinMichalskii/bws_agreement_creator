@@ -113,11 +113,11 @@ class NormalEmployeeQuestions extends HookConsumerWidget {
         onChanged: ref.read(provider.notifier).setInvalidStatus,
         title: "Posiadam orzeczony stopień niezdolności do pracy ",
       ),
-      FormToggle(
-        isOn: sickInsurance,
-        onChanged: ref.read(provider.notifier).setSickInsurance,
-        title: "Wnoszę o objęcie mnie dobrowolnym ubezpieczeniem chorobowym",
-      ),
+      // FormToggle(
+      //   isOn: sickInsurance,
+      //   onChanged: ref.read(provider.notifier).setSickInsurance,
+      //   title: "Wnoszę o objęcie mnie dobrowolnym ubezpieczeniem chorobowym",
+      // ),
     ]);
   }
 }

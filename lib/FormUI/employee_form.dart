@@ -4,10 +4,12 @@ import 'package:bws_agreement_creator/FormUI/components/bws_logo.dart';
 import 'package:bws_agreement_creator/FormUI/components/generate_pdf_button.dart';
 import 'package:bws_agreement_creator/FormUI/components/form_toggle.dart';
 import 'package:bws_agreement_creator/FormUI/normal_employee_questions.dart';
+import 'package:bws_agreement_creator/FormUI/onboarding_information.dart';
 import 'package:bws_agreement_creator/form.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EmployeeForm extends HookConsumerWidget {
@@ -20,6 +22,9 @@ class EmployeeForm extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final provider = FormNotifier.provider;
     final areYouB2B = ref.watch(provider).areYouB2b;
+    useBuildEffect(() {
+      showDialog(context: context, builder: (_) => OnboardingInformation());
+    }, []);
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -48,19 +53,6 @@ class EmployeeForm extends HookConsumerWidget {
                           placeholder: "Imię",
                           onChanged: (value) {
                             ref.read(provider.notifier).setName(value ?? '');
-                          },
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 8),
-                        child: BorderedInput(
-                          placeholder: "Drugie imię",
-                          onChanged: (value) {
-                            ref
-                                .read(provider.notifier)
-                                .setSecondName(value ?? '');
                           },
                         ),
                       ),
@@ -101,13 +93,13 @@ class EmployeeForm extends HookConsumerWidget {
                   },
                 ),
                 BorderedInput(
-                  placeholder: "Numer telefonu",
+                  placeholder: "Numer telefonu (Podany w aplikacji sinch)",
                   onChanged: (value) {
                     ref.read(provider.notifier).setPhoneNumber(value ?? '');
                   },
                 ),
                 BorderedInput(
-                  placeholder: "Adres email",
+                  placeholder: "Adres email (Podany w aplikacji sinch)",
                   onChanged: (value) {
                     ref.read(provider.notifier).setEmailAddress(value ?? '');
                   },
@@ -122,7 +114,8 @@ class EmployeeForm extends HookConsumerWidget {
                 Container(
                   padding: const EdgeInsets.only(bottom: 64),
                   child: !isLoading
-                      ? GeneratePdfButton(
+                      ? DefaultBorderedButton(
+                          text: "Generuj dokumnet",
                           onTap: generateButtonTapped,
                         )
                       : Container(
@@ -140,4 +133,22 @@ class EmployeeForm extends HookConsumerWidget {
       ),
     );
   }
+}
+
+void useBuildEffect(Dispose? Function() effect, [List<Object?>? keys]) {
+  useEffect(() {
+    Dispose? disposeCallback;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      disposeCallback = effect();
+    });
+
+    return () {
+      if (disposeCallback != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          disposeCallback!();
+        });
+      }
+    };
+  }, keys);
 }

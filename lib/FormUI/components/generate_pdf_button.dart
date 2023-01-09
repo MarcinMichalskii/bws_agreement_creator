@@ -1,13 +1,13 @@
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-class GeneratePdfButton extends StatelessWidget {
-  const GeneratePdfButton({
-    Key? key,
-    required this.onTap,
-  }) : super(key: key);
+class DefaultBorderedButton extends StatelessWidget {
+  const DefaultBorderedButton(
+      {Key? key, required this.onTap, required this.text})
+      : super(key: key);
 
   final VoidCallback onTap;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,8 @@ class GeneratePdfButton extends StatelessWidget {
         onPressed: onTap,
         child: Container(
           padding: const EdgeInsets.all(12),
-          child: const Text('Generuj dokument',
-              style: TextStyle(
+          child: Text(text,
+              style: const TextStyle(
                   fontSize: 20,
                   color: CustomColors.gray,
                   fontWeight: FontWeight.w400)),

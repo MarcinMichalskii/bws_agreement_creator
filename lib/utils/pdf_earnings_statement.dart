@@ -33,11 +33,9 @@ class PdfEarningsStatment {
                 ),
                 pw.Container(
                   margin: const pw.EdgeInsets.only(top: 8),
-                  child: dataRow('Nazwisko: ', form.lastName,
-                      "Nazwisko rodowe: ", form.familyName, bold8, regular8),
+                  child: dataRow(
+                      'Nazwisko: ', form.lastName, "", "", bold8, regular8),
                 ),
-                dataRow('Imię: ', form.name, 'Drugie imię: ', form.secondName,
-                    bold8, regular8),
                 dataRow('Data urodzenia: ', birthday, 'PESEL: ', form.pesel,
                     bold8, regular8),
                 pw.Container(
@@ -155,11 +153,11 @@ class PdfEarningsStatment {
                       'G) ${studentText(form.isStudent, form.schoolName)}',
                       style: regular12),
                 ),
-                pw.Container(
-                  margin: const pw.EdgeInsets.fromLTRB(0, 4, 0, 0),
-                  child: pw.Text('H) ${sickInsuracne(form.sickInsurance)}',
-                      style: regular12),
-                ),
+                // pw.Container(
+                //   margin: const pw.EdgeInsets.fromLTRB(0, 4, 0, 0),
+                //   child: pw.Text('H) ${sickInsuracne(form.sickInsurance)}',
+                //       style: regular12),
+                // ),
                 pw.Container(
                   margin: const pw.EdgeInsets.fromLTRB(0, 12, 0, 18),
                   child: pw.Text(
@@ -276,9 +274,9 @@ class PdfEarningsStatment {
         (isInvalid ? '(należy dołączyć orzeczenie organu orzekającego)' : '');
   }
 
-  String sickInsuracne(bool sickInsurance) {
-    return '${sickInsurance ? 'Wnoszę' : 'Nie wnoszę'} o objęcie mnie dobrowolnym ubezpieczenim chorobowym';
-  }
+  // String sickInsuracne(bool sickInsurance) {
+  //   return '${sickInsurance ? 'Wnoszę' : 'Nie wnoszę'} o objęcie mnie dobrowolnym ubezpieczenim chorobowym';
+  // }
 
   Future<pw.TextStyle> boldTextStyle(double size) async {
     final font = await PdfGoogleFonts.openSansBold();
