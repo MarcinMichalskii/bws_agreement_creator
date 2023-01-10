@@ -3,7 +3,6 @@ part 'address_data.g.dart';
 
 @CopyWith()
 class AdressData {
-  final String district;
   final String street;
   final String houseNumber;
   final String flatNumber;
@@ -13,8 +12,7 @@ class AdressData {
   final String citizenship;
 
   AdressData(
-      {this.district = '',
-      this.street = '',
+      {this.street = '',
       this.houseNumber = '',
       this.flatNumber = '',
       this.zipCode = '',
@@ -24,7 +22,6 @@ class AdressData {
 
   List<String> get allComponents {
     return [
-      district,
       street,
       houseNumber,
       flatNumber,
@@ -37,7 +34,6 @@ class AdressData {
 
   bool get isFilledInCorrectly {
     final components = [
-      district,
       street,
       houseNumber,
       zipCode,

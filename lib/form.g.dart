@@ -116,8 +116,6 @@ abstract class _$FormStateCWProxy {
 
   FormState worksInOtherCompany(bool worksInOtherCompany);
 
-  FormState worksOnUop(bool worksOnUop);
-
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FormState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -179,7 +177,6 @@ abstract class _$FormStateCWProxy {
     bool? sickInsurance,
     bool? worksForOtherEmployee,
     bool? worksInOtherCompany,
-    bool? worksOnUop,
   });
 }
 
@@ -384,9 +381,6 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
       this(worksInOtherCompany: worksInOtherCompany);
 
   @override
-  FormState worksOnUop(bool worksOnUop) => this(worksOnUop: worksOnUop);
-
-  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FormState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -449,7 +443,6 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
     Object? sickInsurance = const $CopyWithPlaceholder(),
     Object? worksForOtherEmployee = const $CopyWithPlaceholder(),
     Object? worksInOtherCompany = const $CopyWithPlaceholder(),
-    Object? worksOnUop = const $CopyWithPlaceholder(),
   }) {
     return FormState(
       additionalEmployees:
@@ -711,11 +704,6 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
               ? _value.worksInOtherCompany
               // ignore: cast_nullable_to_non_nullable
               : worksInOtherCompany as bool,
-      worksOnUop:
-          worksOnUop == const $CopyWithPlaceholder() || worksOnUop == null
-              ? _value.worksOnUop
-              // ignore: cast_nullable_to_non_nullable
-              : worksOnUop as bool,
     );
   }
 }

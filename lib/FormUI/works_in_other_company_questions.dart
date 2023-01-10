@@ -11,16 +11,10 @@ class WorksInOtherCompanyQuestions extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final provider = FormNotifier.provider;
     final otherCompanyNip = ref.watch(provider).otherCompanyNip;
-    final worksOnUop = ref.watch(provider).worksOnUop;
     final agreementWithTime = ref.watch(provider).agreementWithTime;
     final earnsMoreThanMinimalWage =
         ref.watch(provider).earnsMoreThanMinimalWage;
     return Column(children: [
-      FormToggle(
-        isOn: worksOnUop,
-        onChanged: ref.read(provider.notifier).setWorksOnUop,
-        title: "Pracuję dla tego pracodawcy w oparciu o umowę o pracę",
-      ),
       FormToggle(
         isOn: agreementWithTime,
         onChanged: ref.read(provider.notifier).setAgreementWithTime,

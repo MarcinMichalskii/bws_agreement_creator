@@ -18,11 +18,11 @@ class PdfStudentId {
                   pw.Container(
                     margin: const pw.EdgeInsets.only(bottom: 32),
                     child: pw.Image(pw.MemoryImage(form.frontStudentIdData!),
-                        width: 440, height: 400),
+                        width: 360, height: 320),
                   ),
                 if (form.backStudentIdData != null)
                   pw.Image(pw.MemoryImage(form.backStudentIdData!),
-                      width: 440, height: 400),
+                      width: 360, height: 320),
               ]);
         });
     document.addPage(page);

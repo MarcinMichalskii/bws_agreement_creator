@@ -33,7 +33,7 @@ class PdfNormalAgreement {
                       pw.Text(NormalAgreementTexts.bwsData, style: regular11),
                 ),
                 pw.Text(
-                    '${form.name} ${form.lastName}\n${form.pesel.isEmpty ? form.pesel : form.passportOrIdNumber}\n${form.placeOfDomicile.city}, ${form.placeOfDomicile.street} ${form.placeOfDomicile.houseNumber}, ${form.placeOfDomicile.flatNumber}',
+                    '${form.name} ${form.lastName}\nPESEL/nr. dokumentu: ${form.pesel.isEmpty ? form.passportOrIdNumber : form.pesel}\n${form.placeOfDomicile.city}, ${form.placeOfDomicile.street} ${form.placeOfDomicile.houseNumber}, ${form.placeOfDomicile.flatNumber}',
                     style: bold10),
                 pw.Container(
                   margin: const pw.EdgeInsets.only(top: 8),
@@ -95,13 +95,6 @@ class PdfNormalAgreement {
         build: (pw.Context context) {
           return pw.Column(children: [
             enumRow(
-                point: '',
-                value:
-                    'dokonywania zwrotu kosztów używania do celów służbowych samochodów osobowych, motocykli i motorowerów niebędących własnością pracodawcy.',
-                pointTextStyle: regular11,
-                valueTextStyle: regular11,
-                emptyPoint: true),
-            enumRow(
                 point: '5.',
                 value:
                     'Warunkiem wypłaty kilometrówki jest prawidłowe złożenie wniosku dostępnego w aplikacji Sinch (zakładka BAZA WIEDZY) najpóźniej do 5 dnia miesiąca, przed którym wykorzystywany był samochód.',
@@ -129,7 +122,7 @@ class PdfNormalAgreement {
             enumRow(
                 point: '2.',
                 value:
-                    'Usługodawca oświadcza, iż ${form.sickInsurance ? 'chce' : 'nie chce'}, aby BWS odprowadzał za niego składkę chorobową.',
+                    'Usługodawca oświadcza, iż nie chce aby BWS odprowadzał za niego składkę chorobową.',
                 pointTextStyle: regular11,
                 valueTextStyle: regular11),
             enumRow(
@@ -165,7 +158,7 @@ class PdfNormalAgreement {
             enumRow(
                 point: '1.',
                 value:
-                    'Usługodawca wskazuje następujące dane kontaktowe:\n1) Adres do doręczeń: ${form.placeOfDomicile.city}, ul. ${form.placeOfDomicile.street} ${form.placeOfDomicile.street} ${form.placeOfDomicile.houseNumber} / ${form.placeOfDomicile.flatNumber} \n2) Numer telefonu: ${form.phoneNumber}\n3) Adres e-mail: ${form.emailAddress}',
+                    'Usługodawca wskazuje następujące dane kontaktowe:\n1) Adres do doręczeń: ${form.placeOfDomicile.city}, ul. ${form.placeOfDomicile.street} ${form.placeOfDomicile.houseNumber} / ${form.placeOfDomicile.flatNumber} \n2) Numer telefonu: ${form.phoneNumber}\n3) Adres e-mail: ${form.emailAddress}',
                 pointTextStyle: bold11,
                 valueTextStyle: bold11),
             enumRow(
@@ -318,7 +311,7 @@ class PdfNormalAgreement {
 
 class NormalAgreementTexts {
   static String bwsData =
-      "spółką BWS Event Support Sp. z o.o. z siedzibą w Krakowie 31-559, przy ul. Na Szaniec 7, NIP 6751759898, KRS 0000944605, reprezentowaną przez pełnomocnika: Imię i nazwisko, PESEL, seria i numer dokumentu, pełnomocnictwo z dnia - DZIEŃ PODPISANIA PEŁNOMOCNICTWA, zwaną w dalszej części Umowy: „BWS” a zleceniobiorcą posługującym się danymi: ";
+      "spółką BWS Event Support Sp. z o.o. z siedzibą w Krakowie 31-559, przy ul. Na Szaniec 7, NIP 6751759898, KRS 0000944605, reprezentowaną przez pełnomocnika: Aleksandra Wróblewską, PESEL: 96052509482, pełnomocnictwo z dnia 1.10.2022, zwaną w dalszej części Umowy: „BWS” a zleceniobiorcą posługującym się danymi: ";
 
   static String howDataWasVerified =
       "co zostało stwierdzone w oparciu o okazany dowód osobisty/dokument tożsamości,działającym osobiście,zwanym w dalszej części Umowy: „Usługodawcą”,";

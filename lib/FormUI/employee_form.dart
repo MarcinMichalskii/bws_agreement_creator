@@ -135,7 +135,7 @@ class EmployeeForm extends HookConsumerWidget {
                   padding: const EdgeInsets.only(bottom: 64),
                   child: !isLoading
                       ? DefaultBorderedButton(
-                          text: "Generuj dokumnet",
+                          text: "Generuj dokument",
                           onTap: generateButtonTapped,
                         )
                       : Container(

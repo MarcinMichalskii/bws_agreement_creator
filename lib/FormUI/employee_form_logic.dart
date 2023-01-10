@@ -76,8 +76,8 @@ class EmployeeFormLogic extends HookConsumerWidget {
           PdfDocument(inputBytes: employeeStatementData);
 
       employeePdf.insertCustomPage(pdfAgreemntFirstPagePdf.pages[0], 0);
-      employeePdf.insertCustomPage(studentStatusPdf.pages[0], 5);
-      employeePdf.insertCustomPage(employeeContactDataPdf.pages[0], 8);
+      employeePdf.insertCustomPage(studentStatusPdf.pages[0], 6);
+      employeePdf.insertCustomPage(employeeContactDataPdf.pages[0], 9);
       employeePdf.insertCustomPage(
           employeeStatementPdf.pages[0], employeePdf.pages.count);
 

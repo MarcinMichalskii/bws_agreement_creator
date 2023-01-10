@@ -30,14 +30,6 @@ class AddressDataQuestions extends HookConsumerWidget {
           ],
         ),
       ),
-      BorderedInput(
-        placeholder: "Gmina / Dzielnica",
-        validator: ref.read(FormNotifier.provider.notifier).isEmptyValidator,
-        onChanged: (value) {
-          onAddressDataChanged(
-              currentAddressData.copyWith(district: value ?? ''));
-        },
-      ),
       Row(children: [
         Expanded(
           child: Container(

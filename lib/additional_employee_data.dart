@@ -15,6 +15,14 @@ class AdditionalEmployeeData {
       required this.address,
       required this.pesel});
 
+  bool get isAnyValueEmpty {
+    return [
+      name,
+      address,
+      pesel,
+    ].contains('');
+  }
+
   bool get isEmpty {
     final allComponents = [
       name,

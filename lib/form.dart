@@ -34,7 +34,6 @@ class FormState {
     required this.retiringSignature,
     required this.rentSignature,
     required this.retiringDecizionDate,
-    required this.worksOnUop,
     required this.sickInsurance,
     required this.invalidStatus,
     required this.secondName,
@@ -88,7 +87,6 @@ class FormState {
   final bool hasRetiring;
   final DateTime retiringDecizionDate;
   final String retiringSignature;
-  final bool worksOnUop;
   final bool sickInsurance;
   final bool invalidStatus;
   final String secondName;
@@ -168,6 +166,10 @@ class FormState {
         invalidCompanyRepresentant;
   }
 
+  bool get invalidB2bEmployees {
+    return additionalEmployees.map((e) => e.isAnyValueEmpty).contains(true);
+  }
+
   String? get validationErrorText {
     if (isBasicDataEmpty) {
       return "Sprawdź dane osobowe";
@@ -175,6 +177,8 @@ class FormState {
       return null;
     } else if (areYouB2b && invalidB2b) {
       return "Sprawdź dane Twojej firmy";
+    } else if (areYouB2b && invalidB2bEmployees) {
+      return "Sprawdź dane dodatkowych pracowników";
     } else if (dontHavePesel && (frontIdData == null || backIdData == null)) {
       return "Sprawdź dane dokumentu";
     } else if (placeOfDomicile.isFilledInCorrectly) {
@@ -217,7 +221,6 @@ class FormNotifier extends StateNotifier<FormState> {
           rentSignature: '',
           retiringDecizionDate: DateTime.now(),
           retiringSignature: '',
-          worksOnUop: false,
           sickInsurance: false,
           invalidStatus: false,
           passportOrIdNumber: '',
@@ -344,10 +347,6 @@ class FormNotifier extends StateNotifier<FormState> {
 
   void setRetiringDecisionDate(DateTime value) {
     state = state.copyWith(retiringDecizionDate: value);
-  }
-
-  void setWorksOnUop(bool value) {
-    state = state.copyWith(worksOnUop: value);
   }
 
   void setSickInsurance(bool value) {

@@ -50,7 +50,7 @@ class B2BAdditionalPeople extends HookConsumerWidget {
                   child: Container(
                     margin: const EdgeInsets.only(left: 8),
                     child: BorderedInput(
-                      placeholder: "Pesel",
+                      placeholder: "Pesel/nr. paszportu (obcokrajowcy)",
                       validator: ref.read(provider.notifier).isEmptyValidator,
                       onChanged: (value) {
                         ref.read(provider.notifier).setAdditionalEmployee(

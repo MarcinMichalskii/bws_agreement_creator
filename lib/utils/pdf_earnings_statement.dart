@@ -33,8 +33,8 @@ class PdfEarningsStatment {
                 ),
                 pw.Container(
                   margin: const pw.EdgeInsets.only(top: 8),
-                  child: dataRow(
-                      'Nazwisko: ', form.lastName, "", "", bold8, regular8),
+                  child: dataRow('Imię: ', form.name, "Nazwisko: ",
+                      form.lastName, bold8, regular8),
                 ),
                 dataRow('Data urodzenia: ', birthday, 'PESEL: ', form.pesel,
                     bold8, regular8),
@@ -43,13 +43,6 @@ class PdfEarningsStatment {
                   child: pw.Text('Miejsce zameldowania: ',
                       style: regular12underline),
                 ),
-                dataRow(
-                    'Gmina/Dzielnica: ',
-                    form.placeOfDomicile.district,
-                    'Województwo: ',
-                    form.placeOfDomicile.district,
-                    bold8,
-                    regular8),
                 dataRow(
                     'Ulica: ',
                     form.placeOfDomicile.street,
@@ -79,18 +72,10 @@ class PdfEarningsStatment {
                   ),
                 if (!form.placeOfLiving.isEmpty)
                   dataRow(
-                      'Gmina/Dzielnica: ',
-                      form.placeOfLiving.district,
-                      'Województwo: ',
-                      form.placeOfLiving.district,
-                      bold8,
-                      regular8),
-                if (!form.placeOfLiving.isEmpty)
-                  dataRow(
                       'Ulica: ',
                       form.placeOfLiving.street,
                       'Nr domu: ',
-                      '${form.placeOfDomicile.houseNumber} m. ${form.placeOfDomicile.flatNumber}',
+                      '${form.placeOfLiving.houseNumber} m. ${form.placeOfLiving.flatNumber}',
                       bold8,
                       regular8),
                 if (!form.placeOfLiving.isEmpty)
@@ -116,48 +101,37 @@ class PdfEarningsStatment {
                 pw.Container(
                   margin: const pw.EdgeInsets.fromLTRB(0, 4, 0, 0),
                   child: pw.Text(
-                      'A) ${worksInOtherCompanyUop(form.worksInOtherCompany, form.otherCompanyName, form.earnsMoreThanMinimalWage)}',
+                      'A) ${worksInOtherCompanyZlec(form.worksInOtherCompany, form.otherCompanyName, form.earnsMoreThanMinimalWage, form.agreementWithTime, form.agreementWithTimeStart, form.agreementWithTimeEnd)}',
+                      style: regular12),
+                ),
+                pw.Container(
+                  margin: const pw.EdgeInsets.fromLTRB(0, 4, 0, 0),
+                  child: pw.Text('B) Nie prowadzę działalności gospodarczej',
                       style: regular12),
                 ),
                 pw.Container(
                   margin: const pw.EdgeInsets.fromLTRB(0, 4, 0, 0),
                   child: pw.Text(
-                      'B) ${worksInOtherCompanyZlec(form.worksInOtherCompany, form.otherCompanyName, form.earnsMoreThanMinimalWage, form.agreementWithTime, form.agreementWithTimeStart, form.agreementWithTimeEnd)}',
-                      style: regular12),
-                ),
-                pw.Container(
-                  margin: const pw.EdgeInsets.fromLTRB(0, 4, 0, 0),
-                  child: pw.Text('C) Nie prowadzę działalności gospodarczej',
+                      'C) ${retirementText(form.hasRetiring, DateFormat('dd.MM.yyyy').format(form.retiringDecizionDate), form.retiringSignature)}',
                       style: regular12),
                 ),
                 pw.Container(
                   margin: const pw.EdgeInsets.fromLTRB(0, 4, 0, 0),
                   child: pw.Text(
-                      'D) ${retirementText(form.hasRetiring, DateFormat('dd.MM.yyyy').format(form.retiringDecizionDate), form.retiringSignature)}',
+                      'D) ${rentText(form.hasRent, DateFormat('dd.MM.yyyy').format(form.rentDecisizionDate), form.rentSignature)}',
+                      style: regular12),
+                ),
+                pw.Container(
+                  margin: const pw.EdgeInsets.fromLTRB(0, 4, 0, 0),
+                  child: pw.Text('E) ${isInvalid(form.invalidStatus)}',
                       style: regular12),
                 ),
                 pw.Container(
                   margin: const pw.EdgeInsets.fromLTRB(0, 4, 0, 0),
                   child: pw.Text(
-                      'E) ${rentText(form.hasRent, DateFormat('dd.MM.yyyy').format(form.rentDecisizionDate), form.rentSignature)}',
+                      'F) ${studentText(form.isStudent, form.schoolName)}',
                       style: regular12),
                 ),
-                pw.Container(
-                  margin: const pw.EdgeInsets.fromLTRB(0, 4, 0, 0),
-                  child: pw.Text('F) ${isInvalid(form.invalidStatus)}',
-                      style: regular12),
-                ),
-                pw.Container(
-                  margin: const pw.EdgeInsets.fromLTRB(0, 4, 0, 0),
-                  child: pw.Text(
-                      'G) ${studentText(form.isStudent, form.schoolName)}',
-                      style: regular12),
-                ),
-                // pw.Container(
-                //   margin: const pw.EdgeInsets.fromLTRB(0, 4, 0, 0),
-                //   child: pw.Text('H) ${sickInsuracne(form.sickInsurance)}',
-                //       style: regular12),
-                // ),
                 pw.Container(
                   margin: const pw.EdgeInsets.fromLTRB(0, 12, 0, 18),
                   child: pw.Text(
@@ -206,19 +180,6 @@ class PdfEarningsStatment {
     ]);
   }
 
-  String worksInOtherCompanyUop(
-      bool worksInOtherCompany, String companyName, bool earnsMore) {
-    final worksInOtherCompanyText =
-        (worksInOtherCompany ? 'Jestem ' : 'Nie jestem ') +
-            'zatrudniony na podstawie umowy o pracę w innym zakładzie pracy\n';
-    final companyNameText =
-        worksInOtherCompany ? 'Nazwa zakładu: $companyName' : '';
-    final earnsMoreText = worksInOtherCompany
-        ? '\nZ tytułu zatrudnienia osiągam dochód ${earnsMore ? 'niższy' : 'wyższy'} wyższy niż minimalne wynagrodzenie'
-        : '';
-    return worksInOtherCompanyText + companyNameText + earnsMoreText;
-  }
-
   String worksInOtherCompanyZlec(
       bool worksInOtherCompany,
       String companyName,
@@ -226,10 +187,9 @@ class PdfEarningsStatment {
       bool agreementWithTime,
       DateTime startsAt,
       DateTime endsAt) {
-    final worksInOtherCompanyText = (worksInOtherCompany
-            ? 'Wykonuję umowy zlecenia'
-            : 'Nie wykonuję umów zleceń') +
-        'w innym zakładzie pracy\n';
+    final worksInOtherCompanyText =
+        (worksInOtherCompany ? 'Pracuję ' : 'Nie pracuję ') +
+            'w innym zakładzie pracy\n';
     final companyNameText =
         worksInOtherCompany ? 'Nazwa zakładu: $companyName' : '';
     final earnsMoreText = worksInOtherCompany

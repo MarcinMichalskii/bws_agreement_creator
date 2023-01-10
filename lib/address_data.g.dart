@@ -13,8 +13,6 @@ abstract class _$AdressDataCWProxy {
 
   AdressData country(String country);
 
-  AdressData district(String district);
-
   AdressData flatNumber(String flatNumber);
 
   AdressData houseNumber(String houseNumber);
@@ -33,7 +31,6 @@ abstract class _$AdressDataCWProxy {
     String? citizenship,
     String? city,
     String? country,
-    String? district,
     String? flatNumber,
     String? houseNumber,
     String? street,
@@ -55,9 +52,6 @@ class _$AdressDataCWProxyImpl implements _$AdressDataCWProxy {
 
   @override
   AdressData country(String country) => this(country: country);
-
-  @override
-  AdressData district(String district) => this(district: district);
 
   @override
   AdressData flatNumber(String flatNumber) => this(flatNumber: flatNumber);
@@ -83,7 +77,6 @@ class _$AdressDataCWProxyImpl implements _$AdressDataCWProxy {
     Object? citizenship = const $CopyWithPlaceholder(),
     Object? city = const $CopyWithPlaceholder(),
     Object? country = const $CopyWithPlaceholder(),
-    Object? district = const $CopyWithPlaceholder(),
     Object? flatNumber = const $CopyWithPlaceholder(),
     Object? houseNumber = const $CopyWithPlaceholder(),
     Object? street = const $CopyWithPlaceholder(),
@@ -103,10 +96,6 @@ class _$AdressDataCWProxyImpl implements _$AdressDataCWProxy {
           ? _value.country
           // ignore: cast_nullable_to_non_nullable
           : country as String,
-      district: district == const $CopyWithPlaceholder() || district == null
-          ? _value.district
-          // ignore: cast_nullable_to_non_nullable
-          : district as String,
       flatNumber:
           flatNumber == const $CopyWithPlaceholder() || flatNumber == null
               ? _value.flatNumber

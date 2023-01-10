@@ -100,7 +100,8 @@ class PdfB2bAgreement {
 
   String onlyCompany(FormState form) {
     final String representedBy = '\nReprezentant spółki: ${form.representedBy}';
-    final String onlyCompany = '\nRola reprezentanta: ${form.representedBy}';
+    final String onlyCompany =
+        '\nRola reprezentanta: ${form.roleOfRepresentant}';
     return (form.representedBy.isEmpty || form.roleOfRepresentant.isEmpty)
         ? ''
         : (representedBy + onlyCompany);
@@ -161,13 +162,13 @@ class PdfB2bAgreement {
                 enumRow(
                     point: '1.',
                     value:
-                        'BWS wskazuje następujące dane kontaktowe: \nAdres do doręczeń: ${form.companyCity}, ${form.companyAddress} \nNumer telefonu: ${form.phoneNumber}\nAdres-email: ${form.emailAddress}\nKomunikator internetowy: ${form.internetComunicator}',
+                        'BWS wskazuje następujące dane kontaktowe:\n1) Adres do doręczeń: ul. Na Szaniec 7, Kraków\n2) Numer telefonu: 794-222-311\n3) Adres e-mail: office@bws.net.pl ',
                     pointTextStyle: regular11,
                     valueTextStyle: regular11),
                 enumRow(
                     point: '2.',
                     value:
-                        'Usługodawca wskazuje następujące dane kontaktowe:: \nAdres do doręczeń \nNumer telefonu\nAdres-email\nKomunikator internetowy: ',
+                        'Usługodawca wskazuje następujące następujące dane kontaktowe: \nAdres do doręczeń: ${form.companyCity}, ${form.companyAddress} \nNumer telefonu: ${form.phoneNumber}\nAdres-email: ${form.emailAddress}\nKomunikator internetowy: ${form.internetComunicator}',
                     pointTextStyle: regular11,
                     valueTextStyle: regular11),
               ]);
@@ -353,7 +354,7 @@ class PdfB2bAgreement {
 
 class B2bTexts {
   static String bwsData =
-      "spółką BWS EVENT SUPPORT spółka z ograniczoną odpowiedzialnością z siedzibą w Krakowie przy ul. Na Szaniec 7, 31-559 Kraków, dla której Sąd Rejonowy dla Krakowa-Śródmieścia w Krakowie XI Wydział Gospodarczy Krajowego Rejestru Sądowego prowadzi akta rejestrowe pod numerem KRS: 0000944605, posiadającą NIP: 6751759898, REGON: 520910120, reprezentowaną przez Prezesa Zarządu – Wojciecha Klonowskiego oraz Wiceprezesa Zarządu – Bartłomieja Stańko, umocowanych do reprezentacji łącznej/ pełnomocnika – TWOJE IMIĘ I NAZWISKO, działającego na podstawie pełnomocnictwa z dnia 3.01.2022r, okazanego Usługodawcy w dniu podpisania niniejszej Umowy, zwaną dalej „BWS”";
+      "spółką BWS EVENT SUPPORT spółka z ograniczoną odpowiedzialnością z siedzibą w Krakowie przy ul. Na Szaniec 7, 31-559 Kraków, dla której Sąd Rejonowy dla Krakowa-Śródmieścia w Krakowie XI Wydział Gospodarczy Krajowego Rejestru Sądowego prowadzi akta rejestrowe pod numerem KRS: 0000944605, posiadającą NIP: 6751759898, REGON: 520910120, reprezentowaną przez Prezesa Zarządu – Wojciecha Klonowskiego oraz Wiceprezesa Zarządu – Bartłomieja Stańko, umocowanych do reprezentacji łącznej/ pełnomocnika – Aleksandrę Wróblewską PESEL: 96052509482 działającego na podstawie pełnomocnictwa z dnia 1.10.2022r, okazanego Usługodawcy w dniu podpisania niniejszej Umowy, zwaną dalej „BWS”";
   static String howDataWasVerified =
       "co zostało stwierdzone w oparciu o okazany dowód osobisty/dokument tożsamości,działającym osobiście,zwanym w dalszej części Umowy: „Usługodawcą”,";
 
