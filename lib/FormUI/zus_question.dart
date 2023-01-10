@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
 import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';
+import 'package:bws_agreement_creator/form.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -26,6 +27,8 @@ class ZusQuestions extends HookConsumerWidget {
           margin: const EdgeInsets.fromLTRB(4, 12, 0, 0),
           child: BorderedInput(
             placeholder: "Sygnatura",
+            validator:
+                ref.read(FormNotifier.provider.notifier).isEmptyValidator,
             onChanged: (value) {
               onSignatureChanged(value ?? '');
             },

@@ -60,6 +60,7 @@ class WorksInOtherCompanyQuestions extends HookConsumerWidget {
         ),
       BorderedInput(
         placeholder: "Nazwa firmy pracodawcy",
+        validator: ref.read(FormNotifier.provider.notifier).isEmptyValidator,
         onChanged: (value) {
           ref.read(provider.notifier).setOtherCompanyName(value ?? '');
         },

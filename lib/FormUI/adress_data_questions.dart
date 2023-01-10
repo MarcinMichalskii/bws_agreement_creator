@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
 import 'package:bws_agreement_creator/address_data.dart';
+import 'package:bws_agreement_creator/form.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -31,6 +32,7 @@ class AddressDataQuestions extends HookConsumerWidget {
       ),
       BorderedInput(
         placeholder: "Gmina / Dzielnica",
+        validator: ref.read(FormNotifier.provider.notifier).isEmptyValidator,
         onChanged: (value) {
           onAddressDataChanged(
               currentAddressData.copyWith(district: value ?? ''));
@@ -42,6 +44,8 @@ class AddressDataQuestions extends HookConsumerWidget {
             margin: const EdgeInsets.only(right: 8),
             child: BorderedInput(
               placeholder: "Ulica",
+              validator:
+                  ref.read(FormNotifier.provider.notifier).isEmptyValidator,
               onChanged: (value) {
                 onAddressDataChanged(
                     currentAddressData.copyWith(street: value ?? ''));
@@ -54,6 +58,8 @@ class AddressDataQuestions extends HookConsumerWidget {
             margin: const EdgeInsets.symmetric(horizontal: 4),
             child: BorderedInput(
               placeholder: "Numer domu",
+              validator:
+                  ref.read(FormNotifier.provider.notifier).isEmptyValidator,
               onChanged: (value) {
                 onAddressDataChanged(
                     currentAddressData.copyWith(houseNumber: value ?? ''));
@@ -80,6 +86,8 @@ class AddressDataQuestions extends HookConsumerWidget {
             margin: const EdgeInsets.only(right: 8),
             child: BorderedInput(
               placeholder: "Kod pocztowy",
+              validator:
+                  ref.read(FormNotifier.provider.notifier).isValidZipCode,
               onChanged: (value) {
                 onAddressDataChanged(
                     currentAddressData.copyWith(zipCode: value ?? ''));
@@ -92,6 +100,8 @@ class AddressDataQuestions extends HookConsumerWidget {
             margin: const EdgeInsets.only(left: 8),
             child: BorderedInput(
               placeholder: "Miejscowość",
+              validator:
+                  ref.read(FormNotifier.provider.notifier).isEmptyValidator,
               onChanged: (value) {
                 onAddressDataChanged(
                     currentAddressData.copyWith(city: value ?? ''));
@@ -106,6 +116,8 @@ class AddressDataQuestions extends HookConsumerWidget {
             margin: const EdgeInsets.only(right: 8),
             child: BorderedInput(
               placeholder: "Kraj",
+              validator:
+                  ref.read(FormNotifier.provider.notifier).isEmptyValidator,
               onChanged: (value) {
                 onAddressDataChanged(
                     currentAddressData.copyWith(country: value ?? ''));
@@ -118,6 +130,8 @@ class AddressDataQuestions extends HookConsumerWidget {
             margin: const EdgeInsets.only(left: 8),
             child: BorderedInput(
               placeholder: "Obywatelstwo",
+              validator:
+                  ref.read(FormNotifier.provider.notifier).isEmptyValidator,
               onChanged: (value) {
                 onAddressDataChanged(
                     currentAddressData.copyWith(citizenship: value ?? ''));

@@ -45,7 +45,8 @@ class PdfB2bAgreement {
                     child: enumRow(
                         point: '2.',
                         value:
-                            'Nazwa firmy: ${form.companyName}\nAdres firmy: ${form.companyAddress} \nNIP: ${form.nip}\nKRS: ${form.krs}\nNumer dokumentu: ${form.passportOrIdNumber}}',
+                            'Nazwa firmy: ${form.companyName}\nAdres firmy: ${form.companyAddress} \nNIP: ${form.nip}\nKRS: ${form.krs}\nNumer dokumentu: ${form.passportOrIdNumber}' +
+                                onlyCompany(form),
                         pointTextStyle: regular11,
                         valueTextStyle: regular11)),
                 pw.Container(
@@ -95,6 +96,14 @@ class PdfB2bAgreement {
         });
     document.addPage(page);
     return document.save();
+  }
+
+  String onlyCompany(FormState form) {
+    final String representedBy = '\nReprezentant spółki: ${form.representedBy}';
+    final String onlyCompany = '\nRola reprezentanta: ${form.representedBy}';
+    return (form.representedBy.isEmpty || form.roleOfRepresentant.isEmpty)
+        ? ''
+        : (representedBy + onlyCompany);
   }
 
   Future<Uint8List> generateAgreementContactData(FormState form) async {

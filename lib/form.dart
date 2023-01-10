@@ -10,55 +10,63 @@ part 'form.g.dart';
 
 @CopyWith()
 class FormState {
-  FormState(
-      {required this.name,
-      required this.lastName,
-      required this.areYouB2b,
-      required this.city,
-      required this.birthday,
-      required this.isStudent,
-      required this.worksForOtherEmployee,
-      required this.companyName,
-      required this.companyAddress,
-      required this.companyCity,
-      required this.nip,
-      this.frontStudentIdImage,
-      this.backStudentIdImage,
-      required this.worksInOtherCompany,
-      required this.otherCompanyName,
-      required this.otherCompanyNip,
-      required this.hasTwoAdresses,
-      required this.hasRent,
-      required this.hasRetiring,
-      required this.rentDecisizionDate,
-      required this.retiringSignature,
-      required this.rentSignature,
-      required this.retiringDecizionDate,
-      required this.worksOnUop,
-      required this.sickInsurance,
-      required this.invalidStatus,
-      required this.secondName,
-      required this.pesel,
-      required this.passportOrIdNumber,
-      required this.familyName,
-      required this.agreementWithTime,
-      required this.agreementWithTimeStart,
-      required this.agreementWithTimeEnd,
-      required this.placeOfLiving,
-      required this.placeOfDomicile,
-      required this.schoolName,
-      required this.earnsMoreThanMinimalWage,
-      required this.parentName,
-      required this.parentAdres,
-      required this.parentPesel,
-      required this.parentId,
-      required this.additionalEmployees,
-      required this.krs,
-      required this.internetComunicator,
-      required this.phoneNumber,
-      required this.emailAddress,
-      this.frontStudentIdData,
-      this.backStudentIdData});
+  FormState({
+    required this.name,
+    required this.lastName,
+    required this.areYouB2b,
+    required this.city,
+    required this.birthday,
+    required this.isStudent,
+    required this.worksForOtherEmployee,
+    required this.companyName,
+    required this.companyAddress,
+    required this.companyCity,
+    required this.nip,
+    this.frontStudentIdImage,
+    this.backStudentIdImage,
+    required this.worksInOtherCompany,
+    required this.otherCompanyName,
+    required this.otherCompanyNip,
+    required this.hasTwoAdresses,
+    required this.hasRent,
+    required this.hasRetiring,
+    required this.rentDecisizionDate,
+    required this.retiringSignature,
+    required this.rentSignature,
+    required this.retiringDecizionDate,
+    required this.worksOnUop,
+    required this.sickInsurance,
+    required this.invalidStatus,
+    required this.secondName,
+    required this.pesel,
+    required this.passportOrIdNumber,
+    required this.familyName,
+    required this.agreementWithTime,
+    required this.agreementWithTimeStart,
+    required this.agreementWithTimeEnd,
+    required this.placeOfLiving,
+    required this.placeOfDomicile,
+    required this.schoolName,
+    required this.earnsMoreThanMinimalWage,
+    required this.parentName,
+    required this.parentAdres,
+    required this.parentPesel,
+    required this.parentId,
+    required this.additionalEmployees,
+    required this.krs,
+    required this.internetComunicator,
+    required this.phoneNumber,
+    required this.emailAddress,
+    this.frontStudentIdData,
+    this.backStudentIdData,
+    required this.dontHavePesel,
+    required this.representedBy,
+    required this.roleOfRepresentant,
+    this.frontIdData,
+    this.backIdData,
+    this.frontIdImage,
+    this.backIdImage,
+  });
   final String name;
   final String lastName;
   final bool areYouB2b;
@@ -107,12 +115,22 @@ class FormState {
   final String emailAddress;
   final Uint8List? frontStudentIdData;
   final Uint8List? backStudentIdData;
+  final bool dontHavePesel;
+  final String representedBy;
+  final String roleOfRepresentant;
+  final Uint8List? backIdData;
+  final Uint8List? frontIdData;
+  final Image? frontIdImage;
+  final Image? backIdImage;
+
+  bool get areBothIdNumbersEmpty {
+    return pesel.isEmpty && passportOrIdNumber.isEmpty;
+  }
 
   bool get isBasicDataEmpty {
     return (name.isEmpty ||
         lastName.isEmpty ||
-        pesel.isEmpty ||
-        passportOrIdNumber.isEmpty ||
+        areBothIdNumbersEmpty ||
         phoneNumber.isEmpty ||
         emailAddress.isEmpty);
   }
@@ -129,13 +147,25 @@ class FormState {
         !otherCompanyNip.isValidNip();
   }
 
+  bool get invalidCompanyRepresentant {
+    if (representedBy.isNotEmpty && roleOfRepresentant.isNotEmpty) {
+      return false;
+    }
+    if (representedBy.isEmpty && roleOfRepresentant.isEmpty) {
+      return false;
+    }
+
+    return true;
+  }
+
   bool get invalidB2b {
     return companyName.isEmpty ||
         nip.isEmpty ||
         !nip.isValidNip() ||
         companyAddress.isEmpty ||
         companyCity.isEmpty ||
-        internetComunicator.isEmpty;
+        internetComunicator.isEmpty ||
+        invalidCompanyRepresentant;
   }
 
   String? get validationErrorText {
@@ -144,7 +174,9 @@ class FormState {
     } else if (areYouB2b && !invalidB2b) {
       return null;
     } else if (areYouB2b && invalidB2b) {
-      return "Sprawdź dane adresowe Twojej firmy";
+      return "Sprawdź dane Twojej firmy";
+    } else if (dontHavePesel && (frontIdData == null || backIdData == null)) {
+      return "Sprawdź dane dokumentu";
     } else if (placeOfDomicile.isFilledInCorrectly) {
       return "Sprawdź miejsce zameldowania";
     } else if (placeOfLiving.isFilledInCorrectly && hasTwoAdresses) {
@@ -166,52 +198,56 @@ class FormState {
 class FormNotifier extends StateNotifier<FormState> {
   FormNotifier()
       : super(FormState(
-            name: '',
-            lastName: '',
-            areYouB2b: false,
-            city: '',
-            birthday: DateTime.now().add(Duration(days: -365 * 18 - 4)),
-            isStudent: false,
-            worksForOtherEmployee: false,
-            companyName: '',
-            nip: '',
-            worksInOtherCompany: false,
-            otherCompanyName: '',
-            otherCompanyNip: '',
-            hasTwoAdresses: false,
-            hasRent: false,
-            hasRetiring: false,
-            rentDecisizionDate: DateTime.now(),
-            rentSignature: '',
-            retiringDecizionDate: DateTime.now(),
-            retiringSignature: '',
-            worksOnUop: false,
-            sickInsurance: false,
-            invalidStatus: false,
-            passportOrIdNumber: '',
-            pesel: '',
-            secondName: '',
-            familyName: '',
-            agreementWithTime: false,
-            agreementWithTimeStart: DateTime.now(),
-            agreementWithTimeEnd: DateTime.now(),
-            placeOfLiving: AdressData(),
-            placeOfDomicile: AdressData(),
-            schoolName: '',
-            earnsMoreThanMinimalWage: false,
-            parentName: '',
-            parentAdres: '',
-            parentPesel: '',
-            parentId: '',
-            companyAddress: '',
-            companyCity: '',
-            additionalEmployees: [],
-            krs: '',
-            phoneNumber: '',
-            emailAddress: '',
-            internetComunicator: '',
-            backStudentIdData: null,
-            frontStudentIdData: null));
+          name: '',
+          lastName: '',
+          areYouB2b: false,
+          city: '',
+          birthday: DateTime.now().add(Duration(days: -365 * 18 - 4)),
+          isStudent: false,
+          worksForOtherEmployee: false,
+          companyName: '',
+          nip: '',
+          worksInOtherCompany: false,
+          otherCompanyName: '',
+          otherCompanyNip: '',
+          hasTwoAdresses: false,
+          hasRent: false,
+          hasRetiring: false,
+          rentDecisizionDate: DateTime.now(),
+          rentSignature: '',
+          retiringDecizionDate: DateTime.now(),
+          retiringSignature: '',
+          worksOnUop: false,
+          sickInsurance: false,
+          invalidStatus: false,
+          passportOrIdNumber: '',
+          pesel: '',
+          secondName: '',
+          familyName: '',
+          agreementWithTime: false,
+          agreementWithTimeStart: DateTime.now(),
+          agreementWithTimeEnd: DateTime.now(),
+          placeOfLiving: AdressData(),
+          placeOfDomicile: AdressData(),
+          schoolName: '',
+          earnsMoreThanMinimalWage: false,
+          parentName: '',
+          parentAdres: '',
+          parentPesel: '',
+          parentId: '',
+          companyAddress: '',
+          companyCity: '',
+          additionalEmployees: [],
+          krs: '',
+          phoneNumber: '',
+          emailAddress: '',
+          internetComunicator: '',
+          backStudentIdData: null,
+          frontStudentIdData: null,
+          dontHavePesel: false,
+          representedBy: '',
+          roleOfRepresentant: '',
+        ));
 
   static final provider =
       StateNotifierProvider.autoDispose<FormNotifier, FormState>((ref) {
@@ -423,5 +459,79 @@ class FormNotifier extends StateNotifier<FormState> {
 
   void setFrontStudentIdData(Uint8List? value) {
     state = state.copyWith(frontStudentIdData: value);
+  }
+
+  void setDontHavePesel(bool value) {
+    state = state.copyWith(dontHavePesel: value);
+  }
+
+  void setRepresentedBy(String value) {
+    state = state.copyWith(representedBy: value);
+  }
+
+  void setRoleOfRepresentant(String value) {
+    state = state.copyWith(roleOfRepresentant: value);
+  }
+
+  void setBackIdData(Uint8List? value) {
+    state = state.copyWith(backIdData: value);
+  }
+
+  void setFrontIdData(Uint8List? value) {
+    state = state.copyWith(frontIdData: value);
+  }
+
+  void setFrontIdImage(Image? value) {
+    state = state.copyWith(frontIdImage: value);
+  }
+
+  void setBackIdImage(Image? value) {
+    state = state.copyWith(backIdImage: value);
+  }
+
+  String? isEmptyValidator(String? value) {
+    if (value?.isEmpty == true) {
+      return 'To pole nie może być puste';
+    } else {
+      return null;
+    }
+  }
+
+  String? isValidPhoneNumber(String? phoneNumber) {
+    if (phoneNumber == null) {
+      return null;
+    }
+    String pattern = r'^(?:[+0][1-9])?[0-9]{9,12}$';
+    RegExp phoneExp = RegExp(pattern);
+    if (phoneExp.hasMatch(phoneNumber)) {
+      return null;
+    } else {
+      return "Nieprawidłowy numer telefonu";
+    }
+  }
+
+  String? isValidEmail(String? email) {
+    if (email == null) {
+      return null;
+    }
+    final RegExp emailexp = RegExp(
+        r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$');
+    if (emailexp.hasMatch(email)) {
+      return null;
+    } else {
+      return "Nieprawidłowy email";
+    }
+  }
+
+  String? isValidZipCode(String? zipCode) {
+    if (zipCode == null) {
+      return null;
+    }
+    final RegExp regex = RegExp(r'^[0-9]{2}-[0-9]{3}$');
+    if (regex.hasMatch(zipCode)) {
+      return null;
+    } else {
+      return "Nieprawidłowy kod pocztowy";
+    }
   }
 }

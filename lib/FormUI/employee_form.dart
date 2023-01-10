@@ -3,6 +3,8 @@ import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
 import 'package:bws_agreement_creator/FormUI/components/bws_logo.dart';
 import 'package:bws_agreement_creator/FormUI/components/generate_pdf_button.dart';
 import 'package:bws_agreement_creator/FormUI/components/form_toggle.dart';
+import 'package:bws_agreement_creator/FormUI/components/select_photo_button.dart';
+import 'package:bws_agreement_creator/FormUI/id_row.dart';
 import 'package:bws_agreement_creator/FormUI/normal_employee_questions.dart';
 import 'package:bws_agreement_creator/FormUI/onboarding_information.dart';
 import 'package:bws_agreement_creator/form.dart';
@@ -51,6 +53,8 @@ class EmployeeForm extends HookConsumerWidget {
                         margin: const EdgeInsets.only(right: 8),
                         child: BorderedInput(
                           placeholder: "Imię",
+                          validator:
+                              ref.read(provider.notifier).isEmptyValidator,
                           onChanged: (value) {
                             ref.read(provider.notifier).setName(value ?? '');
                           },
@@ -62,6 +66,8 @@ class EmployeeForm extends HookConsumerWidget {
                         margin: const EdgeInsets.only(left: 8),
                         child: BorderedInput(
                           placeholder: "Nazwisko",
+                          validator:
+                              ref.read(provider.notifier).isEmptyValidator,
                           onChanged: (value) {
                             ref
                                 .read(provider.notifier)
@@ -72,34 +78,41 @@ class EmployeeForm extends HookConsumerWidget {
                     ),
                   ],
                 ),
-
                 BorderedInput(
                   placeholder: "Pesel",
                   onChanged: (value) {
                     ref.read(provider.notifier).setPesel(value ?? '');
                   },
                 ),
-                // if (!areYouB2B)
-                //   BorderedInput(
-                //     placeholder: "Nazwisko rodowe",
-                //     onChanged: (value) {
-                //       ref.read(provider.notifier).setFamilyName(value ?? '');
-                //     },
-                //   ),
-                BorderedInput(
-                  placeholder: "Numer dowodu lub paszportu",
-                  onChanged: (value) {
-                    ref.read(provider.notifier).setPassportOrId(value ?? '');
-                  },
-                ),
-                BorderedInput(
-                  placeholder: "Numer telefonu (Podany w aplikacji sinch)",
-                  onChanged: (value) {
-                    ref.read(provider.notifier).setPhoneNumber(value ?? '');
-                  },
+                if (!ref.watch(provider).areYouB2b)
+                  FormToggle(
+                    isOn: ref.watch(provider).dontHavePesel,
+                    onChanged: ref.read(provider.notifier).setDontHavePesel,
+                    title: "Nie mam numeru pesel",
+                  ),
+                if (ref.watch(provider).dontHavePesel &&
+                    !ref.watch(provider).areYouB2b)
+                  BorderedInput(
+                    placeholder: "Numer dowodu lub paszportu",
+                    onChanged: (value) {
+                      ref.read(provider.notifier).setPassportOrId(value ?? '');
+                    },
+                  ),
+                if (ref.watch(provider).dontHavePesel &&
+                    !ref.watch(provider).areYouB2b)
+                  const IdRow(),
+                Container(
+                  child: BorderedInput(
+                    placeholder: "Numer telefonu (Podany w aplikacji sinch)",
+                    validator: ref.read(provider.notifier).isValidPhoneNumber,
+                    onChanged: (value) {
+                      ref.read(provider.notifier).setPhoneNumber(value ?? '');
+                    },
+                  ),
                 ),
                 BorderedInput(
                   placeholder: "Adres email (Podany w aplikacji sinch)",
+                  validator: ref.read(provider.notifier).isValidEmail,
                   onChanged: (value) {
                     ref.read(provider.notifier).setEmailAddress(value ?? '');
                   },
@@ -109,6 +122,13 @@ class EmployeeForm extends HookConsumerWidget {
                   onChanged: ref.read(provider.notifier).setAreYouB2B,
                   title: "Czy prowadzisz działalność B2B?",
                 ),
+                if (ref.watch(provider).areYouB2b)
+                  BorderedInput(
+                    placeholder: "Numer dowodu lub paszportu",
+                    onChanged: (value) {
+                      ref.read(provider.notifier).setPassportOrId(value ?? '');
+                    },
+                  ),
                 if (areYouB2B) B2BEmployeeQuestions(),
                 if (!areYouB2B) NormalEmployeeQuestions(),
                 Container(
@@ -120,8 +140,8 @@ class EmployeeForm extends HookConsumerWidget {
                         )
                       : Container(
                           constraints:
-                              BoxConstraints(maxHeight: 16, maxWidth: 16),
-                          child: CircularProgressIndicator(
+                              const BoxConstraints(maxHeight: 16, maxWidth: 16),
+                          child: const CircularProgressIndicator(
                             color: CustomColors.applicationColorMain,
                           ),
                         ),

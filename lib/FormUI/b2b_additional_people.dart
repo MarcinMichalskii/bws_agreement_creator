@@ -20,6 +20,7 @@ class B2BAdditionalPeople extends HookConsumerWidget {
               margin: const EdgeInsets.only(right: 8),
               child: BorderedInput(
                 placeholder: "Imię i Nazwisko",
+                validator: ref.read(provider.notifier).isEmptyValidator,
                 onChanged: (value) {
                   ref
                       .read(provider.notifier)
@@ -33,6 +34,7 @@ class B2BAdditionalPeople extends HookConsumerWidget {
               margin: const EdgeInsets.symmetric(horizontal: 8),
               child: BorderedInput(
                 placeholder: "Adres",
+                validator: ref.read(provider.notifier).isEmptyValidator,
                 onChanged: (value) {
                   ref.read(provider.notifier).setAdditionalEmployee(
                       data.copyWith(address: value ?? ''));
@@ -49,6 +51,7 @@ class B2BAdditionalPeople extends HookConsumerWidget {
                     margin: const EdgeInsets.only(left: 8),
                     child: BorderedInput(
                       placeholder: "Pesel",
+                      validator: ref.read(provider.notifier).isEmptyValidator,
                       onChanged: (value) {
                         ref.read(provider.notifier).setAdditionalEmployee(
                             data.copyWith(pesel: value ?? ''));

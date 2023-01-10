@@ -16,6 +16,7 @@ class B2BEmployeeQuestions extends HookConsumerWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       BorderedInput(
         placeholder: "Nazwa firmy",
+        validator: ref.read(provider.notifier).isEmptyValidator,
         onChanged: (value) {
           ref.read(provider.notifier).setCompanyName(value ?? '');
         },
@@ -29,18 +30,21 @@ class B2BEmployeeQuestions extends HookConsumerWidget {
       ),
       BorderedInput(
         placeholder: "Miejscowość",
+        validator: ref.read(provider.notifier).isEmptyValidator,
         onChanged: (value) {
           ref.read(provider.notifier).setCompanyCity(value ?? '');
         },
       ),
       BorderedInput(
         placeholder: "Adres firmy",
+        validator: ref.read(provider.notifier).isEmptyValidator,
         onChanged: (value) {
           ref.read(provider.notifier).setCompanyAddress(value ?? '');
         },
       ),
       BorderedInput(
         placeholder: "Nazwa komunikatora internetowego",
+        validator: ref.read(provider.notifier).isEmptyValidator,
         onChanged: (value) {
           ref.read(provider.notifier).setInternetComunicator(value ?? '');
         },
@@ -51,6 +55,20 @@ class B2BEmployeeQuestions extends HookConsumerWidget {
           ref.read(provider.notifier).setKrs(value ?? '');
         },
       ),
+      if (ref.watch(provider).areYouB2b)
+        BorderedInput(
+          placeholder: "Spółka reprezentowana przez (tylko spółki)",
+          onChanged: (value) {
+            ref.read(provider.notifier).setRepresentedBy(value ?? '');
+          },
+        ),
+      if (ref.watch(provider).areYouB2b)
+        BorderedInput(
+          placeholder: "Rola reprezentanta spółki (tylko spółki)",
+          onChanged: (value) {
+            ref.read(provider.notifier).setRoleOfRepresentant(value ?? '');
+          },
+        ),
       Container(
         margin: const EdgeInsets.only(top: 12),
         child: Row(

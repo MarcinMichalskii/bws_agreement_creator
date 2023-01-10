@@ -18,6 +18,10 @@ abstract class _$FormStateCWProxy {
 
   FormState areYouB2b(bool areYouB2b);
 
+  FormState backIdData(Uint8List? backIdData);
+
+  FormState backIdImage(Image? backIdImage);
+
   FormState backStudentIdData(Uint8List? backStudentIdData);
 
   FormState backStudentIdImage(Image? backStudentIdImage);
@@ -32,11 +36,17 @@ abstract class _$FormStateCWProxy {
 
   FormState companyName(String companyName);
 
+  FormState dontHavePesel(bool dontHavePesel);
+
   FormState earnsMoreThanMinimalWage(bool earnsMoreThanMinimalWage);
 
   FormState emailAddress(String emailAddress);
 
   FormState familyName(String familyName);
+
+  FormState frontIdData(Uint8List? frontIdData);
+
+  FormState frontIdImage(Image? frontIdImage);
 
   FormState frontStudentIdData(Uint8List? frontStudentIdData);
 
@@ -88,9 +98,13 @@ abstract class _$FormStateCWProxy {
 
   FormState rentSignature(String rentSignature);
 
+  FormState representedBy(String representedBy);
+
   FormState retiringDecizionDate(DateTime retiringDecizionDate);
 
   FormState retiringSignature(String retiringSignature);
+
+  FormState roleOfRepresentant(String roleOfRepresentant);
 
   FormState schoolName(String schoolName);
 
@@ -116,6 +130,8 @@ abstract class _$FormStateCWProxy {
     DateTime? agreementWithTimeEnd,
     DateTime? agreementWithTimeStart,
     bool? areYouB2b,
+    Uint8List? backIdData,
+    Image? backIdImage,
     Uint8List? backStudentIdData,
     Image? backStudentIdImage,
     DateTime? birthday,
@@ -123,9 +139,12 @@ abstract class _$FormStateCWProxy {
     String? companyAddress,
     String? companyCity,
     String? companyName,
+    bool? dontHavePesel,
     bool? earnsMoreThanMinimalWage,
     String? emailAddress,
     String? familyName,
+    Uint8List? frontIdData,
+    Image? frontIdImage,
     Uint8List? frontStudentIdData,
     Image? frontStudentIdImage,
     bool? hasRent,
@@ -151,8 +170,10 @@ abstract class _$FormStateCWProxy {
     AdressData? placeOfLiving,
     DateTime? rentDecisizionDate,
     String? rentSignature,
+    String? representedBy,
     DateTime? retiringDecizionDate,
     String? retiringSignature,
+    String? roleOfRepresentant,
     String? schoolName,
     String? secondName,
     bool? sickInsurance,
@@ -189,6 +210,12 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
   FormState areYouB2b(bool areYouB2b) => this(areYouB2b: areYouB2b);
 
   @override
+  FormState backIdData(Uint8List? backIdData) => this(backIdData: backIdData);
+
+  @override
+  FormState backIdImage(Image? backIdImage) => this(backIdImage: backIdImage);
+
+  @override
   FormState backStudentIdData(Uint8List? backStudentIdData) =>
       this(backStudentIdData: backStudentIdData);
 
@@ -213,6 +240,10 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
   FormState companyName(String companyName) => this(companyName: companyName);
 
   @override
+  FormState dontHavePesel(bool dontHavePesel) =>
+      this(dontHavePesel: dontHavePesel);
+
+  @override
   FormState earnsMoreThanMinimalWage(bool earnsMoreThanMinimalWage) =>
       this(earnsMoreThanMinimalWage: earnsMoreThanMinimalWage);
 
@@ -222,6 +253,14 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
 
   @override
   FormState familyName(String familyName) => this(familyName: familyName);
+
+  @override
+  FormState frontIdData(Uint8List? frontIdData) =>
+      this(frontIdData: frontIdData);
+
+  @override
+  FormState frontIdImage(Image? frontIdImage) =>
+      this(frontIdImage: frontIdImage);
 
   @override
   FormState frontStudentIdData(Uint8List? frontStudentIdData) =>
@@ -311,12 +350,20 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
       this(rentSignature: rentSignature);
 
   @override
+  FormState representedBy(String representedBy) =>
+      this(representedBy: representedBy);
+
+  @override
   FormState retiringDecizionDate(DateTime retiringDecizionDate) =>
       this(retiringDecizionDate: retiringDecizionDate);
 
   @override
   FormState retiringSignature(String retiringSignature) =>
       this(retiringSignature: retiringSignature);
+
+  @override
+  FormState roleOfRepresentant(String roleOfRepresentant) =>
+      this(roleOfRepresentant: roleOfRepresentant);
 
   @override
   FormState schoolName(String schoolName) => this(schoolName: schoolName);
@@ -353,6 +400,8 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
     Object? agreementWithTimeEnd = const $CopyWithPlaceholder(),
     Object? agreementWithTimeStart = const $CopyWithPlaceholder(),
     Object? areYouB2b = const $CopyWithPlaceholder(),
+    Object? backIdData = const $CopyWithPlaceholder(),
+    Object? backIdImage = const $CopyWithPlaceholder(),
     Object? backStudentIdData = const $CopyWithPlaceholder(),
     Object? backStudentIdImage = const $CopyWithPlaceholder(),
     Object? birthday = const $CopyWithPlaceholder(),
@@ -360,9 +409,12 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
     Object? companyAddress = const $CopyWithPlaceholder(),
     Object? companyCity = const $CopyWithPlaceholder(),
     Object? companyName = const $CopyWithPlaceholder(),
+    Object? dontHavePesel = const $CopyWithPlaceholder(),
     Object? earnsMoreThanMinimalWage = const $CopyWithPlaceholder(),
     Object? emailAddress = const $CopyWithPlaceholder(),
     Object? familyName = const $CopyWithPlaceholder(),
+    Object? frontIdData = const $CopyWithPlaceholder(),
+    Object? frontIdImage = const $CopyWithPlaceholder(),
     Object? frontStudentIdData = const $CopyWithPlaceholder(),
     Object? frontStudentIdImage = const $CopyWithPlaceholder(),
     Object? hasRent = const $CopyWithPlaceholder(),
@@ -388,8 +440,10 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
     Object? placeOfLiving = const $CopyWithPlaceholder(),
     Object? rentDecisizionDate = const $CopyWithPlaceholder(),
     Object? rentSignature = const $CopyWithPlaceholder(),
+    Object? representedBy = const $CopyWithPlaceholder(),
     Object? retiringDecizionDate = const $CopyWithPlaceholder(),
     Object? retiringSignature = const $CopyWithPlaceholder(),
+    Object? roleOfRepresentant = const $CopyWithPlaceholder(),
     Object? schoolName = const $CopyWithPlaceholder(),
     Object? secondName = const $CopyWithPlaceholder(),
     Object? sickInsurance = const $CopyWithPlaceholder(),
@@ -425,6 +479,14 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
           ? _value.areYouB2b
           // ignore: cast_nullable_to_non_nullable
           : areYouB2b as bool,
+      backIdData: backIdData == const $CopyWithPlaceholder()
+          ? _value.backIdData
+          // ignore: cast_nullable_to_non_nullable
+          : backIdData as Uint8List?,
+      backIdImage: backIdImage == const $CopyWithPlaceholder()
+          ? _value.backIdImage
+          // ignore: cast_nullable_to_non_nullable
+          : backIdImage as Image?,
       backStudentIdData: backStudentIdData == const $CopyWithPlaceholder()
           ? _value.backStudentIdData
           // ignore: cast_nullable_to_non_nullable
@@ -456,6 +518,11 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
               ? _value.companyName
               // ignore: cast_nullable_to_non_nullable
               : companyName as String,
+      dontHavePesel:
+          dontHavePesel == const $CopyWithPlaceholder() || dontHavePesel == null
+              ? _value.dontHavePesel
+              // ignore: cast_nullable_to_non_nullable
+              : dontHavePesel as bool,
       earnsMoreThanMinimalWage:
           earnsMoreThanMinimalWage == const $CopyWithPlaceholder() ||
                   earnsMoreThanMinimalWage == null
@@ -472,6 +539,14 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
               ? _value.familyName
               // ignore: cast_nullable_to_non_nullable
               : familyName as String,
+      frontIdData: frontIdData == const $CopyWithPlaceholder()
+          ? _value.frontIdData
+          // ignore: cast_nullable_to_non_nullable
+          : frontIdData as Uint8List?,
+      frontIdImage: frontIdImage == const $CopyWithPlaceholder()
+          ? _value.frontIdImage
+          // ignore: cast_nullable_to_non_nullable
+          : frontIdImage as Image?,
       frontStudentIdData: frontStudentIdData == const $CopyWithPlaceholder()
           ? _value.frontStudentIdData
           // ignore: cast_nullable_to_non_nullable
@@ -588,6 +663,11 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
               ? _value.rentSignature
               // ignore: cast_nullable_to_non_nullable
               : rentSignature as String,
+      representedBy:
+          representedBy == const $CopyWithPlaceholder() || representedBy == null
+              ? _value.representedBy
+              // ignore: cast_nullable_to_non_nullable
+              : representedBy as String,
       retiringDecizionDate:
           retiringDecizionDate == const $CopyWithPlaceholder() ||
                   retiringDecizionDate == null
@@ -599,6 +679,11 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
           ? _value.retiringSignature
           // ignore: cast_nullable_to_non_nullable
           : retiringSignature as String,
+      roleOfRepresentant: roleOfRepresentant == const $CopyWithPlaceholder() ||
+              roleOfRepresentant == null
+          ? _value.roleOfRepresentant
+          // ignore: cast_nullable_to_non_nullable
+          : roleOfRepresentant as String,
       schoolName:
           schoolName == const $CopyWithPlaceholder() || schoolName == null
               ? _value.schoolName

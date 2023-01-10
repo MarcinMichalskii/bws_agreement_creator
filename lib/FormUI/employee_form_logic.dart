@@ -7,6 +7,7 @@ import 'package:bws_agreement_creator/utils/date_extensions.dart';
 import 'package:bws_agreement_creator/utils/pdf_b2b_agreement.dart';
 import 'package:bws_agreement_creator/utils/pdf_document_extension.dart';
 import 'package:bws_agreement_creator/utils/pdf_earnings_statement.dart';
+import 'package:bws_agreement_creator/utils/pdf_id.dart';
 import 'package:bws_agreement_creator/utils/pdf_normal_agreement.dart';
 import 'package:bws_agreement_creator/utils/pdf_parent_statement.dart';
 import 'package:bws_agreement_creator/utils/pdf_student_id.dart';
@@ -55,7 +56,6 @@ class EmployeeFormLogic extends HookConsumerWidget {
 
       final ByteData employeePdfData =
           await rootBundle.load('assets/pdfs/umowaScalona.pdf');
-      // print(employeePdfData.lengthInBytes);
       final employeePdf =
           PdfDocument(inputBytes: employeePdfData.dataAsUint8());
 
@@ -95,6 +95,12 @@ class EmployeeFormLogic extends HookConsumerWidget {
         final parentStatementPdf = PdfDocument(inputBytes: parentStatementData);
         employeePdf.insertCustomPage(
             parentStatementPdf.pages[0], employeePdf.pages.count);
+      }
+
+      if (formState.dontHavePesel) {
+        final pdfIdData = await PdftId().generatePdfPage(formState);
+        final pdfId = PdfDocument(inputBytes: pdfIdData);
+        employeePdf.insertCustomPage(pdfId.pages[0], employeePdf.pages.count);
       }
       employeePdf.insertPageNumbers();
       await employeePdf.saveToFiles();

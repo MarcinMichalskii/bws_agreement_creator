@@ -22,7 +22,6 @@ class NormalEmployeeQuestions extends HookConsumerWidget {
     final hasRent = ref.watch(provider).hasRent;
     final retiringDate = ref.watch(provider).retiringDecizionDate;
     final rentDate = ref.watch(provider).retiringDecizionDate;
-    final sickInsurance = ref.watch(provider).sickInsurance;
     final isInvalid = ref.watch(provider).invalidStatus;
     return Column(children: [
       SelectDateButton(
@@ -32,6 +31,7 @@ class NormalEmployeeQuestions extends HookConsumerWidget {
       if (!selectedBirthday.isAdult())
         BorderedInput(
           placeholder: "Imię i nazwisko opiekuna",
+          validator: ref.read(provider.notifier).isEmptyValidator,
           onChanged: (value) {
             ref.read(provider.notifier).setParentName(value ?? '');
           },
@@ -39,6 +39,7 @@ class NormalEmployeeQuestions extends HookConsumerWidget {
       if (!selectedBirthday.isAdult())
         BorderedInput(
           placeholder: "Adres opiekuna",
+          validator: ref.read(provider.notifier).isEmptyValidator,
           onChanged: (value) {
             ref.read(provider.notifier).setParentAdres(value ?? '');
           },
@@ -46,6 +47,7 @@ class NormalEmployeeQuestions extends HookConsumerWidget {
       if (!selectedBirthday.isAdult())
         BorderedInput(
           placeholder: "Pesel opiekuna",
+          validator: ref.read(provider.notifier).isEmptyValidator,
           onChanged: (value) {
             ref.read(provider.notifier).setParentPesel(value ?? '');
           },
@@ -53,6 +55,7 @@ class NormalEmployeeQuestions extends HookConsumerWidget {
       if (!selectedBirthday.isAdult())
         BorderedInput(
           placeholder: "Numer dokumentu opiekuna",
+          validator: ref.read(provider.notifier).isEmptyValidator,
           onChanged: (value) {
             ref.read(provider.notifier).setParentIdNumber(value ?? '');
           },
@@ -82,6 +85,7 @@ class NormalEmployeeQuestions extends HookConsumerWidget {
       if (isStudent)
         BorderedInput(
           placeholder: "Nazwa szkoły lub uczelni",
+          validator: ref.read(provider.notifier).isEmptyValidator,
           onChanged: (value) {
             ref.read(provider.notifier).setSchoolName(value ?? '');
           },
@@ -113,11 +117,6 @@ class NormalEmployeeQuestions extends HookConsumerWidget {
         onChanged: ref.read(provider.notifier).setInvalidStatus,
         title: "Posiadam orzeczony stopień niezdolności do pracy ",
       ),
-      // FormToggle(
-      //   isOn: sickInsurance,
-      //   onChanged: ref.read(provider.notifier).setSickInsurance,
-      //   title: "Wnoszę o objęcie mnie dobrowolnym ubezpieczeniem chorobowym",
-      // ),
     ]);
   }
 }

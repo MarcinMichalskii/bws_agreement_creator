@@ -37,7 +37,8 @@ extension InsertPageNumbers on PdfDocument {
           "Strona ${i + 1}/${pages.count}",
           PdfStandardFont(PdfFontFamily.helvetica, 9,
               style: PdfFontStyle.regular),
-          bounds: Rect.fromLTWH(page.size.width - 140, 740, 60, 20));
+          bounds: Rect.fromLTWH(page.size.width - 140,
+              page.graphics.clientSize.height - 30, 60, 20));
     }
   }
 }
