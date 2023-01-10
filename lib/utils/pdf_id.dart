@@ -18,11 +18,11 @@ class PdftId {
                   pw.Container(
                     margin: const pw.EdgeInsets.only(bottom: 32),
                     child: pw.Image(pw.MemoryImage(form.frontIdData!),
-                        width: 440, height: 400),
+                        width: 360, height: 320),
                   ),
                 if (form.backIdData != null)
                   pw.Image(pw.MemoryImage(form.backIdData!),
-                      width: 440, height: 400),
+                      width: 360, height: 320),
               ]);
         });
     document.addPage(page);
