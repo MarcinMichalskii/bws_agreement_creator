@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/additional_employee_data.dart';
 import 'package:bws_agreement_creator/address_data.dart';
+import 'package:bws_agreement_creator/utils/date_extensions.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/foundation.dart';
@@ -170,6 +171,13 @@ class FormState {
     return additionalEmployees.map((e) => e.isAnyValueEmpty).contains(true);
   }
 
+  bool get invalidParentData {
+    return parentAdres.isEmpty ||
+        parentPesel.isEmpty ||
+        parentId.isEmpty ||
+        parentName.isEmpty;
+  }
+
   String? get validationErrorText {
     if (isBasicDataEmpty) {
       return "Sprawdź dane osobowe";
@@ -181,6 +189,10 @@ class FormState {
       return "Sprawdź dane dodatkowych pracowników";
     } else if (dontHavePesel && (frontIdData == null || backIdData == null)) {
       return "Sprawdź dane dokumentu";
+    } else if (!birthday.isOver16()) {
+      return "Osoby poniżej 16 roku życie nie mogą z nami współpracować";
+    } else if (!birthday.isAdult() && invalidParentData) {
+      return "Sprawdź dane opiekuna";
     } else if (placeOfDomicile.isFilledInCorrectly) {
       return "Sprawdź miejsce zameldowania";
     } else if (placeOfLiving.isFilledInCorrectly && hasTwoAdresses) {

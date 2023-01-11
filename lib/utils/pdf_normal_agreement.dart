@@ -164,7 +164,7 @@ class PdfNormalAgreement {
             enumRow(
                 point: '2.',
                 value:
-                    'BWS wskazuje następujące dane kontaktowe:\n1) Adres do doręczeń: ul. Na Szaniec 7, Kraków\n2) Numer telefonu: 794-222-311\n3) Adres e-mail: office@bws.net.pl ',
+                    'BWS wskazuje następujące dane kontaktowe:\n1) Adres do doręczeń: ul. Na Szaniec 7, 31-559 Kraków\n2) Numer telefonu: 794-002-660\n3) Adres e-mail: office@bws.net.pl Komunikator internetowy: messenger',
                 pointTextStyle: regular11,
                 valueTextStyle: regular11),
             enumRow(

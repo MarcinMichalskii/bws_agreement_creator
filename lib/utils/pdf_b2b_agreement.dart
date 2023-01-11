@@ -45,7 +45,7 @@ class PdfB2bAgreement {
                     child: enumRow(
                         point: '2.',
                         value:
-                            'Nazwa firmy: ${form.companyName}\nAdres firmy: ${form.companyAddress} \nNIP: ${form.nip}\nKRS: ${form.krs}\nNumer dokumentu: ${form.passportOrIdNumber}' +
+                            'Nazwa firmy: ${form.companyName}\nAdres firmy: ${form.companyAddress} \nNIP: ${form.nip}${!form.krs.isEmpty ? '\nKRS: ${form.krs}' : ''}\nNumer dokumentu: ${form.passportOrIdNumber}' +
                                 onlyCompany(form),
                         pointTextStyle: regular11,
                         valueTextStyle: regular11)),
@@ -162,7 +162,7 @@ class PdfB2bAgreement {
                 enumRow(
                     point: '1.',
                     value:
-                        'BWS wskazuje następujące dane kontaktowe:\n1) Adres do doręczeń: ul. Na Szaniec 7, Kraków\n2) Numer telefonu: 794-222-311\n3) Adres e-mail: office@bws.net.pl ',
+                        'BWS wskazuje następujące dane kontaktowe:\n1) Adres do doręczeń: ul. Na Szaniec 7, 31-559 Kraków\n2) Numer telefonu: 794-002-660\n3) Adres e-mail: office@bws.net.pl Komunikator internetowy: messenger',
                     pointTextStyle: regular11,
                     valueTextStyle: regular11),
                 enumRow(

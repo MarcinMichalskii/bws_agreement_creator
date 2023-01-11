@@ -16,7 +16,7 @@ class ValidationError extends StatelessWidget {
       child: Center(
         child: Container(
             width: 480,
-            height: 140,
+            height: 160,
             constraints: const BoxConstraints(maxWidth: 380),
             child: Container(
               decoration: BoxDecoration(
