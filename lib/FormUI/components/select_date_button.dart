@@ -22,8 +22,10 @@ class SelectDateButton extends HookWidget {
           firstDate: DateTime.now().add(const Duration(days: -365 * 100)),
           lastDate: DateTime.now().add(const Duration(days: 365 * 100)));
 
-      onDateSelected(value ?? DateTime.now());
-    }, []);
+      if (value != null) {
+        onDateSelected(value);
+      }
+    }, [dateText, onDateSelected]);
     return FormButtonUI(
         title: DateFormat('dd.MM.yyyy').format(dateText),
         headerText: headerText,

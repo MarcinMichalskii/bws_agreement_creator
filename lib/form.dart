@@ -6,6 +6,7 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 part 'form.g.dart';
 
@@ -178,6 +179,13 @@ class FormState {
         parentName.isEmpty;
   }
 
+  bool get peselBirthdayMismatch {
+    if (pesel.isEmpty) {
+      return false;
+    }
+    return pesel.extractBirthdateFromPesel() != birthday;
+  }
+
   String? get validationErrorText {
     if (isBasicDataEmpty) {
       return "Sprawdź dane osobowe";
@@ -187,6 +195,8 @@ class FormState {
       return "Sprawdź dane Twojej firmy";
     } else if (areYouB2b && invalidB2bEmployees) {
       return "Sprawdź dane dodatkowych pracowników";
+    } else if (!dontHavePesel && peselBirthdayMismatch) {
+      return "Data urodzenia nie pasuje do numeru PESEL";
     } else if (dontHavePesel && (frontIdData == null || backIdData == null)) {
       return "Sprawdź dane dokumentu";
     } else if (!birthday.isOver16()) {
@@ -379,6 +389,10 @@ class FormNotifier extends StateNotifier<FormState> {
 
   void setPesel(String value) {
     state = state.copyWith(pesel: value);
+    final birthday = value.extractBirthdateFromPesel();
+    if (birthday != null) {
+      setBirthDay(birthday);
+    }
   }
 
   void setPassportOrId(String value) {

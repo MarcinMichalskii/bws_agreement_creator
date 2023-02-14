@@ -15,4 +15,38 @@ extension NipValidator on String {
       return false;
     }
   }
+
+  DateTime? extractBirthdateFromPesel() {
+    final pesel = this;
+    if (pesel.length < 6 || int.tryParse(pesel) == null) {
+      return null;
+    }
+
+    String year = pesel.substring(0, 2);
+    String month = pesel.substring(2, 4);
+    String day = pesel.substring(4, 6);
+
+    int monthInt = int.parse(month);
+    int dayInt = int.parse(day);
+
+    if (monthInt > 80) {
+      year = "18$year";
+      monthInt -= 80;
+    } else if (monthInt > 60) {
+      year = "22$year";
+      monthInt -= 60;
+    } else if (monthInt > 40) {
+      year = "21$year";
+      monthInt -= 40;
+    } else if (monthInt > 20) {
+      year = "20$year";
+      monthInt -= 20;
+    } else {
+      year = "19$year";
+    }
+
+    DateTime birthdate = DateTime(int.parse(year), monthInt, dayInt);
+
+    return birthdate;
+  }
 }
