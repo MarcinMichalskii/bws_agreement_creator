@@ -4,7 +4,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-class PdfId {
+class PdfPermission {
   Future<Uint8List> generatePdfPage(FormState form) async {
     final document = pw.Document();
 
@@ -14,15 +14,12 @@ class PdfId {
           return pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
-                if (form.frontIdData != null)
+                if (form.permissionData != null)
                   pw.Container(
                     margin: const pw.EdgeInsets.only(bottom: 32),
-                    child: pw.Image(pw.MemoryImage(form.frontIdData!),
+                    child: pw.Image(pw.MemoryImage(form.permissionData!),
                         width: 360, height: 320),
                   ),
-                if (form.backIdData != null)
-                  pw.Image(pw.MemoryImage(form.backIdData!),
-                      width: 360, height: 320),
               ]);
         });
     document.addPage(page);

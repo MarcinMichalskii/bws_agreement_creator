@@ -86,6 +86,10 @@ abstract class _$FormStateCWProxy {
 
   FormState passportOrIdNumber(String passportOrIdNumber);
 
+  FormState permissionData(Uint8List? permissionData);
+
+  FormState permissionImage(Image? permissionImage);
+
   FormState pesel(String pesel);
 
   FormState phoneNumber(String phoneNumber);
@@ -162,6 +166,8 @@ abstract class _$FormStateCWProxy {
     String? parentName,
     String? parentPesel,
     String? passportOrIdNumber,
+    Uint8List? permissionData,
+    Image? permissionImage,
     String? pesel,
     String? phoneNumber,
     AdressData? placeOfDomicile,
@@ -325,6 +331,14 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
       this(passportOrIdNumber: passportOrIdNumber);
 
   @override
+  FormState permissionData(Uint8List? permissionData) =>
+      this(permissionData: permissionData);
+
+  @override
+  FormState permissionImage(Image? permissionImage) =>
+      this(permissionImage: permissionImage);
+
+  @override
   FormState pesel(String pesel) => this(pesel: pesel);
 
   @override
@@ -428,6 +442,8 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
     Object? parentName = const $CopyWithPlaceholder(),
     Object? parentPesel = const $CopyWithPlaceholder(),
     Object? passportOrIdNumber = const $CopyWithPlaceholder(),
+    Object? permissionData = const $CopyWithPlaceholder(),
+    Object? permissionImage = const $CopyWithPlaceholder(),
     Object? pesel = const $CopyWithPlaceholder(),
     Object? phoneNumber = const $CopyWithPlaceholder(),
     Object? placeOfDomicile = const $CopyWithPlaceholder(),
@@ -627,6 +643,14 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
           ? _value.passportOrIdNumber
           // ignore: cast_nullable_to_non_nullable
           : passportOrIdNumber as String,
+      permissionData: permissionData == const $CopyWithPlaceholder()
+          ? _value.permissionData
+          // ignore: cast_nullable_to_non_nullable
+          : permissionData as Uint8List?,
+      permissionImage: permissionImage == const $CopyWithPlaceholder()
+          ? _value.permissionImage
+          // ignore: cast_nullable_to_non_nullable
+          : permissionImage as Image?,
       pesel: pesel == const $CopyWithPlaceholder() || pesel == null
           ? _value.pesel
           // ignore: cast_nullable_to_non_nullable

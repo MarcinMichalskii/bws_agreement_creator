@@ -13,9 +13,8 @@ class OnboardingInformation extends StatelessWidget {
       type: MaterialType.transparency,
       child: Center(
         child: Container(
-            width: 480,
-            height: 340,
-            constraints: const BoxConstraints(maxWidth: 380),
+            margin: EdgeInsets.symmetric(horizontal: 16),
+            width: double.infinity,
             child: Container(
               decoration: BoxDecoration(
                   color: CustomColors.almostBlack2,
@@ -36,60 +35,115 @@ class _OnboardingInformationContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           'Witaj!',
           style: TextStyle(
             fontWeight: FontWeight.w500,
             color: CustomColors.gray,
-            fontSize: 16,
+            fontSize: 26,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
             'W BWS wszyscy pracują legalnie, zatem podpisują umowy zlecenie. Ta strona przygotuje dla Ciebie wszystkie wymagane dokumenty. ZANIM PODPISZESZ, PRZYCZYTAJ TE 3 PUNKTY:',
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: CustomColors.gray,
-              fontSize: 13,
+              fontSize: 18,
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: Text(
-            '1. Szanujemy swój czas - za zapisanie się do pracy i nieobecność bez L4 grozi kara 300zł.',
-            style: TextStyle(
-              color: CustomColors.gray,
-              fontSize: 13,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    color: CustomColors.gray,
+                    fontSize: 18,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: '1. ',
+                    ),
+                    TextSpan(
+                      text: 'Szanujemy swój czas',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          ' - za zapisanie się do pracy i nieobecność bez L4 grozi kara 300zł.',
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: Text(
-            '2. Jesteśmy uczciwi - informujemy Cię, że kwoty na bws.onsinch.com to kwoty brutto (netto tylko dla JDG/Spółek)',
-            style: TextStyle(
-              color: CustomColors.gray,
-              fontSize: 13,
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    color: CustomColors.gray,
+                    fontSize: 18,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: '2. ',
+                    ),
+                    TextSpan(
+                      text: 'Jesteśmy uczciwi',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          ' - informujemy Cię, że kwoty na bws.onsinch.com to kwoty brutto (netto tylko dla JDG/Spółek)',
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: Text(
-            '3. Jesteśmy porządni - wypełnij umowę faktycznymi danymi, które również wpisałeś w profilu na bws.onsinch.com. Za podanie fałszywych danych grozi kara 500zł.',
-            style: TextStyle(
-              color: CustomColors.gray,
-              fontSize: 13,
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    color: CustomColors.gray,
+                    fontSize: 18,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: '3. ',
+                    ),
+                    TextSpan(
+                      text: 'Jesteśmy porządni',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          ' - wypełnij umowę faktycznymi danymi, które również wpisałeś/aś w profilu na bws.onsinch.com. Za podanie fałszywych danych grozi kara 500zł.',
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
+          ],
         ),
         DefaultBorderedButton(
           onTap: () {
             Navigator.pop(context);
           },
-          text: 'OK!',
+          text: 'ROZUMIEM',
         )
       ],
     );

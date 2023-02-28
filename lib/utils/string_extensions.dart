@@ -49,4 +49,12 @@ extension NipValidator on String {
 
     return birthdate;
   }
+
+  String capitalize() {
+    List<String> words = split(" ");
+    words = words
+        .map((word) => word.substring(0, 1).toUpperCase() + word.substring(1))
+        .toList();
+    return words.join(" ");
+  }
 }

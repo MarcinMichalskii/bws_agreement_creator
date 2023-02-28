@@ -12,62 +12,63 @@ part 'form.g.dart';
 
 @CopyWith()
 class FormState {
-  FormState({
-    required this.name,
-    required this.lastName,
-    required this.areYouB2b,
-    required this.city,
-    required this.birthday,
-    required this.isStudent,
-    required this.worksForOtherEmployee,
-    required this.companyName,
-    required this.companyAddress,
-    required this.companyCity,
-    required this.nip,
-    this.frontStudentIdImage,
-    this.backStudentIdImage,
-    required this.worksInOtherCompany,
-    required this.otherCompanyName,
-    required this.otherCompanyNip,
-    required this.hasTwoAdresses,
-    required this.hasRent,
-    required this.hasRetiring,
-    required this.rentDecisizionDate,
-    required this.retiringSignature,
-    required this.rentSignature,
-    required this.retiringDecizionDate,
-    required this.sickInsurance,
-    required this.invalidStatus,
-    required this.secondName,
-    required this.pesel,
-    required this.passportOrIdNumber,
-    required this.familyName,
-    required this.agreementWithTime,
-    required this.agreementWithTimeStart,
-    required this.agreementWithTimeEnd,
-    required this.placeOfLiving,
-    required this.placeOfDomicile,
-    required this.schoolName,
-    required this.earnsMoreThanMinimalWage,
-    required this.parentName,
-    required this.parentAdres,
-    required this.parentPesel,
-    required this.parentId,
-    required this.additionalEmployees,
-    required this.krs,
-    required this.internetComunicator,
-    required this.phoneNumber,
-    required this.emailAddress,
-    this.frontStudentIdData,
-    this.backStudentIdData,
-    required this.dontHavePesel,
-    required this.representedBy,
-    required this.roleOfRepresentant,
-    this.frontIdData,
-    this.backIdData,
-    this.frontIdImage,
-    this.backIdImage,
-  });
+  FormState(
+      {required this.name,
+      required this.lastName,
+      required this.areYouB2b,
+      required this.city,
+      required this.birthday,
+      required this.isStudent,
+      required this.worksForOtherEmployee,
+      required this.companyName,
+      required this.companyAddress,
+      required this.companyCity,
+      required this.nip,
+      this.frontStudentIdImage,
+      this.backStudentIdImage,
+      required this.worksInOtherCompany,
+      required this.otherCompanyName,
+      required this.otherCompanyNip,
+      required this.hasTwoAdresses,
+      required this.hasRent,
+      required this.hasRetiring,
+      required this.rentDecisizionDate,
+      required this.retiringSignature,
+      required this.rentSignature,
+      required this.retiringDecizionDate,
+      required this.sickInsurance,
+      required this.invalidStatus,
+      required this.secondName,
+      required this.pesel,
+      required this.passportOrIdNumber,
+      required this.familyName,
+      required this.agreementWithTime,
+      required this.agreementWithTimeStart,
+      required this.agreementWithTimeEnd,
+      required this.placeOfLiving,
+      required this.placeOfDomicile,
+      required this.schoolName,
+      required this.earnsMoreThanMinimalWage,
+      required this.parentName,
+      required this.parentAdres,
+      required this.parentPesel,
+      required this.parentId,
+      required this.additionalEmployees,
+      required this.krs,
+      required this.internetComunicator,
+      required this.phoneNumber,
+      required this.emailAddress,
+      this.frontStudentIdData,
+      this.backStudentIdData,
+      required this.dontHavePesel,
+      required this.representedBy,
+      required this.roleOfRepresentant,
+      this.frontIdData,
+      this.backIdData,
+      this.frontIdImage,
+      this.backIdImage,
+      this.permissionData,
+      this.permissionImage});
   final String name;
   final String lastName;
   final bool areYouB2b;
@@ -122,6 +123,8 @@ class FormState {
   final Uint8List? frontIdData;
   final Image? frontIdImage;
   final Image? backIdImage;
+  Uint8List? permissionData;
+  Image? permissionImage;
 
   bool get areBothIdNumbersEmpty {
     return pesel.isEmpty && passportOrIdNumber.isEmpty;
@@ -224,55 +227,56 @@ class FormState {
 class FormNotifier extends StateNotifier<FormState> {
   FormNotifier()
       : super(FormState(
-          name: '',
-          lastName: '',
-          areYouB2b: false,
-          city: '',
-          birthday: DateTime.now().add(Duration(days: -365 * 18 - 4)),
-          isStudent: false,
-          worksForOtherEmployee: false,
-          companyName: '',
-          nip: '',
-          worksInOtherCompany: false,
-          otherCompanyName: '',
-          otherCompanyNip: '',
-          hasTwoAdresses: false,
-          hasRent: false,
-          hasRetiring: false,
-          rentDecisizionDate: DateTime.now(),
-          rentSignature: '',
-          retiringDecizionDate: DateTime.now(),
-          retiringSignature: '',
-          sickInsurance: false,
-          invalidStatus: false,
-          passportOrIdNumber: '',
-          pesel: '',
-          secondName: '',
-          familyName: '',
-          agreementWithTime: false,
-          agreementWithTimeStart: DateTime.now(),
-          agreementWithTimeEnd: DateTime.now(),
-          placeOfLiving: AdressData(),
-          placeOfDomicile: AdressData(),
-          schoolName: '',
-          earnsMoreThanMinimalWage: false,
-          parentName: '',
-          parentAdres: '',
-          parentPesel: '',
-          parentId: '',
-          companyAddress: '',
-          companyCity: '',
-          additionalEmployees: [],
-          krs: '',
-          phoneNumber: '',
-          emailAddress: '',
-          internetComunicator: '',
-          backStudentIdData: null,
-          frontStudentIdData: null,
-          dontHavePesel: false,
-          representedBy: '',
-          roleOfRepresentant: '',
-        ));
+            name: '',
+            lastName: '',
+            areYouB2b: false,
+            city: '',
+            birthday: DateTime.now().add(Duration(days: -365 * 18 - 4)),
+            isStudent: false,
+            worksForOtherEmployee: false,
+            companyName: '',
+            nip: '',
+            worksInOtherCompany: false,
+            otherCompanyName: '',
+            otherCompanyNip: '',
+            hasTwoAdresses: false,
+            hasRent: false,
+            hasRetiring: false,
+            rentDecisizionDate: DateTime.now(),
+            rentSignature: '',
+            retiringDecizionDate: DateTime.now(),
+            retiringSignature: '',
+            sickInsurance: false,
+            invalidStatus: false,
+            passportOrIdNumber: '',
+            pesel: '',
+            secondName: '',
+            familyName: '',
+            agreementWithTime: false,
+            agreementWithTimeStart: DateTime.now(),
+            agreementWithTimeEnd: DateTime.now(),
+            placeOfLiving: AdressData(),
+            placeOfDomicile: AdressData(),
+            schoolName: '',
+            earnsMoreThanMinimalWage: false,
+            parentName: '',
+            parentAdres: '',
+            parentPesel: '',
+            parentId: '',
+            companyAddress: '',
+            companyCity: '',
+            additionalEmployees: [],
+            krs: '',
+            phoneNumber: '',
+            emailAddress: '',
+            internetComunicator: '',
+            backStudentIdData: null,
+            frontStudentIdData: null,
+            dontHavePesel: false,
+            representedBy: '',
+            roleOfRepresentant: '',
+            permissionData: null,
+            permissionImage: null));
 
   static final provider =
       StateNotifierProvider.autoDispose<FormNotifier, FormState>((ref) {
@@ -280,11 +284,11 @@ class FormNotifier extends StateNotifier<FormState> {
   });
 
   void setName(String name) {
-    state = state.copyWith(name: name);
+    state = state.copyWith(name: name.capitalize());
   }
 
   void setLastName(String value) {
-    state = state.copyWith(lastName: value);
+    state = state.copyWith(lastName: value.capitalize());
   }
 
   void setAreYouB2B(bool value) {
@@ -292,7 +296,7 @@ class FormNotifier extends StateNotifier<FormState> {
   }
 
   void setCity(String value) {
-    state = state.copyWith(city: value);
+    state = state.copyWith(city: value.capitalize());
   }
 
   void setCompanyName(String value) {
@@ -304,11 +308,11 @@ class FormNotifier extends StateNotifier<FormState> {
   }
 
   void setCompanyCity(String value) {
-    state = state.copyWith(companyCity: value);
+    state = state.copyWith(companyCity: value.capitalize());
   }
 
   void setCompanyAddress(String value) {
-    state = state.copyWith(companyAddress: value);
+    state = state.copyWith(companyAddress: value.capitalize());
   }
 
   void setBirthDay(DateTime value) {
@@ -380,11 +384,11 @@ class FormNotifier extends StateNotifier<FormState> {
   }
 
   void setSecondName(String value) {
-    state = state.copyWith(secondName: value);
+    state = state.copyWith(secondName: value.capitalize());
   }
 
   void setFamilyName(String value) {
-    state = state.copyWith(familyName: value);
+    state = state.copyWith(familyName: value.capitalize());
   }
 
   void setPesel(String value) {
@@ -396,7 +400,7 @@ class FormNotifier extends StateNotifier<FormState> {
   }
 
   void setPassportOrId(String value) {
-    state = state.copyWith(passportOrIdNumber: value);
+    state = state.copyWith(passportOrIdNumber: value.toUpperCase());
   }
 
   void setAgreementWithTime(bool value) {
@@ -424,15 +428,15 @@ class FormNotifier extends StateNotifier<FormState> {
   }
 
   void setSchoolName(String value) {
-    state = state.copyWith(schoolName: value);
+    state = state.copyWith(schoolName: value.capitalize());
   }
 
   void setParentName(String value) {
-    state = state.copyWith(parentName: value);
+    state = state.copyWith(parentName: value.capitalize());
   }
 
   void setParentAdres(String value) {
-    state = state.copyWith(parentAdres: value);
+    state = state.copyWith(parentAdres: value.capitalize());
   }
 
   void setParentPesel(String value) {
@@ -440,7 +444,7 @@ class FormNotifier extends StateNotifier<FormState> {
   }
 
   void setParentIdNumber(String value) {
-    state = state.copyWith(parentId: value);
+    state = state.copyWith(parentId: value.toUpperCase());
   }
 
   void setAdditionalEmployee(AdditionalEmployeeData value) {
@@ -491,11 +495,11 @@ class FormNotifier extends StateNotifier<FormState> {
   }
 
   void setRepresentedBy(String value) {
-    state = state.copyWith(representedBy: value);
+    state = state.copyWith(representedBy: value.capitalize());
   }
 
   void setRoleOfRepresentant(String value) {
-    state = state.copyWith(roleOfRepresentant: value);
+    state = state.copyWith(roleOfRepresentant: value.capitalize());
   }
 
   void setBackIdData(Uint8List? value) {
@@ -512,6 +516,14 @@ class FormNotifier extends StateNotifier<FormState> {
 
   void setBackIdImage(Image? value) {
     state = state.copyWith(backIdImage: value);
+  }
+
+  void setPermissionData(Uint8List? value) {
+    state = state.copyWith(permissionData: value);
+  }
+
+  void setPermissionImage(Image? value) {
+    state = state.copyWith(permissionImage: value);
   }
 
   String? isEmptyValidator(String? value) {

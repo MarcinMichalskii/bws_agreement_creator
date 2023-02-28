@@ -7,9 +7,11 @@ import 'package:bws_agreement_creator/FormUI/components/select_photo_button.dart
 import 'package:bws_agreement_creator/FormUI/id_row.dart';
 import 'package:bws_agreement_creator/FormUI/normal_employee_questions.dart';
 import 'package:bws_agreement_creator/FormUI/onboarding_information.dart';
+import 'package:bws_agreement_creator/FormUI/outbording_information.dart';
 import 'package:bws_agreement_creator/form.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -24,8 +26,31 @@ class EmployeeForm extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final provider = FormNotifier.provider;
     final areYouB2B = ref.watch(provider).areYouB2b;
+
+    final onSelectedPermissionTapped = useCallback(() async {
+      FilePickerResult? result =
+          await FilePicker.platform.pickFiles(type: FileType.image);
+      final image = result?.files.first.bytes;
+      if (image != null) {
+        ref.read(FormNotifier.provider.notifier).setPermissionData(image);
+        ref
+            .read(FormNotifier.provider.notifier)
+            .setPermissionImage(Image.memory(image));
+      }
+    }, []);
+
+    final onRemovePermissionTapped = useCallback(() {
+      ref.read(FormNotifier.provider.notifier).setPermissionData(null);
+      ref.read(FormNotifier.provider.notifier).setPermissionImage(null);
+    }, []);
+
+    final permissionImage = ref.watch(provider).permissionImage;
+
     useBuildEffect(() {
-      showDialog(context: context, builder: (_) => OnboardingInformation());
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) => OnboardingInformation());
     }, []);
 
     return Scaffold(
@@ -100,7 +125,31 @@ class EmployeeForm extends HookConsumerWidget {
                   ),
                 if (ref.watch(provider).dontHavePesel &&
                     !ref.watch(provider).areYouB2b)
-                  const IdRow(),
+                  Row(
+                    children: [
+                      const IdRow(),
+                      permissionImage == null
+                          ? Container(
+                              margin: EdgeInsets.only(left: 16),
+                              child: SelectPhotoButton(
+                                onTap: onSelectedPermissionTapped,
+                                title: 'Pozwolenie na pobyt',
+                              ),
+                            )
+                          : GestureDetector(
+                              onTap: onRemovePermissionTapped,
+                              child: Container(
+                                margin: const EdgeInsets.only(left: 16),
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5)),
+                                constraints: const BoxConstraints(
+                                    maxHeight: 100, maxWidth: 140),
+                                child: permissionImage,
+                              ),
+                            ),
+                    ],
+                  ),
                 Container(
                   child: BorderedInput(
                     placeholder: "Numer telefonu (Podany w aplikacji sinch)",

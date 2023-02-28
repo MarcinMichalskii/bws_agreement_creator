@@ -4,6 +4,7 @@ import 'package:bws_agreement_creator/form.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:bws_agreement_creator/utils/string_extensions.dart';
 
 class AddressDataQuestions extends HookConsumerWidget {
   final String header;
@@ -39,8 +40,8 @@ class AddressDataQuestions extends HookConsumerWidget {
               validator:
                   ref.read(FormNotifier.provider.notifier).isEmptyValidator,
               onChanged: (value) {
-                onAddressDataChanged(
-                    currentAddressData.copyWith(street: value ?? ''));
+                onAddressDataChanged(currentAddressData.copyWith(
+                    street: value?.capitalize() ?? ''));
               },
             ),
           ),
@@ -95,8 +96,8 @@ class AddressDataQuestions extends HookConsumerWidget {
               validator:
                   ref.read(FormNotifier.provider.notifier).isEmptyValidator,
               onChanged: (value) {
-                onAddressDataChanged(
-                    currentAddressData.copyWith(city: value ?? ''));
+                onAddressDataChanged(currentAddressData.copyWith(
+                    city: value?.capitalize() ?? ''));
               },
             ),
           ),
@@ -111,8 +112,8 @@ class AddressDataQuestions extends HookConsumerWidget {
               validator:
                   ref.read(FormNotifier.provider.notifier).isEmptyValidator,
               onChanged: (value) {
-                onAddressDataChanged(
-                    currentAddressData.copyWith(country: value ?? ''));
+                onAddressDataChanged(currentAddressData.copyWith(
+                    country: value?.capitalize() ?? ''));
               },
             ),
           ),
@@ -125,8 +126,8 @@ class AddressDataQuestions extends HookConsumerWidget {
               validator:
                   ref.read(FormNotifier.provider.notifier).isEmptyValidator,
               onChanged: (value) {
-                onAddressDataChanged(
-                    currentAddressData.copyWith(citizenship: value ?? ''));
+                onAddressDataChanged(currentAddressData.copyWith(
+                    citizenship: value?.capitalize() ?? ''));
               },
             ),
           ),

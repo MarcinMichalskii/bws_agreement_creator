@@ -1,4 +1,5 @@
 import 'package:bws_agreement_creator/FormUI/components/generate_pdf_button.dart';
+import 'package:bws_agreement_creator/FormUI/outbording_information_sign.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +16,8 @@ class OutbordingInformation extends StatelessWidget {
       type: MaterialType.transparency,
       child: Center(
         child: Container(
-            width: 320,
-            height: 280,
-            constraints: const BoxConstraints(maxWidth: 320),
+            width: double.infinity,
+            margin: EdgeInsets.symmetric(horizontal: 16),
             child: Container(
               decoration: BoxDecoration(
                   color: CustomColors.almostBlack2,
@@ -38,53 +38,38 @@ class _OutbordingInformationContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        const Text(
-          'Gratulacje!',
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            color: CustomColors.gray,
-            fontSize: 16,
-          ),
-        ),
         const Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
-              'Udało Ci się wygenerować umowę, dzięki której możemy współpracować!',
+              'Właśnie została pobrana Twoja umowa, na podstawie której możemy współpracować! Zapoznaj się z nią!',
               style: TextStyle(
                 color: CustomColors.gray,
-                fontSize: 14,
+                fontSize: 18,
               ),
             )),
         const Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: TextWithLink(
-              left:
-                  'Teraz trzeba ją podpisać. Możesz to zrobić przez podpis zaufany klikając',
-              link: ' TUTAJ ',
-              right:
-                  'lub wydrukować ją, podpisać NA KAŻDEJ STRONIE i zeskanować.',
-              url:
-                  'https://moj.gov.pl/nforms/signer/upload?xFormsAppName=SIGNER',
-            )),
-        const Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: TextWithLink(
-              left: 'Podpisaną umowę dodaj do swojego profilu',
-              link: '- kliknij TUTAJ, ',
-              right: ' aby się do niego przenieść.',
-              url:
-                  'https://bws.onsinch.com/react/profile/edit/attributes#9_UMOWA_Z_BWS',
+            child: Text(
+              'Teraz trzeba ją podpisać, a następnie dodać do Twojego profiliu w sinchu',
+              style: TextStyle(
+                color: CustomColors.gray,
+                fontSize: 18,
+              ),
             )),
         Container(
-          padding: EdgeInsets.only(top: 8),
-          child: DefaultBorderedButton(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            text: 'OK!',
-          ),
-        )
+            padding: EdgeInsets.only(top: 8),
+            child: DefaultBorderedButton(
+              onTap: () {
+                Navigator.pop(context);
+                showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (_) => OutbordingInformationSign());
+              },
+              text: 'Podpisz umowę',
+            )),
       ],
     );
   }
@@ -112,14 +97,14 @@ class TextWithLink extends StatelessWidget {
             text: left,
             style: const TextStyle(
               color: CustomColors.gray,
-              fontSize: 13,
+              fontSize: 18,
             ),
           ),
           TextSpan(
             text: link,
             style: const TextStyle(
                 color: CustomColors.gray,
-                fontSize: 13,
+                fontSize: 18,
                 fontWeight: FontWeight.w600),
             recognizer: new TapGestureRecognizer()
               ..onTap = () {
@@ -130,7 +115,7 @@ class TextWithLink extends StatelessWidget {
             text: right,
             style: const TextStyle(
               color: CustomColors.gray,
-              fontSize: 13,
+              fontSize: 18,
             ),
           ),
         ],

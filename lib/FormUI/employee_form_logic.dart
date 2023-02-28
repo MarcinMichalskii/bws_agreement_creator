@@ -10,6 +10,7 @@ import 'package:bws_agreement_creator/utils/pdf_earnings_statement.dart';
 import 'package:bws_agreement_creator/utils/pdf_id.dart';
 import 'package:bws_agreement_creator/utils/pdf_normal_agreement.dart';
 import 'package:bws_agreement_creator/utils/pdf_parent_statement.dart';
+import 'package:bws_agreement_creator/utils/pdf_permission.dart';
 import 'package:bws_agreement_creator/utils/pdf_student_id.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -98,9 +99,17 @@ class EmployeeFormLogic extends HookConsumerWidget {
       }
 
       if (formState.dontHavePesel) {
-        final pdfIdData = await PdftId().generatePdfPage(formState);
+        final pdfIdData = await PdfId().generatePdfPage(formState);
         final pdfId = PdfDocument(inputBytes: pdfIdData);
         employeePdf.insertCustomPage(pdfId.pages[0], employeePdf.pages.count);
+      }
+
+      if (formState.permissionData != null) {
+        final pdfPermissionData =
+            await PdfPermission().generatePdfPage(formState);
+        final pdfPermission = PdfDocument(inputBytes: pdfPermissionData);
+        employeePdf.insertCustomPage(
+            pdfPermission.pages[0], employeePdf.pages.count);
       }
       employeePdf.insertPageNumbers();
       await employeePdf.saveToFiles();
@@ -114,7 +123,10 @@ class EmployeeFormLogic extends HookConsumerWidget {
       } else {
         await generateDocumentForEmployee();
       }
-      showDialog(context: context, builder: (_) => OutbordingInformation());
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) => OutbordingInformation());
     }
 
     final generateButtonTapped = useCallback(() {
