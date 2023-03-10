@@ -95,19 +95,13 @@ class PdfNormalAgreement {
         build: (pw.Context context) {
           return pw.Column(children: [
             enumRow(
-                point: '5.',
-                value:
-                    'Warunkiem wypłaty kilometrówki jest prawidłowe złożenie wniosku dostępnego w aplikacji Sinch (zakładka BAZA WIEDZY) najpóźniej do 5 dnia miesiąca, przed którym wykorzystywany był samochód.',
-                pointTextStyle: regular11,
-                valueTextStyle: regular11),
-            enumRow(
-                point: '6.',
-                value:
-                    'W przypadku świadczenia na rzecz BWS Usług poza stałym miejscem świadczenia Usług przez Usługodawcę, BWS doliczy Usługodawcy do wynagrodzenia za wykonanie danej Umowy Szczegółowej koszty poniesione przez Usługodawcę celem dojazdu na miejsce wykonania Umowy Szczegółowej, pod warunkiem uzyskania przez Usługodawcę uprzedniej akceptacji wysokości poniesionych kosztów oraz przedłożenia BWS przez Usługodawcę rachunków potwierdzających faktyczne poniesienie tych kosztów przez Usługodawcę.',
-                pointTextStyle: regular11,
-                valueTextStyle: regular11),
-            enumRow(
                 point: '7.',
+                value:
+                    'W przypadku, gdy w trakcie wykonywania Umowy Szczegółowej Usługodawca poweźmie informację, że do jej prawidłowego i terminowego wykonania niezbędne jest niezwłoczne poniesienie dodatkowych kosztów, które uprzednio były niemożliwe do przewidzenia przez BWS lub Usługodawcę i nie są objęte wynagrodzeniem za wykonanie danej Umowy Szczegółowej, Usługodawca zobowiązuje się pokryć te koszty celem terminowego i prawidłowego wykonania Umowy Szczegółowej. W sytuacji opisanej w zdaniu poprzedzającym Usługodawca zobowiązany jest przedłożyć BWS zestawienie takich kosztów wraz z dowodami ich poniesienia (np. faktury, paragony) najpóźniej w terminie 7 (słownie: siedmiu) dni od dnia zakończenia wykonywania przez Usługodawcę danej Umowy Szczegółowej, a BWS zobowiązuje się zwrócić tak poniesione koszty Usługodawcy w terminie 7 dni od dnia doręczenia BWS kompletnej informacji o poniesionych przez Usługodawcę dodatkowych i nieprzewidzianych uprzednio kosztach niezbędnych do prawidłowego i terminowego wykonania Umowy Szczegółowej wraz z dowodami ich poniesienia przez Usługodawcę.',
+                pointTextStyle: regular11,
+                valueTextStyle: regular11),
+            enumRow(
+                point: '8.',
                 value:
                     'Zapłata przez BWS należnego Usługodawcy wynagrodzenia za wykonanie Umowy Szczegółowej zostanie dokonana najpóźniej w terminie 14 (słownie: czternastu) dni od dnia zakończenia wykonywania przez Usługodawcę danej Umowy Szczegółowej.',
                 pointTextStyle: regular11,

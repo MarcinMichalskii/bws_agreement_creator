@@ -125,12 +125,17 @@ class PdfB2bAgreement {
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
                 enumRow(
-                    point: '',
+                    point: '2.',
                     value:
-                        'Usługodawca zobowiązany jest bez wezwania do zapłaty na rzecz BWS kary umownej w kwocie 1.000,00 zł (słownie: jeden tysiąc złotych) za każdy przypadek naruszenia.',
+                        'W każdym przypadku, w którym Usługodawca poda w Sinch nieprawdziwe informacje, Usługodawca zobowiązany jest bez wezwania do zapłaty na rzecz BWS kary umownej w kwocie 500,00 zł (słownie: pięćset złotych).',
                     pointTextStyle: regular11,
-                    valueTextStyle: regular11,
-                    emptyPoint: true),
+                    valueTextStyle: regular11),
+                enumRow(
+                    point: '3.',
+                    value:
+                        'W przypadku, w którym Usługodawca naruszy zasady świadczenia Usług określone w niniejszej Umowie, w tym powierzy świadczenie Usług lub wykonanie Umowy Szczegółowej podmiotom nietrudniącym się w ramach swojej działalności zawodowej tego typu usługami lub powierzy świadczenie Usług podmiotom nieznajdującym się w oświadczeniu stanowiącym załącznik nr 2 do Umowy, ',
+                    pointTextStyle: regular11,
+                    valueTextStyle: regular11),
                 enumRow(
                     point: '4.',
                     value:
