@@ -32,7 +32,7 @@ class WorksInOtherCompanyQuestions extends HookConsumerWidget {
               child: Container(
                 margin: const EdgeInsets.only(right: 8),
                 child: SelectDateButton(
-                  dateText: DateTime.now(),
+                  dateText: ref.watch(provider).agreementWithTimeStart,
                   headerText: 'Data rozpoczęcia umowy',
                   onDateSelected:
                       ref.read(provider.notifier).setAgreementWithTimeStart,
@@ -43,7 +43,7 @@ class WorksInOtherCompanyQuestions extends HookConsumerWidget {
               child: Container(
                 margin: const EdgeInsets.only(left: 8),
                 child: SelectDateButton(
-                  dateText: DateTime.now(),
+                  dateText: ref.watch(provider).agreementWithTimeEnd,
                   headerText: 'Data zakończenia umowy',
                   onDateSelected:
                       ref.read(provider.notifier).setAgreementWithTimeEnd,

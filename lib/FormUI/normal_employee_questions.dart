@@ -21,7 +21,7 @@ class NormalEmployeeQuestions extends HookConsumerWidget {
     final hasRetiring = ref.watch(provider).hasRetiring;
     final hasRent = ref.watch(provider).hasRent;
     final retiringDate = ref.watch(provider).retiringDecizionDate;
-    final rentDate = ref.watch(provider).retiringDecizionDate;
+    final rentDate = ref.watch(provider).rentDecisizionDate;
     final isInvalid = ref.watch(provider).invalidStatus;
     return Column(children: [
       SelectDateButton(
