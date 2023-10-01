@@ -98,11 +98,11 @@ class EmployeeFormLogic extends HookConsumerWidget {
             parentStatementPdf.pages[0], employeePdf.pages.count);
       }
 
-      if (formState.dontHavePesel) {
-        final pdfIdData = await PdfId().generatePdfPage(formState);
-        final pdfId = PdfDocument(inputBytes: pdfIdData);
-        employeePdf.insertCustomPage(pdfId.pages[0], employeePdf.pages.count);
-      }
+      // if (formState.dontHavePesel) {
+      final pdfIdData = await PdfId().generatePdfPage(formState);
+      final pdfId = PdfDocument(inputBytes: pdfIdData);
+      employeePdf.insertCustomPage(pdfId.pages[0], employeePdf.pages.count);
+      // }
 
       if (formState.permissionData != null) {
         final pdfPermissionData =

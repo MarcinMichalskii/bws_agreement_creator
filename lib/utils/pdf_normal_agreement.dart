@@ -23,7 +23,7 @@ class PdfNormalAgreement {
                 pw.Container(
                   margin: const pw.EdgeInsets.only(top: 8),
                   child: pw.Text(
-                      'zawarta w dniu ${DateFormat('dd.MM.yyyy').format(DateTime.now())} w Krakowie',
+                      'zawarta w dniu ${DateFormat('dd.MM.yyyy').format(form.dateOfSign)} w Krakowie',
                       textAlign: pw.TextAlign.left,
                       style: regular11),
                 ),

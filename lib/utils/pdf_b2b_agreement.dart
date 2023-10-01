@@ -29,7 +29,7 @@ class PdfB2bAgreement {
                 pw.Container(
                   margin: const pw.EdgeInsets.only(top: 8),
                   child: pw.Text(
-                      'zawarta w dniu ${DateFormat('dd.MM.yyyy').format(DateTime.now())} w Krakowie pomiędzy',
+                      'zawarta w dniu ${DateFormat('dd.MM.yyyy').format(form.dateOfSign)} w Krakowie pomiędzy',
                       textAlign: pw.TextAlign.left,
                       style: regular11),
                 ),

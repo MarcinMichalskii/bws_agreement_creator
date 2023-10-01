@@ -18,6 +18,7 @@ class NormalEmployeeQuestions extends HookConsumerWidget {
     final hasTwoAdresses = ref.watch(provider).hasTwoAdresses;
     final worksInOtherCompany = ref.watch(provider).worksInOtherCompany;
     final selectedBirthday = ref.watch(provider).birthday;
+    final selectedDateOfSign = ref.watch(provider).dateOfSign;
     final hasRetiring = ref.watch(provider).hasRetiring;
     final hasRent = ref.watch(provider).hasRent;
     final retiringDate = ref.watch(provider).retiringDecizionDate;
@@ -28,6 +29,10 @@ class NormalEmployeeQuestions extends HookConsumerWidget {
           dateText: selectedBirthday,
           headerText: "Data urodzenia",
           onDateSelected: ref.read(provider.notifier).setBirthDay),
+      SelectDateButton(
+          dateText: selectedDateOfSign,
+          headerText: "Data zawarcia umowy",
+          onDateSelected: ref.read(provider.notifier).setDateOfSign),
       if (!selectedBirthday.isAdult())
         BorderedInput(
           placeholder: "Imię i nazwisko opiekuna",

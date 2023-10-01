@@ -18,6 +18,7 @@ class FormState {
       required this.areYouB2b,
       required this.city,
       required this.birthday,
+      required this.dateOfSign,
       required this.isStudent,
       required this.worksForOtherEmployee,
       required this.companyName,
@@ -74,6 +75,7 @@ class FormState {
   final bool areYouB2b;
   final String city;
   final DateTime birthday;
+  final DateTime dateOfSign;
   final bool isStudent;
   final bool worksForOtherEmployee;
   final String companyName;
@@ -195,13 +197,18 @@ class FormState {
     } else if (areYouB2b && !invalidB2b) {
       return null;
     } else if (areYouB2b && invalidB2b) {
+      print(invalidB2b);
       return "Sprawdź dane Twojej firmy";
     } else if (areYouB2b && invalidB2bEmployees) {
       return "Sprawdź dane dodatkowych pracowników";
     } else if (!dontHavePesel && peselBirthdayMismatch) {
       return "Data urodzenia nie pasuje do numeru PESEL";
-    } else if (dontHavePesel && (frontIdData == null || backIdData == null)) {
+    } else if (frontIdData == null ||
+        backIdData == null ||
+        passportOrIdNumber == '') {
       return "Sprawdź dane dokumentu";
+    } else if (dontHavePesel && permissionData == null) {
+      return "Sprawdź dane pozwolenia na pobyt";
     } else if (!birthday.isOver16()) {
       return "Osoby poniżej 16 roku życie nie mogą z nami współpracować";
     } else if (!birthday.isAdult() && invalidParentData) {
@@ -232,6 +239,7 @@ class FormNotifier extends StateNotifier<FormState> {
             areYouB2b: false,
             city: '',
             birthday: DateTime.now().add(Duration(days: -365 * 18 - 4)),
+            dateOfSign: DateTime.now(),
             isStudent: false,
             worksForOtherEmployee: false,
             companyName: '',
@@ -317,6 +325,10 @@ class FormNotifier extends StateNotifier<FormState> {
 
   void setBirthDay(DateTime value) {
     state = state.copyWith(birthday: value);
+  }
+
+  void setDateOfSign(DateTime value) {
+    state = state.copyWith(dateOfSign: value);
   }
 
   void setAreYouStudent(bool value) {

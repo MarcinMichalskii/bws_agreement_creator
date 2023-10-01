@@ -115,19 +115,21 @@ class EmployeeForm extends HookConsumerWidget {
                     onChanged: ref.read(provider.notifier).setDontHavePesel,
                     title: "Nie mam numeru pesel",
                   ),
-                if (ref.watch(provider).dontHavePesel &&
-                    !ref.watch(provider).areYouB2b)
-                  BorderedInput(
-                    placeholder: "Numer dowodu lub paszportu",
-                    onChanged: (value) {
-                      ref.read(provider.notifier).setPassportOrId(value ?? '');
-                    },
-                  ),
-                if (ref.watch(provider).dontHavePesel &&
-                    !ref.watch(provider).areYouB2b)
-                  Row(
-                    children: [
-                      const IdRow(),
+                // if (ref.watch(provider).dontHavePesel &&
+                //     !ref.watch(provider).areYouB2b)
+                BorderedInput(
+                  placeholder: "Numer dowodu lub paszportu",
+                  onChanged: (value) {
+                    ref.read(provider.notifier).setPassportOrId(value ?? '');
+                  },
+                ),
+                // if (ref.watch(provider).dontHavePesel &&
+                //     !ref.watch(provider).areYouB2b)
+                Row(
+                  children: [
+                    const IdRow(),
+                    if (ref.watch(provider).dontHavePesel &&
+                        !ref.watch(provider).areYouB2b)
                       permissionImage == null
                           ? Container(
                               margin: EdgeInsets.only(left: 16),
@@ -148,8 +150,8 @@ class EmployeeForm extends HookConsumerWidget {
                                 child: permissionImage,
                               ),
                             ),
-                    ],
-                  ),
+                  ],
+                ),
                 Container(
                   child: BorderedInput(
                     placeholder: "Numer telefonu (Podany w aplikacji sinch)",

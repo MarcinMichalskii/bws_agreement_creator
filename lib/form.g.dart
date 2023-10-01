@@ -36,6 +36,8 @@ abstract class _$FormStateCWProxy {
 
   FormState companyName(String companyName);
 
+  FormState dateOfSign(DateTime dateOfSign);
+
   FormState dontHavePesel(bool dontHavePesel);
 
   FormState earnsMoreThanMinimalWage(bool earnsMoreThanMinimalWage);
@@ -141,6 +143,7 @@ abstract class _$FormStateCWProxy {
     String? companyAddress,
     String? companyCity,
     String? companyName,
+    DateTime? dateOfSign,
     bool? dontHavePesel,
     bool? earnsMoreThanMinimalWage,
     String? emailAddress,
@@ -241,6 +244,9 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
 
   @override
   FormState companyName(String companyName) => this(companyName: companyName);
+
+  @override
+  FormState dateOfSign(DateTime dateOfSign) => this(dateOfSign: dateOfSign);
 
   @override
   FormState dontHavePesel(bool dontHavePesel) =>
@@ -417,6 +423,7 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
     Object? companyAddress = const $CopyWithPlaceholder(),
     Object? companyCity = const $CopyWithPlaceholder(),
     Object? companyName = const $CopyWithPlaceholder(),
+    Object? dateOfSign = const $CopyWithPlaceholder(),
     Object? dontHavePesel = const $CopyWithPlaceholder(),
     Object? earnsMoreThanMinimalWage = const $CopyWithPlaceholder(),
     Object? emailAddress = const $CopyWithPlaceholder(),
@@ -527,6 +534,11 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
               ? _value.companyName
               // ignore: cast_nullable_to_non_nullable
               : companyName as String,
+      dateOfSign:
+          dateOfSign == const $CopyWithPlaceholder() || dateOfSign == null
+              ? _value.dateOfSign
+              // ignore: cast_nullable_to_non_nullable
+              : dateOfSign as DateTime,
       dontHavePesel:
           dontHavePesel == const $CopyWithPlaceholder() || dontHavePesel == null
               ? _value.dontHavePesel
