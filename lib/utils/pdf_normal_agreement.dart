@@ -33,7 +33,7 @@ class PdfNormalAgreement {
                       pw.Text(NormalAgreementTexts.bwsData, style: regular11),
                 ),
                 pw.Text(
-                    '${form.name} ${form.lastName}\nPESEL/nr. dokumentu: ${form.pesel.isEmpty ? form.passportOrIdNumber : form.pesel}\n${form.placeOfDomicile.city}, ${form.placeOfDomicile.street} ${form.placeOfDomicile.houseNumber}, ${form.placeOfDomicile.flatNumber}',
+                    'Imię i nazwisko: ${form.name} ${form.lastName}\nPESEL: ${form.pesel}\nNr dokumentu: ${form.passportOrIdNumber}\nAdres: ${form.placeOfDomicile.city} ${form.placeOfDomicile.zipCode}, ${form.placeOfDomicile.street} ${form.placeOfDomicile.houseNumber}, ${form.placeOfDomicile.flatNumber}',
                     style: bold10),
                 pw.Container(
                   margin: const pw.EdgeInsets.only(top: 8),
