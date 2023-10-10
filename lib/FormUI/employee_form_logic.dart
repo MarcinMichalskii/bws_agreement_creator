@@ -28,7 +28,7 @@ class EmployeeFormLogic extends HookConsumerWidget {
       isLoading.value = true;
       final formState = ref.read(FormNotifier.provider.notifier).state;
       final ByteData b2bAgreementData =
-          await rootBundle.load('assets/pdfs/umowaScalonaB2b.pdf');
+          await rootBundle.load('assets/pdfs/umowaScalonaB2bSigned.pdf');
       final b2bPdf = PdfDocument(inputBytes: b2bAgreementData.dataAsUint8());
       final b2bFirstPageData =
           await PdfB2bAgreement().generateAgreementFirstPage(formState);

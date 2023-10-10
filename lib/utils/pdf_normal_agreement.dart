@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/form.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -143,6 +144,8 @@ class PdfNormalAgreement {
     final bold10 = await boldTextStyle(10);
     final bold11 = await boldTextStyle(11);
     final regular11 = await regulartTextStyle(11);
+    final ByteData signatureData = await rootBundle.load('assets/podpis.png');
+    final Uint8List signatureUint8 = signatureData.buffer.asUint8List();
 
     final page = pw.Page(
         pageFormat: PdfPageFormat.a4,
@@ -204,7 +207,14 @@ class PdfNormalAgreement {
                 child: pw.Row(children: [
                   pw.Expanded(
                       child: pw.Row(children: [
-                    pw.Text('................... \n   Bws', style: bold10),
+                    pw.Column(children: [
+                      pw.Container(
+                        child: pw.Image(pw.MemoryImage(signatureUint8)),
+                        width: 150,
+                        height: 150,
+                      ),
+                      pw.Text('................... \n   Bws', style: bold10),
+                    ])
                   ])),
                   pw.Expanded(
                       child: pw.Row(
