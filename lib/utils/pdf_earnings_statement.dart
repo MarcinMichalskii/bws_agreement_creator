@@ -193,7 +193,7 @@ class PdfEarningsStatment {
     final companyNameText =
         worksInOtherCompany ? 'Nazwa zakładu: $companyName' : '';
     final earnsMoreText = worksInOtherCompany
-        ? '\nZ tytułu zatrudnienia osiągam dochód ${earnsMore ? 'niższy' : 'wyższy'} niż minimalne wynagrodzenie'
+        ? '\nZ tytułu zatrudnienia osiągam dochód ${earnsMore ? 'wyższy' : 'niższy'} niż minimalne wynagrodzenie'
         : '';
     final timeOfAgreement = agreementWithTime
         ? '\n - Umowa obowiązuje od dnia ${DateFormat('dd.MM.yyyy').format(startsAt)} do dnia ${DateFormat('dd.MM.yyyy').format(endsAt)}'

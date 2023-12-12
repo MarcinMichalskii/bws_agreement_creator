@@ -6,7 +6,6 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 
 part 'form.g.dart';
 
@@ -20,7 +19,6 @@ class FormState {
       required this.birthday,
       required this.dateOfSign,
       required this.isStudent,
-      required this.worksForOtherEmployee,
       required this.companyName,
       required this.companyAddress,
       required this.companyCity,
@@ -77,7 +75,6 @@ class FormState {
   final DateTime birthday;
   final DateTime dateOfSign;
   final bool isStudent;
-  final bool worksForOtherEmployee;
   final String companyName;
   final String nip;
   final Image? frontStudentIdImage;
@@ -241,7 +238,6 @@ class FormNotifier extends StateNotifier<FormState> {
             birthday: DateTime.now().add(Duration(days: -365 * 18 - 4)),
             dateOfSign: DateTime.now(),
             isStudent: false,
-            worksForOtherEmployee: false,
             companyName: '',
             nip: '',
             worksInOtherCompany: false,
@@ -333,10 +329,6 @@ class FormNotifier extends StateNotifier<FormState> {
 
   void setAreYouStudent(bool value) {
     state = state.copyWith(isStudent: value);
-  }
-
-  void setWorksForOtherEmployee(bool value) {
-    state = state.copyWith(worksForOtherEmployee: value);
   }
 
   void setFrontStudentIdImage(Image? value) {

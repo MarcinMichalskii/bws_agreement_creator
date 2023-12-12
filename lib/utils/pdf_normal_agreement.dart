@@ -111,7 +111,7 @@ class PdfNormalAgreement {
             enumRow(
                 point: '1.',
                 value:
-                    'Usługodawca oświadcza, że ${form.isStudent ? 'posiada' : 'nie posiada'} status/u studenta lub ucznia, w rozumieniu ustawy z dnia z dnia 13 października 1998 r. o systemie ubezpieczeń społecznych ${worksForOtherCompanyText(form.worksForOtherEmployee, form.earnsMoreThanMinimalWage)}',
+                    'Usługodawca oświadcza, że ${form.isStudent ? 'posiada' : 'nie posiada'} status/u studenta lub ucznia, w rozumieniu ustawy z dnia z dnia 13 października 1998 r. o systemie ubezpieczeń społecznych ${worksForOtherCompanyText(form.worksInOtherCompany, form.earnsMoreThanMinimalWage)}',
                 pointTextStyle: regular11,
                 valueTextStyle: regular11),
             enumRow(
@@ -308,8 +308,8 @@ class PdfNormalAgreement {
       return '';
     }
     final earnsMoreThanMimimalText = earnsMoreThanMinimum
-        ? 'gdzie, zarabia gdzie zarabia co najmniej minimalną krajową w skali miesiąca (3010zł brutto)'
-        : 'gdzie zarabia mniej niż minimalną krajową w skali miesiąca (3010zł brutto).';
+        ? 'gdzie, zarabia gdzie zarabia co najmniej minimalną krajową w skali miesiąca (3490zł brutto)'
+        : 'gdzie zarabia mniej niż minimalną krajową w skali miesiąca (3490zł brutto).';
     final worksForOtherCompanyText =
         'oraz jest zatrudniony w innym przedsiębiorstwie ${worksForOtherCompany ? earnsMoreThanMimimalText : ''}';
     return worksForOtherCompanyText;

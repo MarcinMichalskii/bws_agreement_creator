@@ -32,8 +32,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_hooks: ^0.18.5+1
-  pdf: 3.8.4
-  printing: 5.9.3
+  pdf: 3.10.7
+  printing: 5.10.4
   intl: ^0.17.0
   file_picker: ^5.2.4
   hooks_riverpod: 2.0.0-dev.9

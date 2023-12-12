@@ -118,8 +118,6 @@ abstract class _$FormStateCWProxy {
 
   FormState sickInsurance(bool sickInsurance);
 
-  FormState worksForOtherEmployee(bool worksForOtherEmployee);
-
   FormState worksInOtherCompany(bool worksInOtherCompany);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FormState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -184,7 +182,6 @@ abstract class _$FormStateCWProxy {
     String? schoolName,
     String? secondName,
     bool? sickInsurance,
-    bool? worksForOtherEmployee,
     bool? worksInOtherCompany,
   });
 }
@@ -393,10 +390,6 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
       this(sickInsurance: sickInsurance);
 
   @override
-  FormState worksForOtherEmployee(bool worksForOtherEmployee) =>
-      this(worksForOtherEmployee: worksForOtherEmployee);
-
-  @override
   FormState worksInOtherCompany(bool worksInOtherCompany) =>
       this(worksInOtherCompany: worksInOtherCompany);
 
@@ -464,7 +457,6 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
     Object? schoolName = const $CopyWithPlaceholder(),
     Object? secondName = const $CopyWithPlaceholder(),
     Object? sickInsurance = const $CopyWithPlaceholder(),
-    Object? worksForOtherEmployee = const $CopyWithPlaceholder(),
     Object? worksInOtherCompany = const $CopyWithPlaceholder(),
   }) {
     return FormState(
@@ -728,12 +720,6 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
               ? _value.sickInsurance
               // ignore: cast_nullable_to_non_nullable
               : sickInsurance as bool,
-      worksForOtherEmployee:
-          worksForOtherEmployee == const $CopyWithPlaceholder() ||
-                  worksForOtherEmployee == null
-              ? _value.worksForOtherEmployee
-              // ignore: cast_nullable_to_non_nullable
-              : worksForOtherEmployee as bool,
       worksInOtherCompany:
           worksInOtherCompany == const $CopyWithPlaceholder() ||
                   worksInOtherCompany == null
