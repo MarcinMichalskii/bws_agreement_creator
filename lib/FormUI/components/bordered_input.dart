@@ -35,14 +35,15 @@ class BorderedInput extends StatelessWidget {
         margin: const EdgeInsets.fromLTRB(0, 16, 0, 4),
         child: TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          autofillHints: null,
           validator: validator,
           onSaved: onSaved,
+          autofillHints: null,
           initialValue: initialValue,
           obscureText: isSecure,
           autocorrect: false,
           enableSuggestions: false,
-          keyboardType: TextInputType.visiblePassword,
+          keyboardType: TextInputType.name,
+          enableIMEPersonalizedLearning: false,
           style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
               prefixIcon: prefixIcon,
