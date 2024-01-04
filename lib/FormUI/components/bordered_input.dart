@@ -43,6 +43,7 @@ class BorderedInput extends StatelessWidget {
           autocorrect: false,
           enableSuggestions: false,
           keyboardType: TextInputType.name,
+          smartDashesType: SmartDashesType.disabled,
           enableIMEPersonalizedLearning: false,
           style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
