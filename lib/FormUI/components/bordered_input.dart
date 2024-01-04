@@ -35,6 +35,7 @@ class BorderedInput extends StatelessWidget {
         margin: const EdgeInsets.fromLTRB(0, 16, 0, 4),
         child: TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
+          autofillHints: const [],
           validator: validator,
           onSaved: onSaved,
           initialValue: initialValue,
