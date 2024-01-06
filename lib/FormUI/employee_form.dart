@@ -61,8 +61,6 @@ class EmployeeForm extends HookConsumerWidget {
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 16),
               child: Column(children: [
-                Text(ref.watch(provider).name,
-                    style: TextStyle(fontSize: 16, color: Colors.white)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

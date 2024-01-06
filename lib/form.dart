@@ -288,7 +288,7 @@ class FormNotifier extends StateNotifier<FormState> {
   });
 
   void setName(String name) {
-    state = state.copyWith(name: name);
+    state = state.copyWith(name: name.capitalize());
   }
 
   void setLastName(String value) {

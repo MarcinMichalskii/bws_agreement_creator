@@ -50,11 +50,13 @@ extension NipValidator on String {
     return birthdate;
   }
 
+  String toCapitalized() =>
+      length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
+
   String capitalize() {
-    List<String> words = split(" ");
-    words = words
-        .map((word) => word.substring(0, 1).toUpperCase() + word.substring(1))
-        .toList();
-    return words.join(" ");
+    return replaceAll(RegExp(' +'), ' ')
+        .split(' ')
+        .map((str) => str.toCapitalized())
+        .join(' ');
   }
 }
