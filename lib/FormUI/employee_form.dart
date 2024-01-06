@@ -7,7 +7,6 @@ import 'package:bws_agreement_creator/FormUI/components/select_photo_button.dart
 import 'package:bws_agreement_creator/FormUI/id_row.dart';
 import 'package:bws_agreement_creator/FormUI/normal_employee_questions.dart';
 import 'package:bws_agreement_creator/FormUI/onboarding_information.dart';
-import 'package:bws_agreement_creator/FormUI/outbording_information.dart';
 import 'package:bws_agreement_creator/form.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
