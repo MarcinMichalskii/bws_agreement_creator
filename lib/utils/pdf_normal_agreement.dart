@@ -318,7 +318,7 @@ class PdfNormalAgreement {
 
 class NormalAgreementTexts {
   static String bwsData =
-      "spółką BWS Event Support Sp. z o.o. z siedzibą w Krakowie 31-559, przy ul. Na Szaniec 7, NIP 6751759898, KRS 0000944605, reprezentowaną przez pełnomocnika: Aleksandra Wróblewską, PESEL: 96052509482, pełnomocnictwo z dnia 1.10.2022, zwaną w dalszej części Umowy: „BWS” a zleceniobiorcą posługującym się danymi: ";
+      "spółką BWS Event Support Sp. z o.o. z siedzibą w Krakowie 31-559, przy ul. Na Szaniec 7, NIP 6751759898, KRS 0000944605, reprezentowaną przez Aleksandrę Wróblewską - Prokurenta, zwaną w dalszej części Umowy: „BWS” a zleceniobiorcą posługującym się danymi: ";
 
   static String howDataWasVerified =
       "co zostało stwierdzone w oparciu o okazany dowód osobisty/dokument tożsamości,działającym osobiście,zwanym w dalszej części Umowy: „Usługodawcą”,";
