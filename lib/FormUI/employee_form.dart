@@ -31,19 +31,19 @@ class EmployeeForm extends HookConsumerWidget {
           await FilePicker.platform.pickFiles(type: FileType.image);
       final image = result?.files.first.bytes;
       if (image != null) {
-        ref.read(FormNotifier.provider.notifier).setPermissionData(image);
+        ref.read(FormNotifier.provider.notifier).setResidencePermitData(image);
         ref
             .read(FormNotifier.provider.notifier)
-            .setPermissionImage(Image.memory(image));
+            .setResidencePermitImage(Image.memory(image));
       }
     }, []);
 
     final onRemovePermissionTapped = useCallback(() {
-      ref.read(FormNotifier.provider.notifier).setPermissionData(null);
-      ref.read(FormNotifier.provider.notifier).setPermissionImage(null);
+      ref.read(FormNotifier.provider.notifier).setResidencePermitData(null);
+      ref.read(FormNotifier.provider.notifier).setResidencePermitImage(null);
     }, []);
 
-    final permissionImage = ref.watch(provider).permissionImage;
+    final permissionImage = ref.watch(provider).residencePermitImage;
 
     useBuildEffect(() {
       showDialog(

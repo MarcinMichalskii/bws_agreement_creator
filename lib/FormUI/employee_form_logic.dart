@@ -57,7 +57,7 @@ class EmployeeFormLogic extends HookConsumerWidget {
       //     PdfDocument(inputBytes: employeePdfData.dataAsUint8());
 
       final pdfAgreementFirstPageData =
-          await PdfNormalAgreementNew().generateAgreementFirstPage(formState);
+          await PdfNormalAgreementNew().generateNormalAgreement(formState);
       pdfAgreementFirstPageData.saveToFiles();
       final pdfAgreemntFirstPagePdf =
           PdfDocument(inputBytes: pdfAgreementFirstPageData);

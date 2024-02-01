@@ -66,8 +66,8 @@ class FormState {
       this.backIdData,
       this.frontIdImage,
       this.backIdImage,
-      this.permissionData,
-      this.permissionImage});
+      this.residencePermitData,
+      this.residencePermitImage});
   final String name;
   final String lastName;
   final bool areYouB2b;
@@ -122,8 +122,8 @@ class FormState {
   final Uint8List? frontIdData;
   final Image? frontIdImage;
   final Image? backIdImage;
-  Uint8List? permissionData;
-  Image? permissionImage;
+  Uint8List? residencePermitData;
+  Image? residencePermitImage;
 
   bool get areBothIdNumbersEmpty {
     return pesel.isEmpty && passportOrIdNumber.isEmpty;
@@ -204,7 +204,7 @@ class FormState {
         backIdData == null ||
         passportOrIdNumber == '') {
       return "Sprawdź dane dokumentu";
-    } else if (dontHavePesel && permissionData == null) {
+    } else if (dontHavePesel && residencePermitData == null) {
       return "Sprawdź dane pozwolenia na pobyt";
     } else if (!birthday.isOver16()) {
       return "Osoby poniżej 16 roku życie nie mogą z nami współpracować";
@@ -279,13 +279,85 @@ class FormNotifier extends StateNotifier<FormState> {
             dontHavePesel: false,
             representedBy: '',
             roleOfRepresentant: '',
-            permissionData: null,
-            permissionImage: null));
+            residencePermitData: null,
+            residencePermitImage: null));
 
   static final provider =
       StateNotifierProvider.autoDispose<FormNotifier, FormState>((ref) {
     return FormNotifier();
   });
+
+  // void setDefaultData() {
+  //   state = FormState(
+  //       name: 'Marcin',
+  //       lastName: 'Michalski',
+  //       areYouB2b: false,
+  //       city: '',
+  //       birthday: DateTime.now().add(Duration(days: -365 * 16 - 4)),
+  //       dateOfSign: DateTime.now(),
+  //       isStudent: false,
+  //       companyName: '',
+  //       nip: '',
+  //       worksInOtherCompany: false,
+  //       otherCompanyName: '',
+  //       otherCompanyNip: '',
+  //       hasTwoAdresses: false,
+  //       hasRent: false,
+  //       hasRetiring: false,
+  //       rentDecisizionDate: DateTime.now(),
+  //       rentSignature: '',
+  //       retiringDecizionDate: DateTime.now(),
+  //       retiringSignature: '',
+  //       sickInsurance: false,
+  //       invalidStatus: false,
+  //       passportOrIdNumber: 'CEDXD123',
+  //       pesel: '970200709574',
+  //       secondName: 'Jezus',
+  //       familyName: 'Polacki',
+  //       agreementWithTime: false,
+  //       agreementWithTimeStart: DateTime.now(),
+  //       agreementWithTimeEnd: DateTime.now(),
+  //       placeOfLiving: AdressData(
+  //           street: 'Krakowska',
+  //           houseNumber: '12',
+  //           flatNumber: '12',
+  //           zipCode: '12-123',
+  //           city: 'Kraków',
+  //           country: 'Polska',
+  //           citizenship: 'Polska'),
+  //       placeOfDomicile: AdressData(
+  //           street: 'Krakowska',
+  //           houseNumber: '12',
+  //           flatNumber: '12',
+  //           zipCode: '12-123',
+  //           city: 'Kraków',
+  //           country: 'Polska',
+  //           citizenship: 'Polska'),
+  //       schoolName: '',
+  //       earnsMoreThanMinimalWage: false,
+  //       parentName: 'Andrzej Michalski',
+  //       parentAdres: 'Kraków 12-123 Krakowska 12',
+  //       parentPesel: '97020710945',
+  //       parentId: 'CEDXD4444',
+  //       companyAddress: '',
+  //       companyCity: '',
+  //       additionalEmployees: [],
+  //       krs: '',
+  //       phoneNumber: '504365433',
+  //       emailAddress: 'test@test.pl',
+  //       internetComunicator: 'test',
+  //       backStudentIdData: state.backStudentIdData,
+  //       frontStudentIdData: state.frontStudentIdData,
+  //       backIdImage: state.backIdImage,
+  //       frontIdImage: state.frontIdImage,
+  //       backIdData: state.backIdData,
+  //       frontIdData: state.frontIdData,
+  //       dontHavePesel: false,
+  //       representedBy: '',
+  //       roleOfRepresentant: '',
+  //       residencePermitData: state.residencePermitData,
+  //       residencePermitImage: state.residencePermitImage);
+  // }
 
   void setName(String name) {
     state = state.copyWith(name: name.capitalize());
@@ -522,12 +594,12 @@ class FormNotifier extends StateNotifier<FormState> {
     state = state.copyWith(backIdImage: value);
   }
 
-  void setPermissionData(Uint8List? value) {
-    state = state.copyWith(permissionData: value);
+  void setResidencePermitData(Uint8List? value) {
+    state = state.copyWith(residencePermitData: value);
   }
 
-  void setPermissionImage(Image? value) {
-    state = state.copyWith(permissionImage: value);
+  void setResidencePermitImage(Image? value) {
+    state = state.copyWith(residencePermitImage: value);
   }
 
   String? isEmptyValidator(String? value) {

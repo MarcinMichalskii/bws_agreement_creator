@@ -88,10 +88,6 @@ abstract class _$FormStateCWProxy {
 
   FormState passportOrIdNumber(String passportOrIdNumber);
 
-  FormState permissionData(Uint8List? permissionData);
-
-  FormState permissionImage(Image? permissionImage);
-
   FormState pesel(String pesel);
 
   FormState phoneNumber(String phoneNumber);
@@ -105,6 +101,10 @@ abstract class _$FormStateCWProxy {
   FormState rentSignature(String rentSignature);
 
   FormState representedBy(String representedBy);
+
+  FormState residencePermitData(Uint8List? residencePermitData);
+
+  FormState residencePermitImage(Image? residencePermitImage);
 
   FormState retiringDecizionDate(DateTime retiringDecizionDate);
 
@@ -167,8 +167,6 @@ abstract class _$FormStateCWProxy {
     String? parentName,
     String? parentPesel,
     String? passportOrIdNumber,
-    Uint8List? permissionData,
-    Image? permissionImage,
     String? pesel,
     String? phoneNumber,
     AdressData? placeOfDomicile,
@@ -176,6 +174,8 @@ abstract class _$FormStateCWProxy {
     DateTime? rentDecisizionDate,
     String? rentSignature,
     String? representedBy,
+    Uint8List? residencePermitData,
+    Image? residencePermitImage,
     DateTime? retiringDecizionDate,
     String? retiringSignature,
     String? roleOfRepresentant,
@@ -334,14 +334,6 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
       this(passportOrIdNumber: passportOrIdNumber);
 
   @override
-  FormState permissionData(Uint8List? permissionData) =>
-      this(permissionData: permissionData);
-
-  @override
-  FormState permissionImage(Image? permissionImage) =>
-      this(permissionImage: permissionImage);
-
-  @override
   FormState pesel(String pesel) => this(pesel: pesel);
 
   @override
@@ -366,6 +358,14 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
   @override
   FormState representedBy(String representedBy) =>
       this(representedBy: representedBy);
+
+  @override
+  FormState residencePermitData(Uint8List? residencePermitData) =>
+      this(residencePermitData: residencePermitData);
+
+  @override
+  FormState residencePermitImage(Image? residencePermitImage) =>
+      this(residencePermitImage: residencePermitImage);
 
   @override
   FormState retiringDecizionDate(DateTime retiringDecizionDate) =>
@@ -442,8 +442,6 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
     Object? parentName = const $CopyWithPlaceholder(),
     Object? parentPesel = const $CopyWithPlaceholder(),
     Object? passportOrIdNumber = const $CopyWithPlaceholder(),
-    Object? permissionData = const $CopyWithPlaceholder(),
-    Object? permissionImage = const $CopyWithPlaceholder(),
     Object? pesel = const $CopyWithPlaceholder(),
     Object? phoneNumber = const $CopyWithPlaceholder(),
     Object? placeOfDomicile = const $CopyWithPlaceholder(),
@@ -451,6 +449,8 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
     Object? rentDecisizionDate = const $CopyWithPlaceholder(),
     Object? rentSignature = const $CopyWithPlaceholder(),
     Object? representedBy = const $CopyWithPlaceholder(),
+    Object? residencePermitData = const $CopyWithPlaceholder(),
+    Object? residencePermitImage = const $CopyWithPlaceholder(),
     Object? retiringDecizionDate = const $CopyWithPlaceholder(),
     Object? retiringSignature = const $CopyWithPlaceholder(),
     Object? roleOfRepresentant = const $CopyWithPlaceholder(),
@@ -647,14 +647,6 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
           ? _value.passportOrIdNumber
           // ignore: cast_nullable_to_non_nullable
           : passportOrIdNumber as String,
-      permissionData: permissionData == const $CopyWithPlaceholder()
-          ? _value.permissionData
-          // ignore: cast_nullable_to_non_nullable
-          : permissionData as Uint8List?,
-      permissionImage: permissionImage == const $CopyWithPlaceholder()
-          ? _value.permissionImage
-          // ignore: cast_nullable_to_non_nullable
-          : permissionImage as Image?,
       pesel: pesel == const $CopyWithPlaceholder() || pesel == null
           ? _value.pesel
           // ignore: cast_nullable_to_non_nullable
@@ -689,6 +681,14 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
               ? _value.representedBy
               // ignore: cast_nullable_to_non_nullable
               : representedBy as String,
+      residencePermitData: residencePermitData == const $CopyWithPlaceholder()
+          ? _value.residencePermitData
+          // ignore: cast_nullable_to_non_nullable
+          : residencePermitData as Uint8List?,
+      residencePermitImage: residencePermitImage == const $CopyWithPlaceholder()
+          ? _value.residencePermitImage
+          // ignore: cast_nullable_to_non_nullable
+          : residencePermitImage as Image?,
       retiringDecizionDate:
           retiringDecizionDate == const $CopyWithPlaceholder() ||
                   retiringDecizionDate == null

@@ -1,23 +1,22 @@
 import 'package:bws_agreement_creator/Fonts.dart';
 import 'package:bws_agreement_creator/form.dart';
-import 'package:bws_agreement_creator/utils/date_extensions.dart';
+import 'package:bws_agreement_creator/utils/dictionaries/b2b_agreement_dictionary.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/normal_agreement_dictionary.dart';
 import 'package:bws_agreement_creator/utils/pdf_data_processing_page.dart';
 import 'package:bws_agreement_creator/utils/pdf_pages/pdf_id_page.dart';
-import 'package:bws_agreement_creator/utils/pdf_pages/pdf_legal_guardian_statement_page.dart';
-import 'package:bws_agreement_creator/utils/pdf_pages/pdf_residence_permit_page.dart';
-import 'package:bws_agreement_creator/utils/pdf_pages/pdf_student_id_page.dart';
 import 'package:bws_agreement_creator/utils/pdf_widget_set.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-class PdfNormalAgreementNew {
-  Future<Uint8List> generateNormalAgreement(FormState form) async {
+class PdfB2BAgreementNew {
+  Future<Uint8List> generateB2bPdf(FormState form) async {
     final document = pw.Document();
     final PolishAgreementDictionary dictionary =
         PolishAgreementDictionary(form);
+    final PolishB2BAgreementDictionary b2bDictionary =
+        PolishB2BAgreementDictionary(form);
 
     final page = pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
@@ -41,9 +40,10 @@ class PdfNormalAgreementNew {
                 text: dictionary.dateOfConclusion,
                 style: defaultFonts.regularStyle),
             pw.Paragraph(
-                text: dictionary.bwsData, style: defaultFonts.regularStyle),
+                text: b2bDictionary.bwsData, style: defaultFonts.regularStyle),
             pw.Paragraph(
-                text: dictionary.contractorData, style: defaultFonts.boldStyle),
+                text: b2bDictionary.contractorData,
+                style: defaultFonts.boldStyle),
             PdfWidgetSet()
                 .enumRow(point: "1)", value: dictionary.titlePagePoint1),
             PdfWidgetSet()
@@ -57,16 +57,15 @@ class PdfNormalAgreementNew {
                 style: defaultFonts.regularStyle),
             ...dictionary.contractPurpose.toParagraphWidgetRichText('1'),
             ...dictionary.specificContractMaking.toParagraphWidget('2'),
-            ...dictionary.rulesOfServiceProviding.toParagraphWidget('3'),
+            ...b2bDictionary.rulesOfServiceProviding.toParagraphWidget('3'),
             ...dictionary.periodOfAgreement.toParagraphWidget('4'),
-            ...dictionary.salary.toParagraphWidget('5'),
-            ...dictionary.studentStatus.toParagraphWidget('6'),
+            ...b2bDictionary.salary.toParagraphWidget('5'),
+            ...dictionary.conflictResolving.toParagraphWidget('6'),
             ...dictionary.confidentiality.toParagraphWidget('7'),
-            ...dictionary.penalties.toParagraphWidget('8'),
-            ...dictionary.conflictResolving.toParagraphWidget('9'),
-            ...dictionary.salvatorianClause.toParagraphWidget('10'),
-            ...dictionary.contactData.toParagraphWidgetRichText('11'),
-            ...dictionary.finalConclusion.toParagraphWidget('12'),
+            ...b2bDictionary.penalties.toParagraphWidget('8'),
+            ...dictionary.salvatorianClause.toParagraphWidget('9'),
+            ...dictionary.contactData.toParagraphWidget('10'),
+            ...dictionary.finalConclusion.toParagraphWidget('11'),
             pw.Padding(
                 padding: const pw.EdgeInsets.symmetric(vertical: 20),
                 child: pw.Row(
@@ -81,18 +80,6 @@ class PdfNormalAgreementNew {
     document.addPage(page);
     document.addPage(PdfDataProcessingPage().generate());
     document.addPage(PdfIdPage().generate(form));
-    if (form.isStudent) {
-      document.addPage(PdfStudentIdPage().generate(form));
-    }
-
-    if (form.residencePermitData != null) {
-      document.addPage(PdfResidencePermitPage().generate(form));
-    }
-
-    if (!form.birthday.isAdult()) {
-      document.addPage(PdfLegalGuardianStatementPage().generate(form));
-    }
-
     return document.save();
   }
 }
