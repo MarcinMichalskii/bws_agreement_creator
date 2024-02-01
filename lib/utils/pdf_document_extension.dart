@@ -29,6 +29,20 @@ extension SavePdfFile on PdfDocument {
   }
 }
 
+extension SavePdfDataFile on Uint8List {
+  saveToFiles() async {
+    var anchor = null;
+    final blob = html.Blob([this], 'application/pdf');
+    final url = html.Url.createObjectUrlFromBlob(blob);
+    anchor = html.document.createElement('a') as html.AnchorElement
+      ..href = url
+      ..style.display = 'none'
+      ..download = 'umowa.pdf'
+      ..click();
+    html.document.body?.children.add(anchor);
+  }
+}
+
 extension InsertPageNumbers on PdfDocument {
   insertPageNumbers() {
     for (int i = 0; i < pages.count; i++) {
