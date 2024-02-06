@@ -2,10 +2,9 @@ import 'package:bws_agreement_creator/Fonts.dart';
 import 'package:bws_agreement_creator/form.dart';
 import 'package:bws_agreement_creator/utils/date_extensions.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/normal_agreement_dictionary.dart';
-import 'package:bws_agreement_creator/utils/pdf_data_processing_page.dart';
-import 'package:bws_agreement_creator/utils/pdf_pages/pdf_id_page.dart';
+import 'package:bws_agreement_creator/utils/pdf_pages/pdf_contractor_statement_page.dart';
+import 'package:bws_agreement_creator/utils/pdf_pages/pdf_data_processing_page.dart';
 import 'package:bws_agreement_creator/utils/pdf_pages/pdf_legal_guardian_statement_page.dart';
-import 'package:bws_agreement_creator/utils/pdf_pages/pdf_residence_permit_page.dart';
 import 'package:bws_agreement_creator/utils/pdf_pages/pdf_student_id_page.dart';
 import 'package:bws_agreement_creator/utils/pdf_widget_set.dart';
 import 'package:flutter/foundation.dart';
@@ -80,18 +79,15 @@ class PdfNormalAgreementNew {
         });
     document.addPage(page);
     document.addPage(PdfDataProcessingPage().generate());
-    document.addPage(PdfIdPage().generate(form));
     if (form.isStudent) {
       document.addPage(PdfStudentIdPage().generate(form));
-    }
-
-    if (form.residencePermitData != null) {
-      document.addPage(PdfResidencePermitPage().generate(form));
     }
 
     if (!form.birthday.isAdult()) {
       document.addPage(PdfLegalGuardianStatementPage().generate(form));
     }
+
+    document.addPage(PdfContractorStatementPage().generate(form));
 
     return document.save();
   }

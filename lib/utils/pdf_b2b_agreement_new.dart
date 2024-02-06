@@ -2,7 +2,7 @@ import 'package:bws_agreement_creator/Fonts.dart';
 import 'package:bws_agreement_creator/form.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/b2b_agreement_dictionary.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/normal_agreement_dictionary.dart';
-import 'package:bws_agreement_creator/utils/pdf_data_processing_page.dart';
+import 'package:bws_agreement_creator/utils/pdf_pages/pdf_data_processing_page.dart';
 import 'package:bws_agreement_creator/utils/pdf_pages/pdf_id_page.dart';
 import 'package:bws_agreement_creator/utils/pdf_widget_set.dart';
 import 'package:flutter/foundation.dart';

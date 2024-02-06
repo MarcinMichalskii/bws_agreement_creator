@@ -250,9 +250,6 @@ społecznych.
 Usługodawca oświadcza, że ${form.worksInOtherCompany ? 'nie jest zatrudniony w innym przedsiębiorstwie' : 'jest zatrudniony w innym przedsiębiorstwie, ${form.earnsMoreThanMinimalWage ? earnsMoreThanMinimumWage : earnsLessThanMinimumWage}'}
 ''',
         '''
-Usługodawca oświadcza, iż nie przewiduje, aby jego dochody przekroczyły kwotę wolną od podatku w skali roku i wnioskuje do BWS na mocy art. 41 ust. 1c ustawy z dnia 26 lipca 1991r. o podatku dochodowym od osób fizycznych, o nieodprowadzanie za niego zaliczki na podatek dochodowy.
-''',
-        '''
 Usługodawca oświadcza, iż nie chce, aby BWS odprowadzał za niego składkę chorobową.
 ''',
         '''
