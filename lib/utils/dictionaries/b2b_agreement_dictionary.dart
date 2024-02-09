@@ -14,6 +14,7 @@ Imię i nazwisko: ${form.name} ${form.lastName}
 PESEL: ${form.pesel}
 Nr dokumentu: ${form.passportOrIdNumber}
 Adres: ${form.placeOfDomicile.fullAddress}',
+NIP: ${form.nip}
 ''';
 
   String get confirmedByIdText => '''

@@ -336,6 +336,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+  hand_signature:
+    dependency: "direct main"
+    description:
+      name: hand_signature
+      sha256: a76d56edd2b31bffb3998937be1c6b1eba98696f6e8d817381260c41da415ede
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.2"
   hooks_riverpod:
     dependency: "direct main"
     description:
