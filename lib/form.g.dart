@@ -7,9 +7,6 @@ part of 'form.dart';
 // **************************************************************************
 
 abstract class _$FormStateCWProxy {
-  FormState additionalEmployees(
-      List<AdditionalEmployeeData> additionalEmployees);
-
   FormState agreementWithTime(bool agreementWithTime);
 
   FormState agreementWithTimeEnd(DateTime agreementWithTimeEnd);
@@ -127,7 +124,6 @@ abstract class _$FormStateCWProxy {
   /// FormState(...).copyWith(id: 12, name: "My name")
   /// ````
   FormState call({
-    List<AdditionalEmployeeData>? additionalEmployees,
     bool? agreementWithTime,
     DateTime? agreementWithTimeEnd,
     DateTime? agreementWithTimeStart,
@@ -191,11 +187,6 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
   final FormState _value;
 
   const _$FormStateCWProxyImpl(this._value);
-
-  @override
-  FormState additionalEmployees(
-          List<AdditionalEmployeeData> additionalEmployees) =>
-      this(additionalEmployees: additionalEmployees);
 
   @override
   FormState agreementWithTime(bool agreementWithTime) =>
@@ -402,7 +393,6 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
   /// FormState(...).copyWith(id: 12, name: "My name")
   /// ````
   FormState call({
-    Object? additionalEmployees = const $CopyWithPlaceholder(),
     Object? agreementWithTime = const $CopyWithPlaceholder(),
     Object? agreementWithTimeEnd = const $CopyWithPlaceholder(),
     Object? agreementWithTimeStart = const $CopyWithPlaceholder(),
@@ -460,12 +450,6 @@ class _$FormStateCWProxyImpl implements _$FormStateCWProxy {
     Object? worksInOtherCompany = const $CopyWithPlaceholder(),
   }) {
     return FormState(
-      additionalEmployees:
-          additionalEmployees == const $CopyWithPlaceholder() ||
-                  additionalEmployees == null
-              ? _value.additionalEmployees
-              // ignore: cast_nullable_to_non_nullable
-              : additionalEmployees as List<AdditionalEmployeeData>,
       agreementWithTime: agreementWithTime == const $CopyWithPlaceholder() ||
               agreementWithTime == null
           ? _value.agreementWithTime

@@ -1,4 +1,3 @@
-import 'package:bws_agreement_creator/additional_employee_data.dart';
 import 'package:bws_agreement_creator/address_data.dart';
 import 'package:bws_agreement_creator/utils/date_extensions.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
@@ -52,7 +51,6 @@ class FormState {
       required this.parentAdres,
       required this.parentPesel,
       required this.parentId,
-      required this.additionalEmployees,
       required this.krs,
       required this.internetComunicator,
       required this.phoneNumber,
@@ -108,7 +106,6 @@ class FormState {
   final String parentId;
   final String companyAddress;
   final String companyCity;
-  final List<AdditionalEmployeeData> additionalEmployees;
   final String krs;
   final String internetComunicator;
   final String phoneNumber;
@@ -170,10 +167,6 @@ class FormState {
         invalidCompanyRepresentant;
   }
 
-  bool get invalidB2bEmployees {
-    return additionalEmployees.map((e) => e.isAnyValueEmpty).contains(true);
-  }
-
   bool get invalidParentData {
     return parentAdres.isEmpty ||
         parentPesel.isEmpty ||
@@ -196,7 +189,7 @@ class FormState {
     } else if (areYouB2b && invalidB2b) {
       print(invalidB2b);
       return "Sprawdź dane Twojej firmy";
-    } else if (areYouB2b && invalidB2bEmployees) {
+    } else if (areYouB2b) {
       return "Sprawdź dane dodatkowych pracowników";
     } else if (!dontHavePesel && peselBirthdayMismatch) {
       return "Data urodzenia nie pasuje do numeru PESEL";
@@ -269,7 +262,6 @@ class FormNotifier extends StateNotifier<FormState> {
             parentId: '',
             companyAddress: '',
             companyCity: '',
-            additionalEmployees: [],
             krs: '',
             phoneNumber: '',
             emailAddress: '',
@@ -523,24 +515,9 @@ class FormNotifier extends StateNotifier<FormState> {
     state = state.copyWith(parentId: value.toUpperCase());
   }
 
-  void setAdditionalEmployee(AdditionalEmployeeData value) {
-    var employees = state.additionalEmployees;
-    final employeeIndex =
-        employees.indexWhere((element) => element.id == value.id);
+  void setAdditionalEmployee() {}
 
-    if (employeeIndex == -1) {
-      employees.add(value);
-    } else {
-      employees[employeeIndex] = value;
-    }
-    state = state.copyWith(additionalEmployees: employees);
-  }
-
-  void removeAdditionalEmployee(String id) {
-    var employees = state.additionalEmployees;
-    employees.removeWhere((element) => element.id == id);
-    state = state.copyWith(additionalEmployees: employees);
-  }
+  void removeAdditionalEmployee(String id) {}
 
   void setKrs(String value) {
     state = state.copyWith(krs: value);

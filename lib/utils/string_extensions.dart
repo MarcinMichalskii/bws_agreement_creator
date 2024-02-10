@@ -59,4 +59,11 @@ extension NipValidator on String {
         .map((str) => str.toCapitalized())
         .join(' ');
   }
+
+  bool isValidEmail() {
+    final RegExp emailExp = RegExp(
+        r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$');
+
+    return emailExp.hasMatch(this);
+  }
 }

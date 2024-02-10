@@ -1,13 +1,16 @@
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/b2b_contract_question_widget.dart';
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/employee_contract_question_widget.dart';
-import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/legal_guardina_questions_widget.dart';
+import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/legal_guardian_questions_widget.dart';
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/other_company_details_question_widget.dart';
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/signature_widget.dart';
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/works_in_other_company_question_widget.dart';
+import 'package:bws_agreement_creator/FormUI/Providers/login_data_provider.dart';
+import 'package:bws_agreement_creator/FormUI/Providers/upload_pdf_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/bws_logo.dart';
 import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -138,7 +141,14 @@ class EmployeeFormWidget extends HookConsumerWidget {
                       fontWeight: FontWeight.w600,
                       textSize: 18,
                       textColor: CustomColors.darkGray,
-                      onPress: () {},
+                      onPress: () {
+                        final cookie =
+                            ref.read(loginProvider.notifier).state.data!.cookie;
+                        ref.read(uploadPdfProvider.notifier).uploadPdf(
+                            authString: cookie,
+                            bytes: Uint8List(2),
+                            filename: 'jebacbiede.pdf');
+                      },
                       icon: const Icon(
                         Icons.send_and_archive_outlined,
                         color: CustomColors.almostBlack,
