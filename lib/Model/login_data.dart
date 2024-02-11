@@ -79,11 +79,11 @@ class LoginData {
     } else if (passportId == null &&
         idNumber == null &&
         birthDateParsed!.isAdult()) {
-      return "Musisz podać numer paszportu lub dowodu osobistego";
+      return "Musisz uzupełnić numer paszportu lub dowodu osobistego w profilu Sinch";
     } else if (pesel == null) {
-      return "Musisz podać numer PESEL";
+      return "Musisz uzupełnić numer PESEL w profilu Sinch";
     } else if (address == null) {
-      return "Musisz podać adres";
+      return "Musisz uzupełnić adres w profilu Sinch";
     }
 
     return null;
