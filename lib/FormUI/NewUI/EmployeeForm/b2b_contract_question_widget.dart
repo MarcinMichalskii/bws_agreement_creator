@@ -22,7 +22,6 @@ class B2bContractQuestionWidget extends HookConsumerWidget {
     useBuildEffect(() {
       final address =
           ref.read(newFormDataProvider.notifier).state.b2bCompanyAddress;
-      print(address);
       ref.read(newFormDataProvider.notifier).setB2bAddress(address);
       initialAddress.value = address ?? '';
     }, []);
