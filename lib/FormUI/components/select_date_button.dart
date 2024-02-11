@@ -43,6 +43,8 @@ class FormButtonUI extends StatelessWidget {
       required this.onPress,
       required this.icon,
       this.textColor = CustomColors.almostBlack,
+      this.textSize = 15,
+      this.fontWeight = FontWeight.normal,
       this.hasHeader = true});
   final String title;
   final Icon icon;
@@ -50,6 +52,8 @@ class FormButtonUI extends StatelessWidget {
   final VoidCallback onPress;
   final Color textColor;
   final bool hasHeader;
+  final double textSize;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +69,9 @@ class FormButtonUI extends StatelessWidget {
               dateText: title,
               onPress: onPress,
               icon: icon,
-              textColor: textColor),
+              textColor: textColor,
+              textSize: textSize,
+              fontWeight: fontWeight),
         ),
       ],
     );
@@ -77,12 +83,16 @@ class _FormButtonContent extends StatelessWidget {
       {required this.dateText,
       required this.onPress,
       required this.icon,
-      required this.textColor});
+      required this.textColor,
+      required this.fontWeight,
+      required this.textSize});
 
   final String dateText;
   final VoidCallback onPress;
   final Icon icon;
   final Color textColor;
+  final double textSize;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -97,13 +107,16 @@ class _FormButtonContent extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
             ),
-            child: Row(children: [
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Container(margin: const EdgeInsets.only(left: 8), child: icon),
               Flexible(
                 child: Container(
-                    padding: const EdgeInsets.fromLTRB(8, 16, 16, 16),
+                    padding: const EdgeInsets.fromLTRB(12, 18, 16, 16),
                     child: Text(dateText,
-                        style: TextStyle(color: textColor, fontSize: 15))),
+                        style: TextStyle(
+                            color: textColor,
+                            fontSize: textSize,
+                            fontWeight: fontWeight))),
               )
             ]),
           ),

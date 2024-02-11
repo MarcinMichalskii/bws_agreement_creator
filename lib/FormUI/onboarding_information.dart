@@ -1,6 +1,10 @@
+import 'package:bws_agreement_creator/FormUI/Providers/login_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/generate_pdf_button.dart';
+import 'package:bws_agreement_creator/FormUI/onboarding_point_widget.dart';
+import 'package:bws_agreement_creator/FormUI/outbording_information_sign.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class OnboardingInformation extends StatelessWidget {
   const OnboardingInformation({
@@ -27,26 +31,27 @@ class OnboardingInformation extends StatelessWidget {
   }
 }
 
-class _OnboardingInformationContainer extends StatelessWidget {
+class _OnboardingInformationContainer extends HookConsumerWidget {
   const _OnboardingInformationContainer({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final name = ref.read(loginProvider.notifier).state.data?.name ?? '';
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'Witaj!',
-          style: TextStyle(
+          'Witaj $name!',
+          style: const TextStyle(
             fontWeight: FontWeight.w500,
             color: CustomColors.gray,
             fontSize: 26,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
             'W BWS wszyscy pracują legalnie, zatem podpisują umowy zlecenie. Ta strona przygotuje dla Ciebie wszystkie wymagane dokumenty. ZANIM PODPISZESZ, PRZYCZYTAJ TE 3 PUNKTY:',
             textAlign: TextAlign.center,
@@ -56,87 +61,33 @@ class _OnboardingInformationContainer extends StatelessWidget {
             ),
           ),
         ),
-        Column(
+        const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            OnboardingPointWidget(
+                pointNumber: '1. ',
+                pointTextBold: 'Szanujemy swój czas',
+                poinText:
+                    ' - za zapisanie się do pracy i nieobecność bez L4 grozi kara 300zł.'),
+            OnboardingPointWidget(
+                pointNumber: '2. ',
+                pointTextBold: 'Jesteśmy uczciwi',
+                poinText:
+                    ' - informujemy Cię, że kwoty na bws.onsinch.com to kwoty brutto (netto tylko dla JDG/Spółek)'),
+            OnboardingPointWidget(
+                pointNumber: '3. ',
+                pointTextBold: 'Jesteśmy porządni',
+                poinText:
+                    ' - wypełnij formularz zgodnie z prawdą. Za podanie fałszywych danych grozi kara 500zł.'),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                    color: CustomColors.gray,
-                    fontSize: 18,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: '1. ',
-                    ),
-                    TextSpan(
-                      text: 'Szanujemy swój czas',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextSpan(
-                      text:
-                          ' - za zapisanie się do pracy i nieobecność bez L4 grozi kara 300zł.',
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                    color: CustomColors.gray,
-                    fontSize: 18,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: '2. ',
-                    ),
-                    TextSpan(
-                      text: 'Jesteśmy uczciwi',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextSpan(
-                      text:
-                          ' - informujemy Cię, że kwoty na bws.onsinch.com to kwoty brutto (netto tylko dla JDG/Spółek)',
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                    color: CustomColors.gray,
-                    fontSize: 18,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: '3. ',
-                    ),
-                    TextSpan(
-                      text: 'Jesteśmy porządni',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextSpan(
-                      text:
-                          ' - wypełnij umowę faktycznymi danymi, które również wpisałeś/aś w profilu na bws.onsinch.com. Za podanie fałszywych danych grozi kara 500zł.',
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                child: TextWithLink(
+                    left:
+                        'Umowa którą za chwilę podpiszesz, będzie wiążąca. O formie dokumentowej możesz przeczytać',
+                    link: ' tutaj',
+                    right: '',
+                    url:
+                        'https://sip.lex.pl/akty-prawne/dzu-dziennik-ustaw/kodeks-cywilny-16785996/art-77-2')),
           ],
         ),
         DefaultBorderedButton(

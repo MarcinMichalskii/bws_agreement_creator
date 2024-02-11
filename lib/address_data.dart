@@ -32,6 +32,10 @@ class AdressData {
     ];
   }
 
+  String get fullAddress {
+    return '$street $houseNumber ${flatNumber.isEmpty ? '' : '/$flatNumber'}, $zipCode $city, $country';
+  }
+
   bool get isFilledInCorrectly {
     final components = [
       street,
