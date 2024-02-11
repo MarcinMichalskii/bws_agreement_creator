@@ -1,13 +1,13 @@
-import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/selected_page_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';
+import 'package:bws_agreement_creator/Model/selected_page_data.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class EmployeeContractQuestionWidget extends HookConsumerWidget {
-  const EmployeeContractQuestionWidget({super.key});
+class ContractTypeQuestionWidget extends HookConsumerWidget {
+  const ContractTypeQuestionWidget({super.key});
   @override
   Widget build(BuildContext context, ref) {
     final name =
@@ -46,8 +46,15 @@ class EmployeeContractQuestionWidget extends HookConsumerWidget {
                   ref
                       .read(selectedPageProvider.notifier)
                       .setPage(SelectedPage.b2bContract);
-                  // ref.read(selectedPageProvider.notifier).state =
-                  // SelectedPage.b2bContract;
+
+                  final loginDataAddress = ref
+                      .read(newFormDataProvider.notifier)
+                      .state
+                      .loginData
+                      ?.address;
+                  ref
+                      .read(newFormDataProvider.notifier)
+                      .setB2bAddress(loginDataAddress ?? '');
                 },
                 icon: const Icon(
                   Icons.factory,
@@ -68,8 +75,9 @@ class EmployeeContractQuestionWidget extends HookConsumerWidget {
                 textSize: 18,
                 textColor: CustomColors.darkGray,
                 onPress: () {
-                  ref.read(selectedPageProvider.notifier).state =
-                      SelectedPage.worksInOtherCompany;
+                  ref
+                      .read(selectedPageProvider.notifier)
+                      .setPage(SelectedPage.worksInOtherCompany);
                 },
                 icon: const Icon(
                   Icons.badge,

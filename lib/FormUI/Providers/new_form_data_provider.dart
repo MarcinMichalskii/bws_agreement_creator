@@ -17,7 +17,7 @@ class NewFormNotifier extends StateNotifier<NewFormData> {
     state = state.copyWith(loginData: loginData);
   }
 
-  void setAddress(String address) {
+  void setB2bAddress(String address) {
     state = state.copyWith(b2bCompanyAddress: address);
   }
 

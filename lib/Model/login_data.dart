@@ -1,7 +1,9 @@
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/Model/address_data.dart';
+import 'package:bws_agreement_creator/Model/selected_page_data.dart';
 import 'package:bws_agreement_creator/utils/date_extensions.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+
 part 'login_data.g.dart';
 
 @CopyWith()
@@ -87,7 +89,7 @@ class LoginData {
 
   SelectedPage pageBasedOnData() {
     if (!birthDateParsed!.isAdult()) {
-      return SelectedPage.below18;
+      return SelectedPage.legalGuardian;
     } else if (studentId != null && birthDateParsed!.isBelow26()) {
       return SelectedPage.student;
     } else {

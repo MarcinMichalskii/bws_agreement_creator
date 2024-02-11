@@ -19,10 +19,10 @@ class B2bContractQuestionWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final initialAddress =
-        ref.read(newFormDataProvider.notifier).state.loginData?.address ?? '';
+        ref.read(newFormDataProvider.notifier).state.b2bCompanyAddress;
 
     final updateAddress = useCallback((String text) {
-      ref.read(newFormDataProvider.notifier).setAddress(text);
+      ref.read(newFormDataProvider.notifier).setB2bAddress(text);
     }, []);
 
     final updateNip = useCallback((String text) {
@@ -64,7 +64,7 @@ class B2bContractQuestionWidget extends HookConsumerWidget {
           onChanged: (value) {
             updateAddress(value ?? '');
           }),
-      DefaultSignatureWidget()
+      const DefaultSignatureWidget()
     ]);
   }
 }

@@ -67,3 +67,12 @@ extension NipValidator on String {
     return emailExp.hasMatch(this);
   }
 }
+
+extension EmptyAsNull on String {
+  String? emptyAsNull() {
+    if (isEmpty) {
+      return null;
+    }
+    return this;
+  }
+}
