@@ -1,7 +1,9 @@
 import 'package:bws_agreement_creator/Fonts.dart';
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/FormUI/NewUI/Login/login_widget.dart';
+import 'package:bws_agreement_creator/FormUI/NewUI/Outboarding/agreement_sent_widget.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/login_data_provider.dart';
+import 'package:bws_agreement_creator/FormUI/Providers/upload_pdf_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -24,11 +26,14 @@ class MyApp extends HookConsumerWidget {
     final isLoggedIn = ref.watch(loginProvider).data != null;
 
     final onLoginButtonTapped = useCallback((bool isLoggedIn) {}, []);
+    final appFlowScreen = isLoggedIn
+        ? EmployeeFormWidget()
+        : LoginWidget(
+            onLoginTapped: onLoginButtonTapped,
+          );
+    final generationFinished = ref.watch(uploadPdfProvider).data != null;
+
     return MaterialApp(
-        home: isLoggedIn
-            ? EmployeeFormWidget()
-            : LoginWidget(
-                onLoginTapped: onLoginButtonTapped,
-              ));
+        home: generationFinished ? const AgreementSentWidget() : appFlowScreen);
   }
 }

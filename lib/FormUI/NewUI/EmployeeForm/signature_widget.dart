@@ -1,22 +1,25 @@
+import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hand_signature/signature.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SignatureWidget extends HookConsumerWidget {
   final Function(Uint8List?) onSignatureChanged;
   final String label;
-  final control = HandSignatureControl(
-    threshold: 3.0,
-    smoothRatio: 0.65,
-    velocityRange: 2.0,
-  );
 
   SignatureWidget(
       {super.key, required this.onSignatureChanged, this.label = 'Podpis'});
   @override
   Widget build(BuildContext context, ref) {
+    final control = useState(HandSignatureControl(
+      threshold: 3.0,
+      smoothRatio: 0.65,
+      velocityRange: 2.0,
+    ));
+
     return Column(children: [
       Container(
         margin: const EdgeInsets.symmetric(vertical: 8),
@@ -39,7 +42,7 @@ class SignatureWidget extends HookConsumerWidget {
                     backgroundColor: CustomColors.applicationColorMain,
                     foregroundColor: CustomColors.almostBlack),
                 onPressed: () {
-                  control.clear();
+                  control.value.clear();
                   onSignatureChanged(null);
                 },
                 child: const Text("Wyczyść"),
@@ -59,11 +62,15 @@ class SignatureWidget extends HookConsumerWidget {
           ),
         ),
         child: HandSignature(
-          control: control,
+          control: control.value,
+          onPointerDown: () {
+            ref.read(scrollEnabled.notifier).state = false;
+          },
           onPointerUp: () async {
-            final data = await control.toImage();
+            final data = await control.value.toImage();
             final uint8Data = data?.buffer.asUint8List();
             onSignatureChanged(uint8Data);
+            ref.read(scrollEnabled.notifier).state = true;
           },
           width: 0.8,
           type: SignatureDrawType.line,

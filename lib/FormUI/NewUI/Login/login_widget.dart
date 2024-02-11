@@ -1,3 +1,4 @@
+import 'package:bws_agreement_creator/FormUI/NewUI/Login/no_password_help_widget.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/login_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
 import 'package:bws_agreement_creator/FormUI/components/bws_logo.dart';
@@ -35,44 +36,48 @@ class LoginWidget extends HookConsumerWidget {
 
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Center(
-        child: Container(
-          constraints: const BoxConstraints(maxWidth: Consts.defaultMaxWidth),
-          child: Column(children: [
-            Container(
-                margin: const EdgeInsets.only(top: 64),
-                constraints: const BoxConstraints(maxHeight: 100),
-                child: BwsLogo()),
-            BorderedInput(
-              placeholder: 'Sinch Email',
-              onChanged: (text) {
-                login.value = text ?? '';
-              },
-            ),
-            BorderedInput(
-              placeholder: 'Password',
-              isSecure: true,
-              onChanged: (text) {
-                password.value = text ?? '';
-              },
-            ),
-            ref.watch(loginProvider).isLoading
-                ? Container(
-                    margin: const EdgeInsets.only(top: 8),
-                    child: const CircularProgressIndicator(
-                      color: CustomColors.applicationColorMain,
-                    ))
-                : DefaultBorderedButton(
-                    borderColor: isInputValid
-                        ? CustomColors.applicationColorMain
-                        : CustomColors.gray,
-                    onTap: () {
-                      if (isInputValid) {
-                        authorize();
-                      }
-                    },
-                    text: 'Login')
-          ]),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            constraints: const BoxConstraints(maxWidth: Consts.defaultMaxWidth),
+            child: Column(children: [
+              Container(
+                  margin: const EdgeInsets.only(top: 64),
+                  constraints: const BoxConstraints(maxHeight: 100),
+                  child: BwsLogo()),
+              BorderedInput(
+                placeholder: 'Sinch Email',
+                onChanged: (text) {
+                  login.value = text ?? '';
+                },
+              ),
+              BorderedInput(
+                placeholder: 'Password',
+                isSecure: true,
+                onChanged: (text) {
+                  password.value = text ?? '';
+                },
+              ),
+              ref.watch(loginProvider).isLoading
+                  ? Container(
+                      margin: const EdgeInsets.only(top: 8),
+                      child: const CircularProgressIndicator(
+                        color: CustomColors.applicationColorMain,
+                      ))
+                  : DefaultBorderedButton(
+                      borderColor: isInputValid
+                          ? CustomColors.applicationColorMain
+                          : CustomColors.gray,
+                      onTap: () {
+                        if (isInputValid) {
+                          authorize();
+                        }
+                      },
+                      text: 'Login'),
+              const NoPasswordHelpWidget()
+            ]),
+          ),
         ),
       ),
     );

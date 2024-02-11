@@ -1,6 +1,7 @@
 import 'package:bws_agreement_creator/FormUI/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/Model/login_data.dart';
+import 'package:bws_agreement_creator/utils/base_url.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -18,7 +19,7 @@ class LoginNotifier extends StateNotifier<ParsedResponseState<LoginData>> {
     final response = await ApiController().fetchData(params: {
       "login": login,
       "password": password,
-    }, url: "http://localhost:3000/login");
+    }, url: "${baseUrl}/login");
     try {
       final loginData = LoginData.fromJson(response.data);
       if (loginData.validationError != null) {

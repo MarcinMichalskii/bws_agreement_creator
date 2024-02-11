@@ -15,7 +15,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 class PdfNormalAgreementNew {
-  Future<Uint8List> generateNormalAgreement(NewFormData form) async {
+  pw.Document generateNormalAgreement(NewFormData form) {
     final document = pw.Document();
     final PolishAgreementDictionary dictionary =
         PolishAgreementDictionary(form);
@@ -81,7 +81,6 @@ class PdfNormalAgreementNew {
     }
 
     document.addPage(PdfContractorStatementPage().generate(form));
-
-    return document.save();
+    return document;
   }
 }

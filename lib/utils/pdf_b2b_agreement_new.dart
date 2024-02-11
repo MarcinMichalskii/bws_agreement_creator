@@ -11,7 +11,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 class PdfB2BAgreementNew {
-  Future<Uint8List> generateB2bPdf(NewFormData form) async {
+  pw.Document generateB2bPdf(NewFormData form) {
     final document = pw.Document();
     final PolishAgreementDictionary dictionary =
         PolishAgreementDictionary(form);
@@ -73,6 +73,6 @@ class PdfB2BAgreementNew {
         });
     document.addPage(page);
     document.addPage(PdfDataProcessingPage().generate());
-    return document.save();
+    return document;
   }
 }

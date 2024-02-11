@@ -1,5 +1,4 @@
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/default_signature_widget.dart';
-import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/signature_widget.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
