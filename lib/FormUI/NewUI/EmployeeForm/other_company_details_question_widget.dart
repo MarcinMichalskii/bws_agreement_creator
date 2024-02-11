@@ -5,6 +5,7 @@ import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
 import 'package:bws_agreement_creator/FormUI/components/form_toggle.dart';
 import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
+import 'package:bws_agreement_creator/utils/nip_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -48,6 +49,7 @@ class OtherCompanyDetailsQuestionWidget extends HookConsumerWidget {
       ),
       BorderedInput(
           placeholder: "NIP firmy",
+          validator: NipValidator.validate,
           onChanged: (value) {
             ref
                 .read(newFormDataProvider.notifier)
