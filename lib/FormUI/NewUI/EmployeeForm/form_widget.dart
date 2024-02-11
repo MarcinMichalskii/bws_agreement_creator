@@ -1,4 +1,3 @@
-import 'package:bws_agreement_creator/FormUI/Providers/login_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/selected_page_provider.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/upload_pdf_provider.dart';
@@ -7,7 +6,6 @@ import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart'
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,6 +18,29 @@ class EmployeeFormWidget extends HookConsumerWidget {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(backgroundColor: Colors.red, content: Text(error)));
     }, []);
+
+    ref.listen(uploadPdfProvider, (previous, next) {
+      if (next.error != null) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(
+              next.error!.message,
+            )));
+      }
+    });
+
+    final onGeneratePress = useCallback(() async {
+      final formData = ref.read(newFormDataProvider.notifier).state;
+      final SelectedPage page = ref.read(selectedPageProvider.notifier).state;
+
+      final validationError = formData.validationError(page);
+      if (validationError != null) {
+        onError(validationError);
+        return;
+      }
+      ref.read(uploadPdfProvider.notifier).uploadPdf();
+    }, [ref]);
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
@@ -58,38 +79,22 @@ class EmployeeFormWidget extends HookConsumerWidget {
                   ),
                 ),
                 if (ref.watch(selectedPageProvider).isFinalPage)
-                  FormButtonUI(
-                    hasHeader: false,
-                    title: "Generuj umowę",
-                    headerText: "",
-                    fontWeight: FontWeight.w600,
-                    textSize: 18,
-                    textColor: CustomColors.darkGray,
-                    onPress: () {
-                      final formData =
-                          ref.read(newFormDataProvider.notifier).state;
-                      final SelectedPage page =
-                          ref.read(selectedPageProvider.notifier).state;
-
-                      final validationError = formData.validationError(page);
-                      if (validationError != null) {
-                        onError(validationError);
-                        return;
-                      }
-
-                      final cookie =
-                          ref.read(loginProvider.notifier).state.data!.cookie;
-                      ref.read(uploadPdfProvider.notifier).uploadPdf(
-                          authString: cookie,
-                          bytes: Uint8List(2),
-                          filename: 'jebacbiede.pdf');
-                    },
-                    icon: const Icon(
-                      Icons.send_and_archive_outlined,
-                      color: CustomColors.almostBlack,
-                      size: 32,
-                    ),
-                  )
+                  ref.watch(uploadPdfProvider).isLoading
+                      ? const CircularProgressIndicator()
+                      : FormButtonUI(
+                          hasHeader: false,
+                          title: "Generuj umowę",
+                          headerText: "",
+                          fontWeight: FontWeight.w600,
+                          textSize: 18,
+                          textColor: CustomColors.darkGray,
+                          onPress: onGeneratePress,
+                          icon: const Icon(
+                            Icons.send_and_archive_outlined,
+                            color: CustomColors.almostBlack,
+                            size: 32,
+                          ),
+                        )
               ],
             )),
       ),

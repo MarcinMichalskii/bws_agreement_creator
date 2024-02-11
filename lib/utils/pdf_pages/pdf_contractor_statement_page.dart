@@ -1,11 +1,12 @@
 import 'package:bws_agreement_creator/Fonts.dart';
-import 'package:bws_agreement_creator/form.dart';
+import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/contractor_statement_dictionary.dart';
+import 'package:bws_agreement_creator/utils/pdf_pages/pdf_signature.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 class PdfContractorStatementPage {
-  pw.Page generate(FormState form) {
+  pw.Page generate(NewFormData form) {
     ContractorStatementDictionary dictionary =
         ContractorStatementDictionary(form);
     return pw.Page(
@@ -48,6 +49,9 @@ class PdfContractorStatementPage {
                         : dictionary.doesntHaveStudentStatus,
                     textAlign: pw.TextAlign.left,
                     style: defaultFonts.regularStyle),
+                SignatureWidgetPdf().generate(
+                    signatureData: form.signatureData!,
+                    bwsSignatureData: form.bwsSignatureData!),
               ]);
         });
   }

@@ -1,19 +1,21 @@
+import 'dart:typed_data';
+
 import 'package:bws_agreement_creator/Fonts.dart';
-import 'package:bws_agreement_creator/form.dart';
-import 'package:bws_agreement_creator/utils/date_extensions.dart';
+import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/normal_agreement_dictionary.dart';
 import 'package:bws_agreement_creator/utils/pdf_pages/pdf_contractor_statement_page.dart';
 import 'package:bws_agreement_creator/utils/pdf_pages/pdf_data_processing_page.dart';
 import 'package:bws_agreement_creator/utils/pdf_pages/pdf_legal_guardian_statement_page.dart';
-import 'package:bws_agreement_creator/utils/pdf_pages/pdf_student_id_page.dart';
+import 'package:bws_agreement_creator/utils/pdf_pages/pdf_signature.dart';
 import 'package:bws_agreement_creator/utils/pdf_widget_set.dart';
+import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 class PdfNormalAgreementNew {
-  Future<Uint8List> generateNormalAgreement(FormState form) async {
+  Future<Uint8List> generateNormalAgreement(NewFormData form) async {
     final document = pw.Document();
     final PolishAgreementDictionary dictionary =
         PolishAgreementDictionary(form);
@@ -66,24 +68,15 @@ class PdfNormalAgreementNew {
             ...dictionary.salvatorianClause.toParagraphWidget('10'),
             ...dictionary.contactData.toParagraphWidgetRichText('11'),
             ...dictionary.finalConclusion.toParagraphWidget('12'),
-            pw.Padding(
-                padding: const pw.EdgeInsets.symmetric(vertical: 20),
-                child: pw.Row(
-                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                    children: [
-                      pw.Text('BWS', style: defaultFonts.boldStyle),
-                      pw.Text(dictionary.serviceProvider,
-                          style: defaultFonts.boldStyle),
-                    ])),
+            SignatureWidgetPdf().generate(
+                signatureData: form.signatureData!,
+                bwsSignatureData: form.bwsSignatureData!),
           ];
         });
     document.addPage(page);
     document.addPage(PdfDataProcessingPage().generate());
-    if (form.isStudent) {
-      document.addPage(PdfStudentIdPage().generate(form));
-    }
 
-    if (!form.birthday.isAdult()) {
+    if (form.legalGuardianIdNumber?.emptyAsNull() != null) {
       document.addPage(PdfLegalGuardianStatementPage().generate(form));
     }
 

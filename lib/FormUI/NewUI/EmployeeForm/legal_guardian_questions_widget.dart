@@ -39,11 +39,29 @@ class LegalGuardianQuestionsWidget extends HookConsumerWidget {
       Container(height: 20),
       BorderedInput(
         placeholder: "Imię i nazwisko",
-        onChanged: (value) {},
+        onChanged: (value) {
+          ref.read(newFormDataProvider.notifier).setLegalGuardianName(value);
+        },
       ),
-      BorderedInput(placeholder: "Pesel", onChanged: (value) {}),
-      BorderedInput(placeholder: "Numer dowodu", onChanged: (value) {}),
-      BorderedInput(placeholder: "Adres", onChanged: (value) {}),
+      BorderedInput(
+          placeholder: "Pesel",
+          onChanged: (value) {
+            ref.read(newFormDataProvider.notifier).setLegalGuardianPesel(value);
+          }),
+      BorderedInput(
+          placeholder: "Numer dowodu",
+          onChanged: (value) {
+            ref
+                .read(newFormDataProvider.notifier)
+                .setLegalGuardianIdNumber(value);
+          }),
+      BorderedInput(
+          placeholder: "Adres",
+          onChanged: (value) {
+            ref
+                .read(newFormDataProvider.notifier)
+                .setLegalGuardianAddress(value);
+          }),
       SignatureWidget(
           label: 'Podpis opiekuna',
           onSignatureChanged: (data) {
@@ -51,43 +69,9 @@ class LegalGuardianQuestionsWidget extends HookConsumerWidget {
                 .read(newFormDataProvider.notifier)
                 .setLegalGuardianSignature(data);
           }),
-      Container(
-        height: 160,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
-          border: Border.all(
-            color: CustomColors.almostBlack,
-            width: 2.0,
-          ),
-        ),
-        child: HandSignature(
-          control: guardianControl,
-          width: 0.8,
-          type: SignatureDrawType.line,
-          color: CustomColors.applicationColorMain,
-        ),
-      ),
       SignatureWidget(onSignatureChanged: (data) {
         ref.read(newFormDataProvider.notifier).setSignature(data);
       }),
-      Container(
-        height: 160,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
-          border: Border.all(
-            color: CustomColors.almostBlack,
-            width: 2.0,
-          ),
-        ),
-        child: HandSignature(
-          control: employeeControl,
-          width: 0.8,
-          type: SignatureDrawType.line,
-          color: CustomColors.applicationColorMain,
-        ),
-      )
     ]);
   }
 }

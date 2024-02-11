@@ -2,12 +2,16 @@ import 'dart:typed_data';
 
 import 'package:bws_agreement_creator/Model/login_data.dart';
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
+import 'package:bws_agreement_creator/utils/date_extensions.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:intl/intl.dart';
+
 part 'new_form_data.g.dart';
 
 @CopyWith()
 class NewFormData {
+  final String dateOfSign = DateFormat('dd.MM.yyyy').format(DateTime.now());
   final LoginData? loginData;
   final Uint8List? signatureData;
   final Uint8List? legalGuardianSignatureData;
@@ -24,24 +28,25 @@ class NewFormData {
   final String? b2bCompanyName;
   final String? b2bCompanyAddress;
   final String? b2bCompanyNip;
+  final Uint8List? bwsSignatureData;
 
-  NewFormData({
-    this.loginData,
-    this.signatureData,
-    this.legalGuardianSignatureData,
-    this.otherCompanyName,
-    this.otherCompanyAddress,
-    this.otherCompanyNip,
-    this.otherCompanyStartDate,
-    this.otherCompanyEndDate,
-    this.b2bCompanyName,
-    this.b2bCompanyAddress,
-    this.b2bCompanyNip,
-    this.legalGuardianName,
-    this.legalGuardianPesel,
-    this.legalGuardianIdNumber,
-    this.legalGuardianAddress,
-  });
+  NewFormData(
+      {this.loginData,
+      this.signatureData,
+      this.legalGuardianSignatureData,
+      this.otherCompanyName,
+      this.otherCompanyAddress,
+      this.otherCompanyNip,
+      this.otherCompanyStartDate,
+      this.otherCompanyEndDate,
+      this.b2bCompanyName,
+      this.b2bCompanyAddress,
+      this.b2bCompanyNip,
+      this.legalGuardianName,
+      this.legalGuardianPesel,
+      this.legalGuardianIdNumber,
+      this.legalGuardianAddress,
+      this.bwsSignatureData});
 
   String? validationError(SelectedPage page) {
     if (page == SelectedPage.contractType ||
@@ -84,4 +89,28 @@ class NewFormData {
       }
     }
   }
+
+  String get pdfFileName {
+    if (!loginData!.birthDateParsed!.isAdult()) {
+      return 'uz_student_niepelnoletni.pdf';
+    } else if (loginData?.studentId != null &&
+        loginData?.birthDateParsed?.isBelow26() == true) {
+      return 'uz_student.pdf';
+    } else if (worksInOtherCompany && otherCompanyEndDate == null) {
+      return 'uz_kolejna_nieokreslony.pdf';
+    } else if (worksInOtherCompany && otherCompanyEndDate != null) {
+      return 'uz_kolejna_okreslony_${DateFormat('dd.MM.yyyy').format(otherCompanyEndDate!)}';
+    } else if (b2bCompanyName != null) {
+      return 'b2b.pdf';
+    } else if (loginData?.birthDateParsed?.isBelow26() == true) {
+      return 'uz_bez_pit_bez_studenta.pdf';
+    } else {
+      return 'uz_normalna.pdf';
+    }
+  }
+
+  bool get worksInOtherCompany => otherCompanyName != null;
+  bool get isStudent =>
+      loginData?.studentId != null &&
+      loginData?.birthDateParsed?.isBelow26() == true;
 }

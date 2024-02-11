@@ -1,4 +1,3 @@
-import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/Model/address_data.dart';
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
 import 'package:bws_agreement_creator/utils/date_extensions.dart';
@@ -12,6 +11,7 @@ class LoginData {
   String name;
   String birthDate;
   String? address;
+  String email;
   String phone;
   String? passportId;
   String? idNumber;
@@ -30,6 +30,7 @@ class LoginData {
     required this.cookie,
     required this.name,
     required this.birthDate,
+    required this.email,
     required this.address,
     required this.phone,
     required this.passportId,
@@ -43,6 +44,7 @@ class LoginData {
       cookie: json['cookie'],
       name: json['name'],
       birthDate: json['birthDate'],
+      email: json['email'],
       address: json['address'] != null
           ? Address.fromJson(json['address']).fullAddress
           : null,

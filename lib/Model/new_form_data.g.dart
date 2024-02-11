@@ -13,6 +13,8 @@ abstract class _$NewFormDataCWProxy {
 
   NewFormData b2bCompanyNip(String? b2bCompanyNip);
 
+  NewFormData bwsSignatureData(Uint8List? bwsSignatureData);
+
   NewFormData legalGuardianAddress(String? legalGuardianAddress);
 
   NewFormData legalGuardianIdNumber(String? legalGuardianIdNumber);
@@ -47,6 +49,7 @@ abstract class _$NewFormDataCWProxy {
     String? b2bCompanyAddress,
     String? b2bCompanyName,
     String? b2bCompanyNip,
+    Uint8List? bwsSignatureData,
     String? legalGuardianAddress,
     String? legalGuardianIdNumber,
     String? legalGuardianName,
@@ -79,6 +82,10 @@ class _$NewFormDataCWProxyImpl implements _$NewFormDataCWProxy {
   @override
   NewFormData b2bCompanyNip(String? b2bCompanyNip) =>
       this(b2bCompanyNip: b2bCompanyNip);
+
+  @override
+  NewFormData bwsSignatureData(Uint8List? bwsSignatureData) =>
+      this(bwsSignatureData: bwsSignatureData);
 
   @override
   NewFormData legalGuardianAddress(String? legalGuardianAddress) =>
@@ -140,6 +147,7 @@ class _$NewFormDataCWProxyImpl implements _$NewFormDataCWProxy {
     Object? b2bCompanyAddress = const $CopyWithPlaceholder(),
     Object? b2bCompanyName = const $CopyWithPlaceholder(),
     Object? b2bCompanyNip = const $CopyWithPlaceholder(),
+    Object? bwsSignatureData = const $CopyWithPlaceholder(),
     Object? legalGuardianAddress = const $CopyWithPlaceholder(),
     Object? legalGuardianIdNumber = const $CopyWithPlaceholder(),
     Object? legalGuardianName = const $CopyWithPlaceholder(),
@@ -166,6 +174,10 @@ class _$NewFormDataCWProxyImpl implements _$NewFormDataCWProxy {
           ? _value.b2bCompanyNip
           // ignore: cast_nullable_to_non_nullable
           : b2bCompanyNip as String?,
+      bwsSignatureData: bwsSignatureData == const $CopyWithPlaceholder()
+          ? _value.bwsSignatureData
+          // ignore: cast_nullable_to_non_nullable
+          : bwsSignatureData as Uint8List?,
       legalGuardianAddress: legalGuardianAddress == const $CopyWithPlaceholder()
           ? _value.legalGuardianAddress
           // ignore: cast_nullable_to_non_nullable

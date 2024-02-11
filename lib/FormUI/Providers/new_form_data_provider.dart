@@ -1,7 +1,7 @@
 import 'package:bws_agreement_creator/FormUI/Providers/login_data_provider.dart';
 import 'package:bws_agreement_creator/Model/login_data.dart';
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final newFormDataProvider =
@@ -13,8 +13,11 @@ class NewFormNotifier extends StateNotifier<NewFormData> {
   StateNotifierProviderRef<NewFormNotifier, NewFormData> ref;
   NewFormNotifier(this.ref) : super(NewFormData());
 
-  void setLoginData(LoginData loginData) {
-    state = state.copyWith(loginData: loginData);
+  void setLoginData(LoginData loginData) async {
+    String fileName = 'assets/podpis.png';
+    ByteData data = await rootBundle.load(fileName);
+    Uint8List bytes = data.buffer.asUint8List();
+    state = state.copyWith(loginData: loginData, bwsSignatureData: bytes);
   }
 
   void setB2bAddress(String address) {
@@ -31,6 +34,22 @@ class NewFormNotifier extends StateNotifier<NewFormData> {
 
   void setLegalGuardianSignature(Uint8List? signature) {
     state = state.copyWith(legalGuardianSignatureData: signature);
+  }
+
+  void setLegalGuardianPesel(String? pesel) {
+    state = state.copyWith(legalGuardianPesel: pesel);
+  }
+
+  void setLegalGuardianIdNumber(String? id) {
+    state = state.copyWith(legalGuardianIdNumber: id);
+  }
+
+  void setLegalGuardianAddress(String? address) {
+    state = state.copyWith(legalGuardianAddress: address);
+  }
+
+  void setLegalGuardianName(String? name) {
+    state = state.copyWith(legalGuardianName: name);
   }
 
   void updateCompanyName(String companyName) {
@@ -57,7 +76,13 @@ class NewFormNotifier extends StateNotifier<NewFormData> {
     state = state.copyWith(otherCompanyEndDate: date);
   }
 
-  void cleanUp() {
-    state = NewFormData(loginData: ref.read(loginProvider.notifier).state.data);
+  void cleanUp() async {
+    String fileName = 'assets/podpis.png';
+    ByteData data = await rootBundle.load(fileName);
+    Uint8List bytes = data.buffer.asUint8List();
+
+    state = NewFormData(
+        loginData: ref.read(loginProvider.notifier).state.data,
+        bwsSignatureData: bytes);
   }
 }

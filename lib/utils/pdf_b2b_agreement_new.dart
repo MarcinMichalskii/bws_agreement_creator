@@ -1,9 +1,9 @@
 import 'package:bws_agreement_creator/Fonts.dart';
-import 'package:bws_agreement_creator/form.dart';
+import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/b2b_agreement_dictionary.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/normal_agreement_dictionary.dart';
 import 'package:bws_agreement_creator/utils/pdf_pages/pdf_data_processing_page.dart';
-import 'package:bws_agreement_creator/utils/pdf_pages/pdf_id_page.dart';
+import 'package:bws_agreement_creator/utils/pdf_pages/pdf_signature.dart';
 import 'package:bws_agreement_creator/utils/pdf_widget_set.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +11,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 class PdfB2BAgreementNew {
-  Future<Uint8List> generateB2bPdf(FormState form) async {
+  Future<Uint8List> generateB2bPdf(NewFormData form) async {
     final document = pw.Document();
     final PolishAgreementDictionary dictionary =
         PolishAgreementDictionary(form);
@@ -66,20 +66,13 @@ class PdfB2BAgreementNew {
             ...dictionary.salvatorianClause.toParagraphWidget('9'),
             ...dictionary.contactData.toParagraphWidget('10'),
             ...dictionary.finalConclusion.toParagraphWidget('11'),
-            pw.Padding(
-                padding: const pw.EdgeInsets.symmetric(vertical: 20),
-                child: pw.Row(
-                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                    children: [
-                      pw.Text('BWS', style: defaultFonts.boldStyle),
-                      pw.Text(dictionary.serviceProvider,
-                          style: defaultFonts.boldStyle),
-                    ])),
+            SignatureWidgetPdf().generate(
+                signatureData: form.signatureData!,
+                bwsSignatureData: form.bwsSignatureData!),
           ];
         });
     document.addPage(page);
     document.addPage(PdfDataProcessingPage().generate());
-    document.addPage(PdfIdPage().generate(form));
     return document.save();
   }
 }

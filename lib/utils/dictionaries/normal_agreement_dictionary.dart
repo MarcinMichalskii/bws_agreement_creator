@@ -1,6 +1,5 @@
-import 'package:bws_agreement_creator/form.dart';
+import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:bws_agreement_creator/utils/pdf_widget_set.dart';
-import 'package:intl/intl.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 class ParagraphData {
@@ -30,18 +29,18 @@ class ParagraphData {
 }
 
 abstract class TranslatedAgreementDictionary {
-  FormState get form;
+  NewFormData get form;
 }
 
 class PolishAgreementDictionary implements TranslatedAgreementDictionary {
-  final FormState form;
+  final NewFormData form;
 
   PolishAgreementDictionary(this.form);
 
   final agreementTitle = 'Umowa Ramowa o świadczenie usług';
 
   String get dateOfConclusion =>
-      'zawarta w dniu ${DateFormat('dd.MM.yyyy').format(form.dateOfSign)} w Krakowie pomiędzy';
+      'zawarta w dniu ${form.dateOfSign} w Krakowie pomiędzy';
 
   String get bwsData =>
       '''spółką BWS Event Support Sp. z o.o. z siedzibą w Krakowie 31-559, przy ul. Na Szaniec 7,
@@ -52,11 +51,23 @@ zwaną w dalszej części Umowy: „BWS” a zleceniobiorcą posługującym się
 ''';
 
   String get contractorData => '''
-Imię i nazwisko: ${form.name} ${form.lastName}
-PESEL: ${form.pesel}
-Nr dokumentu: ${form.passportOrIdNumber}
-Adres: ${form.placeOfDomicile.fullAddress}',
+Imię i nazwisko: ${form.loginData?.name}
+PESEL: ${form.loginData?.pesel}
+$documentId
+Adres: ${form.loginData?.address}',
 ''';
+
+  String get documentId {
+    if (form.loginData?.studentId != null) {
+      return 'Nr legitymacji studenckiej: ${form.loginData?.studentId}';
+    } else if (form.loginData?.idNumber != null) {
+      return 'Dowód osobisty: ${form.loginData?.idNumber}';
+    } else if (form.loginData?.passportId != null) {
+      return 'Paszport: ${form.loginData?.passportId}';
+    } else {
+      return '';
+    }
+  }
 
   String get confirmedByIdText => '''
 co zostało stwierdzone w oparciu o okazany dowód osobisty/dokument tożsamości,działającym osobiście,zwanym w dalszej części Umowy: „Usługodawcą”,
@@ -247,7 +258,7 @@ Usługodawca oświadcza, że ${form.isStudent ? 'posiada status' : 'nie posiada 
 społecznych.
 ''',
         '''
-Usługodawca oświadcza, że ${form.worksInOtherCompany ? 'nie jest zatrudniony w innym przedsiębiorstwie' : 'jest zatrudniony w innym przedsiębiorstwie, ${form.earnsMoreThanMinimalWage ? earnsMoreThanMinimumWage : earnsLessThanMinimumWage}'}
+Usługodawca oświadcza, że ${form.worksInOtherCompany ? 'nie jest zatrudniony w innym przedsiębiorstwie' : 'jest zatrudniony w innym przedsiębiorstwie, $earnsMoreThanMinimumWage'}
 ''',
         '''
 Usługodawca oświadcza, iż nie chce, aby BWS odprowadzał za niego składkę chorobową.
@@ -259,10 +270,6 @@ Usługodawca zobowiązuje się do niezwłocznego powiadomienia płatnika o każd
 
   String get earnsMoreThanMinimumWage => '''
 gdzie zarabia conajmniej minimalną krajową w skali miesiąca (3010zł brutto).
-''';
-
-  String get earnsLessThanMinimumWage => '''
-gdzie zarabia poniżej minimalnej krajowej w skali miesiąca (3010zł brutto).
 ''';
 
   ParagraphData get confidentiality =>
@@ -338,9 +345,9 @@ W przypadku wystąpienia okoliczności opisanych w ust. 1 niniejszego paragrafu,
       ParagraphData(title: 'Dane kontaktowe', points: [
         '''
 <b>Usługodawca wskazuje następujące dane kontaktowe:</b>
-<b>1) Adres do doręczeń ${form.placeOfDomicile.fullAddress}:</b>
-<b>2) Numer telefonu: ${form.phoneNumber}</b>
-<b>3) Adres e-mail: ${form.emailAddress}.</b>
+<b>1) Adres do doręczeń ${form.loginData?.address}:</b>
+<b>2) Numer telefonu: ${form.loginData?.phone}</b>
+<b>3) Adres e-mail: ${form.loginData?.email}.</b>
 ''',
         '''
 BWS wskazuje następujące dane kontaktowe:

@@ -1,18 +1,16 @@
-import 'package:bws_agreement_creator/form.dart';
-import 'package:intl/intl.dart';
+import 'package:bws_agreement_creator/Model/new_form_data.dart';
 
 class LegalGuardianConsentDictionary {
-  final FormState form;
+  final NewFormData form;
   LegalGuardianConsentDictionary(this.form);
 
-  String get dateOfConclusion =>
-      'Kraków, dnia: ${DateFormat('dd.MM.yyyy').format(form.dateOfSign)}';
+  String get dateOfConclusion => 'Kraków, dnia: ${form.dateOfSign}';
 
   String get guardianData => '''
-Imię i nazwisko: ${form.parentName}
-PESEL: ${form.parentPesel},
-Adres: ${form.parentAdres}',
-Nr dokumentu: ${form.parentId}
+Imię i nazwisko: ${form.legalGuardianName}
+PESEL: ${form.legalGuardianPesel},
+Adres: ${form.legalGuardianAddress}',
+Nr dokumentu: ${form.legalGuardianIdNumber}
 ''';
 
   String get title => '''
@@ -22,10 +20,10 @@ dziecko pracy lub innych zajęć zarobkowych
 
   String get childData => '''
 Będąc przedstawicielem ustawowym małoletniego
-Imię i nazwisko: ${form.name} ${form.lastName}
-PESEL: ${form.pesel},
-Adres: ${form.placeOfDomicile.fullAddress}',
-Nr dokumentu: ${form.passportOrIdNumber}
+Imię i nazwisko: ${form.loginData?.name}
+PESEL: ${form.loginData?.pesel},
+Adres: ${form.loginData?.address}',
+Nr dokumentu: ${form.loginData?.studentId}
 ''';
 
   String get guardianConsent => '''

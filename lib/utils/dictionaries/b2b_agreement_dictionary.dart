@@ -1,8 +1,8 @@
-import 'package:bws_agreement_creator/form.dart';
+import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/normal_agreement_dictionary.dart';
 
 class PolishB2BAgreementDictionary {
-  final FormState form;
+  final NewFormData form;
   PolishB2BAgreementDictionary(this.form);
 
   String get bwsData => '''
@@ -10,12 +10,23 @@ spółką BWS EVENT SUPPORT spółka z ograniczoną odpowiedzialnością z siedz
 ''';
 
   String get contractorData => '''
-Imię i nazwisko: ${form.name} ${form.lastName}
-PESEL: ${form.pesel}
-Nr dokumentu: ${form.passportOrIdNumber}
-Adres: ${form.placeOfDomicile.fullAddress}',
-NIP: ${form.nip}
+Imię i nazwisko: ${form.loginData?.name}
+Nazwa firmy: ${form.b2bCompanyName}
+PESEL: ${form.loginData?.pesel}
+Nr dokumentu: $documentId
+Adres: ${form.loginData?.address}
+NIP: ${form.b2bCompanyNip}
 ''';
+
+  String get documentId {
+    if (form.loginData?.idNumber != null) {
+      return 'Dowód osobisty: ${form.loginData?.idNumber}';
+    } else if (form.loginData?.passportId != null) {
+      return 'Paszport: ${form.loginData?.passportId}';
+    } else {
+      return '';
+    }
+  }
 
   String get confirmedByIdText => '''
 co zostało stwierdzone w oparciu o okazany dowód osobisty/dokument tożsamości, działającym w formie jednoosobowej działalności gospodarczej / spółki, zwanym w dalszej części Umowy „Usługodawcą”.

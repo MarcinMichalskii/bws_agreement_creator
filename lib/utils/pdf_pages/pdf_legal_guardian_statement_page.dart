@@ -1,11 +1,12 @@
 import 'package:bws_agreement_creator/Fonts.dart';
-import 'package:bws_agreement_creator/form.dart';
+import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/legal_guardian_consent_dictionary.dart';
+import 'package:bws_agreement_creator/utils/pdf_pages/pdf_signature.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 class PdfLegalGuardianStatementPage {
-  pw.Page generate(FormState form) {
+  pw.Page generate(NewFormData form) {
     LegalGuardianConsentDictionary dictionary =
         LegalGuardianConsentDictionary(form);
     return pw.Page(
@@ -49,6 +50,9 @@ class PdfLegalGuardianStatementPage {
                     text: dictionary.period,
                     textAlign: pw.TextAlign.left,
                     style: defaultFonts.regularStyle),
+                SignatureWidgetPdf().generate(
+                    signatureData: form.legalGuardianSignatureData!,
+                    bwsSignatureData: form.bwsSignatureData!),
               ]);
         });
   }

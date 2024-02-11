@@ -13,6 +13,8 @@ abstract class _$LoginDataCWProxy {
 
   LoginData cookie(String cookie);
 
+  LoginData email(String email);
+
   LoginData idNumber(String? idNumber);
 
   LoginData name(String name);
@@ -35,6 +37,7 @@ abstract class _$LoginDataCWProxy {
     String? address,
     String? birthDate,
     String? cookie,
+    String? email,
     String? idNumber,
     String? name,
     String? passportId,
@@ -58,6 +61,9 @@ class _$LoginDataCWProxyImpl implements _$LoginDataCWProxy {
 
   @override
   LoginData cookie(String cookie) => this(cookie: cookie);
+
+  @override
+  LoginData email(String email) => this(email: email);
 
   @override
   LoginData idNumber(String? idNumber) => this(idNumber: idNumber);
@@ -89,6 +95,7 @@ class _$LoginDataCWProxyImpl implements _$LoginDataCWProxy {
     Object? address = const $CopyWithPlaceholder(),
     Object? birthDate = const $CopyWithPlaceholder(),
     Object? cookie = const $CopyWithPlaceholder(),
+    Object? email = const $CopyWithPlaceholder(),
     Object? idNumber = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
     Object? passportId = const $CopyWithPlaceholder(),
@@ -109,6 +116,10 @@ class _$LoginDataCWProxyImpl implements _$LoginDataCWProxy {
           ? _value.cookie
           // ignore: cast_nullable_to_non_nullable
           : cookie as String,
+      email: email == const $CopyWithPlaceholder() || email == null
+          ? _value.email
+          // ignore: cast_nullable_to_non_nullable
+          : email as String,
       idNumber: idNumber == const $CopyWithPlaceholder()
           ? _value.idNumber
           // ignore: cast_nullable_to_non_nullable
