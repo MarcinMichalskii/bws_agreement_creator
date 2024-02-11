@@ -10,7 +10,7 @@ class ContractorStatementDictionary {
   String get contractorData => '''
 Imię i nazwisko: ${form.loginData?.name}
 PESEL: ${form.loginData?.pesel},
-Adres: ${form.loginData?.address}'}
+Adres: ${form.loginData?.address}'
 $documentId
 ''';
 

@@ -13,17 +13,14 @@ class ContractTypeQuestionWidget extends HookConsumerWidget {
     final name =
         ref.read(newFormDataProvider.notifier).state.loginData?.name ?? '';
     return Column(children: [
-      Row(
+      const Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text("Witaj $name,",
-                  style:
-                      const TextStyle(color: CustomColors.gray, fontSize: 20)),
-              const Text("Będziesz pracował w oparciu o: ",
+              Text("Wybierz formę współpracy z BWS",
                   style: TextStyle(color: CustomColors.gray, fontSize: 20)),
             ],
           ),
@@ -46,15 +43,6 @@ class ContractTypeQuestionWidget extends HookConsumerWidget {
                   ref
                       .read(selectedPageProvider.notifier)
                       .setPage(SelectedPage.b2bContract);
-
-                  final loginDataAddress = ref
-                      .read(newFormDataProvider.notifier)
-                      .state
-                      .loginData
-                      ?.address;
-                  ref
-                      .read(newFormDataProvider.notifier)
-                      .setB2bAddress(loginDataAddress ?? '');
                 },
                 icon: const Icon(
                   Icons.factory,

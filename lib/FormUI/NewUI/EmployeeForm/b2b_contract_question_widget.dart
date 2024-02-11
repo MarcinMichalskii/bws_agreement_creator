@@ -1,4 +1,5 @@
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/default_signature_widget.dart';
+import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
@@ -17,8 +18,14 @@ class B2bContractQuestionWidget extends HookConsumerWidget {
   B2bContractQuestionWidget({super.key});
   @override
   Widget build(BuildContext context, ref) {
-    final initialAddress =
-        ref.read(newFormDataProvider.notifier).state.b2bCompanyAddress;
+    final initialAddress = useState('');
+    useBuildEffect(() {
+      final address =
+          ref.read(newFormDataProvider.notifier).state.b2bCompanyAddress;
+      print(address);
+      ref.read(newFormDataProvider.notifier).setB2bAddress(address);
+      initialAddress.value = address ?? '';
+    }, []);
 
     final updateAddress = useCallback((String text) {
       ref.read(newFormDataProvider.notifier).setB2bAddress(text);
@@ -58,7 +65,7 @@ class B2bContractQuestionWidget extends HookConsumerWidget {
             updateNip(value ?? '');
           }),
       BorderedInput(
-          initialValue: initialAddress,
+          initialValue: initialAddress.value,
           placeholder: "Adres",
           onChanged: (value) {
             updateAddress(value ?? '');

@@ -1,4 +1,5 @@
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/default_signature_widget.dart';
+import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
 import 'package:bws_agreement_creator/FormUI/components/form_toggle.dart';
@@ -12,6 +13,15 @@ class OtherCompanyDetailsQuestionWidget extends HookConsumerWidget {
   const OtherCompanyDetailsQuestionWidget({super.key});
   @override
   Widget build(BuildContext context, ref) {
+    useBuildEffect(() {
+      ref
+          .read(newFormDataProvider.notifier)
+          .updateOtherCompanyContractStartDate(DateTime.now());
+      ref
+          .read(newFormDataProvider.notifier)
+          .updateOtherCompanyContractEndDate(DateTime.now());
+      return;
+    }, []);
     final contractWithoutTime = useState(false);
 
     return Column(children: [

@@ -31,6 +31,8 @@ class UploadPdfNotifier extends StateNotifier<ParsedResponseState<String?>> {
       final selectedAgreement =
           formData.b2bCompanyName?.emptyAsNull() != null ? pdfB2b : pdf;
       final selectedAgreementData = await selectedAgreement.save();
+      print(selectedAgreementData.length);
+      print(formData.pdfFileName);
 
       state = ParsedResponseState(isLoading: true);
       await _performRequest(

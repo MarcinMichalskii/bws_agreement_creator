@@ -3,6 +3,7 @@ import 'package:bws_agreement_creator/FormUI/Providers/selected_page_provider.da
 import 'package:bws_agreement_creator/FormUI/Providers/upload_pdf_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/bws_logo.dart';
 import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';
+import 'package:bws_agreement_creator/FormUI/onboarding_information.dart';
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
@@ -14,10 +15,35 @@ final scrollEnabled = StateProvider<bool>((ref) {
   return true;
 });
 
+void useBuildEffect(Dispose? Function() effect, [List<Object?>? keys]) {
+  useEffect(() {
+    Dispose? disposeCallback;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      disposeCallback = effect();
+    });
+
+    return () {
+      if (disposeCallback != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          disposeCallback!();
+        });
+      }
+    };
+  }, keys);
+}
+
 class EmployeeFormWidget extends HookConsumerWidget {
   const EmployeeFormWidget({super.key});
   @override
   Widget build(BuildContext context, ref) {
+    useBuildEffect(() {
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) => const OnboardingInformation());
+    }, []);
+
     final onError = useCallback((String error) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(backgroundColor: Colors.red, content: Text(error)));
@@ -33,7 +59,7 @@ class EmployeeFormWidget extends HookConsumerWidget {
       }
     });
 
-    final onGeneratePress = useCallback(() async {
+    void onGeneratePress() {
       final formData = ref.read(newFormDataProvider.notifier).state;
       final SelectedPage page = ref.read(selectedPageProvider.notifier).state;
 
@@ -43,7 +69,7 @@ class EmployeeFormWidget extends HookConsumerWidget {
         return;
       }
       ref.read(uploadPdfProvider.notifier).uploadPdf();
-    }, [ref]);
+    }
 
     return Scaffold(
       backgroundColor: Colors.black,

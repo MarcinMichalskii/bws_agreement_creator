@@ -68,8 +68,7 @@ class NewFormData {
       if (otherCompanyName?.emptyAsNull() == null ||
           otherCompanyAddress?.emptyAsNull() == null ||
           otherCompanyNip?.isValidNip() == true ||
-          otherCompanyStartDate == null ||
-          otherCompanyEndDate == null) {
+          otherCompanyStartDate == null) {
         return "Wszystkie pola muszą być wypełnione";
       }
     }
@@ -99,7 +98,10 @@ class NewFormData {
     } else if (worksInOtherCompany && otherCompanyEndDate == null) {
       return 'uz_kolejna_nieokreslony.pdf';
     } else if (worksInOtherCompany && otherCompanyEndDate != null) {
-      return 'uz_kolejna_okreslony_${DateFormat('dd.MM.yyyy').format(otherCompanyEndDate!)}';
+      final nameDatePart = DateFormat('dd.MM.yyyy')
+          .format(otherCompanyEndDate!)
+          .replaceAll('.', '_');
+      return 'uz_kolejna_okreslony_$nameDatePart.pdf';
     } else if (b2bCompanyName != null) {
       return 'b2b.pdf';
     } else if (loginData?.birthDateParsed?.isBelow26() == true) {
