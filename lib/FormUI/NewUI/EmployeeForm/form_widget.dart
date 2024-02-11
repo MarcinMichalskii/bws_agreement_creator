@@ -1,10 +1,12 @@
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/b2b_contract_question_widget.dart';
+import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/default_signature_widget.dart';
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/employee_contract_question_widget.dart';
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/legal_guardian_questions_widget.dart';
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/other_company_details_question_widget.dart';
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/signature_widget.dart';
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/works_in_other_company_question_widget.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/login_data_provider.dart';
+import 'package:bws_agreement_creator/FormUI/Providers/selected_page_provider.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/upload_pdf_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/bws_logo.dart';
 import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';
@@ -39,9 +41,9 @@ extension SelectedPageExtension on SelectedPage {
       case SelectedPage.b2bContract:
         return B2bContractQuestionWidget();
       case SelectedPage.signature:
-        return SignatureWidget();
+        return const DefaultSignatureWidget();
       case SelectedPage.student:
-        return SignatureWidget();
+        return const DefaultSignatureWidget();
       case SelectedPage.below18:
         return LegalGuardianQuestionsWidget();
     }
@@ -90,9 +92,9 @@ extension SelectedPageExtension on SelectedPage {
   }
 }
 
-final selectedPageProvider = StateProvider<SelectedPage>((ref) {
-  return SelectedPage.below18;
-});
+// final selectedPageProvider = StateProvider<SelectedPage>((ref) {
+//   return ref.read(loginProvider.notifier).state.data!.pageBasedOnData();
+// });
 
 class EmployeeFormWidget extends HookConsumerWidget {
   const EmployeeFormWidget({super.key});
@@ -123,8 +125,12 @@ class EmployeeFormWidget extends HookConsumerWidget {
                                   CustomColors.applicationColorMain,
                               foregroundColor: CustomColors.almostBlack),
                           onPressed: () {
-                            ref.read(selectedPageProvider.notifier).state =
-                                ref.watch(selectedPageProvider).previousPage!;
+                            final previousPage =
+                                ref.read(selectedPageProvider).previousPage!;
+
+                            ref
+                                .read(selectedPageProvider.notifier)
+                                .setPage(previousPage);
                           },
                           child: const Text("Wstecz"),
                         ),
@@ -132,28 +138,25 @@ class EmployeeFormWidget extends HookConsumerWidget {
                   ),
                 ),
                 if (ref.watch(selectedPageProvider).isFinalPage)
-                  Container(
-                    width: 300,
-                    child: FormButtonUI(
-                      hasHeader: false,
-                      title: "Generuj umowę",
-                      headerText: "",
-                      fontWeight: FontWeight.w600,
-                      textSize: 18,
-                      textColor: CustomColors.darkGray,
-                      onPress: () {
-                        final cookie =
-                            ref.read(loginProvider.notifier).state.data!.cookie;
-                        ref.read(uploadPdfProvider.notifier).uploadPdf(
-                            authString: cookie,
-                            bytes: Uint8List(2),
-                            filename: 'jebacbiede.pdf');
-                      },
-                      icon: const Icon(
-                        Icons.send_and_archive_outlined,
-                        color: CustomColors.almostBlack,
-                        size: 32,
-                      ),
+                  FormButtonUI(
+                    hasHeader: false,
+                    title: "Generuj umowę",
+                    headerText: "",
+                    fontWeight: FontWeight.w600,
+                    textSize: 18,
+                    textColor: CustomColors.darkGray,
+                    onPress: () {
+                      final cookie =
+                          ref.read(loginProvider.notifier).state.data!.cookie;
+                      ref.read(uploadPdfProvider.notifier).uploadPdf(
+                          authString: cookie,
+                          bytes: Uint8List(2),
+                          filename: 'jebacbiede.pdf');
+                    },
+                    icon: const Icon(
+                      Icons.send_and_archive_outlined,
+                      color: CustomColors.almostBlack,
+                      size: 32,
                     ),
                   )
               ],

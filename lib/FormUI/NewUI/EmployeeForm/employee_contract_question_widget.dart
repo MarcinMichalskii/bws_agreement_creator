@@ -1,4 +1,6 @@
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
+import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
+import 'package:bws_agreement_creator/FormUI/Providers/selected_page_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -8,17 +10,20 @@ class EmployeeContractQuestionWidget extends HookConsumerWidget {
   const EmployeeContractQuestionWidget({super.key});
   @override
   Widget build(BuildContext context, ref) {
+    final name =
+        ref.read(newFormDataProvider.notifier).state.loginData?.name ?? '';
     return Column(children: [
-      const Row(
+      Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text("Witaj Marcin,",
-                  style: TextStyle(color: CustomColors.gray, fontSize: 20)),
-              Text("Będziesz pracował w oparciu o: ",
+              Text("Witaj $name,",
+                  style:
+                      const TextStyle(color: CustomColors.gray, fontSize: 20)),
+              const Text("Będziesz pracował w oparciu o: ",
                   style: TextStyle(color: CustomColors.gray, fontSize: 20)),
             ],
           ),
@@ -38,8 +43,11 @@ class EmployeeContractQuestionWidget extends HookConsumerWidget {
                 textSize: 18,
                 textColor: CustomColors.darkGray,
                 onPress: () {
-                  ref.read(selectedPageProvider.notifier).state =
-                      SelectedPage.b2bContract;
+                  ref
+                      .read(selectedPageProvider.notifier)
+                      .setPage(SelectedPage.b2bContract);
+                  // ref.read(selectedPageProvider.notifier).state =
+                  // SelectedPage.b2bContract;
                 },
                 icon: const Icon(
                   Icons.factory,

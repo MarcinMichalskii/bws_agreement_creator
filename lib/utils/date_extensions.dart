@@ -22,4 +22,16 @@ extension CheckIfAdult on DateTime {
     }
     return age >= 16;
   }
+
+  bool isBelow26() {
+    final birthday = this;
+    DateTime currentDate = DateTime.now();
+    int age = currentDate.year - birthday.year;
+    if (currentDate.month < birthday.month ||
+        (currentDate.month == birthday.month &&
+            currentDate.day < birthday.day)) {
+      age--;
+    }
+    return age <= 26;
+  }
 }

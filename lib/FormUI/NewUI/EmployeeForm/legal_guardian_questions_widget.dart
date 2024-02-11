@@ -1,3 +1,5 @@
+import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/signature_widget.dart';
+import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -42,36 +44,21 @@ class LegalGuardianQuestionsWidget extends HookConsumerWidget {
       BorderedInput(placeholder: "Pesel", onChanged: (value) {}),
       BorderedInput(placeholder: "Numer dowodu", onChanged: (value) {}),
       BorderedInput(placeholder: "Adres", onChanged: (value) {}),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 8),
-            child: const Text("Podpis opiekuna",
-                style: TextStyle(color: CustomColors.gray, fontSize: 20)),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 8),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: CustomColors.applicationColorMain,
-                  foregroundColor: CustomColors.almostBlack),
-              onPressed: () {
-                guardianControl.clear();
-              },
-              child: const Text("Wyczyść"),
-            ),
-          ),
-        ],
-      ),
+      SignatureWidget(
+          label: 'Podpis opiekuna',
+          onSignatureChanged: (data) {
+            ref
+                .read(newFormDataProvider.notifier)
+                .setLegalGuardianSignature(data);
+          }),
       Container(
         height: 160,
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
           border: Border.all(
-            color: CustomColors.almostBlack, // You can set the border color
-            width: 2.0, // You can set the border width
+            color: CustomColors.almostBlack,
+            width: 2.0,
           ),
         ),
         child: HandSignature(
@@ -81,36 +68,17 @@ class LegalGuardianQuestionsWidget extends HookConsumerWidget {
           color: CustomColors.applicationColorMain,
         ),
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 8),
-            child: const Text("Twój podpis",
-                style: TextStyle(color: CustomColors.gray, fontSize: 20)),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 8),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: CustomColors.applicationColorMain,
-                  foregroundColor: CustomColors.almostBlack),
-              onPressed: () {
-                employeeControl.clear();
-              },
-              child: const Text("Wyczyść"),
-            ),
-          ),
-        ],
-      ),
+      SignatureWidget(onSignatureChanged: (data) {
+        ref.read(newFormDataProvider.notifier).setSignature(data);
+      }),
       Container(
         height: 160,
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
           border: Border.all(
-            color: CustomColors.almostBlack, // You can set the border color
-            width: 2.0, // You can set the border width
+            color: CustomColors.almostBlack,
+            width: 2.0,
           ),
         ),
         child: HandSignature(

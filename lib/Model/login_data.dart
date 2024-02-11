@@ -1,15 +1,28 @@
+import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
+import 'package:bws_agreement_creator/Model/address_data.dart';
 import 'package:bws_agreement_creator/utils/date_extensions.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
+part 'login_data.g.dart';
 
+@CopyWith()
 class LoginData {
   String cookie;
   String name;
   String birthDate;
-  Address? address;
+  String? address;
   String phone;
   String? passportId;
   String? idNumber;
   String? pesel;
   String? studentId;
+
+  DateTime? get birthDateParsed {
+    try {
+      return DateTime.parse(birthDate);
+    } catch (e) {
+      return null;
+    }
+  }
 
   LoginData({
     required this.cookie,
@@ -28,58 +41,57 @@ class LoginData {
       cookie: json['cookie'],
       name: json['name'],
       birthDate: json['birthDate'],
-      address: Address.fromJson(json['address']),
+      address: json['address'] != null
+          ? Address.fromJson(json['address']).fullAddress
+          : null,
       phone: json['phone'],
-      passportId: json['passportId'],
-      idNumber: json['idNumber'],
-      pesel: json['pesel'],
-      studentId: json['studentId'],
+      passportId: _cleanString(json['passportId']),
+      idNumber: _cleanString(json['idNumber']),
+      pesel: _cleanString(json['pesel']),
+      studentId: _cleanString(json['studentId']),
     );
+  }
+
+  static String? _cleanString(String? value) {
+    try {
+      if (value == null) {
+        return null;
+      }
+      String cleanedValue = value.trim();
+
+      return cleanedValue.isEmpty ? null : cleanedValue;
+    } catch (e) {
+      return null;
+    }
   }
 
   String? get validationError {
-    try {
-      DateTime parsedBirthdate = DateTime.parse(birthDate);
-      if (!parsedBirthdate.isOver16()) {
-        return "Osoby poniżej 16 roku życia nie mogą zawrzeć z nami umowy";
-      } else if (!parsedBirthdate.isAdult() && studentId == null) {
-        return "Osoby poniżej 18 roku życia muszą podać numer legitymacji szkolnej";
-      } else if (passportId == null && idNumber == null) {
-        return "Musisz podać numer paszportu lub dowodu osobistego";
-      } else if (pesel == null) {
-        return "Musisz podać numer PESEL";
-      } else if (address == null) {
-        return "Musisz podać adres";
-      }
-    } catch (e) {
+    if (birthDateParsed == null) {
       return "Nieprawidłowa data urodzenia";
+    } else if (!birthDateParsed!.isOver16()) {
+      return "Osoby poniżej 16 roku życia nie mogą zawrzeć z nami umowy";
+    } else if (!birthDateParsed!.isAdult() && studentId == null) {
+      return "Osoby poniżej 18 roku życia muszą podać numer legitymacji szkolnej";
+    } else if (passportId == null &&
+        idNumber == null &&
+        birthDateParsed!.isAdult()) {
+      return "Musisz podać numer paszportu lub dowodu osobistego";
+    } else if (pesel == null) {
+      return "Musisz podać numer PESEL";
+    } else if (address == null) {
+      return "Musisz podać adres";
     }
+
     return null;
   }
-}
 
-class Address {
-  String street;
-  String city;
-  String zip;
-  String country;
-  String region;
-
-  Address({
-    required this.street,
-    required this.city,
-    required this.zip,
-    required this.country,
-    required this.region,
-  });
-
-  factory Address.fromJson(Map<String, dynamic> json) {
-    return Address(
-      street: json['street'],
-      city: json['city'],
-      zip: json['zip'],
-      country: json['country'],
-      region: json['region'],
-    );
+  SelectedPage pageBasedOnData() {
+    if (!birthDateParsed!.isAdult()) {
+      return SelectedPage.below18;
+    } else if (studentId != null && birthDateParsed!.isBelow26()) {
+      return SelectedPage.student;
+    } else {
+      return SelectedPage.contractType;
+    }
   }
 }

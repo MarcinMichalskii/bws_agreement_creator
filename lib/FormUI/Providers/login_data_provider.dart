@@ -1,14 +1,16 @@
 import 'package:bws_agreement_creator/FormUI/Providers/api_controller.dart';
+import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/Model/login_data.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final loginProvider =
     StateNotifierProvider<LoginNotifier, ParsedResponseState<LoginData>>((ref) {
-  return LoginNotifier();
+  return LoginNotifier(ref);
 });
 
 class LoginNotifier extends StateNotifier<ParsedResponseState<LoginData>> {
-  LoginNotifier() : super(ParsedResponseState());
+  StateNotifierProviderRef<LoginNotifier, ParsedResponseState<LoginData>> ref;
+  LoginNotifier(this.ref) : super(ParsedResponseState());
 
   void login(String login, String password) async {
     state = ParsedResponseState(isLoading: true);
@@ -24,9 +26,11 @@ class LoginNotifier extends StateNotifier<ParsedResponseState<LoginData>> {
         return;
       }
       state = ParsedResponseState.fromAPIResponseState(response, loginData);
+      ref.read(newFormDataProvider.notifier).setLoginData(loginData);
     } catch (error) {
       state = ParsedResponseState(
-          error: CostRegisterError("Nie udało się zalogować"));
+          error: CostRegisterError(
+              "Nie udało się zalogować, sprawdź login i hasło"));
     }
   }
 }
