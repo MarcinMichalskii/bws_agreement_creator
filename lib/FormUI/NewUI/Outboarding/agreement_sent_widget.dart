@@ -23,9 +23,14 @@ class AgreementSentWidget extends HookConsumerWidget {
                   child: BwsLogo()),
               const Text(
                   textAlign: TextAlign.center,
-                  '''Umowa została podpisana i dodana do Twojego profilu, a jej kopia wraz z Twoim podpisem została pobrana na Twoje urządzenie!
-
-                  Nie musisz już nic robić, administrator zweryfikuje Twój profil najszybciej jak to możliwe (do 48h).''',
+                  'Umowa została podpisana i dodana do Twojego profilu, a jej kopia wraz z Twoim podpisem została pobrana na Twoje urządzenie!',
+                  style: TextStyle(
+                    color: CustomColors.gray,
+                    fontSize: 20,
+                  )),
+              const Text(
+                  textAlign: TextAlign.center,
+                  'Nie musisz już nic robić, administrator zweryfikuje Twój profil najszybciej jak to możliwe (do 48h).',
                   style: TextStyle(
                     color: CustomColors.gray,
                     fontSize: 20,
@@ -33,6 +38,7 @@ class AgreementSentWidget extends HookConsumerWidget {
               Container(
                 margin: const EdgeInsets.only(top: 24),
                 child: const TextWithLink(
+                    textAlign: TextAlign.center,
                     fontSize: 20,
                     left:
                         'W razie pytań możesz się z nami skontaktować - dane znajdziesz ',

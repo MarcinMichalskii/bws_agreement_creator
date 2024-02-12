@@ -92,15 +92,6 @@ class _OnboardingInformationContainer extends HookConsumerWidget {
                       'Umowa nie zobowiązuje Cię do podejmowania zleceń ani nie wiąże się z żadnymi opłatami.',
                   poinText:
                       ' - Tylko zapis na zlecenie przez Sinch jest wiążący.'),
-              Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
-                  child: TextWithLink(
-                      left:
-                          'Umowa którą za chwilę podpiszesz, będzie wiążąca. O formie dokumentowej możesz przeczytać',
-                      link: ' tutaj',
-                      right: '',
-                      url:
-                          'https://sip.lex.pl/akty-prawne/dzu-dziennik-ustaw/kodeks-cywilny-16785996/art-77-2')),
             ],
           ),
           DefaultBorderedButton(

@@ -10,19 +10,9 @@ class WorksInOtherCompanyQuestionWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     return Column(children: [
-      const Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                  "Czy pracujesz u innego pracodawcy gdzie osiągasz dochód powyżej minimalnej krajowej?",
-                  style: TextStyle(color: CustomColors.gray, fontSize: 20)),
-            ],
-          ),
-        ],
+      const Text(
+        "Czy pracujesz u innego pracodawcy gdzie osiągasz dochód powyżej minimalnej krajowej?",
+        style: TextStyle(color: CustomColors.gray, fontSize: 20),
       ),
       Container(height: 20),
       Row(
