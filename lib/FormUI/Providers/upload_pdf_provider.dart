@@ -6,10 +6,10 @@ import 'package:bws_agreement_creator/utils/base_url.dart';
 import 'package:bws_agreement_creator/utils/pdf_b2b_agreement_new.dart';
 import 'package:bws_agreement_creator/utils/pdf_new_normal_agreement.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
+import 'package:bws_agreement_creator/utils/uint8list_extension.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'dart:html' as html;
 
 final uploadPdfProvider =
     StateNotifierProvider<UploadPdfNotifier, ParsedResponseState<String?>>(
@@ -31,8 +31,6 @@ class UploadPdfNotifier extends StateNotifier<ParsedResponseState<String?>> {
       final selectedAgreement =
           formData.b2bCompanyName?.emptyAsNull() != null ? pdfB2b : pdf;
       final selectedAgreementData = await selectedAgreement.save();
-      print(selectedAgreementData.length);
-      print(formData.pdfFileName);
 
       state = ParsedResponseState(isLoading: true);
       await _performRequest(
@@ -41,24 +39,11 @@ class UploadPdfNotifier extends StateNotifier<ParsedResponseState<String?>> {
           filename: formData.pdfFileName);
       state =
           ParsedResponseState(isLoading: false, data: 'Plik został wysłany');
-      _saveToFiles(selectedAgreementData, formData.pdfFileName);
+      selectedAgreementData.saveToFiles(formData.pdfFileName);
     } catch (e) {
       state = ParsedResponseState(error: CostRegisterError(e.toString()));
       state = ParsedResponseState(isLoading: false);
     }
-  }
-
-  _saveToFiles(Uint8List file, String name) async {
-    var anchor = null;
-
-    final blob = html.Blob([file], 'application/pdf');
-    final url = html.Url.createObjectUrlFromBlob(blob);
-    anchor = html.document.createElement('a') as html.AnchorElement
-      ..href = url
-      ..style.display = 'none'
-      ..download = name
-      ..click();
-    html.document.body?.children.add(anchor);
   }
 
   _performRequest(

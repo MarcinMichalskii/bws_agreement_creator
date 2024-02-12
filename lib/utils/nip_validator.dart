@@ -1,3 +1,5 @@
+import 'package:bws_agreement_creator/utils/string_extensions.dart';
+
 class NipValidator {
   static String? validate(String? value) {
     if (value == null || value.isEmpty) {
@@ -11,5 +13,11 @@ class NipValidator {
     }
 
     return null;
+  }
+}
+
+class EmailValidator {
+  static String? validate(String? value) {
+    return value?.isValidEmail() == true ? null : "Niepoprawny email";
   }
 }

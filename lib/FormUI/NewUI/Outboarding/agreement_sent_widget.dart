@@ -1,10 +1,9 @@
 import 'package:bws_agreement_creator/FormUI/components/bws_logo.dart';
-import 'package:bws_agreement_creator/FormUI/components/generate_pdf_button.dart';
+import 'package:bws_agreement_creator/FormUI/outbording_information_sign.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AgreementSentWidget extends HookConsumerWidget {
   const AgreementSentWidget({super.key});
@@ -23,19 +22,25 @@ class AgreementSentWidget extends HookConsumerWidget {
                   constraints: const BoxConstraints(maxHeight: 100),
                   child: BwsLogo()),
               const Text(
-                  'Umowa została podpisana i wysłana do Twojego profilu w sinchu',
-                  style: TextStyle(color: CustomColors.gray, fontSize: 20)),
+                  textAlign: TextAlign.center,
+                  '''Umowa została podpisana i dodana do Twojego profilu, a jej kopia wraz z Twoim podpisem została pobrana na Twoje urządzenie!
 
-              // go to sinch button
-              DefaultBorderedButton(
-                onTap: () {
-                  launchUrl(
-                    Uri.parse('https://bws.onsinch.com'),
-                    webOnlyWindowName: '_self',
-                  );
-                },
-                text: 'Powrót do sincha',
-              )
+                  Nie musisz już nic robić, administrator zweryfikuje Twój profil najszybciej jak to możliwe (do 48h).''',
+                  style: TextStyle(
+                    color: CustomColors.gray,
+                    fontSize: 20,
+                  )),
+              Container(
+                margin: const EdgeInsets.only(top: 24),
+                child: const TextWithLink(
+                    fontSize: 20,
+                    left:
+                        'W razie pytań możesz się z nami skontaktować - dane znajdziesz ',
+                    link: 'tutaj',
+                    right: '',
+                    url:
+                        'https://bws.onsinch.com/react/page/contacts-for-workers'),
+              ),
             ]),
           ),
         ),

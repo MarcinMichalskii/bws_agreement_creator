@@ -1,10 +1,12 @@
 import 'package:bws_agreement_creator/FormUI/NewUI/Login/no_password_help_widget.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/login_data_provider.dart';
+import 'package:bws_agreement_creator/FormUI/Providers/reset_password_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
 import 'package:bws_agreement_creator/FormUI/components/bws_logo.dart';
 import 'package:bws_agreement_creator/FormUI/components/generate_pdf_button.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
+import 'package:bws_agreement_creator/utils/nip_validator.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -22,6 +24,13 @@ class LoginWidget extends HookConsumerWidget {
             content: Text(
               next.error!.message,
             )));
+      }
+    });
+
+    ref.listen(resetPasswordProvider, (previous, next) {
+      if (next.error != null) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.red, content: Text(next.error!.message)));
       }
     });
     final login = useState('');
@@ -47,13 +56,14 @@ class LoginWidget extends HookConsumerWidget {
                   constraints: const BoxConstraints(maxHeight: 100),
                   child: BwsLogo()),
               BorderedInput(
-                placeholder: 'Sinch Email',
+                placeholder: 'Twój login do Sinch',
+                validator: EmailValidator.validate,
                 onChanged: (text) {
                   login.value = text ?? '';
                 },
               ),
               BorderedInput(
-                placeholder: 'Password',
+                placeholder: 'Hasło',
                 isSecure: true,
                 onChanged: (text) {
                   password.value = text ?? '';

@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:bws_agreement_creator/Fonts.dart';
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/normal_agreement_dictionary.dart';
@@ -9,8 +7,6 @@ import 'package:bws_agreement_creator/utils/pdf_pages/pdf_legal_guardian_stateme
 import 'package:bws_agreement_creator/utils/pdf_pages/pdf_signature.dart';
 import 'package:bws_agreement_creator/utils/pdf_widget_set.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 

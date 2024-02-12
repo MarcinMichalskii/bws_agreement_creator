@@ -1,4 +1,5 @@
 import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
+import 'package:bws_agreement_creator/FormUI/outbording_information_sign.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,10 @@ class SignatureWidget extends HookConsumerWidget {
   final Function(Uint8List?) onSignatureChanged;
   final String label;
 
-  SignatureWidget(
-      {super.key, required this.onSignatureChanged, this.label = 'Podpis'});
+  const SignatureWidget(
+      {super.key,
+      required this.onSignatureChanged,
+      this.label = 'Narysuj swój podpis:'});
   @override
   Widget build(BuildContext context, ref) {
     final control = useState(HandSignatureControl(
@@ -76,6 +79,15 @@ class SignatureWidget extends HookConsumerWidget {
           type: SignatureDrawType.line,
           color: CustomColors.applicationColorMain,
         ),
+      ),
+      Container(
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        child: const TextWithLink(
+            left:
+                "Ten rodzaj podpisu, to forma dokumentowa - jest pełnoprawnym podpisem w formie online. \Chcesz dowiedzieć się więcej na temat formy dokumentowej? ",
+            link: "Przeczytaj ten artykuł.",
+            right: "",
+            url: "https://eurocert.pl/formy-zawierania-umow-rodzaje-i-roznice"),
       )
     ]);
   }

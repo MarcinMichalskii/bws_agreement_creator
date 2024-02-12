@@ -6,7 +6,7 @@ class PolishB2BAgreementDictionary {
   PolishB2BAgreementDictionary(this.form);
 
   String get bwsData => '''
-spółką BWS EVENT SUPPORT spółka z ograniczoną odpowiedzialnością z siedzibą w Krakowie przy ul. Na Szaniec 7, 31-559 Kraków, dla której Sąd Rejonowy dla Krakowa-Śródmieścia w Krakowie XI Wydział Gospodarczy Krajowego Rejestru Sądowego prowadzi akta rejestrowe pod numerem KRS: 0000944605, posiadającą NIP: 6751759898, REGON: 520910120, reprezentowaną przez Aleksandrę Wróblewską - Prokurenta, zwaną w dalszej części Umowy: „BWS”, zwaną dalej „BWS, a: ”
+spółką BWS EVENT SUPPORT spółka z ograniczoną odpowiedzialnością z siedzibą w Krakowie przy ul. Na Szaniec 7, 31-559 Kraków, dla której Sąd Rejonowy dla Krakowa-Śródmieścia w Krakowie XI Wydział Gospodarczy Krajowego Rejestru Sądowego prowadzi akta rejestrowe pod numerem KRS: 0000944605, posiadającą NIP: 6751759898, REGON: 520910120, reprezentowaną przez Aleksandrę Wróblewską - Prokurenta, zwaną w dalszej części Umowy: „BWS”, a: ”
 ''';
 
   String get contractorData => '''
