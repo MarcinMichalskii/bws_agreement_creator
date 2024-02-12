@@ -109,12 +109,14 @@ class _OutbordingInformationSignContainer extends StatelessWidget {
 class TextWithLink extends StatelessWidget {
   const TextWithLink(
       {Key? key,
+      this.textAlign = TextAlign.start,
       this.fontSize = 18,
       required this.left,
       required this.link,
       required this.right,
       required this.url})
       : super(key: key);
+  final TextAlign textAlign;
   final double fontSize;
   final String left;
   final String link;
@@ -124,6 +126,7 @@ class TextWithLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RichText(
+      textAlign: textAlign,
       text: TextSpan(
         children: [
           TextSpan(

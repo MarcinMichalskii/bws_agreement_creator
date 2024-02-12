@@ -2,6 +2,7 @@ import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/signature_widget
 import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
+import 'package:bws_agreement_creator/utils/nip_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:hand_signature/signature.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -45,6 +46,7 @@ class LegalGuardianQuestionsWidget extends HookConsumerWidget {
       ),
       BorderedInput(
           placeholder: "Pesel",
+          validator: PeselValidator.validate,
           onChanged: (value) {
             ref.read(newFormDataProvider.notifier).setLegalGuardianPesel(value);
           }),
