@@ -47,6 +47,16 @@ class AgreementSentWidget extends HookConsumerWidget {
                     url:
                         'https://bws.onsinch.com/react/page/contacts-for-workers'),
               ),
+              Container(
+                margin: const EdgeInsets.only(top: 24),
+                child: const TextWithLink(
+                    textAlign: TextAlign.center,
+                    fontSize: 20,
+                    left: '',
+                    link: 'Powrót do SINCH',
+                    right: '',
+                    url: 'https://bws.onsinch.com'),
+              ),
             ]),
           ),
         ),

@@ -54,7 +54,7 @@ class _OnboardingInformationContainer extends HookConsumerWidget {
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
-              'W BWS wszyscy pracują legalnie, zatem podpisują umowy zlecenie. Ta strona przygotuje dla Ciebie wszystkie wymagane dokumenty. ZANIM PODPISZESZ, PRZYCZYTAJ TE 3 PUNKTY:',
+              'W BWS wszyscy pracują legalnie, zatem podpisują umowy zlecenie. Ta strona przygotuje dla Ciebie wszystkie wymagane dokumenty. ZANIM PODPISZESZ, PRZYCZYTAJ PONIŻSZE 5 punktów',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: CustomColors.gray,
