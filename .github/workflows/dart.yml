@@ -21,7 +21,7 @@ jobs:
     - name: Build Flutter App
       run: |
         flutter pub get
-        flutter build web
+        flutter build web --base-href /bws.net.pl/agreement-creator-test/
 
     - name: Deploy to FTP
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
