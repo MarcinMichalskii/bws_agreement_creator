@@ -75,11 +75,12 @@ class LoginData {
     } else if (!birthDateParsed!.isOver16()) {
       return "Osoby poniżej 16 roku życia nie mogą zawrzeć z nami umowy";
     } else if (!birthDateParsed!.isAdult() && studentId == null) {
-      return "Osoby poniżej 18 roku życia muszą podać numer legitymacji szkolnej";
+      return "Osoby poniżej 18 roku życia muszą podać numer legitymacji szkolnej w profilu Sinch";
     } else if (passportId == null &&
         idNumber == null &&
+        studentId == null &&
         birthDateParsed!.isAdult()) {
-      return "Musisz uzupełnić numer paszportu lub dowodu osobistego w profilu Sinch";
+      return "Musisz uzupełnić numer paszportu, dowodu osobistego lub legitymacji studenckiej w profilu Sinch";
     } else if (pesel == null) {
       return "Musisz uzupełnić numer PESEL w profilu Sinch";
     } else if (address == null) {
