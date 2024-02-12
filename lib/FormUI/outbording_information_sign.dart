@@ -15,14 +15,14 @@ class OutbordingInformationSign extends StatelessWidget {
       type: MaterialType.transparency,
       child: Center(
         child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
+            margin: const EdgeInsets.symmetric(horizontal: 16),
             width: double.infinity,
             child: Container(
               decoration: BoxDecoration(
                   color: CustomColors.almostBlack2,
                   borderRadius: BorderRadius.circular(8)),
               padding: const EdgeInsets.all(16.0),
-              child: _OutbordingInformationSignContainer(),
+              child: const _OutbordingInformationSignContainer(),
             )),
       ),
     );
@@ -56,7 +56,7 @@ class _OutbordingInformationSignContainer extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Padding(
-                padding: const EdgeInsets.only(top: 8.0),
+                padding: EdgeInsets.only(top: 8.0),
                 child: Text(
                   'Pobraną umowę możesz podpisać elektronicznie przez profil zaufany klikając w guzik poniżej',
                   style: TextStyle(
@@ -65,7 +65,7 @@ class _OutbordingInformationSignContainer extends StatelessWidget {
                   ),
                 )),
             Container(
-              padding: EdgeInsets.only(top: 0),
+              padding: const EdgeInsets.only(top: 0),
               child: DefaultBorderedButton(
                 onTap: () {
                   launchUrl(Uri.parse(
@@ -75,7 +75,7 @@ class _OutbordingInformationSignContainer extends StatelessWidget {
               ),
             ),
             const Padding(
-                padding: const EdgeInsets.only(top: 20),
+                padding: EdgeInsets.only(top: 20),
                 child: Text(
                   'Możesz również podpisać umowę offline, wydrukować ją, podpisać i zeskanować.',
                   style: TextStyle(
@@ -84,7 +84,7 @@ class _OutbordingInformationSignContainer extends StatelessWidget {
                   ),
                 )),
             const Padding(
-                padding: const EdgeInsets.only(top: 20),
+                padding: EdgeInsets.only(top: 20),
                 child: Text(
                   'Na koniec nie zapomnij dodać jej do Sincha.',
                   style: TextStyle(
@@ -92,14 +92,12 @@ class _OutbordingInformationSignContainer extends StatelessWidget {
                     fontSize: 18,
                   ),
                 )),
-            Container(
-              child: DefaultBorderedButton(
-                onTap: () {
-                  launchUrl(Uri.parse(
-                      'https://bws.onsinch.com/react/profile/edit/attributes#9_UMOWA_Z_BWS'));
-                },
-                text: 'Sinch',
-              ),
+            DefaultBorderedButton(
+              onTap: () {
+                launchUrl(Uri.parse(
+                    'https://bws.onsinch.com/react/profile/edit/attributes#9_UMOWA_Z_BWS'));
+              },
+              text: 'Sinch',
             )
           ],
         ),
@@ -111,11 +109,15 @@ class _OutbordingInformationSignContainer extends StatelessWidget {
 class TextWithLink extends StatelessWidget {
   const TextWithLink(
       {Key? key,
+      this.textAlign = TextAlign.start,
+      this.fontSize = 18,
       required this.left,
       required this.link,
       required this.right,
       required this.url})
       : super(key: key);
+  final TextAlign textAlign;
+  final double fontSize;
   final String left;
   final String link;
   final String right;
@@ -124,13 +126,14 @@ class TextWithLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RichText(
+      textAlign: textAlign,
       text: TextSpan(
         children: [
           TextSpan(
             text: left,
-            style: const TextStyle(
+            style: TextStyle(
               color: CustomColors.gray,
-              fontSize: 18,
+              fontSize: fontSize,
             ),
           ),
           TextSpan(
@@ -139,16 +142,16 @@ class TextWithLink extends StatelessWidget {
                 color: CustomColors.gray,
                 fontSize: 18,
                 fontWeight: FontWeight.w600),
-            recognizer: new TapGestureRecognizer()
+            recognizer: TapGestureRecognizer()
               ..onTap = () {
                 launchUrl(Uri.parse(url));
               },
           ),
           TextSpan(
             text: right,
-            style: const TextStyle(
+            style: TextStyle(
               color: CustomColors.gray,
-              fontSize: 18,
+              fontSize: fontSize,
             ),
           ),
         ],

@@ -7,6 +7,7 @@ import 'package:bws_agreement_creator/FormUI/onboarding_information.dart';
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
+import 'package:bws_agreement_creator/utils/preview_pdf_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -71,6 +72,12 @@ class EmployeeFormWidget extends HookConsumerWidget {
       ref.read(uploadPdfProvider.notifier).uploadPdf();
     }
 
+    void onPreviewSelected() {
+      final SelectedPage page = ref.read(selectedPageProvider.notifier).state;
+
+      PreviewPdfGenerator.generatePreview(page);
+    }
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
@@ -115,6 +122,25 @@ class EmployeeFormWidget extends HookConsumerWidget {
                       ],
                     ),
                   ),
+                  if (ref.read(selectedPageProvider).isFinalPage)
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      child: FormButtonUI(
+                        hasHeader: false,
+                        title:
+                            "Otwórz wersję do przeglądnięcia (z danymi przykładowymi)",
+                        headerText: "",
+                        fontWeight: FontWeight.w600,
+                        textSize: 18,
+                        textColor: CustomColors.darkGray,
+                        onPress: onPreviewSelected,
+                        icon: const Icon(
+                          Icons.pageview_outlined,
+                          color: CustomColors.almostBlack,
+                          size: 32,
+                        ),
+                      ),
+                    ),
                   if (ref.watch(selectedPageProvider).isFinalPage)
                     ref.watch(uploadPdfProvider).isLoading
                         ? const CircularProgressIndicator(
@@ -124,7 +150,7 @@ class EmployeeFormWidget extends HookConsumerWidget {
                             margin: const EdgeInsets.only(bottom: 16),
                             child: FormButtonUI(
                               hasHeader: false,
-                              title: "Generuj umowę",
+                              title: "Generuj i wyślij umowę",
                               headerText: "",
                               fontWeight: FontWeight.w600,
                               textSize: 18,

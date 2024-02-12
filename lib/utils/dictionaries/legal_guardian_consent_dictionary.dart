@@ -9,7 +9,7 @@ class LegalGuardianConsentDictionary {
   String get guardianData => '''
 Imię i nazwisko: ${form.legalGuardianName}
 PESEL: ${form.legalGuardianPesel},
-Adres: ${form.legalGuardianAddress}',
+Adres: ${form.legalGuardianAddress},
 Nr dokumentu: ${form.legalGuardianIdNumber}
 ''';
 
@@ -22,7 +22,7 @@ dziecko pracy lub innych zajęć zarobkowych
 Będąc przedstawicielem ustawowym małoletniego
 Imię i nazwisko: ${form.loginData?.name}
 PESEL: ${form.loginData?.pesel},
-Adres: ${form.loginData?.address}',
+Adres: ${form.loginData?.address},
 Nr dokumentu: ${form.loginData?.studentId}
 ''';
 

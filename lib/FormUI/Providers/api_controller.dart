@@ -44,14 +44,13 @@ class ApiController {
       if (response.statusCode != 200) {
         return APIResponseState(
             error: CostRegisterError(
-                "Something went wrong on reqest $url with status code ${response.statusCode}"),
+                "Coś poszło nie tak reqest $url kod błędu ${response.statusCode}"),
             params: params);
       }
       return APIResponseState(data: response.data, params: params);
     } catch (error) {
       return APIResponseState(
-          error: CostRegisterError("Something went wrong on reqest $url"),
-          params: params);
+          error: CostRegisterError("Coś poszło nie tak $url"), params: params);
     }
   }
 
