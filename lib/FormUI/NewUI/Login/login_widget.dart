@@ -56,7 +56,7 @@ class LoginWidget extends HookConsumerWidget {
                   constraints: const BoxConstraints(maxHeight: 100),
                   child: BwsLogo()),
               BorderedInput(
-                placeholder: 'Twój login do Sinch',
+                placeholder: 'Twój email do Sinch',
                 validator: EmailValidator.validate,
                 onChanged: (text) {
                   login.value = text ?? '';
