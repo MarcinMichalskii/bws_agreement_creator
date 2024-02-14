@@ -18,12 +18,14 @@ class B2bContractQuestionWidget extends HookConsumerWidget {
   B2bContractQuestionWidget({super.key});
   @override
   Widget build(BuildContext context, ref) {
-    final initialAddress = useState('');
+    final initialAddress = useState(
+        ref.read(newFormDataProvider.notifier).state.loginData?.address);
+
+    ;
     useBuildEffect(() {
       final address =
-          ref.read(newFormDataProvider.notifier).state.b2bCompanyAddress;
+          ref.read(newFormDataProvider.notifier).state.loginData?.address;
       ref.read(newFormDataProvider.notifier).setB2bAddress(address);
-      initialAddress.value = address ?? '';
     }, []);
 
     final updateAddress = useCallback((String text) {

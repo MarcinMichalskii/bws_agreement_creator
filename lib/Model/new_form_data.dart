@@ -67,7 +67,7 @@ class NewFormData {
     if (page == SelectedPage.otherCompanyDetails) {
       if (otherCompanyName?.emptyAsNull() == null ||
           otherCompanyAddress?.emptyAsNull() == null ||
-          otherCompanyNip?.isValidNip() == true ||
+          otherCompanyNip?.isValidNip() == false ||
           otherCompanyStartDate == null) {
         return "Wszystkie pola muszą być wypełnione";
       }
@@ -76,7 +76,7 @@ class NewFormData {
     if (page == SelectedPage.b2bContract) {
       if (b2bCompanyName?.emptyAsNull() == null ||
           b2bCompanyAddress?.emptyAsNull() == null ||
-          b2bCompanyNip?.isValidNip() == true ||
+          b2bCompanyNip?.isValidNip() == false ||
           signatureData == null) {
         return "Wszystkie pola muszą być wypełnione";
       }
