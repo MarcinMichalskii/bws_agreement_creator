@@ -80,8 +80,9 @@ class OtherCompanyDetailsQuestionWidget extends HookConsumerWidget {
             child: Container(
               margin: const EdgeInsets.only(right: 8),
               child: SelectDateButton(
-                dateText: ref.watch(newFormDataProvider).otherCompanyEndDate ??
-                    DateTime.now(),
+                dateText:
+                    ref.watch(newFormDataProvider).otherCompanyStartDate ??
+                        DateTime.now(),
                 headerText: 'Data rozpoczęcia umowy',
                 onDateSelected: (date) {
                   ref

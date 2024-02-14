@@ -54,7 +54,7 @@ class _OnboardingInformationContainer extends HookConsumerWidget {
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
-              'W BWS wszyscy pracują legalnie, zatem podpisują umowy zlecenie. Ta strona przygotuje dla Ciebie wszystkie wymagane dokumenty. ZANIM PODPISZESZ, PRZYCZYTAJ PONIŻSZE 5 punktów',
+              'W BWS wszyscy pracują legalnie, zatem podpisują umowy zlecenie. Ta strona przygotuje dla Ciebie wszystkie wymagane dokumenty. ZANIM PODPISZESZ, PRZYCZYTAJ PONIŻSZE 4 punkty',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: CustomColors.gray,
@@ -77,17 +77,12 @@ class _OnboardingInformationContainer extends HookConsumerWidget {
                       ' - informujemy Cię, że kwoty na bws.onsinch.com to kwoty brutto (netto tylko dla JDG/Spółek)'),
               OnboardingPointWidget(
                   pointNumber: '3. ',
-                  pointTextBold: 'Jesteśmy porządni',
-                  poinText:
-                      ' - wypełnij formularz zgodnie z prawdą. Za podanie fałszywych danych grozi kara 500zł.'),
-              OnboardingPointWidget(
-                  pointNumber: '4. ',
                   pointTextBold:
                       'Za chwilę będziesz mógł przejrzeć i podpisać umowę z BWS',
                   poinText:
                       ' - wypełnij formularz zgodnie z prawdą. Za podanie fałszywych danych grozi kara 500zł.'),
               OnboardingPointWidget(
-                  pointNumber: '5. ',
+                  pointNumber: '4. ',
                   pointTextBold:
                       'Umowa nie zobowiązuje Cię do podejmowania zleceń ani nie wiąże się z żadnymi opłatami.',
                   poinText:
