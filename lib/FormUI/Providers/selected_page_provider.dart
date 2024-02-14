@@ -1,5 +1,4 @@
 import 'package:bws_agreement_creator/FormUI/Providers/login_data_provider.dart';
-import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -15,6 +14,5 @@ class SelectedPageNotifier extends StateNotifier<SelectedPage> {
 
   void setPage(SelectedPage page) {
     state = page;
-    ref.read(newFormDataProvider.notifier).cleanUp();
   }
 }
