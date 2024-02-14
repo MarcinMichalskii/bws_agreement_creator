@@ -1,3 +1,5 @@
+import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
+import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/selected_page_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
@@ -9,6 +11,9 @@ class ContractTypeQuestionWidget extends HookConsumerWidget {
   const ContractTypeQuestionWidget({super.key});
   @override
   Widget build(BuildContext context, ref) {
+    useBuildEffect(() {
+      ref.read(newFormDataProvider.notifier).cleanUp();
+    }, []);
     return Column(children: [
       const Text("Wybierz formę współpracy z BWS",
           style: TextStyle(color: CustomColors.gray, fontSize: 20)),
@@ -26,6 +31,15 @@ class ContractTypeQuestionWidget extends HookConsumerWidget {
                 textSize: 18,
                 textColor: CustomColors.darkGray,
                 onPress: () {
+                  final address = ref
+                      .read(newFormDataProvider.notifier)
+                      .state
+                      .loginData
+                      ?.address;
+                  ref
+                      .read(newFormDataProvider.notifier)
+                      .setB2bAddress(address ?? '');
+
                   ref
                       .read(selectedPageProvider.notifier)
                       .setPage(SelectedPage.b2bContract);

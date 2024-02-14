@@ -1,5 +1,5 @@
-import 'dart:typed_data';
 import 'dart:html' as html;
+import 'dart:typed_data';
 
 extension SaveToFiles on Uint8List {
   void saveToFiles(String name) {

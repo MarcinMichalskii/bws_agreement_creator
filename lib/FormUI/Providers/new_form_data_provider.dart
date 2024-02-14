@@ -22,6 +22,7 @@ class NewFormNotifier extends StateNotifier<NewFormData> {
 
   void setB2bAddress(String? address) {
     state = state.copyWith(b2bCompanyAddress: address);
+    print(state.b2bCompanyAddress);
   }
 
   void setNip(String nip) {
