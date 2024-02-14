@@ -54,31 +54,40 @@ class NewFormData {
       return "Coś poszło nie tak. To nie Twoja wina, skontaktuj się z administratorem lub wypełnij dane w formularzu i spróbuj ponownie";
     }
     if (page == SelectedPage.legalGuardian) {
-      if (legalGuardianName?.emptyAsNull() == null ||
-          legalGuardianPesel?.emptyAsNull() == null ||
-          legalGuardianIdNumber?.emptyAsNull() == null ||
-          legalGuardianAddress?.emptyAsNull() == null ||
-          legalGuardianSignatureData == null ||
-          signatureData == null) {
-        return "Wszystkie pola muszą być wypełnione";
+      if (legalGuardianAddress?.emptyAsNull() == null) {
+        return "Adres opiekuna prawnego jest wymagany";
+      } else if (legalGuardianIdNumber?.emptyAsNull() == null) {
+        return "Numer dowodu opiekuna prawnego jest wymagany";
+      } else if (legalGuardianName?.emptyAsNull() == null) {
+        return "Imię i nazwisko opiekuna prawnego jest wymagane";
+      } else if (legalGuardianPesel?.emptyAsNull() == null) {
+        return "PESEL opiekuna prawnego jest wymagany";
+      } else if (legalGuardianSignatureData == null || signatureData == null) {
+        return "Podpis opiekuna prawnego i podpis ucznia są wymagane";
       }
     }
 
     if (page == SelectedPage.otherCompanyDetails) {
-      if (otherCompanyName?.emptyAsNull() == null ||
-          otherCompanyAddress?.emptyAsNull() == null ||
-          otherCompanyNip?.isValidNip() == false ||
-          otherCompanyStartDate == null) {
-        return "Wszystkie pola muszą być wypełnione";
+      if (otherCompanyName?.emptyAsNull() == null) {
+        return "Nazwa firmy jest wymagana";
+      } else if (otherCompanyAddress?.emptyAsNull() == null) {
+        return "Adres firmy jest wymagany";
+      } else if (otherCompanyNip?.isValidNip() == false) {
+        return "NIP firmy jest wymagany";
+      } else if (otherCompanyStartDate == null) {
+        return "Data rozpoczęcia umowy jest wymagana";
       }
     }
 
     if (page == SelectedPage.b2bContract) {
-      if (b2bCompanyName?.emptyAsNull() == null ||
-          b2bCompanyAddress?.emptyAsNull() == null ||
-          b2bCompanyNip?.isValidNip() == false ||
-          signatureData == null) {
-        return "Wszystkie pola muszą być wypełnione";
+      if (b2bCompanyName?.emptyAsNull() == null) {
+        return "Nazwa firmy jest wymagana";
+      } else if (b2bCompanyAddress?.emptyAsNull() == null) {
+        return "Adres firmy jest wymagany";
+      } else if (b2bCompanyNip?.isValidNip() == false) {
+        return "NIP firmy jest wymagany";
+      } else if (signatureData == null) {
+        return "Podpis jest wymagany";
       }
     }
 
@@ -87,6 +96,8 @@ class NewFormData {
         return "Podpis jest wymagany";
       }
     }
+
+    return null;
   }
 
   String get pdfFileName {
