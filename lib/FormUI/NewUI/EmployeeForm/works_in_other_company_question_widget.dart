@@ -1,3 +1,5 @@
+import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
+import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/Providers/selected_page_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
@@ -9,6 +11,9 @@ class WorksInOtherCompanyQuestionWidget extends HookConsumerWidget {
   const WorksInOtherCompanyQuestionWidget({super.key});
   @override
   Widget build(BuildContext context, ref) {
+    useBuildEffect(() {
+      ref.read(newFormDataProvider.notifier).cleanUp();
+    }, []);
     return Column(children: [
       const Text(
         "Czy pracujesz u innego pracodawcy gdzie osiągasz dochód powyżej minimalnej krajowej?",

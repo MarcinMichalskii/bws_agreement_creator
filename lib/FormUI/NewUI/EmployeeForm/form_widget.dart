@@ -62,6 +62,7 @@ class EmployeeFormWidget extends HookConsumerWidget {
 
     void onGeneratePress() {
       final formData = ref.read(newFormDataProvider.notifier).state;
+
       final SelectedPage page = ref.read(selectedPageProvider.notifier).state;
 
       final validationError = formData.validationError(page);
