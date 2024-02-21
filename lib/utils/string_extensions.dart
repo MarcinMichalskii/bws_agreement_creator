@@ -76,3 +76,9 @@ extension EmptyAsNull on String {
     return this;
   }
 }
+
+extension HasNumbers on String {
+  bool hasNumbers() {
+    return RegExp(r'\d').hasMatch(this);
+  }
+}

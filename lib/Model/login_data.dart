@@ -1,6 +1,7 @@
 import 'package:bws_agreement_creator/Model/address_data.dart';
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
 import 'package:bws_agreement_creator/utils/date_extensions.dart';
+import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'login_data.g.dart';
@@ -70,6 +71,7 @@ class LoginData {
   }
 
   String? get validationError {
+    print(address);
     if (birthDateParsed == null) {
       return "Nieprawidłowa data urodzenia";
     } else if (!birthDateParsed!.isOver16()) {
@@ -85,8 +87,9 @@ class LoginData {
       return "Musisz uzupełnić numer PESEL w profilu Sinch";
     } else if (address == null) {
       return "Musisz uzupełnić adres w profilu Sinch";
+    } else if (address?.hasNumbers() == false) {
+      return "Musisz podać numer mieszkania w profilu Sinch";
     }
-
     return null;
   }
 
