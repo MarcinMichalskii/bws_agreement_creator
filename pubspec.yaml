@@ -67,9 +67,6 @@ flutter:
     - assets/example_signature.png
     - assets/bws_logo.png
     - assets/fonts/opensans.ttf
-    - assets/pdfs/umowaScalona.pdf
-    - assets/pdfs/umowaScalonaB2b.pdf
-    - assets/pdfs/umowaScalonaB2bSigned.pdf
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

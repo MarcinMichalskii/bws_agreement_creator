@@ -3,6 +3,10 @@ import 'package:dio/dio.dart';
 class CostRegisterError {
   final String message;
   CostRegisterError(this.message);
+
+  factory CostRegisterError.fromJson(Map<String, dynamic> json) {
+    return CostRegisterError(json['message']);
+  }
 }
 
 class APIResponseState {
@@ -43,18 +47,22 @@ class ApiController {
           }));
       if (response.statusCode != 200) {
         return APIResponseState(
-            error: CostRegisterError(
-                "Coś poszło nie tak reqest $url kod błędu ${response.statusCode}"),
-            params: params);
+            error: CostRegisterError.fromJson(response.data), params: params);
       }
       return APIResponseState(data: response.data, params: params);
     } catch (error) {
-      return APIResponseState(
-          error: CostRegisterError("Coś poszło nie tak $url"), params: params);
+      if (error is DioError && error.response?.data != null) {
+        return APIResponseState(
+            error: CostRegisterError.fromJson((error).response?.data),
+            params: params);
+      } else {
+        return APIResponseState(
+            error: CostRegisterError("Coś poszło nie tak $url"),
+            params: params);
+      }
     }
   }
 
-  // send form data
   Future<APIResponseState> sendFormData(
       {required Map<String, dynamic> params, required String url}) async {
     Dio dio = Dio();
