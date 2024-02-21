@@ -19,6 +19,12 @@ class LoginNotifier extends StateNotifier<ParsedResponseState<LoginData>> {
       "login": login,
       "password": password,
     }, url: "$baseUrl/login");
+
+    if (response.error != null) {
+      state = ParsedResponseState(error: response.error);
+      return;
+    }
+
     try {
       final loginData = LoginData.fromJson(response.data);
       if (loginData.validationError != null) {
@@ -30,8 +36,7 @@ class LoginNotifier extends StateNotifier<ParsedResponseState<LoginData>> {
       ref.read(newFormDataProvider.notifier).setLoginData(loginData);
     } catch (error) {
       state = ParsedResponseState(
-          error: CostRegisterError(
-              "Nie udało się zalogować, sprawdź login i hasło"));
+          error: CostRegisterError("Nie udało się zalogować"));
     }
   }
 }

@@ -1,7 +1,6 @@
 import 'package:bws_agreement_creator/FormUI/Providers/login_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/generate_pdf_button.dart';
 import 'package:bws_agreement_creator/FormUI/onboarding_point_widget.dart';
-import 'package:bws_agreement_creator/FormUI/outbording_information_sign.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

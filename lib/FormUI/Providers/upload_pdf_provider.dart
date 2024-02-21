@@ -11,6 +11,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+final agreementProvider = StateProvider<Uint8List?>((ref) {
+  return null;
+});
+
 final uploadPdfProvider =
     StateNotifierProvider<UploadPdfNotifier, ParsedResponseState<String?>>(
         (ref) {
@@ -39,7 +43,7 @@ class UploadPdfNotifier extends StateNotifier<ParsedResponseState<String?>> {
           filename: formData.pdfFileName);
       state =
           ParsedResponseState(isLoading: false, data: 'Plik został wysłany');
-      selectedAgreementData.saveToFiles(formData.pdfFileName);
+      ref.read(agreementProvider.notifier).state = selectedAgreementData;
     } catch (e) {
       state = ParsedResponseState(error: CostRegisterError(e.toString()));
       state = ParsedResponseState(isLoading: false);
