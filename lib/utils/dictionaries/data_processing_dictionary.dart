@@ -1,3 +1,4 @@
+import 'package:bws_agreement_creator/utils/dictionaries/normal_agreement_dictionary.dart';
 import 'package:bws_agreement_creator/utils/pdf_widget_set.dart';
 import 'package:pdf/widgets.dart' as pw;
 
@@ -27,7 +28,7 @@ Zgodnie z art. 13 ust. 1 i ust. 2 Rozporządzenia Parlamentu Europejskiego i Rad
   List<DataProcessingData> get points => [
         DataProcessingData(
             title: 'I. Administrator danych osobowych', value: '''
-Administratorem Twoich danych osobowych jest spółka BWS Event Support spółka z ograniczoną odpowiedzialnością z siedzibą w Krakowie przy ul. Na Szaniec 7, 31-559 Kraków, dla której Sąd Rejonowy dla Krakowa-Śródmieścia w Krakowie, XI Wydział Gospodarczy KRS prowadzi akta rejestrowe pod numerem KRS: 0000944605, posiadająca NIP: 6751759898, REGON: 52091012.
+Administratorem Twoich danych osobowych jest spółka ${BWS.nameAndAddress} dla której Sąd Rejonowy dla Krakowa-Śródmieścia w Krakowie, XI Wydział Gospodarczy KRS prowadzi akta rejestrowe pod numerem KRS: 0000944605, posiadająca NIP: 6751759898, REGON: 52091012.
 '''),
         DataProcessingData(
             title: 'II. Cele i podstawy przetwarzania', value: '''
