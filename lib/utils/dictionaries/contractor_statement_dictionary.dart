@@ -9,8 +9,8 @@ class ContractorStatementDictionary {
 
   String get contractorData => '''
 Imię i nazwisko: ${form.loginData?.name}
-PESEL: ${form.loginData?.pesel},
-Adres: ${form.loginData?.address}'
+PESEL: ${form.loginData?.pesel}
+Adres: ${form.loginData?.address}
 $documentId
 ''';
 
@@ -38,7 +38,7 @@ A) ${form.worksInOtherCompany ? 'Pracuję' : 'Nie pracuję'} w innym zakładzie 
 Nazwa zakładu: ${form.otherCompanyName}
 Adres zakładu: adres,
 NIP: ${form.otherCompanyNip}
-Z tytułu zatrudnienia osiągam dochód wyższy niż minimalne wynagrodzenie za pracę 3010zł brutto
+Z tytułu zatrudnienia osiągam dochód wyższy niż minimalne wynagrodzenie za pracę 4242zł brutto
 ''';
 
   String get otherCompanyContractPeriod => '''
@@ -54,7 +54,7 @@ B) Nie prowadzę działalności gospodarczej
 ''';
 
   String get hasStudentStatus => '''
-C) Posiadam status studenta / ucznia , stosowny dokument potwierdzający mój status został umieszczony w profilu Sinc. Numer legitymacji: ${form.loginData?.studentId}
+C) Posiadam status studenta / ucznia , stosowny dokument potwierdzający mój status został umieszczony w profilu Sinch. Numer legitymacji: ${form.loginData?.studentId}
 ''';
 
   String get studentStatusDescription => '''}

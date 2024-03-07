@@ -42,6 +42,7 @@ dependencies:
   hand_signature: ^3.0.2
   cupertino_icons: ^1.0.2
   dio: ^4.0.0
+  device_info_plus: ^9.1.2
 
 dev_dependencies:
   flutter_test:
