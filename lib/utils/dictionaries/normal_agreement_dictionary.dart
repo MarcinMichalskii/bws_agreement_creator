@@ -2,6 +2,12 @@ import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:bws_agreement_creator/utils/pdf_widget_set.dart';
 import 'package:pdf/widgets.dart' as pw;
 
+class BWS {
+  static String get nameAndAddress =>
+      'BWS Event Support Sp. z o.o. z siedzibą w Krakowie 30-709, przy ul. Stoczniowców 3';
+  static String get address => 'Kraków 30-709, ul. Stoczniowców 3';
+}
+
 class ParagraphData {
   String title;
   List<String> points;
@@ -42,8 +48,7 @@ class PolishAgreementDictionary implements TranslatedAgreementDictionary {
   String get dateOfConclusion =>
       'zawarta w dniu ${form.dateOfSign} w Krakowie pomiędzy';
 
-  String get bwsData =>
-      '''spółką BWS Event Support Sp. z o.o. z siedzibą w Krakowie 31-559, przy ul. Na Szaniec 7,
+  String get bwsData => '''spółką ${BWS.nameAndAddress},
 NIP 6751759898,
 KRS 0000944605,
 reprezentowaną przez Aleksandrę Wróblewską - Prokurenta,
@@ -258,7 +263,7 @@ Usługodawca oświadcza, że ${form.isStudent ? 'posiada status' : 'nie posiada 
 społecznych.
 ''',
         '''
-Usługodawca oświadcza, że ${form.worksInOtherCompany ? 'nie jest zatrudniony w innym przedsiębiorstwie' : 'jest zatrudniony w innym przedsiębiorstwie, $earnsMoreThanMinimumWage'}
+Usługodawca oświadcza, że ${form.worksInOtherCompany ? 'jest zatrudniony w innym przedsiębiorstwie, $earnsMoreThanMinimumWage' : 'nie jest zatrudniony w innym przedsiębiorstwie'}
 ''',
         '''
 Usługodawca oświadcza, iż nie chce, aby BWS odprowadzał za niego składkę chorobową.
@@ -269,7 +274,7 @@ Usługodawca zobowiązuje się do niezwłocznego powiadomienia płatnika o każd
       ]);
 
   String get earnsMoreThanMinimumWage => '''
-gdzie zarabia conajmniej minimalną krajową w skali miesiąca (3010zł brutto).
+gdzie zarabia conajmniej minimalną krajową w skali miesiąca (4242zł brutto).
 ''';
 
   ParagraphData get confidentiality =>
@@ -351,7 +356,7 @@ W przypadku wystąpienia okoliczności opisanych w ust. 1 niniejszego paragrafu,
 ''',
         '''
 BWS wskazuje następujące dane kontaktowe:
-1) Adres do doręczeń Adres do doręczeń: ul. Na Szaniec 7, Kraków
+1) Adres do doręczeń: ${BWS.address}
 2) Numer telefonu: 794-222-311
 3) Adres e-mail: office@bws.net.pl
 4) Komunikator internetowy: whatsapp 794-222-311
