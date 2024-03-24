@@ -7,25 +7,25 @@ part of 'login_data.dart';
 // **************************************************************************
 
 abstract class _$LoginDataCWProxy {
-  LoginData address(String? address);
+  ProfileData address(String? address);
 
-  LoginData birthDate(String birthDate);
+  ProfileData birthDate(String birthDate);
 
-  LoginData cookie(String cookie);
+  ProfileData email(String email);
 
-  LoginData email(String email);
+  ProfileData hasStudentIdPhoto(bool hasStudentIdPhoto);
 
-  LoginData idNumber(String? idNumber);
+  ProfileData idNumber(String? idNumber);
 
-  LoginData name(String name);
+  ProfileData name(String name);
 
-  LoginData passportId(String? passportId);
+  ProfileData passportId(String? passportId);
 
-  LoginData pesel(String? pesel);
+  ProfileData pesel(String? pesel);
 
-  LoginData phone(String phone);
+  ProfileData phone(String phone);
 
-  LoginData studentId(String? studentId);
+  ProfileData studentId(String? studentId);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `LoginData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -33,11 +33,11 @@ abstract class _$LoginDataCWProxy {
   /// ```dart
   /// LoginData(...).copyWith(id: 12, name: "My name")
   /// ````
-  LoginData call({
+  ProfileData call({
     String? address,
     String? birthDate,
-    String? cookie,
     String? email,
+    bool? hasStudentIdPhoto,
     String? idNumber,
     String? name,
     String? passportId,
@@ -49,39 +49,40 @@ abstract class _$LoginDataCWProxy {
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfLoginData.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfLoginData.copyWith.fieldName(...)`
 class _$LoginDataCWProxyImpl implements _$LoginDataCWProxy {
-  final LoginData _value;
+  final ProfileData _value;
 
   const _$LoginDataCWProxyImpl(this._value);
 
   @override
-  LoginData address(String? address) => this(address: address);
+  ProfileData address(String? address) => this(address: address);
 
   @override
-  LoginData birthDate(String birthDate) => this(birthDate: birthDate);
+  ProfileData birthDate(String birthDate) => this(birthDate: birthDate);
 
   @override
-  LoginData cookie(String cookie) => this(cookie: cookie);
+  ProfileData email(String email) => this(email: email);
 
   @override
-  LoginData email(String email) => this(email: email);
+  ProfileData hasStudentIdPhoto(bool hasStudentIdPhoto) =>
+      this(hasStudentIdPhoto: hasStudentIdPhoto);
 
   @override
-  LoginData idNumber(String? idNumber) => this(idNumber: idNumber);
+  ProfileData idNumber(String? idNumber) => this(idNumber: idNumber);
 
   @override
-  LoginData name(String name) => this(name: name);
+  ProfileData name(String name) => this(name: name);
 
   @override
-  LoginData passportId(String? passportId) => this(passportId: passportId);
+  ProfileData passportId(String? passportId) => this(passportId: passportId);
 
   @override
-  LoginData pesel(String? pesel) => this(pesel: pesel);
+  ProfileData pesel(String? pesel) => this(pesel: pesel);
 
   @override
-  LoginData phone(String phone) => this(phone: phone);
+  ProfileData phone(String phone) => this(phone: phone);
 
   @override
-  LoginData studentId(String? studentId) => this(studentId: studentId);
+  ProfileData studentId(String? studentId) => this(studentId: studentId);
 
   @override
 
@@ -91,11 +92,11 @@ class _$LoginDataCWProxyImpl implements _$LoginDataCWProxy {
   /// ```dart
   /// LoginData(...).copyWith(id: 12, name: "My name")
   /// ````
-  LoginData call({
+  ProfileData call({
     Object? address = const $CopyWithPlaceholder(),
     Object? birthDate = const $CopyWithPlaceholder(),
-    Object? cookie = const $CopyWithPlaceholder(),
     Object? email = const $CopyWithPlaceholder(),
+    Object? hasStudentIdPhoto = const $CopyWithPlaceholder(),
     Object? idNumber = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
     Object? passportId = const $CopyWithPlaceholder(),
@@ -103,7 +104,7 @@ class _$LoginDataCWProxyImpl implements _$LoginDataCWProxy {
     Object? phone = const $CopyWithPlaceholder(),
     Object? studentId = const $CopyWithPlaceholder(),
   }) {
-    return LoginData(
+    return ProfileData(
       address: address == const $CopyWithPlaceholder()
           ? _value.address
           // ignore: cast_nullable_to_non_nullable
@@ -112,14 +113,15 @@ class _$LoginDataCWProxyImpl implements _$LoginDataCWProxy {
           ? _value.birthDate
           // ignore: cast_nullable_to_non_nullable
           : birthDate as String,
-      cookie: cookie == const $CopyWithPlaceholder() || cookie == null
-          ? _value.cookie
-          // ignore: cast_nullable_to_non_nullable
-          : cookie as String,
       email: email == const $CopyWithPlaceholder() || email == null
           ? _value.email
           // ignore: cast_nullable_to_non_nullable
           : email as String,
+      hasStudentIdPhoto: hasStudentIdPhoto == const $CopyWithPlaceholder() ||
+              hasStudentIdPhoto == null
+          ? _value.hasStudentIdPhoto
+          // ignore: cast_nullable_to_non_nullable
+          : hasStudentIdPhoto as bool,
       idNumber: idNumber == const $CopyWithPlaceholder()
           ? _value.idNumber
           // ignore: cast_nullable_to_non_nullable
@@ -148,7 +150,7 @@ class _$LoginDataCWProxyImpl implements _$LoginDataCWProxy {
   }
 }
 
-extension $LoginDataCopyWith on LoginData {
+extension $LoginDataCopyWith on ProfileData {
   /// Returns a callable class that can be used as follows: `instanceOfLoginData.copyWith(...)` or like so:`instanceOfLoginData.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
   _$LoginDataCWProxy get copyWith => _$LoginDataCWProxyImpl(this);

@@ -1,9 +1,9 @@
-import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/b2b_contract_question_widget.dart';
-import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/default_signature_widget.dart';
-import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/employee_contract_question_widget.dart';
-import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/legal_guardian_questions_widget.dart';
-import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/other_company_details_question_widget.dart';
-import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/works_in_other_company_question_widget.dart';
+import 'package:bws_agreement_creator/FormUI/EmployeeForm/b2b_contract_question_widget.dart';
+import 'package:bws_agreement_creator/FormUI/EmployeeForm/default_signature_widget.dart';
+import 'package:bws_agreement_creator/FormUI/EmployeeForm/employee_contract_question_widget.dart';
+import 'package:bws_agreement_creator/FormUI/EmployeeForm/legal_guardian_questions_widget.dart';
+import 'package:bws_agreement_creator/FormUI/EmployeeForm/other_company_details_question_widget.dart';
+import 'package:bws_agreement_creator/FormUI/EmployeeForm/works_in_other_company_question_widget.dart';
 import 'package:bws_agreement_creator/Model/login_data.dart';
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:flutter/material.dart';
@@ -84,18 +84,17 @@ extension TempalteDataForPage on SelectedPage {
     ByteData data = await rootBundle.load(fileName);
     Uint8List signatureData = data.buffer.asUint8List();
 
-    final loginData = LoginData(
-      cookie: '',
-      name: 'Jan Kowalski',
-      email: 'jan@kowalski.pl',
-      address: 'Testowa 24, 30-218 Kraków',
-      phone: "+48 600 600 600",
-      pesel: '99999999999',
-      studentId: null,
-      birthDate: '2000-09-06',
-      passportId: 'CED XDDDD',
-      idNumber: 'FED XDDDD',
-    );
+    final loginData = ProfileData(
+        name: 'Jan Kowalski',
+        email: 'jan@kowalski.pl',
+        address: 'Testowa 24, 30-218 Kraków',
+        phone: "+48 600 600 600",
+        pesel: '99999999999',
+        studentId: null,
+        birthDate: '2000-09-06',
+        passportId: 'CED XDDDD',
+        idNumber: 'FED XDDDD',
+        hasStudentIdPhoto: false);
     final newFormData = NewFormData(
         loginData: loginData,
         bwsSignatureData: signatureData,

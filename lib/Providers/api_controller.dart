@@ -35,8 +35,10 @@ class ParsedResponseState<T> {
 class ApiController {
   ApiController();
 
-  Future<APIResponseState> fetchData(
-      {required Map<String, String> params, required String url}) async {
+  Future<APIResponseState> performPost(
+      {required Map<String, String> params,
+      required String url,
+      String? cookie}) async {
     Dio dio = Dio();
 
     try {
@@ -44,6 +46,7 @@ class ApiController {
           data: params,
           options: Options(headers: {
             'Content-Type': 'application/json',
+            'authorization': cookie
           }));
       if (response.statusCode != 200) {
         return APIResponseState(
@@ -59,6 +62,36 @@ class ApiController {
         return APIResponseState(
             error: CostRegisterError("Coś poszło nie tak $url"),
             params: params);
+      }
+    }
+  }
+
+  Future<APIResponseState> performGet(
+      {required String url, String? cookie}) async {
+    Dio dio = Dio();
+
+    try {
+      Response response = await dio.get(url,
+          options: Options(headers: {
+            'Content-Type': 'application/json',
+            'authorization': cookie
+          }));
+      if (response.statusCode != 200) {
+        return APIResponseState(
+          error: CostRegisterError.fromJson(response.data),
+        );
+      }
+      return APIResponseState(
+        data: response.data,
+      );
+    } catch (error) {
+      if (error is DioError && error.response?.data != null) {
+        return APIResponseState(
+            error: CostRegisterError.fromJson((error).response?.data));
+      } else {
+        return APIResponseState(
+          error: CostRegisterError("Coś poszło nie tak $url"),
+        );
       }
     }
   }

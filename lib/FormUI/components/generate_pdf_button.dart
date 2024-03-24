@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 class DefaultBorderedButton extends StatelessWidget {
   const DefaultBorderedButton(
       {Key? key,
-      required this.onTap,
+      this.onTap,
       required this.text,
       this.borderColor = CustomColors.applicationColorMain})
       : super(key: key);
 
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final String text;
   final Color borderColor;
 

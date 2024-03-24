@@ -1,4 +1,4 @@
-import 'package:bws_agreement_creator/Fonts.dart';
+import 'package:bws_agreement_creator/utils/Fonts.dart';
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/legal_guardian_consent_dictionary.dart';
 import 'package:bws_agreement_creator/utils/pdf_pages/pdf_signature.dart';

@@ -1,4 +1,4 @@
-import 'package:bws_agreement_creator/Fonts.dart';
+import 'package:bws_agreement_creator/utils/Fonts.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/data_processing_dictionary.dart';
 import 'package:pdf/widgets.dart' as pw;
 

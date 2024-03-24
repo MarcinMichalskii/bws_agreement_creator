@@ -1,4 +1,4 @@
-import 'package:bws_agreement_creator/FormUI/Providers/api_controller.dart';
+import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -17,7 +17,7 @@ class ResetPasswordNotifier
   void resetPassword(String email) async {
     state = ParsedResponseState(isLoading: true);
 
-    final response = await ApiController().fetchData(params: {
+    final response = await ApiController().performPost(params: {
       "email": email,
     }, url: "$baseUrl/resetPassword");
     state = ParsedResponseState(data: "Hasło zresetowane, sprawdź email");

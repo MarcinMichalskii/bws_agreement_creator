@@ -1,4 +1,4 @@
-import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
+import 'package:bws_agreement_creator/FormUI/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/FormUI/text_with_link_widget.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/foundation.dart';
