@@ -1,21 +1,20 @@
-import 'package:bws_agreement_creator/Fonts.dart';
-import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
-import 'package:bws_agreement_creator/FormUI/NewUI/Login/login_widget.dart';
-import 'package:bws_agreement_creator/FormUI/NewUI/Outboarding/agreement_sent_widget.dart';
-import 'package:bws_agreement_creator/FormUI/Providers/login_data_provider.dart';
-import 'package:bws_agreement_creator/FormUI/Providers/upload_pdf_provider.dart';
+import 'package:bws_agreement_creator/router.dart';
+import 'package:bws_agreement_creator/utils/Fonts.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:printing/printing.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final boldFont = await PdfGoogleFonts.openSansBold();
-  final regularFont = await PdfGoogleFonts.openSansRegular();
-  defaultFonts.bold = boldFont;
-  defaultFonts.regular = regularFont;
-  runApp(const ProviderScope(child: MyApp()));
+  await defaultFonts.loadFonts();
+  await EasyLocalization.ensureInitialized();
+  await initializeDateFormatting();
+  runApp(EasyLocalization(
+      supportedLocales: const [Locale('pl')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('pl'),
+      child: const ProviderScope(child: MyApp())));
 }
 
 class MyApp extends HookConsumerWidget {
@@ -23,17 +22,8 @@ class MyApp extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final isLoggedIn = ref.watch(loginProvider).data != null;
+    final router = ref.watch(routerProvider);
 
-    final onLoginButtonTapped = useCallback((bool isLoggedIn) {}, []);
-    final appFlowScreen = isLoggedIn
-        ? EmployeeFormWidget()
-        : LoginWidget(
-            onLoginTapped: onLoginButtonTapped,
-          );
-    final generationFinished = ref.watch(uploadPdfProvider).data != null;
-
-    return MaterialApp(
-        home: generationFinished ? const AgreementSentWidget() : appFlowScreen);
+    return MaterialApp.router(routerConfig: router);
   }
 }

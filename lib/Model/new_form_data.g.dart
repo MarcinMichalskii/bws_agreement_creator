@@ -25,7 +25,7 @@ abstract class _$NewFormDataCWProxy {
 
   NewFormData legalGuardianSignatureData(Uint8List? legalGuardianSignatureData);
 
-  NewFormData loginData(LoginData? loginData);
+  NewFormData loginData(ProfileData? loginData);
 
   NewFormData otherCompanyAddress(String? otherCompanyAddress);
 
@@ -55,7 +55,7 @@ abstract class _$NewFormDataCWProxy {
     String? legalGuardianName,
     String? legalGuardianPesel,
     Uint8List? legalGuardianSignatureData,
-    LoginData? loginData,
+    ProfileData? loginData,
     String? otherCompanyAddress,
     DateTime? otherCompanyEndDate,
     String? otherCompanyName,
@@ -109,7 +109,7 @@ class _$NewFormDataCWProxyImpl implements _$NewFormDataCWProxy {
       this(legalGuardianSignatureData: legalGuardianSignatureData);
 
   @override
-  NewFormData loginData(LoginData? loginData) => this(loginData: loginData);
+  NewFormData loginData(ProfileData? loginData) => this(loginData: loginData);
 
   @override
   NewFormData otherCompanyAddress(String? otherCompanyAddress) =>
@@ -203,7 +203,7 @@ class _$NewFormDataCWProxyImpl implements _$NewFormDataCWProxy {
       loginData: loginData == const $CopyWithPlaceholder()
           ? _value.loginData
           // ignore: cast_nullable_to_non_nullable
-          : loginData as LoginData?,
+          : loginData as ProfileData?,
       otherCompanyAddress: otherCompanyAddress == const $CopyWithPlaceholder()
           ? _value.otherCompanyAddress
           // ignore: cast_nullable_to_non_nullable

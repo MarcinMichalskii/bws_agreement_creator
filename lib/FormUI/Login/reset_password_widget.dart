@@ -1,6 +1,6 @@
-import 'package:bws_agreement_creator/FormUI/NewUI/Login/reset_password_content_widget.dart';
-import 'package:bws_agreement_creator/FormUI/NewUI/Login/reset_password_sent_widget.dart';
-import 'package:bws_agreement_creator/FormUI/Providers/reset_password_provider.dart';
+import 'package:bws_agreement_creator/FormUI/Login/reset_password_content_widget.dart';
+import 'package:bws_agreement_creator/FormUI/Login/reset_password_sent_widget.dart';
+import 'package:bws_agreement_creator/Providers/reset_password_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

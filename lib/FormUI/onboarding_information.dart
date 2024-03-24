@@ -1,4 +1,4 @@
-import 'package:bws_agreement_creator/FormUI/Providers/login_data_provider.dart';
+import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/generate_pdf_button.dart';
 import 'package:bws_agreement_creator/FormUI/onboarding_point_widget.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
@@ -37,7 +37,7 @@ class _OnboardingInformationContainer extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final name = ref.read(loginProvider.notifier).state.data?.name ?? '';
+    final name = ref.read(profileProvider.notifier).state.data?.name ?? '';
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,

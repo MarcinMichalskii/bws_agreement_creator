@@ -1,6 +1,6 @@
-import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/default_signature_widget.dart';
-import 'package:bws_agreement_creator/FormUI/NewUI/EmployeeForm/form_widget.dart';
-import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
+import 'package:bws_agreement_creator/FormUI/EmployeeForm/default_signature_widget.dart';
+import 'package:bws_agreement_creator/FormUI/EmployeeForm/form_widget.dart';
+import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
 import 'package:bws_agreement_creator/FormUI/components/form_toggle.dart';
 import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';

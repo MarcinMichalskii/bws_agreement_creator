@@ -12,7 +12,7 @@ part 'new_form_data.g.dart';
 @CopyWith()
 class NewFormData {
   final String dateOfSign = DateFormat('dd.MM.yyyy').format(DateTime.now());
-  final LoginData? loginData;
+  final ProfileData? loginData;
   final Uint8List? signatureData;
   final Uint8List? legalGuardianSignatureData;
   final String? legalGuardianName;

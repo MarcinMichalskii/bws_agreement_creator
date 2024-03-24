@@ -1,6 +1,6 @@
-import 'package:bws_agreement_creator/FormUI/Providers/new_form_data_provider.dart';
-import 'package:bws_agreement_creator/FormUI/Providers/selected_page_provider.dart';
-import 'package:bws_agreement_creator/FormUI/Providers/upload_pdf_provider.dart';
+import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
+import 'package:bws_agreement_creator/Providers/selected_page_provider.dart';
+import 'package:bws_agreement_creator/Providers/upload_pdf_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/bws_logo.dart';
 import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';
 import 'package:bws_agreement_creator/FormUI/onboarding_information.dart';

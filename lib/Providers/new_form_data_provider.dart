@@ -1,4 +1,4 @@
-import 'package:bws_agreement_creator/FormUI/Providers/login_data_provider.dart';
+import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
 import 'package:bws_agreement_creator/Model/login_data.dart';
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +13,7 @@ class NewFormNotifier extends StateNotifier<NewFormData> {
   StateNotifierProviderRef<NewFormNotifier, NewFormData> ref;
   NewFormNotifier(this.ref) : super(NewFormData());
 
-  void setLoginData(LoginData loginData) async {
+  void setLoginData(ProfileData loginData) async {
     String fileName = 'assets/podpis.png';
     ByteData data = await rootBundle.load(fileName);
     Uint8List bytes = data.buffer.asUint8List();
@@ -83,7 +83,7 @@ class NewFormNotifier extends StateNotifier<NewFormData> {
     Uint8List bytes = data.buffer.asUint8List();
 
     state = NewFormData(
-        loginData: ref.read(loginProvider.notifier).state.data,
+        loginData: ref.read(profileProvider.notifier).state.data,
         bwsSignatureData: bytes);
   }
 }

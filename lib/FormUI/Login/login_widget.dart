@@ -1,6 +1,7 @@
-import 'package:bws_agreement_creator/FormUI/NewUI/Login/no_password_help_widget.dart';
-import 'package:bws_agreement_creator/FormUI/Providers/login_data_provider.dart';
-import 'package:bws_agreement_creator/FormUI/Providers/reset_password_provider.dart';
+import 'package:bws_agreement_creator/FormUI/Login/no_password_help_widget.dart';
+import 'package:bws_agreement_creator/Providers/auth_provider.dart';
+import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
+import 'package:bws_agreement_creator/Providers/reset_password_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
 import 'package:bws_agreement_creator/FormUI/components/bws_logo.dart';
 import 'package:bws_agreement_creator/FormUI/components/generate_pdf_button.dart';
@@ -13,11 +14,20 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LoginWidget extends HookConsumerWidget {
-  final void Function(bool) onLoginTapped;
-  const LoginWidget({super.key, required this.onLoginTapped});
+  const LoginWidget({super.key});
   @override
   Widget build(BuildContext context, ref) {
-    ref.listen(loginProvider, (previous, next) {
+    ref.listen(profileProvider, (previous, next) {
+      if (next.error != null) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(
+              next.error!.message,
+            )));
+      }
+    });
+
+    ref.listen(authProvider, (previous, next) {
       if (next.error != null) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.red,
@@ -37,7 +47,7 @@ class LoginWidget extends HookConsumerWidget {
     final password = useState('');
 
     final authorize = useCallback(() {
-      ref.read(loginProvider.notifier).login(login.value, password.value);
+      ref.read(authProvider.notifier).login(login.value, password.value);
     }, [login.value, password.value]);
 
     final isInputValid =
@@ -69,7 +79,7 @@ class LoginWidget extends HookConsumerWidget {
                   password.value = text ?? '';
                 },
               ),
-              ref.watch(loginProvider).isLoading
+              ref.watch(authProvider).isLoading
                   ? Container(
                       margin: const EdgeInsets.only(top: 8),
                       child: const CircularProgressIndicator(

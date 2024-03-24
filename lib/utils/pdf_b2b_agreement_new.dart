@@ -1,4 +1,4 @@
-import 'package:bws_agreement_creator/Fonts.dart';
+import 'package:bws_agreement_creator/utils/Fonts.dart';
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/b2b_agreement_dictionary.dart';
 import 'package:bws_agreement_creator/utils/dictionaries/normal_agreement_dictionary.dart';
@@ -62,7 +62,7 @@ class PdfB2BAgreementNew {
             ...dictionary.confidentiality.toParagraphWidget('7'),
             ...b2bDictionary.penalties.toParagraphWidget('8'),
             ...dictionary.salvatorianClause.toParagraphWidget('9'),
-            ...dictionary.contactData.toParagraphWidget('10'),
+            ...dictionary.contactData.toParagraphWidgetRichText('10'),
             ...dictionary.finalConclusion.toParagraphWidget('11'),
             SignatureWidgetPdf().generate(
                 signatureData: form.signatureData!,
