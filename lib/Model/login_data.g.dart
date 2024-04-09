@@ -6,7 +6,7 @@ part of 'login_data.dart';
 // CopyWithGenerator
 // **************************************************************************
 
-abstract class _$LoginDataCWProxy {
+abstract class _$ProfileDataCWProxy {
   ProfileData address(String? address);
 
   ProfileData birthDate(String birthDate);
@@ -27,11 +27,11 @@ abstract class _$LoginDataCWProxy {
 
   ProfileData studentId(String? studentId);
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `LoginData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ProfileData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// LoginData(...).copyWith(id: 12, name: "My name")
+  /// ProfileData(...).copyWith(id: 12, name: "My name")
   /// ````
   ProfileData call({
     String? address,
@@ -47,11 +47,11 @@ abstract class _$LoginDataCWProxy {
   });
 }
 
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfLoginData.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfLoginData.copyWith.fieldName(...)`
-class _$LoginDataCWProxyImpl implements _$LoginDataCWProxy {
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfProfileData.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfProfileData.copyWith.fieldName(...)`
+class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
   final ProfileData _value;
 
-  const _$LoginDataCWProxyImpl(this._value);
+  const _$ProfileDataCWProxyImpl(this._value);
 
   @override
   ProfileData address(String? address) => this(address: address);
@@ -86,11 +86,11 @@ class _$LoginDataCWProxyImpl implements _$LoginDataCWProxy {
 
   @override
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `LoginData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ProfileData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// LoginData(...).copyWith(id: 12, name: "My name")
+  /// ProfileData(...).copyWith(id: 12, name: "My name")
   /// ````
   ProfileData call({
     Object? address = const $CopyWithPlaceholder(),
@@ -150,8 +150,8 @@ class _$LoginDataCWProxyImpl implements _$LoginDataCWProxy {
   }
 }
 
-extension $LoginDataCopyWith on ProfileData {
-  /// Returns a callable class that can be used as follows: `instanceOfLoginData.copyWith(...)` or like so:`instanceOfLoginData.copyWith.fieldName(...)`.
+extension $ProfileDataCopyWith on ProfileData {
+  /// Returns a callable class that can be used as follows: `instanceOfProfileData.copyWith(...)` or like so:`instanceOfProfileData.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$LoginDataCWProxy get copyWith => _$LoginDataCWProxyImpl(this);
+  _$ProfileDataCWProxy get copyWith => _$ProfileDataCWProxyImpl(this);
 }

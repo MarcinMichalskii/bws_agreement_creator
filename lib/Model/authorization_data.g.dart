@@ -7,7 +7,7 @@ part of 'authorization_data.dart';
 // **************************************************************************
 
 abstract class _$AuthorizationDataCWProxy {
-  AuthorizationData cookie(String cookie);
+  AuthorizationData accessToken(String accessToken);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AuthorizationData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -16,7 +16,7 @@ abstract class _$AuthorizationDataCWProxy {
   /// AuthorizationData(...).copyWith(id: 12, name: "My name")
   /// ````
   AuthorizationData call({
-    String? cookie,
+    String? accessToken,
   });
 }
 
@@ -27,7 +27,8 @@ class _$AuthorizationDataCWProxyImpl implements _$AuthorizationDataCWProxy {
   const _$AuthorizationDataCWProxyImpl(this._value);
 
   @override
-  AuthorizationData cookie(String cookie) => this(cookie: cookie);
+  AuthorizationData accessToken(String accessToken) =>
+      this(accessToken: accessToken);
 
   @override
 
@@ -38,13 +39,14 @@ class _$AuthorizationDataCWProxyImpl implements _$AuthorizationDataCWProxy {
   /// AuthorizationData(...).copyWith(id: 12, name: "My name")
   /// ````
   AuthorizationData call({
-    Object? cookie = const $CopyWithPlaceholder(),
+    Object? accessToken = const $CopyWithPlaceholder(),
   }) {
     return AuthorizationData(
-      cookie: cookie == const $CopyWithPlaceholder() || cookie == null
-          ? _value.cookie
-          // ignore: cast_nullable_to_non_nullable
-          : cookie as String,
+      accessToken:
+          accessToken == const $CopyWithPlaceholder() || accessToken == null
+              ? _value.accessToken
+              // ignore: cast_nullable_to_non_nullable
+              : accessToken as String,
     );
   }
 }

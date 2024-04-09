@@ -15,6 +15,7 @@ class BorderedInput extends StatelessWidget {
       this.prefixIcon,
       this.errorText,
       this.onSaved,
+      this.sufixIcon,
       this.validator});
 
   final String placeholder;
@@ -28,6 +29,7 @@ class BorderedInput extends StatelessWidget {
   final Icon? prefixIcon;
   final FormFieldSetter<String>? onSaved;
   final FormFieldValidator<String>? validator;
+  final IconButton? sufixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class BorderedInput extends StatelessWidget {
           style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
               prefixIcon: prefixIcon,
+              suffixIcon: sufixIcon,
               filled: true,
               fillColor: backgroundColor,
               errorText: errorText,

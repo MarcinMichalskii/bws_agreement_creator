@@ -14,12 +14,13 @@ class SignatureWidgetPdf {
               crossAxisAlignment: pw.CrossAxisAlignment.center,
               children: [
                 pw.Container(
+                  padding: pw.EdgeInsets.all(4),
                   decoration: pw.BoxDecoration(
                       border: pw.Border.all(
                     width: 0.5,
                   )),
                   child: pw.Image(pw.MemoryImage(signatureData),
-                      width: 180, height: 120),
+                      fit: pw.BoxFit.contain, width: 180, height: 120),
                 ),
                 pw.Padding(
                     padding: const pw.EdgeInsets.only(top: 4),

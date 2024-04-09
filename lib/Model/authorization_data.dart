@@ -4,13 +4,13 @@ part 'authorization_data.g.dart';
 
 @CopyWith()
 class AuthorizationData {
-  final String cookie;
+  final String accessToken;
 
-  AuthorizationData({required this.cookie});
+  AuthorizationData({required this.accessToken});
 
   factory AuthorizationData.fromJson(Map<String, dynamic> json) {
     return AuthorizationData(
-      cookie: json['cookie'],
+      accessToken: json['accessToken'],
     );
   }
 }

@@ -23,7 +23,7 @@ class ProfileNotifier extends StateNotifier<ParsedResponseState<ProfileData>> {
       ref;
   ProfileNotifier(this.ref) : super(ParsedResponseState()) {
     ref.listen(authProvider, (previous, next) {
-      if (next.data?.cookie != null) {
+      if (next.data?.accessToken != null) {
         getProfile();
       }
     });
@@ -34,7 +34,8 @@ class ProfileNotifier extends StateNotifier<ParsedResponseState<ProfileData>> {
     state = ParsedResponseState(isLoading: true);
     final response = await ApiController().performGet(
         url: "$baseUrl/getProfileData",
-        cookie: ref.read(authProvider.notifier).state.data?.cookie ?? '');
+        accessToken:
+            ref.read(authProvider.notifier).state.data?.accessToken ?? '');
 
     if (response.error != null) {
       state = ParsedResponseState(error: response.error);
@@ -56,6 +57,7 @@ class ProfileNotifier extends StateNotifier<ParsedResponseState<ProfileData>> {
           .read(appStateProvider.notifier)
           .setShouldUpdateStudentIdNumber(studentIdUpdate);
     } catch (error) {
+      print(error);
       state = ParsedResponseState(
           isLoading: false,
           error: CostRegisterError("Wystąpił problem z pobraniem profilu"));

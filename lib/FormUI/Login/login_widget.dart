@@ -1,22 +1,25 @@
 import 'package:bws_agreement_creator/FormUI/Login/no_password_help_widget.dart';
-import 'package:bws_agreement_creator/Providers/auth_provider.dart';
-import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
-import 'package:bws_agreement_creator/Providers/reset_password_provider.dart';
 import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
 import 'package:bws_agreement_creator/FormUI/components/bws_logo.dart';
 import 'package:bws_agreement_creator/FormUI/components/generate_pdf_button.dart';
+import 'package:bws_agreement_creator/Providers/auth_provider.dart';
+import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
+import 'package:bws_agreement_creator/Providers/reset_password_provider.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
 import 'package:bws_agreement_creator/utils/nip_validator.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart';
+import 'package:google_sign_in_web/google_sign_in_web.dart' as web;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LoginWidget extends HookConsumerWidget {
   const LoginWidget({super.key});
   @override
   Widget build(BuildContext context, ref) {
+    final passwordInvisible = useState(true);
     ref.listen(profileProvider, (previous, next) {
       if (next.error != null) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -46,6 +49,11 @@ class LoginWidget extends HookConsumerWidget {
     final login = useState('');
     final password = useState('');
 
+    final googleAuthButton = useMemoized(
+        () => (GoogleSignInPlatform.instance as web.GoogleSignInPlugin)
+            .renderButton(),
+        []);
+
     final authorize = useCallback(() {
       ref.read(authProvider.notifier).login(login.value, password.value);
     }, [login.value, password.value]);
@@ -73,8 +81,16 @@ class LoginWidget extends HookConsumerWidget {
                 },
               ),
               BorderedInput(
+                sufixIcon: IconButton(
+                  icon: Icon(passwordInvisible.value
+                      ? Icons.visibility_off
+                      : Icons.visibility),
+                  onPressed: () {
+                    passwordInvisible.value = !passwordInvisible.value;
+                  },
+                ),
                 placeholder: 'Hasło',
-                isSecure: true,
+                isSecure: passwordInvisible.value,
                 onChanged: (text) {
                   password.value = text ?? '';
                 },
@@ -95,6 +111,8 @@ class LoginWidget extends HookConsumerWidget {
                         }
                       },
                       text: 'Login'),
+              if (false)
+                Padding(padding: EdgeInsets.all(16), child: googleAuthButton),
               const NoPasswordHelpWidget()
             ]),
           ),

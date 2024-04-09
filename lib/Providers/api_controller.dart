@@ -38,7 +38,7 @@ class ApiController {
   Future<APIResponseState> performPost(
       {required Map<String, String> params,
       required String url,
-      String? cookie}) async {
+      String? accessToken}) async {
     Dio dio = Dio();
 
     try {
@@ -46,7 +46,7 @@ class ApiController {
           data: params,
           options: Options(headers: {
             'Content-Type': 'application/json',
-            'authorization': cookie
+            'authorization': 'Bearer $accessToken'
           }));
       if (response.statusCode != 200) {
         return APIResponseState(
@@ -54,27 +54,30 @@ class ApiController {
       }
       return APIResponseState(data: response.data, params: params);
     } catch (error) {
-      if (error is DioError && error.response?.data != null) {
-        return APIResponseState(
-            error: CostRegisterError.fromJson((error).response?.data),
-            params: params);
-      } else {
-        return APIResponseState(
-            error: CostRegisterError("Coś poszło nie tak $url"),
-            params: params);
-      }
+      return handleError(error);
+    }
+  }
+
+  APIResponseState handleError(error) {
+    try {
+      return APIResponseState(
+          error: CostRegisterError(error.response?.data['message']));
+    } catch (error) {
+      return APIResponseState(
+        error: CostRegisterError("Coś poszło nie tak"),
+      );
     }
   }
 
   Future<APIResponseState> performGet(
-      {required String url, String? cookie}) async {
+      {required String url, String? accessToken}) async {
     Dio dio = Dio();
 
     try {
       Response response = await dio.get(url,
           options: Options(headers: {
             'Content-Type': 'application/json',
-            'authorization': cookie
+            'authorization': "Bearer $accessToken"
           }));
       if (response.statusCode != 200) {
         return APIResponseState(

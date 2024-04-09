@@ -38,9 +38,10 @@ class UploadPdfNotifier extends StateNotifier<ParsedResponseState<String?>> {
       final selectedAgreementData = await selectedAgreement.save();
 
       state = ParsedResponseState(isLoading: true);
-      final cookie = ref.read(authProvider.notifier).state.data?.cookie ?? '';
+      final accessToken =
+          ref.read(authProvider.notifier).state.data?.accessToken ?? '';
       await _performRequest(
-          authString: cookie,
+          accessToken: accessToken,
           bytes: selectedAgreementData,
           filename: formData.pdfFileName);
       state =
@@ -54,12 +55,13 @@ class UploadPdfNotifier extends StateNotifier<ParsedResponseState<String?>> {
   }
 
   _performRequest(
-      {required String authString,
+      {required String accessToken,
       required Uint8List bytes,
       required String filename}) async {
     Dio dio = Dio();
 
-    FormData formData = FormData.fromMap({'authString': authString});
+    dio.options.headers['authorization'] = 'Bearer $accessToken';
+    FormData formData = FormData();
     final file = MultipartFile.fromBytes(bytes, filename: filename);
     final mapEntry = MapEntry('pdfFile', file);
     formData.files.add(mapEntry);
