@@ -36,4 +36,24 @@ class AuthNotifier
           error: CostRegisterError("Nie udało się zalogować"));
     }
   }
+
+  void loginWithGoogleToken(String idToken) async {
+    state = ParsedResponseState(isLoading: true);
+    final response = await ApiController().performPost(
+        params: {"idToken": idToken}, url: "$baseUrl/loginWithGoogle");
+
+    if (response.error != null) {
+      state = ParsedResponseState(error: response.error);
+      return;
+    }
+
+    try {
+      final cookie = AuthorizationData.fromJson(response.data);
+
+      state = ParsedResponseState(data: cookie);
+    } catch (error) {
+      state = ParsedResponseState(
+          error: CostRegisterError("Nie udało się zalogować"));
+    }
+  }
 }
