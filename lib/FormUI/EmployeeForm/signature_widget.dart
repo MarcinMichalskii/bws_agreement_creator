@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hand_signature/signature.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:bws_agreement_creator/utils/svg_extension.dart';
 
 class SignatureWidget extends HookConsumerWidget {
   final Function(Uint8List?) onSignatureChanged;
@@ -70,8 +71,9 @@ class SignatureWidget extends HookConsumerWidget {
             ref.read(scrollEnabled.notifier).state = false;
           },
           onPointerUp: () async {
-            final data = await control.value.toImage();
-            final uint8Data = data?.buffer.asUint8List();
+            final data = control.value.toSvg();
+
+            final uint8Data = await data?.asPng();
             onSignatureChanged(uint8Data);
             ref.read(scrollEnabled.notifier).state = true;
           },
@@ -84,7 +86,7 @@ class SignatureWidget extends HookConsumerWidget {
         margin: const EdgeInsets.symmetric(vertical: 8),
         child: const TextWithLinkWidget(
             left:
-                "Ten rodzaj podpisu, to forma dokumentowa - jest pełnoprawnym podpisem w formie online. \Chcesz dowiedzieć się więcej na temat formy dokumentowej? ",
+                "Ten rodzaj podpisu, to forma dokumentowa - jest pełnoprawnym podpisem w formie online. \nChcesz dowiedzieć się więcej na temat formy dokumentowej? ",
             link: "Przeczytaj ten artykuł.",
             right: "",
             url: "https://eurocert.pl/formy-zawierania-umow-rodzaje-i-roznice"),

@@ -72,8 +72,8 @@ class ProfileData {
   String? get validationError {
     if (birthDateParsed == null) {
       return "Nieprawidłowa data urodzenia";
-    } else if (!birthDateParsed!.isOver16()) {
-      return "Osoby poniżej 16 roku życia nie mogą zawrzeć z nami umowy";
+    } else if (!birthDateParsed!.isOver17()) {
+      return "Osoby poniżej 17 roku życia nie mogą zawrzeć z nami umowy";
     } else if (!birthDateParsed!.isAdult() && studentId == null) {
       return "Osoby poniżej 18 roku życia muszą podać numer legitymacji szkolnej w profilu Sinch";
     } else if (passportId == null &&

@@ -11,7 +11,7 @@ extension CheckIfAdult on DateTime {
     return age >= 18;
   }
 
-  bool isOver16() {
+  bool isOver17() {
     final birthday = this;
     DateTime currentDate = DateTime.now();
     int age = currentDate.year - birthday.year;
@@ -20,7 +20,7 @@ extension CheckIfAdult on DateTime {
             currentDate.day < birthday.day)) {
       age--;
     }
-    return age >= 16;
+    return age >= 17;
   }
 
   bool isBelow26() {

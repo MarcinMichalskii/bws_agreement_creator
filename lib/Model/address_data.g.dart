@@ -11,8 +11,6 @@ abstract class _$AddressCWProxy {
 
   Address country(String country);
 
-  Address region(String region);
-
   Address street(String street);
 
   Address zip(String zip);
@@ -26,7 +24,6 @@ abstract class _$AddressCWProxy {
   Address call({
     String? city,
     String? country,
-    String? region,
     String? street,
     String? zip,
   });
@@ -45,9 +42,6 @@ class _$AddressCWProxyImpl implements _$AddressCWProxy {
   Address country(String country) => this(country: country);
 
   @override
-  Address region(String region) => this(region: region);
-
-  @override
   Address street(String street) => this(street: street);
 
   @override
@@ -64,7 +58,6 @@ class _$AddressCWProxyImpl implements _$AddressCWProxy {
   Address call({
     Object? city = const $CopyWithPlaceholder(),
     Object? country = const $CopyWithPlaceholder(),
-    Object? region = const $CopyWithPlaceholder(),
     Object? street = const $CopyWithPlaceholder(),
     Object? zip = const $CopyWithPlaceholder(),
   }) {
@@ -77,10 +70,6 @@ class _$AddressCWProxyImpl implements _$AddressCWProxy {
           ? _value.country
           // ignore: cast_nullable_to_non_nullable
           : country as String,
-      region: region == const $CopyWithPlaceholder() || region == null
-          ? _value.region
-          // ignore: cast_nullable_to_non_nullable
-          : region as String,
       street: street == const $CopyWithPlaceholder() || street == null
           ? _value.street
           // ignore: cast_nullable_to_non_nullable

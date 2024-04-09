@@ -17,11 +17,11 @@ class UpdateStudentIdNotifier
 
   void updateStudentId(String studentId) async {
     state = ParsedResponseState(isLoading: true);
-    final cookie = ref.read(authProvider.notifier).state.data?.cookie;
+    final accessToken = ref.read(authProvider.notifier).state.data?.accessToken;
 
-    final response = await ApiController().performPost(
-        params: {"studentId": studentId, "cookie": cookie ?? ''},
-        url: "$baseUrl/updateStudentId");
+    final response = await ApiController().performPost(params: {
+      "studentId": studentId,
+    }, url: "$baseUrl/updateStudentId", accessToken: accessToken);
     if (response.error != null) {
       state = ParsedResponseState(
           error: CostRegisterError("Coś poszło nie tak"),
