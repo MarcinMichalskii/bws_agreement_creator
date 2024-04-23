@@ -1,5 +1,8 @@
+import 'package:bws_agreement_creator/Providers/api_controller.dart';
+import 'package:bws_agreement_creator/Providers/token_refresh_interceptor.dart';
 import 'package:bws_agreement_creator/router.dart';
 import 'package:bws_agreement_creator/utils/Fonts.dart';
+import 'package:bws_agreement_creator/utils/user_data_helper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +20,12 @@ GoogleSignIn googleSignIn = GoogleSignIn(
 );
 
 Future<void> main() async {
+  UserDataHelper().cleanupUserData();
   final GoogleSignInPlugin _plugin =
       GoogleSignInPlatform.instance as GoogleSignInPlugin;
   WidgetsFlutterBinding.ensureInitialized();
+  final container = ProviderContainer();
+  dio.interceptors.add(TokenInterceptor(container.read));
   await defaultFonts.loadFonts();
   await EasyLocalization.ensureInitialized();
   await initializeDateFormatting();
@@ -38,7 +44,8 @@ Future<void> main() async {
       supportedLocales: const [Locale('pl')],
       path: 'assets/translations',
       fallbackLocale: const Locale('pl'),
-      child: const ProviderScope(child: MyApp())));
+      child: UncontrolledProviderScope(
+          container: container, child: const MyApp())));
 }
 
 class MyApp extends HookConsumerWidget {

@@ -7,8 +7,11 @@ class CustomColors {
   static const darkGray = Color(0xFF505050);
   static const almostBlack = Color.fromRGBO(55, 55, 55, 1);
   static const almostBlack2 = Color.fromRGBO(33, 33, 33, 1);
+  static const almostBlack3 = Color.fromRGBO(15, 15, 15, 1);
   static const green = Color.fromRGBO(136, 200, 10, 1);
   static const red = Color.fromRGBO(228, 40, 0, 1);
+
+  static const mainBackground = Color.fromRGBO(15, 15, 15, 1);
 }
 
 extension HexColor on Color {

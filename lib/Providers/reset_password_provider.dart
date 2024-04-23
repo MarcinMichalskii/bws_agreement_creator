@@ -3,32 +3,28 @@ import 'package:bws_agreement_creator/utils/base_url.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final resetPasswordProvider =
-    StateNotifierProvider<ResetPasswordNotifier, ParsedResponseState<String?>>(
+    StateNotifierProvider<ResetPasswordNotifier, APIResponseState<String?>>(
         (ref) {
   return ResetPasswordNotifier(ref);
 });
 
-class ResetPasswordNotifier
-    extends StateNotifier<ParsedResponseState<String?>> {
-  StateNotifierProviderRef<ResetPasswordNotifier, ParsedResponseState<String?>>
+class ResetPasswordNotifier extends StateNotifier<APIResponseState<String?>> {
+  StateNotifierProviderRef<ResetPasswordNotifier, APIResponseState<String?>>
       ref;
-  ResetPasswordNotifier(this.ref) : super(ParsedResponseState());
+  ResetPasswordNotifier(this.ref) : super(APIResponseState());
 
   void resetPassword(String email) async {
-    state = ParsedResponseState(isLoading: true);
+    state = APIResponseState(isLoading: true);
 
-    final response = await ApiController().performPost(params: {
+    await ApiController(Dupa.elo).performPost(params: {
       "email": email,
     }, url: "$baseUrl/resetPassword");
-    state = ParsedResponseState(data: "Hasło zresetowane, sprawdź email");
-    if (response.error != null) {
-      state = ParsedResponseState(
-          error: CostRegisterError(
-              "Nie udało się zresetować hasła, sprawdź wprowadzony email"),
-          params: response.params,
-          isLoading: false);
-    } else {
-      state = ParsedResponseState(data: "Hasło zresetowane, sprawdź email");
-    }
+    state = APIResponseState(data: "Hasło zresetowane, sprawdź email");
+  }
+}
+
+class Dupa {
+  static String? elo(Map<String, dynamic> elo) {
+    return "XD";
   }
 }

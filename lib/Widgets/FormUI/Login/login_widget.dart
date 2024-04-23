@@ -1,10 +1,11 @@
-import 'package:bws_agreement_creator/FormUI/Login/no_password_help_widget.dart';
-import 'package:bws_agreement_creator/FormUI/components/bordered_input.dart';
-import 'package:bws_agreement_creator/FormUI/components/bws_logo.dart';
-import 'package:bws_agreement_creator/FormUI/components/generate_pdf_button.dart';
+import 'package:bws_agreement_creator/Widgets/FormUI/Login/no_password_help_widget.dart';
+import 'package:bws_agreement_creator/Widgets/FormUI/components/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/FormUI/components/bws_logo.dart';
+import 'package:bws_agreement_creator/Widgets/FormUI/components/generate_pdf_button.dart';
 import 'package:bws_agreement_creator/Providers/auth_provider.dart';
 import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/reset_password_provider.dart';
+import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
 import 'package:bws_agreement_creator/utils/nip_validator.dart';
@@ -61,8 +62,7 @@ class LoginWidget extends HookConsumerWidget {
     final isInputValid =
         login.value.isValidEmail() && password.value.isNotEmpty;
 
-    return Scaffold(
-      backgroundColor: Colors.black,
+    return AppScaffold(
       body: SingleChildScrollView(
         child: Center(
           child: Container(

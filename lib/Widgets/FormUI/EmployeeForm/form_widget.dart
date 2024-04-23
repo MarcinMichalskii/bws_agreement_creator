@@ -1,10 +1,11 @@
 import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/selected_page_provider.dart';
 import 'package:bws_agreement_creator/Providers/upload_pdf_provider.dart';
-import 'package:bws_agreement_creator/FormUI/components/bws_logo.dart';
-import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';
-import 'package:bws_agreement_creator/FormUI/onboarding_information.dart';
+import 'package:bws_agreement_creator/Widgets/FormUI/components/bws_logo.dart';
+import 'package:bws_agreement_creator/Widgets/FormUI/components/select_date_button.dart';
+import 'package:bws_agreement_creator/Widgets/FormUI/onboarding_information.dart';
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
+import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
 import 'package:bws_agreement_creator/utils/preview_pdf_generator.dart';
@@ -79,8 +80,7 @@ class EmployeeFormWidget extends HookConsumerWidget {
       PreviewPdfGenerator.generatePreview(page);
     }
 
-    return Scaffold(
-      backgroundColor: Colors.black,
+    return AppScaffold(
       body: SingleChildScrollView(
         physics: ref.watch(scrollEnabled)
             ? const AlwaysScrollableScrollPhysics()

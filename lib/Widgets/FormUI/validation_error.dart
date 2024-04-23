@@ -1,4 +1,4 @@
-import 'package:bws_agreement_creator/FormUI/components/generate_pdf_button.dart';
+import 'package:bws_agreement_creator/Widgets/FormUI/components/generate_pdf_button.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 

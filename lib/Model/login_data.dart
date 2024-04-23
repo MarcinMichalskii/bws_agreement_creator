@@ -116,5 +116,6 @@ class ProfileData {
     } else if (invalidStudentId) {
       return 'Numer legitymacji studenckiej (${studentId ?? ''}) w Twoim profilu Sinch zawiera niedozwolone znaki. Popraw go poniżej. Numer może zawierać tylko cyfry spacje i znak "/"';
     }
+    return null;
   }
 }

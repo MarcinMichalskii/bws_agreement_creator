@@ -1,4 +1,4 @@
-import 'package:bws_agreement_creator/FormUI/Login/reset_password_widget.dart';
+import 'package:bws_agreement_creator/Widgets/FormUI/Login/reset_password_widget.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
 import 'package:flutter/material.dart';

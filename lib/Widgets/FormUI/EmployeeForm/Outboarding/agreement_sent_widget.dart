@@ -1,8 +1,9 @@
 import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/upload_pdf_provider.dart';
-import 'package:bws_agreement_creator/FormUI/components/bws_logo.dart';
-import 'package:bws_agreement_creator/FormUI/components/select_date_button.dart';
-import 'package:bws_agreement_creator/FormUI/text_with_link_widget.dart';
+import 'package:bws_agreement_creator/Widgets/FormUI/components/bws_logo.dart';
+import 'package:bws_agreement_creator/Widgets/FormUI/components/select_date_button.dart';
+import 'package:bws_agreement_creator/Widgets/FormUI/text_with_link_widget.dart';
+import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
 import 'package:bws_agreement_creator/utils/uint8list_extension.dart';
@@ -13,8 +14,7 @@ class AgreementSentWidget extends HookConsumerWidget {
   const AgreementSentWidget({super.key});
   @override
   Widget build(BuildContext context, ref) {
-    return Scaffold(
-      backgroundColor: Colors.black,
+    return AppScaffold(
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 16),
         child: Center(
