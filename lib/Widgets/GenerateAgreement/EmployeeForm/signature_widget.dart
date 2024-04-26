@@ -1,5 +1,5 @@
-import 'package:bws_agreement_creator/Widgets/FormUI/EmployeeForm/form_widget.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/text_with_link_widget.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/text_with_link_widget.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

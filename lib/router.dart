@@ -1,10 +1,12 @@
 import 'dart:async';
 
-import 'package:bws_agreement_creator/Widgets/FormUI/EmployeeForm/Outboarding/agreement_sent_widget.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/EmployeeForm/form_widget.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/EmployeeForm/update_student_id_widget.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/Login/login_widget.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/Outboarding/agreement_sent_widget.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/update_student_id_widget.dart';
+import 'package:bws_agreement_creator/Widgets/Login/login_widget.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_trainings_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/SideMenu/side_menu.dart';
+import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:bws_agreement_creator/utils/app_state_provider.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/foundation.dart';
@@ -24,7 +26,10 @@ final routerProvider = Provider<GoRouter>((ref) {
               return Container(
                 color: CustomColors.mainBackground,
                 child: Row(
-                  children: [const SideMenu(), Expanded(flex: 5, child: child)],
+                  children: [
+                    if (kIsWeb) const SideMenu(),
+                    Expanded(flex: 5, child: child)
+                  ],
                 ),
               );
             },
@@ -38,7 +43,6 @@ class RouterNotifier extends ChangeNotifier {
       appStateProvider.select((value) => Object.hashAll([
             value.isLoggedIn,
             value.shouldUpdateStudentIdNumber,
-            value.sentAgreement
           ])),
       (_, __) {
         notifyListeners();
@@ -49,15 +53,16 @@ class RouterNotifier extends ChangeNotifier {
 
   FutureOr<String?> _redirectLogic(BuildContext context, GoRouterState state) {
     final appState = _ref.read(appStateProvider);
-    if (appState.sentAgreement) {
-      return '/outboarding';
-    } else if (appState.isLoggedIn && appState.shouldUpdateStudentIdNumber) {
-      return '/updateStudentId';
-    } else if (!appState.isLoggedIn) {
+
+    if (!appState.isLoggedIn) {
       return '/login';
-    } else {
-      return '/';
+    } else if (appState.isLoggedIn && state.fullPath == '/login' ||
+        state.fullPath == '/updateStudentId') {
+      return appState.shouldUpdateStudentIdNumber
+          ? '/updateStudentId'
+          : '/employeeFormWidget';
     }
+    return null;
   }
 }
 
@@ -74,26 +79,51 @@ final _loginRoutes = [
 
 final _mainRoutes = [
   GoRoute(
-      path: '/',
+      path: '/employeeFormWidget',
+      name: 'employeeFormWidget',
       pageBuilder: (context, state) {
         return wrapWithPage(context, state, EmployeeFormWidget());
       }),
   GoRoute(
       path: '/updateStudentId',
+      name: 'updateStudentId',
       pageBuilder: (context, state) {
         return wrapWithPage(context, state, UpdateStudentIdWidget());
       }),
   GoRoute(
       path: '/outboarding',
+      name: 'outboarding',
       pageBuilder: (context, state) {
         return wrapWithPage(context, state, const AgreementSentWidget());
       }),
+  GoRoute(
+      path: '/manageTrainings',
+      name: 'manageTrainings',
+      pageBuilder: (context, state) =>
+          wrapWithPage(context, state, const ManageTraingsScaffold()))
 ];
 
 Page wrapWithPage(
     BuildContext buildContext, GoRouterState state, Widget widget) {
-  if (!kIsWeb) {
+  if (!kIsWeb &&
+      !(state.fullPath != '/login') &&
+      !(state.fullPath != '/employeeFormWidget')) {
     return MaterialPage(key: state.pageKey, child: widget);
   }
   return NoTransitionPage(child: widget);
+}
+
+extension RouterHelper on BuildContext {
+  void pushScreen(
+    String screen, {
+    Map<String, String> params = const <String, String>{},
+    Map<String, dynamic> queryParams = const <String, dynamic>{},
+    Object? extra,
+  }) =>
+      GoRouter.of(this).pushNamed(
+        screen,
+        pathParameters: params,
+        queryParameters: queryParams,
+        extra: extra,
+      );
 }

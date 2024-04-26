@@ -1,7 +1,7 @@
-import 'package:bws_agreement_creator/Widgets/FormUI/Login/no_password_help_widget.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/components/bordered_input.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/components/bws_logo.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/components/generate_pdf_button.dart';
+import 'package:bws_agreement_creator/Widgets/Login/no_password_help_widget.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bws_logo.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/generate_pdf_button.dart';
 import 'package:bws_agreement_creator/Providers/auth_provider.dart';
 import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/reset_password_provider.dart';
@@ -13,7 +13,7 @@ import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart';
-import 'package:google_sign_in_web/google_sign_in_web.dart' as web;
+// import 'package:google_sign_in_web/google_sign_in_web.dart' as web;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LoginWidget extends HookConsumerWidget {
@@ -50,10 +50,10 @@ class LoginWidget extends HookConsumerWidget {
     final login = useState('');
     final password = useState('');
 
-    final googleAuthButton = useMemoized(
-        () => (GoogleSignInPlatform.instance as web.GoogleSignInPlugin)
-            .renderButton(),
-        []);
+    // final googleAuthButton = useMemoized(
+    //     () => (GoogleSignInPlatform.instance as web.GoogleSignInPlugin)
+    //         .renderButton(),
+    //     []);
 
     final authorize = useCallback(() {
       ref.read(authProvider.notifier).login(login.value, password.value);
@@ -62,7 +62,8 @@ class LoginWidget extends HookConsumerWidget {
     final isInputValid =
         login.value.isValidEmail() && password.value.isNotEmpty;
 
-    return AppScaffold(
+    return Scaffold(
+      backgroundColor: CustomColors.mainBackground,
       body: SingleChildScrollView(
         child: Center(
           child: Container(
@@ -111,8 +112,8 @@ class LoginWidget extends HookConsumerWidget {
                         }
                       },
                       text: 'Login'),
-              if (false)
-                Padding(padding: EdgeInsets.all(16), child: googleAuthButton),
+              // if (false)
+              // Padding(padding: EdgeInsets.all(16), child: googleAuthButton),
               const NoPasswordHelpWidget()
             ]),
           ),

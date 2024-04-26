@@ -1,9 +1,9 @@
-import 'package:bws_agreement_creator/Widgets/FormUI/EmployeeForm/default_signature_widget.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/EmployeeForm/form_widget.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/default_signature_widget.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/components/bordered_input.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/components/form_toggle.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/components/select_date_button.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/form_toggle.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/select_date_button.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/nip_validator.dart';
 import 'package:flutter/material.dart';

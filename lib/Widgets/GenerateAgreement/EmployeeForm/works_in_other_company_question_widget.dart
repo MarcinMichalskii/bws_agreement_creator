@@ -1,7 +1,7 @@
-import 'package:bws_agreement_creator/Widgets/FormUI/EmployeeForm/form_widget.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/selected_page_provider.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/components/select_date_button.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/select_date_button.dart';
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';

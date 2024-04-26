@@ -1,8 +1,8 @@
 import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/update_student_id_provider.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/components/bordered_input.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/components/bws_logo.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/components/generate_pdf_button.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bws_logo.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/generate_pdf_button.dart';
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:bws_agreement_creator/utils/app_state_provider.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';

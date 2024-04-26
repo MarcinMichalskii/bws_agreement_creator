@@ -15,13 +15,10 @@ extension SvgAsPng on String {
 
     final svgDrawableRoot =
         await vg.loadPicture(SvgStringLoader(svgString), null);
-    // same thing
 
-    // Convert to ui.Image. toImage() takes width and height as parameters
-    // you need to find the best size to suit your needs and take into account the screen DPI
-    final image = await svgDrawableRoot.picture.toImage(
-        int.parse(widthAttribute.toString()),
-        int.parse(heightAttribute.toString()));
+    final int width = double.parse(widthAttribute).round();
+    final int height = double.parse(heightAttribute).round();
+    final image = await svgDrawableRoot.picture.toImage(width, height);
     ByteData? bytes = await image.toByteData(format: ImageByteFormat.png);
 
     return bytes?.buffer.asUint8List();

@@ -1,16 +1,18 @@
 import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/selected_page_provider.dart';
 import 'package:bws_agreement_creator/Providers/upload_pdf_provider.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/components/bws_logo.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/components/select_date_button.dart';
-import 'package:bws_agreement_creator/Widgets/FormUI/onboarding_information.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bws_logo.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/select_date_button.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/onboarding_information.dart';
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
+import 'package:bws_agreement_creator/utils/app_state_provider.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
 import 'package:bws_agreement_creator/utils/preview_pdf_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final scrollEnabled = StateProvider<bool>((ref) {
@@ -58,6 +60,12 @@ class EmployeeFormWidget extends HookConsumerWidget {
             content: Text(
               next.error!.message,
             )));
+      }
+    });
+
+    ref.listen(appStateProvider, (previous, next) {
+      if (next.sentAgreement) {
+        context.pushNamed('outboarding');
       }
     });
 
