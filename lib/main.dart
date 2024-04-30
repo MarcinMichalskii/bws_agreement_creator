@@ -59,6 +59,8 @@ Future<void> main() async {
           container: container, child: const MyApp())));
 }
 
+final GlobalKey<ScaffoldMessengerState> scaffoldKey = GlobalKey();
+
 class MyApp extends HookConsumerWidget {
   const MyApp({super.key});
 
@@ -66,6 +68,9 @@ class MyApp extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final router = ref.watch(routerProvider);
 
-    return MaterialApp.router(routerConfig: router);
+    return MaterialApp.router(
+      routerConfig: router,
+      scaffoldMessengerKey: scaffoldKey,
+    );
   }
 }

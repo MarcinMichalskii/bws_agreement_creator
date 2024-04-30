@@ -4,9 +4,12 @@ import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/Out
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/update_student_id_widget.dart';
 import 'package:bws_agreement_creator/Widgets/Login/login_widget.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapter_details.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_trainings_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/SideMenu/side_menu.dart';
-import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/chapters_list_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/videos_list_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/watch_video_scaffold.dart';
 import 'package:bws_agreement_creator/utils/app_state_provider.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/foundation.dart';
@@ -97,8 +100,56 @@ final _mainRoutes = [
         return wrapWithPage(context, state, const AgreementSentWidget());
       }),
   GoRoute(
+      path: '/trainings',
+      name: 'trainings',
+      pageBuilder: (context, state) {
+        return wrapWithPage(context, state, const ChaptersListScaffold());
+      },
+      routes: [
+        GoRoute(
+            path: ':id1',
+            name: 'videosList',
+            pageBuilder: (context, state) {
+              final chapterId = state.pathParameters['id1'] ?? '';
+              final chapterName = state.uri.queryParameters['name'] ?? '';
+              return wrapWithPage(
+                  context,
+                  state,
+                  VideoListScaffold(
+                    chapterId: chapterId,
+                    chapterName: chapterName,
+                  ));
+            },
+            routes: [
+              GoRoute(
+                  path: ':id2',
+                  name: 'watchVideo',
+                  pageBuilder: (context, state) {
+                    final videoId = state.pathParameters['id2'] ?? '';
+                    final videoTitle = state.uri.queryParameters['title'] ?? '';
+                    final videoUrl = state.uri.queryParameters['url'] ?? '';
+                    return wrapWithPage(
+                        context, state, WatchVideoScaffold(videoUrl: videoUrl));
+                  }),
+            ]),
+      ]),
+  GoRoute(
       path: '/manageTrainings',
       name: 'manageTrainings',
+      routes: [
+        GoRoute(
+            path: ':id',
+            name: 'manageChapterDetails',
+            pageBuilder: (context, state) {
+              final chapterId = state.pathParameters['id'] ?? '';
+              final chapterTitle = state.uri.queryParameters['title'] ?? '';
+              return wrapWithPage(
+                  context,
+                  state,
+                  ManageChapterDetailsScaffold(
+                      chapterId: chapterId, chapterTitle: chapterTitle));
+            }),
+      ],
       pageBuilder: (context, state) =>
           wrapWithPage(context, state, const ManageTraingsScaffold()))
 ];
@@ -108,9 +159,9 @@ Page wrapWithPage(
   if (!kIsWeb &&
       !(state.fullPath != '/login') &&
       !(state.fullPath != '/employeeFormWidget')) {
-    return MaterialPage(key: state.pageKey, child: widget);
+    return MaterialPage(key: state.pageKey, child: widget, name: state.name);
   }
-  return NoTransitionPage(child: widget);
+  return NoTransitionPage(child: widget, key: state.pageKey, name: state.name);
 }
 
 extension RouterHelper on BuildContext {
@@ -120,7 +171,7 @@ extension RouterHelper on BuildContext {
     Map<String, dynamic> queryParams = const <String, dynamic>{},
     Object? extra,
   }) =>
-      GoRouter.of(this).pushNamed(
+      GoRouter.of(this).goNamed(
         screen,
         pathParameters: params,
         queryParameters: queryParams,

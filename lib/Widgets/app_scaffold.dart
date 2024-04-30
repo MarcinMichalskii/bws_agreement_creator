@@ -1,6 +1,7 @@
-import 'package:bws_agreement_creator/Providers/snackbar_message_provider.dart';
+import 'package:bws_agreement_creator/Providers/snackbar_handler.dart';
 import 'package:bws_agreement_creator/Widgets/SideMenu/side_menu.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
+import 'package:bws_agreement_creator/utils/consts.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,12 +20,12 @@ class AppScaffold extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(snackbarProvider, (previous, next) {
-      if (next == null) return;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: next.color ?? CustomColors.applicationColorMain,
-          content: Text(next.message, style: const TextStyle(fontSize: 16))));
-    });
+    // ref.listen(snackbarProvider, (previous, next) {
+    //   if (next == null) return;
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       backgroundColor: next.color ?? CustomColors.applicationColorMain,
+    //       content: Text(next.message, style: const TextStyle(fontSize: 16))));
+    // });
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: !kIsWeb,
@@ -36,7 +37,15 @@ class AppScaffold extends HookConsumerWidget {
         actions: actions,
       ),
       drawer: kIsWeb ? null : const SideMenu(),
-      body: body,
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+              constraints:
+                  const BoxConstraints(maxWidth: Consts.defaultMaxWidth),
+              child: body),
+        ],
+      ),
       backgroundColor: CustomColors.mainBackground,
     );
   }

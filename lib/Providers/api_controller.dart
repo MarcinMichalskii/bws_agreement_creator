@@ -19,7 +19,7 @@ class APIResponseState<T> {
   final bool isLoading;
   final T? data;
   final CostRegisterError? error;
-  final Map<String, String>? params;
+  final Map<String, dynamic>? params;
 }
 
 class ApiController<T> {
@@ -28,9 +28,43 @@ class ApiController<T> {
   ApiController(this.fromJsonFunction);
 
   Future<APIResponseState<T>> performPost(
-      {required Map<String, String> params, required String url}) async {
+      {required Map<String, dynamic> params, required String url}) async {
     try {
       Response response = await dio.post(url,
+          data: params,
+          options: Options(headers: {'Content-Type': 'application/json'}));
+      if (response.statusCode != 200) {
+        return APIResponseState(
+            error: CostRegisterError.fromJson(response.data), params: params);
+      }
+      return APIResponseState(
+          data: fromJsonFunction(response.data), params: params);
+    } catch (error) {
+      return handleError(error);
+    }
+  }
+
+  Future<APIResponseState<T>> performPut(
+      {required Map<String, dynamic> params, required String url}) async {
+    try {
+      Response response = await dio.put(url,
+          data: params,
+          options: Options(headers: {'Content-Type': 'application/json'}));
+      if (response.statusCode != 200) {
+        return APIResponseState(
+            error: CostRegisterError.fromJson(response.data), params: params);
+      }
+      return APIResponseState(
+          data: fromJsonFunction(response.data), params: params);
+    } catch (error) {
+      return handleError(error);
+    }
+  }
+
+  Future<APIResponseState<T>> performDelete(
+      {required Map<String, String> params, required String url}) async {
+    try {
+      Response response = await dio.delete(url,
           data: params,
           options: Options(headers: {'Content-Type': 'application/json'}));
       if (response.statusCode != 200) {
@@ -49,32 +83,38 @@ class ApiController<T> {
       return APIResponseState(
           error: CostRegisterError(error.response?.data['message']));
     } catch (error) {
+      print(error.toString());
       return APIResponseState(
         error: CostRegisterError("Coś poszło nie tak"),
       );
     }
   }
 
-  Future<APIResponseState<T>> performGet({required String url}) async {
+  Future<APIResponseState<T>> performGet(
+      {Map<String, String> params = const {}, required String url}) async {
     try {
       Response response = await dio.get(url,
-          options: Options(headers: {'Content-Type': 'application/json'}));
+          options: Options(headers: {'Content-Type': 'application/json'}),
+          queryParameters: params);
       if (response.statusCode != 200) {
         return APIResponseState(
           error: CostRegisterError.fromJson(response.data),
+          params: params,
         );
       }
       return APIResponseState(
-        data: fromJsonFunction(response.data),
-      );
+          data: fromJsonFunction(response.data), params: params);
     } catch (error) {
       if (error is DioException && error.response?.data != null) {
         return APIResponseState(
-            error: CostRegisterError.fromJson((error).response?.data));
+            error: CostRegisterError.fromJson((error).response?.data),
+            params: params);
       } else {
         return APIResponseState(
-          error: CostRegisterError("Coś poszło nie tak $url"),
-        );
+            error: CostRegisterError(
+              "Coś poszło nie tak $url",
+            ),
+            params: params);
       }
     }
   }

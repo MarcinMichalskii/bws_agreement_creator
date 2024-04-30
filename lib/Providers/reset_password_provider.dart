@@ -25,6 +25,6 @@ class ResetPasswordNotifier extends StateNotifier<APIResponseState<String?>> {
 
 class Dupa {
   static String? elo(Map<String, dynamic> elo) {
-    return "XD";
+    return "jebacpis";
   }
 }

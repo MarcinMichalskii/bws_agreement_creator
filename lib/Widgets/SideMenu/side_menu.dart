@@ -39,10 +39,12 @@ class SideMenu extends HookConsumerWidget {
             isCollapsed: false,
             title: 'Szkolenia',
             icon: Icons.school_outlined,
-            onTap: () {}),
+            onTap: () {
+              context.pushScreen('trainings');
+            }),
         DrawerListTile(
             isCollapsed: false,
-            title: 'Zarządzaj szkoleniamiii',
+            title: 'Zarządzaj szkoleniami',
             icon: Icons.video_settings_outlined,
             onTap: () {
               context.pushScreen('manageTrainings');

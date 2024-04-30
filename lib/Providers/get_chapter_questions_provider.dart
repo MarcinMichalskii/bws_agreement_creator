@@ -1,0 +1,51 @@
+import 'package:bws_agreement_creator/Model/chapter_question_data.dart';
+import 'package:bws_agreement_creator/Providers/add_question_provider.dart';
+import 'package:bws_agreement_creator/Providers/api_controller.dart';
+import 'package:bws_agreement_creator/Providers/delete_question_provider.dart';
+import 'package:bws_agreement_creator/Providers/update_question_provider.dart';
+import 'package:bws_agreement_creator/utils/base_url.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final getChapterQuestionsProvider = StateNotifierProvider.family<
+    GetChapterQuestionsNotifier,
+    APIResponseState<List<ChapterQuestionData>>,
+    String>((ref, chapterId) {
+  return GetChapterQuestionsNotifier(ref, chapterId);
+});
+
+class GetChapterQuestionsNotifier
+    extends StateNotifier<APIResponseState<List<ChapterQuestionData>>> {
+  StateNotifierProviderRef<GetChapterQuestionsNotifier,
+      APIResponseState<List<ChapterQuestionData>>> ref;
+  final String chapterId;
+  GetChapterQuestionsNotifier(this.ref, this.chapterId)
+      : super(APIResponseState()) {
+    ref.listen(addQuestionProvider, (previous, next) {
+      final chapterId = next.params?['chapterId'];
+      if (next.data != null && chapterId != null) {
+        getChapterQuestions(chapterId);
+      }
+    });
+    ref.listen(deleteQuestionProvider, (previous, next) {
+      if (next.data != null) {
+        getChapterQuestions(next.params?['chapterId'] ?? '');
+      }
+    });
+
+    ref.listen(updateQuestionProvider, (previous, next) {
+      if (next.data != null) {
+        getChapterQuestions(next.params?['chapterId'] ?? '');
+      }
+    });
+  }
+
+  void getChapterQuestions(String chapterId) async {
+    state = APIResponseState(isLoading: true, data: state.data);
+
+    final response = await ApiController(ChapterQuestionData.listFromJson)
+        .performGet(
+            url: "$baseUrl/getQuestionsForChapter",
+            params: {"chapterId": chapterId});
+    state = response;
+  }
+}
