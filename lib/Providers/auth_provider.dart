@@ -1,59 +1,44 @@
 import 'package:bws_agreement_creator/Model/authorization_data.dart';
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
+import 'package:bws_agreement_creator/utils/user_data_helper.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final authProvider =
-    StateNotifierProvider<AuthNotifier, ParsedResponseState<AuthorizationData>>(
+    StateNotifierProvider<AuthNotifier, APIResponseState<AuthorizationData>>(
         (ref) {
   return AuthNotifier(ref);
 });
 
-class AuthNotifier
-    extends StateNotifier<ParsedResponseState<AuthorizationData>> {
-  StateNotifierProviderRef<AuthNotifier, ParsedResponseState<AuthorizationData>>
+class AuthNotifier extends StateNotifier<APIResponseState<AuthorizationData>> {
+  StateNotifierProviderRef<AuthNotifier, APIResponseState<AuthorizationData>>
       ref;
-  AuthNotifier(this.ref) : super(ParsedResponseState());
+  AuthNotifier(this.ref) : super(APIResponseState());
 
   void login(String login, String password) async {
-    state = ParsedResponseState(isLoading: true);
-    final response = await ApiController().performPost(params: {
+    final helper = UserDataHelper();
+    state = APIResponseState(isLoading: true);
+    final response =
+        await ApiController(AuthorizationData.fromJson).performPost(params: {
       "login": login,
       "password": password,
     }, url: "$baseUrl/login");
-
-    if (response.error != null) {
-      state = ParsedResponseState(error: response.error);
-      return;
+    if (response.data != null) {
+      await helper.storeTokens(response.data!);
     }
-
-    try {
-      final cookie = AuthorizationData.fromJson(response.data);
-
-      state = ParsedResponseState(data: cookie);
-    } catch (error) {
-      state = ParsedResponseState(
-          error: CostRegisterError("Nie udało się zalogować"));
-    }
+    state = response;
   }
 
   void loginWithGoogleToken(String idToken) async {
-    state = ParsedResponseState(isLoading: true);
-    final response = await ApiController().performPost(
-        params: {"idToken": idToken}, url: "$baseUrl/loginWithGoogle");
+    final helper = UserDataHelper();
+    state = APIResponseState(isLoading: true);
+    final response = await ApiController(AuthorizationData.fromJson)
+        .performPost(
+            params: {"idToken": idToken}, url: "$baseUrl/loginWithGoogle");
 
-    if (response.error != null) {
-      state = ParsedResponseState(error: response.error);
-      return;
+    if (response.data != null) {
+      await helper.storeTokens(response.data!);
     }
-
-    try {
-      final cookie = AuthorizationData.fromJson(response.data);
-
-      state = ParsedResponseState(data: cookie);
-    } catch (error) {
-      state = ParsedResponseState(
-          error: CostRegisterError("Nie udało się zalogować"));
-    }
+    state = response;
   }
 }

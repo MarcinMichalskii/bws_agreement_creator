@@ -9,6 +9,8 @@ part of 'authorization_data.dart';
 abstract class _$AuthorizationDataCWProxy {
   AuthorizationData accessToken(String accessToken);
 
+  AuthorizationData refreshToken(String refreshToken);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AuthorizationData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -17,6 +19,7 @@ abstract class _$AuthorizationDataCWProxy {
   /// ````
   AuthorizationData call({
     String? accessToken,
+    String? refreshToken,
   });
 }
 
@@ -31,6 +34,10 @@ class _$AuthorizationDataCWProxyImpl implements _$AuthorizationDataCWProxy {
       this(accessToken: accessToken);
 
   @override
+  AuthorizationData refreshToken(String refreshToken) =>
+      this(refreshToken: refreshToken);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AuthorizationData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -40,6 +47,7 @@ class _$AuthorizationDataCWProxyImpl implements _$AuthorizationDataCWProxy {
   /// ````
   AuthorizationData call({
     Object? accessToken = const $CopyWithPlaceholder(),
+    Object? refreshToken = const $CopyWithPlaceholder(),
   }) {
     return AuthorizationData(
       accessToken:
@@ -47,6 +55,11 @@ class _$AuthorizationDataCWProxyImpl implements _$AuthorizationDataCWProxy {
               ? _value.accessToken
               // ignore: cast_nullable_to_non_nullable
               : accessToken as String,
+      refreshToken:
+          refreshToken == const $CopyWithPlaceholder() || refreshToken == null
+              ? _value.refreshToken
+              // ignore: cast_nullable_to_non_nullable
+              : refreshToken as String,
     );
   }
 }

@@ -18,6 +18,7 @@ class ProfileData {
   String? pesel;
   String? studentId;
   bool hasStudentIdPhoto;
+  bool isAdmin;
 
   DateTime? get birthDateParsed {
     try {
@@ -37,7 +38,8 @@ class ProfileData {
       required this.idNumber,
       required this.pesel,
       required this.studentId,
-      required this.hasStudentIdPhoto});
+      required this.hasStudentIdPhoto,
+      required this.isAdmin});
 
   factory ProfileData.fromJson(Map<String, dynamic> json) {
     return ProfileData(
@@ -53,6 +55,7 @@ class ProfileData {
       pesel: _cleanString(json['pesel']),
       studentId: _cleanString(json['studentId']),
       hasStudentIdPhoto: json['hasStudentIdPhoto'],
+      isAdmin: json['isAdmin'],
     );
   }
 
@@ -116,5 +119,6 @@ class ProfileData {
     } else if (invalidStudentId) {
       return 'Numer legitymacji studenckiej (${studentId ?? ''}) w Twoim profilu Sinch zawiera niedozwolone znaki. Popraw go poniżej. Numer może zawierać tylko cyfry spacje i znak "/"';
     }
+    return null;
   }
 }
