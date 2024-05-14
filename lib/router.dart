@@ -41,7 +41,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                 color: CustomColors.mainBackground,
                 child: Row(
                   children: [
-                    if (kIsWeb) const SideMenu(),
+                    if (isDekstop(context)) const SideMenu(),
                     Expanded(flex: 5, child: child)
                   ],
                 ),

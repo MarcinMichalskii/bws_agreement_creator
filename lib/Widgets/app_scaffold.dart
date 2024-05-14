@@ -23,7 +23,7 @@ class AppScaffold extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: !kIsWeb,
+        automaticallyImplyLeading: !isDekstop(context),
         backgroundColor: CustomColors.mainBackground,
         elevation: 0,
         iconTheme: const IconThemeData(color: CustomColors.gray),
@@ -32,15 +32,17 @@ class AppScaffold extends HookConsumerWidget {
         actions: actions,
       ),
       drawer: isDekstop(context) ? null : const SideMenu(),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-              constraints:
-                  const BoxConstraints(maxWidth: Consts.defaultMaxWidth),
-              child: body),
-        ],
-      ),
+      body: isDekstop(context)
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                    constraints:
+                        const BoxConstraints(maxWidth: Consts.defaultMaxWidth),
+                    child: body),
+              ],
+            )
+          : body,
       backgroundColor: CustomColors.mainBackground,
     );
   }
