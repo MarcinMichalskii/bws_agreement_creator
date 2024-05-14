@@ -64,8 +64,8 @@ class ManageChapterDetailsScaffold extends HookConsumerWidget with RouteAware {
     }, [chapterId]);
 
     useBuildEffect(() {
-      ref.read(videosProvider.notifier).getVideos(chapterId);
-      ref.read(questionsProvider.notifier).getChapterQuestions(chapterId);
+      ref.read(videosProvider.notifier).getVideos();
+      ref.read(questionsProvider.notifier).getChapterQuestions();
     }, []);
     return AppScaffold(
         title: "Rozdział $chapterTitle",

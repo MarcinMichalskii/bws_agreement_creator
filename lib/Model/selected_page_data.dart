@@ -94,7 +94,8 @@ extension TempalteDataForPage on SelectedPage {
         birthDate: '2000-09-06',
         passportId: 'CED XDDDD',
         idNumber: 'FED XDDDD',
-        hasStudentIdPhoto: false);
+        hasStudentIdPhoto: false,
+        isAdmin: false);
     final newFormData = NewFormData(
         loginData: loginData,
         bwsSignatureData: signatureData,

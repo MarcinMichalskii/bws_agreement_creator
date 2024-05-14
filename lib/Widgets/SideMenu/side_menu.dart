@@ -42,13 +42,14 @@ class SideMenu extends HookConsumerWidget {
             onTap: () {
               context.pushScreen('trainings');
             }),
-        DrawerListTile(
-            isCollapsed: false,
-            title: 'Zarządzaj szkoleniami',
-            icon: Icons.video_settings_outlined,
-            onTap: () {
-              context.pushScreen('manageTrainings');
-            }),
+        if (ref.watch(profileProvider).data?.isAdmin == true)
+          DrawerListTile(
+              isCollapsed: false,
+              title: 'Zarządzaj szkoleniami',
+              icon: Icons.video_settings_outlined,
+              onTap: () {
+                context.pushScreen('manageTrainings');
+              }),
         Spacer(),
         Container(
           margin: const EdgeInsets.only(bottom: 16),

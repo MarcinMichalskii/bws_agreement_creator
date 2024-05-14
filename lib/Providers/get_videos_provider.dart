@@ -20,17 +20,17 @@ class GetVideosNotifier
     ref.listen(addVideoProvider, (previous, next) {
       final chapterId = next.params?['chapterId'];
       if (next.data != null && chapterId == this.chapterId) {
-        getVideos(chapterId);
+        getVideos();
       }
     });
     ref.listen(deleteVideoProvider, (previous, next) {
       if (next.data != null && next.params!['chapterId'] == chapterId) {
-        getVideos(next.params!['chapterId']!);
+        getVideos();
       }
     });
   }
 
-  void getVideos(String chapterId) async {
+  void getVideos() async {
     state = APIResponseState(isLoading: true, data: state.data);
 
     final response = await ApiController(VideoData.listFromJson).performGet(

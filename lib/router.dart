@@ -7,8 +7,9 @@ import 'package:bws_agreement_creator/Widgets/Login/login_widget.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapter_details.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_trainings_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/SideMenu/side_menu.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/chapter_details_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/chapter_examine_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/chapters_list_scaffold.dart';
-import 'package:bws_agreement_creator/Widgets/Trainings/videos_list_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/watch_video_scaffold.dart';
 import 'package:bws_agreement_creator/utils/app_state_provider.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
@@ -16,6 +17,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+bool isDekstop(context) {
+  if (kIsWeb) {
+    const mobileScreenWidth = 600.0;
+    double screenWidth = MediaQuery.of(context).size.width;
+    return screenWidth > mobileScreenWidth;
+  } else {
+    return false;
+  }
+}
 
 final routerProvider = Provider<GoRouter>((ref) {
   final router = RouterNotifier(ref);
@@ -115,12 +126,24 @@ final _mainRoutes = [
               return wrapWithPage(
                   context,
                   state,
-                  VideoListScaffold(
+                  ChapterDetailsScaffold(
                     chapterId: chapterId,
                     chapterName: chapterName,
                   ));
             },
             routes: [
+              GoRoute(
+                  path: 'examine',
+                  name: 'examine',
+                  pageBuilder: (context, state) {
+                    final chapterId = state.pathParameters['id1'] ?? '';
+                    final chapterName = state.uri.queryParameters['name'] ?? '';
+                    return wrapWithPage(
+                        context,
+                        state,
+                        ChapterExamineScaffold(
+                            chapterId: chapterId, chapterName: chapterName));
+                  }),
               GoRoute(
                   path: ':id2',
                   name: 'watchVideo',
@@ -129,7 +152,14 @@ final _mainRoutes = [
                     final videoTitle = state.uri.queryParameters['title'] ?? '';
                     final videoUrl = state.uri.queryParameters['url'] ?? '';
                     return wrapWithPage(
-                        context, state, WatchVideoScaffold(videoUrl: videoUrl));
+                        context,
+                        state,
+                        WatchVideoScaffold(
+                          videoUrl: videoUrl,
+                          videoTitle: videoTitle,
+                          videoId: videoId,
+                          chapterId: state.pathParameters['id1'] ?? '',
+                        ));
                   }),
             ]),
       ]),

@@ -20,7 +20,7 @@ class ChaptersListScaffold extends HookConsumerWidget {
 
     final onChapterOpen = useCallback((ChapterData chapter) {
       context.pushScreen('videosList',
-          params: {'id1': chapter.id}, queryParams: {'title': chapter.name});
+          params: {'id1': chapter.id}, queryParams: {'name': chapter.name});
     }, []);
 
     return AppScaffold(

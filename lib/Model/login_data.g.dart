@@ -17,6 +17,8 @@ abstract class _$ProfileDataCWProxy {
 
   ProfileData idNumber(String? idNumber);
 
+  ProfileData isAdmin(bool isAdmin);
+
   ProfileData name(String name);
 
   ProfileData passportId(String? passportId);
@@ -39,6 +41,7 @@ abstract class _$ProfileDataCWProxy {
     String? email,
     bool? hasStudentIdPhoto,
     String? idNumber,
+    bool? isAdmin,
     String? name,
     String? passportId,
     String? pesel,
@@ -70,6 +73,9 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
   ProfileData idNumber(String? idNumber) => this(idNumber: idNumber);
 
   @override
+  ProfileData isAdmin(bool isAdmin) => this(isAdmin: isAdmin);
+
+  @override
   ProfileData name(String name) => this(name: name);
 
   @override
@@ -98,6 +104,7 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
     Object? email = const $CopyWithPlaceholder(),
     Object? hasStudentIdPhoto = const $CopyWithPlaceholder(),
     Object? idNumber = const $CopyWithPlaceholder(),
+    Object? isAdmin = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
     Object? passportId = const $CopyWithPlaceholder(),
     Object? pesel = const $CopyWithPlaceholder(),
@@ -126,6 +133,10 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
           ? _value.idNumber
           // ignore: cast_nullable_to_non_nullable
           : idNumber as String?,
+      isAdmin: isAdmin == const $CopyWithPlaceholder() || isAdmin == null
+          ? _value.isAdmin
+          // ignore: cast_nullable_to_non_nullable
+          : isAdmin as bool,
       name: name == const $CopyWithPlaceholder() || name == null
           ? _value.name
           // ignore: cast_nullable_to_non_nullable

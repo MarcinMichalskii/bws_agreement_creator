@@ -23,23 +23,23 @@ class GetChapterQuestionsNotifier
     ref.listen(addQuestionProvider, (previous, next) {
       final chapterId = next.params?['chapterId'];
       if (next.data != null && chapterId != null) {
-        getChapterQuestions(chapterId);
+        getChapterQuestions();
       }
     });
     ref.listen(deleteQuestionProvider, (previous, next) {
       if (next.data != null) {
-        getChapterQuestions(next.params?['chapterId'] ?? '');
+        getChapterQuestions();
       }
     });
 
     ref.listen(updateQuestionProvider, (previous, next) {
       if (next.data != null) {
-        getChapterQuestions(next.params?['chapterId'] ?? '');
+        getChapterQuestions();
       }
     });
   }
 
-  void getChapterQuestions(String chapterId) async {
+  void getChapterQuestions() async {
     state = APIResponseState(isLoading: true, data: state.data);
 
     final response = await ApiController(ChapterQuestionData.listFromJson)
