@@ -42,4 +42,8 @@ class CheckExamineNotifier
       SnackbarHandler.showSnackBar(state.error!.message, color: Colors.red);
     }
   }
+
+  void resetState() {
+    state = APIResponseState();
+  }
 }

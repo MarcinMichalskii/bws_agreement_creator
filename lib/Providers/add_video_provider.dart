@@ -17,7 +17,8 @@ class AddVideoNotifier extends StateNotifier<APIResponseState<String?>> {
   void addVideo(String videoTitle, String videoUrl, String chapterId) async {
     state = APIResponseState(isLoading: true);
 
-    state = await ApiController(Dupa.elo).performPost(params: {
+    state =
+        await ApiController(NoDataResponseParser.parse).performPost(params: {
       "videoName": videoTitle,
       'videoUrl': videoUrl,
       'chapterId': chapterId,

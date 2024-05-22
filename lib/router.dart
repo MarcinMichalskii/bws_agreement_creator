@@ -5,7 +5,7 @@ import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/for
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/update_student_id_widget.dart';
 import 'package:bws_agreement_creator/Widgets/Login/login_widget.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapter_details.dart';
-import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_trainings_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapters_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/SideMenu/side_menu.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/chapter_details_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/chapter_examine_scaffold.dart';
@@ -19,8 +19,10 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 bool isDekstop(context) {
+  print(MediaQuery.of(context).size.width);
+
   if (kIsWeb) {
-    const mobileScreenWidth = 600.0;
+    const mobileScreenWidth = 1023.0;
     double screenWidth = MediaQuery.of(context).size.width;
     return screenWidth > mobileScreenWidth;
   } else {
@@ -181,7 +183,7 @@ final _mainRoutes = [
             }),
       ],
       pageBuilder: (context, state) =>
-          wrapWithPage(context, state, const ManageTraingsScaffold()))
+          wrapWithPage(context, state, const ManageChaptersScaffold()))
 ];
 
 Page wrapWithPage(

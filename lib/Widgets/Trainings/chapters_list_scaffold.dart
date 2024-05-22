@@ -25,8 +25,8 @@ class ChaptersListScaffold extends HookConsumerWidget {
 
     return AppScaffold(
       title: "Lista szkoleń",
-      body:
-          ChaptersListWidget(chapters: chapters, onChapterOpen: onChapterOpen),
+      body: ChaptersListWidget(
+          lockUnpassed: true, chapters: chapters, onChapterOpen: onChapterOpen),
     );
   }
 }

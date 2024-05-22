@@ -17,7 +17,8 @@ class AddChapterNotifier extends StateNotifier<APIResponseState<String?>> {
   void addChapter(String chapterTitle) async {
     state = APIResponseState(isLoading: true);
 
-    state = await ApiController(Dupa.elo).performPost(params: {
+    state =
+        await ApiController(NoDataResponseParser.parse).performPost(params: {
       "name": chapterTitle,
     }, url: "$baseUrl/addChapter");
 

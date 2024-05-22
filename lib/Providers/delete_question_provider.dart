@@ -20,7 +20,7 @@ class DeleteQuestionNotifier extends StateNotifier<APIResponseState<String?>> {
       {required String questionId, required String chapterId}) async {
     state = APIResponseState(isLoading: true);
 
-    state = await ApiController(Dupa.elo).performDelete(
+    state = await ApiController(NoDataResponseParser.parse).performDelete(
         params: {"questionId": questionId, "chapterId": chapterId},
         url: "$baseUrl/deleteQuestionForChapter");
 

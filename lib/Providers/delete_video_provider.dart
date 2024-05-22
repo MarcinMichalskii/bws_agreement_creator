@@ -18,7 +18,7 @@ class DeleteVideoNotifier extends StateNotifier<APIResponseState<String?>> {
   void deleteVideo({required String videoId, required String chapterId}) async {
     state = APIResponseState(isLoading: true);
 
-    state = await ApiController(Dupa.elo).performDelete(
+    state = await ApiController(NoDataResponseParser.parse).performDelete(
         params: {"videoId": videoId, "chapterId": chapterId},
         url: "$baseUrl/deleteVideo");
 

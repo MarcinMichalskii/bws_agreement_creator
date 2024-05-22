@@ -16,15 +16,15 @@ class ResetPasswordNotifier extends StateNotifier<APIResponseState<String?>> {
   void resetPassword(String email) async {
     state = APIResponseState(isLoading: true);
 
-    await ApiController(Dupa.elo).performPost(params: {
+    await ApiController(NoDataResponseParser.parse).performPost(params: {
       "email": email,
     }, url: "$baseUrl/resetPassword");
     state = APIResponseState(data: "Hasło zresetowane, sprawdź email");
   }
 }
 
-class Dupa {
-  static String? elo(Map<String, dynamic> elo) {
-    return "jebacpis";
+class NoDataResponseParser {
+  static String? parse(Map<String, dynamic> elo) {
+    return "empty";
   }
 }

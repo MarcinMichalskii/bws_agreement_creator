@@ -3,7 +3,7 @@ import 'package:bws_agreement_creator/Providers/check_examine_provider.dart';
 import 'package:bws_agreement_creator/Providers/get_chapter_questions_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/touchable_opacity.dart';
-import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_trainings_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapters_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/chapter_examine_finished_widget.dart';
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
@@ -104,6 +104,7 @@ class ChapterExamineScaffold extends HookConsumerWidget {
         title: "Egzamin dla rozdziału $chapterName",
         body: examFinished
             ? ChapterExamineFinished(
+                chapterId: chapterId,
                 result: ref.watch(checkExamineProivder(chapterId)).data!,
                 numberOfQuestions: selectedQuestions.value.length)
             : selectedQuestions.value.isEmpty
@@ -116,7 +117,7 @@ class ChapterExamineScaffold extends HookConsumerWidget {
                           color: CustomColors.almostBlack2,
                         ),
                         width: double.infinity,
-                        padding: EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(16),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [

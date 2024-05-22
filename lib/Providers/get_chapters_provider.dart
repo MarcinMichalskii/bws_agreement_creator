@@ -2,8 +2,11 @@ import 'package:bws_agreement_creator/Model/chapter_data.dart';
 import 'package:bws_agreement_creator/Providers/add_chapter_provider.dart';
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/Providers/delete_chapter_provider.dart';
+import 'package:bws_agreement_creator/Providers/update_chapters_order_provider.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
+import 'package:bws_agreement_creator/utils/move_element_list_extension.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:collection/collection.dart';
 
 final getChaptersProvider = StateNotifierProvider<GetChaptersNotifier,
     APIResponseState<List<ChapterData>>>((ref) {
@@ -25,6 +28,12 @@ class GetChaptersNotifier
         getChapters();
       }
     });
+
+    ref.listen(updateChaptersOrderProvider, (previous, next) {
+      if (next.data != null) {
+        getChapters();
+      }
+    });
   }
 
   void getChapters() async {
@@ -33,5 +42,39 @@ class GetChaptersNotifier
     final response = await ApiController(ChapterData.listFromJson)
         .performGet(url: "$baseUrl/getChapters");
     state = response;
+  }
+
+  void reorderChapters(int oldIndex, int newIndex) {
+    final List<ChapterData> videos = state.data!;
+
+    videos.move(oldIndex, newIndex);
+    state = APIResponseState(data: videos);
+    ref.read(updateChaptersOrderProvider.notifier).updateChaptersOrder(
+        chaptersOrderList: videos.map((e) => e.id).toList());
+  }
+
+  ChapterData? getChapterForId(String id) {
+    return state.data?.firstWhereOrNull((element) => element.id == id);
+  }
+
+  bool isChapterLocked(String videoId) {
+    final firstIndexUnpassed =
+        state.data?.indexWhere((element) => element.passed == false);
+    final videoIndex =
+        state.data?.indexWhere((element) => element.id == videoId);
+
+    if (videoIndex == 0) {
+      return false;
+    }
+
+    if (firstIndexUnpassed == -1 || firstIndexUnpassed == null) {
+      return false;
+    }
+
+    if (firstIndexUnpassed >= videoIndex!) {
+      return false;
+    }
+
+    return true;
   }
 }

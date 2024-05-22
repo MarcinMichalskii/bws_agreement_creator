@@ -4,6 +4,7 @@ import 'package:bws_agreement_creator/Providers/get_videos_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/touchable_opacity.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/videos_list_widget.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/exam_access_state.dart';
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:bws_agreement_creator/router.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
@@ -64,16 +65,17 @@ class ChapterDetailsScaffold extends HookConsumerWidget {
       body: Column(
         children: [
           VideosListWidget(
+            chapterId: chapterId,
+            isEditing: false,
+            lockUnpassed: true,
             onVideoOpen: onVideoOpen,
             videos: videos,
             hasSubtitle: false,
           ),
-          canStartExamine
-              ? StartExamineWidget(
-                  chapterPassed: chapterPassed,
-                  onExamineOpen: onExamineOpen,
-                )
-              : Container()
+          StartExamineWidget(
+              examAccessState: ExamAccessStateExtension.getExamAccessState(
+                  chapterPassed, canStartExamine),
+              onExamineOpen: onExamineOpen)
         ],
       ),
     );
@@ -81,33 +83,37 @@ class ChapterDetailsScaffold extends HookConsumerWidget {
 }
 
 class StartExamineWidget extends HookConsumerWidget {
-  final bool chapterPassed;
+  final ExamAccessState examAccessState;
   VoidCallback onExamineOpen;
 
   StartExamineWidget(
-      {super.key, required this.onExamineOpen, required this.chapterPassed});
+      {super.key, required this.examAccessState, required this.onExamineOpen});
   @override
   Widget build(BuildContext context, ref) {
-    return TouchableOpacity(
-      onTap: () {
-        onExamineOpen();
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.quiz_outlined,
-              color: chapterPassed
-                  ? CustomColors.green
-                  : CustomColors.applicationColorMain,
-              size: 24),
-          Container(
-            margin: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-            child: Text(
-              chapterPassed ? 'Sprawdź się ponownie' : 'Rozpocznij test',
-              style: const TextStyle(fontSize: 24, color: CustomColors.gray),
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 4),
+      child: TouchableOpacity(
+        onTap: () {
+          if (examAccessState != ExamAccessState.cannotStart) onExamineOpen();
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 8, 0, 4),
+              child: Text(
+                textAlign: TextAlign.center,
+                examAccessState.buttonText,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: CustomColors.gray,
+                ),
+              ),
             ),
-          )
-        ],
+            Icon(Icons.quiz_outlined,
+                color: examAccessState.buttonColor, size: 24),
+          ],
+        ),
       ),
     );
   }

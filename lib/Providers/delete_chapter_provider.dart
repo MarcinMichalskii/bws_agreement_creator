@@ -19,7 +19,8 @@ class DeleteChapterNotifier extends StateNotifier<APIResponseState<String?>> {
   void deleteChapter(String chapterId) async {
     state = APIResponseState(isLoading: true);
 
-    state = await ApiController(Dupa.elo).performDelete(params: {
+    state =
+        await ApiController(NoDataResponseParser.parse).performDelete(params: {
       "chapterId": chapterId,
     }, url: "$baseUrl/deleteChapter");
 
