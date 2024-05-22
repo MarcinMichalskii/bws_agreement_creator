@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/Model/examine_result.dart';
-import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_trainings_scaffold.dart';
+import 'package:bws_agreement_creator/Providers/check_examine_provider.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapters_scaffold.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -7,9 +8,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class ChapterExamineFinished extends HookConsumerWidget {
   final int numberOfQuestions;
   final ExamineResultData result;
+  final String chapterId;
 
   const ChapterExamineFinished(
-      {Key? key, required this.result, required this.numberOfQuestions})
+      {Key? key,
+      required this.result,
+      required this.numberOfQuestions,
+      required this.chapterId})
       : super(key: key);
 
   @override
@@ -42,6 +47,7 @@ class ChapterExamineFinished extends HookConsumerWidget {
         child: PillButton(
             title: "Powrót",
             onPress: () {
+              ref.read(checkExamineProivder(chapterId).notifier).resetState();
               Navigator.of(context).pop();
             }),
       )

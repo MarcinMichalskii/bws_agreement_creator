@@ -23,6 +23,7 @@ class ManageChapterDetailsScaffold extends HookConsumerWidget with RouteAware {
 
   @override
   Widget build(BuildContext context, ref) {
+    final isEditing = useState(false);
     final videosProvider = getVideosProvider(chapterId);
     final questionsProvider = getChapterQuestionsProvider(chapterId);
     final videos = ref.watch(videosProvider).data ?? [];
@@ -72,6 +73,13 @@ class ManageChapterDetailsScaffold extends HookConsumerWidget with RouteAware {
         actions: [
           TouchableOpacity(
               onTap: () {
+                isEditing.value = !isEditing.value;
+              },
+              child: const Padding(
+                  padding: EdgeInsets.only(right: 16),
+                  child: Icon(Icons.swap_vert))),
+          TouchableOpacity(
+              onTap: () {
                 showDialog(
                     context: context,
                     builder: (_) =>
@@ -93,6 +101,8 @@ class ManageChapterDetailsScaffold extends HookConsumerWidget with RouteAware {
         body: Column(
           children: [
             VideosListWidget(
+              chapterId: chapterId,
+              isEditing: isEditing.value,
               videos: videos,
               onVideoDelete: onVideoDelete,
             ),

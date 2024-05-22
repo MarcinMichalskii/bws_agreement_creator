@@ -1,4 +1,4 @@
-import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_trainings_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapters_scaffold.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 

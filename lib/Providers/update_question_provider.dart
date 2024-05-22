@@ -29,7 +29,7 @@ class UpdateQuestionNotifier extends StateNotifier<APIResponseState<String?>> {
         })?.text ??
         '';
 
-    state = await ApiController(Dupa.elo).performPut(params: {
+    state = await ApiController(NoDataResponseParser.parse).performPut(params: {
       'chapterId': chapterId,
       "questionText": questionText,
       'answers': answers.map((e) => e.text).toList(),

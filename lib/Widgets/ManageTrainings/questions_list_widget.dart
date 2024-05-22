@@ -1,5 +1,5 @@
 import 'package:bws_agreement_creator/Model/chapter_question_data.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/touchable_opacity.dart';
+import 'package:bws_agreement_creator/Widgets/Components/default_list_element.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -34,52 +34,15 @@ class QuestionsListWidget extends HookConsumerWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: questions.map((e) {
-                      return TouchableOpacity(
-                        onTap: () => onQuestionEdit!(e),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(4),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(8),
-                                      color: CustomColors.almostBlack2,
-                                      child: Row(
-                                        children: [
-                                          const Icon(Icons.quiz_outlined,
-                                              color: CustomColors.darkGray),
-                                          Expanded(
-                                            child: Container(
-                                              margin: const EdgeInsets.only(
-                                                  left: 8),
-                                              child: Text(e.questionText,
-                                                  style: const TextStyle(
-                                                      fontSize: 20,
-                                                      color:
-                                                          CustomColors.gray)),
-                                            ),
-                                          ),
-                                          const Spacer(),
-                                          if (onQuestionDelete != null)
-                                            TouchableOpacity(
-                                                onTap: () {
-                                                  onQuestionDelete!(e.id);
-                                                },
-                                                child: const Icon(Icons.delete,
-                                                    color:
-                                                        CustomColors.darkGray)),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
+                      return DefaultListElement(
+                          onElementTapped: () {
+                            onQuestionEdit!(e);
+                          },
+                          onElementDelete: () {
+                            onQuestionDelete!(e.id);
+                          },
+                          passed: e.passed,
+                          title: e.questionText);
                     }).toList(),
                   ),
                 ),

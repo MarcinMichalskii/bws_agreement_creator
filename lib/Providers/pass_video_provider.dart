@@ -19,7 +19,8 @@ class PassVideoNotifier extends StateNotifier<APIResponseState<String?>> {
   void videoPassed({required String chapterId}) async {
     state = APIResponseState(isLoading: true);
 
-    state = await ApiController(Dupa.elo).performPost(params: {
+    state =
+        await ApiController(NoDataResponseParser.parse).performPost(params: {
       "videoId": videoId,
     }, url: "$baseUrl/videoWatched");
 

@@ -26,45 +26,46 @@ class SideMenu extends HookConsumerWidget {
 
     return Drawer(
       backgroundColor: CustomColors.mainBackground,
-      child: Column(children: [
-        const SideMenuHeader(),
-        DrawerListTile(
-            isCollapsed: false,
-            title: 'Generator umów',
-            icon: Icons.upload_file_outlined,
-            onTap: () {
-              context.pushScreen('employeeFormWidget');
-            }),
-        DrawerListTile(
-            isCollapsed: false,
-            title: 'Szkolenia',
-            icon: Icons.school_outlined,
-            onTap: () {
-              context.pushScreen('trainings');
-            }),
-        if (ref.watch(profileProvider).data?.isAdmin == true)
+      child: SingleChildScrollView(
+        child: Column(children: [
+          const SideMenuHeader(),
           DrawerListTile(
               isCollapsed: false,
-              title: 'Zarządzaj szkoleniami',
-              icon: Icons.video_settings_outlined,
+              title: 'Generator umów',
+              icon: Icons.upload_file_outlined,
               onTap: () {
-                context.pushScreen('manageTrainings');
+                context.pushScreen('employeeFormWidget');
               }),
-        Spacer(),
-        Container(
-          margin: const EdgeInsets.only(bottom: 16),
-          child: DrawerListTile(
+          DrawerListTile(
               isCollapsed: false,
-              title: 'Wyloguj',
-              icon: Icons.door_back_door_outlined,
+              title: 'Szkolenia',
+              icon: Icons.school_outlined,
               onTap: () {
-                UserDataHelper().cleanupUserData();
-                ref.read(appStateProvider.notifier).setDefaultState();
-                ref.read(notAStudentTapped.notifier).state = false;
-                ref.read(profileProvider.notifier).setDefaultState();
+                context.pushScreen('trainings');
               }),
-        ),
-      ]),
+          if (ref.watch(profileProvider).data?.isAdmin == true)
+            DrawerListTile(
+                isCollapsed: false,
+                title: 'Zarządzaj szkoleniami',
+                icon: Icons.video_settings_outlined,
+                onTap: () {
+                  context.pushScreen('manageTrainings');
+                }),
+          Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            child: DrawerListTile(
+                isCollapsed: false,
+                title: 'Wyloguj',
+                icon: Icons.door_back_door_outlined,
+                onTap: () {
+                  UserDataHelper().cleanupUserData();
+                  ref.read(appStateProvider.notifier).setDefaultState();
+                  ref.read(notAStudentTapped.notifier).state = false;
+                  ref.read(profileProvider.notifier).setDefaultState();
+                }),
+          ),
+        ]),
+      ),
     );
   }
 }

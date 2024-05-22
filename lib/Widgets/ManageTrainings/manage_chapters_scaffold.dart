@@ -13,8 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ManageTraingsScaffold extends HookConsumerWidget {
-  const ManageTraingsScaffold({super.key});
+class ManageChaptersScaffold extends HookConsumerWidget {
+  const ManageChaptersScaffold({super.key});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -40,9 +40,18 @@ class ManageTraingsScaffold extends HookConsumerWidget {
           });
     }, []);
 
+    final isEditing = useState(false);
+
     return AppScaffold(
       title: "Zarządzaj szkoleniami",
       actions: [
+        TouchableOpacity(
+            onTap: () {
+              isEditing.value = !isEditing.value;
+            },
+            child: const Padding(
+                padding: EdgeInsets.only(right: 16),
+                child: Icon(Icons.swap_vert))),
         TouchableOpacity(
             onTap: () {
               showDialog(
@@ -54,7 +63,8 @@ class ManageTraingsScaffold extends HookConsumerWidget {
       body: ChaptersListWidget(
           chapters: chapters,
           onChapterOpen: onChapterOpen,
-          onChapterDelete: onChapterDelete),
+          onChapterDelete: onChapterDelete,
+          isEditing: isEditing.value),
     );
   }
 }

@@ -1,18 +1,24 @@
 import 'package:bws_agreement_creator/Model/video_data.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/touchable_opacity.dart';
+import 'package:bws_agreement_creator/Providers/get_videos_provider.dart';
+import 'package:bws_agreement_creator/Widgets/Components/default_list_element.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VideosListWidget extends HookConsumerWidget {
   final List<VideoData> videos;
+  final String chapterId;
   final ValueSetter<String>? onVideoDelete;
   final ValueSetter<VideoData>? onVideoOpen;
   final bool hasSubtitle;
+  final bool isEditing;
+  final bool lockUnpassed;
   const VideosListWidget({
     super.key,
+    required this.chapterId,
+    required this.isEditing,
     required this.videos,
+    this.lockUnpassed = false,
     this.onVideoDelete,
     this.hasSubtitle = true,
     this.onVideoOpen,
@@ -20,6 +26,42 @@ class VideosListWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    return isEditing
+        ? ReordableVideos(
+            hasSubtitle: hasSubtitle,
+            videos: videos,
+            chapterId: chapterId,
+          )
+        : StandardVideos(
+            chapterId: chapterId,
+            lockUnpassed: lockUnpassed,
+            hasSubtitle: hasSubtitle,
+            videos: videos,
+            onVideoDelete: onVideoDelete,
+            onVideoOpen: onVideoOpen);
+  }
+}
+
+class StandardVideos extends HookConsumerWidget {
+  final String chapterId;
+  final bool hasSubtitle;
+  final List<VideoData> videos;
+  final ValueSetter<String>? onVideoDelete;
+  final ValueSetter<VideoData>? onVideoOpen;
+  final bool lockUnpassed;
+
+  const StandardVideos(
+      {super.key,
+      required this.chapterId,
+      required this.lockUnpassed,
+      required this.hasSubtitle,
+      required this.videos,
+      this.onVideoDelete,
+      required this.onVideoOpen});
+
+  @override
+  Widget build(BuildContext context, ref) {
+    final videoProvider = getVideosProvider(chapterId);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
@@ -37,55 +79,76 @@ class VideosListWidget extends HookConsumerWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: videos.map((video) {
-                      return TouchableOpacity(
-                        onTap: () {
-                          onVideoOpen?.call(video);
-                        },
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(4),
-                                child: Container(
-                                  padding: const EdgeInsets.all(8),
-                                  color: CustomColors.almostBlack2,
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.video_camera_back_outlined,
-                                          color: video.passed
-                                              ? CustomColors.green
-                                              : CustomColors.darkGray),
-                                      Expanded(
-                                        child: Container(
-                                          margin:
-                                              const EdgeInsets.only(left: 8),
-                                          child: Text(video.name,
-                                              style: const TextStyle(
-                                                  fontSize: 20,
-                                                  color: CustomColors.gray)),
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                      if (onVideoDelete != null)
-                                        TouchableOpacity(
-                                            onTap: () {
-                                              onVideoDelete!(video.id);
-                                            },
-                                            child: const Icon(Icons.delete,
-                                                color: CustomColors.darkGray)),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
+                      return DefaultListElement(
+                          locked: lockUnpassed &&
+                              ref
+                                  .read(videoProvider.notifier)
+                                  .isVideoLocked(video.id),
+                          onElementTapped: () {
+                            onVideoOpen?.call(video);
+                          },
+                          onElementDelete: onVideoDelete != null
+                              ? () {
+                                  onVideoDelete!(video.id);
+                                }
+                              : null,
+                          passed: video.passed,
+                          title: video.name);
                     }).toList(),
                   ),
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ReordableVideos extends HookConsumerWidget {
+  final bool hasSubtitle;
+  final List<VideoData> videos;
+
+  final String chapterId;
+  const ReordableVideos(
+      {super.key,
+      required this.hasSubtitle,
+      required this.videos,
+      required this.chapterId});
+
+  @override
+  Widget build(BuildContext context, ref) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      child: Column(
+        children: [
+          if (hasSubtitle)
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 12),
+              child: const Text("Filmy do rozdziału",
+                  style: TextStyle(fontSize: 18, color: CustomColors.gray)),
+            ),
+          ReorderableListView(
+            shrinkWrap: true,
+            buildDefaultDragHandles: false,
+            onReorder: (int oldIndex, int newIndex) {
+              ref
+                  .read(getVideosProvider(chapterId).notifier)
+                  .reorderVideos(oldIndex, newIndex);
+            },
+            children: videos.map((video) {
+              return ReorderableDragStartListener(
+                key: ValueKey(video.id),
+                index: videos.indexOf(video),
+                child: DefaultListElement(
+                    isReordering: true,
+                    title: video.name,
+                    passed: video.passed,
+                    onElementTapped: () {},
+                    onElementDelete: null),
+              );
+            }).toList(),
           ),
         ],
       ),

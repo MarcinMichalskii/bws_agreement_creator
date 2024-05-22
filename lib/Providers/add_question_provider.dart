@@ -27,7 +27,8 @@ class AddQuestionNotifier extends StateNotifier<APIResponseState<String?>> {
         })?.text ??
         '';
 
-    state = await ApiController(Dupa.elo).performPost(params: {
+    state =
+        await ApiController(NoDataResponseParser.parse).performPost(params: {
       'chapterId': chapterId,
       "questionText": question,
       'answers': answers.map((e) => e.text).toList(),

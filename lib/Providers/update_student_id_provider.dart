@@ -20,7 +20,8 @@ class UpdateStudentIdNotifier extends StateNotifier<APIResponseState<String?>> {
     state = APIResponseState(isLoading: true);
     final accessToken = ref.read(authProvider.notifier).state.data?.accessToken;
 
-    final response = await ApiController(Dupa.elo).performPost(params: {
+    final response =
+        await ApiController(NoDataResponseParser.parse).performPost(params: {
       "studentId": studentId,
     }, url: "$baseUrl/updateStudentId");
 
