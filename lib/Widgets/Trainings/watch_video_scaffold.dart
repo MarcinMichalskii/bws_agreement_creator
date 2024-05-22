@@ -47,6 +47,7 @@ class WatchVideoScaffold extends HookConsumerWidget {
     final secondsToWatch = useState(0);
     final requestSent = useState(false);
     final initialized = useState(false);
+    print('jajebe');
 
     final passVideo = useCallback(() {
       ref.read(vieoWatchedProvider.notifier).videoPassed(chapterId: chapterId);
@@ -55,18 +56,18 @@ class WatchVideoScaffold extends HookConsumerWidget {
     final secondsLeft = (secondsToWatch.value - watchedSeconds.value) < 0
         ? 0
         : (secondsToWatch.value - watchedSeconds.value);
-    useMemoized(() {
-      return Timer.periodic(const Duration(seconds: 1), (_) {
-        if (chewieController.value?.isPlaying == true) {
-          watchedSeconds.value++;
-        }
-        final left = secondsToWatch.value - watchedSeconds.value;
-        if (left == 0 && !requestSent.value && secondsToWatch.value != 0) {
-          requestSent.value = true;
-          passVideo();
-        }
-      });
-    });
+    // useMemoized(() {
+    //   return Timer.periodic(const Duration(seconds: 1), (_) {
+    //     if (chewieController.value?.isPlaying == true) {
+    //       watchedSeconds.value++;
+    //     }
+    //     final left = secondsToWatch.value - watchedSeconds.value;
+    //     if (left == 0 && !requestSent.value && secondsToWatch.value != 0) {
+    //       requestSent.value = true;
+    //       passVideo();
+    //     }
+    //   });
+    // });
 
     void getVideoUserData() {
       ref.read(getVideoUserDataProvider(videoId).notifier).getVideoUserData();
@@ -82,6 +83,7 @@ class WatchVideoScaffold extends HookConsumerWidget {
           showOptions: false,
           videoPlayerController: controller,
           allowFullScreen: true,
+          autoPlay: true,
           fullScreenByDefault: false,
           systemOverlaysOnEnterFullScreen: [],
           showControls: true,
@@ -94,20 +96,20 @@ class WatchVideoScaffold extends HookConsumerWidget {
 
     chewieController.value?.addListener(() {
       if (chewieController.value?.isFullScreen == true) {
-        document.documentElement?.requestFullscreen();
+        // document.documentElement?.requestFullscreen();
       }
     });
 
-    document.addEventListener('fullscreenchange', (event) {
-      if (document.fullscreenElement == null) {
-        Timer(const Duration(milliseconds: 150), () {
-          chewieController.value?.exitFullScreen();
-          Timer(const Duration(milliseconds: 300), () {
-            chewieController.value?.play();
-          });
-        });
-      }
-    });
+    // document.addEventListener('fullscreenchange', (event) {
+    //   if (document.fullscreenElement == null) {
+    //     Timer(const Duration(milliseconds: 350), () {
+    //       chewieController.value?.exitFullScreen();
+    //       Timer(const Duration(milliseconds: 300), () {
+    //         chewieController.value?.play();
+    //       });
+    //     });
+    //   }
+    // });
 
     useEffect(
       () {
@@ -153,7 +155,11 @@ class WatchVideoScaffold extends HookConsumerWidget {
     });
 
     return !initialized.value
-        ? Container()
+        ? const Center(
+            child: CircularProgressIndicator(
+              color: CustomColors.applicationColorMain,
+            ),
+          )
         : AppScaffold(
             title: videoTitle,
             body: SingleChildScrollView(
@@ -168,15 +174,18 @@ class WatchVideoScaffold extends HookConsumerWidget {
                   ),
                   if (chewieController.value != null)
                     Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 12),
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            style: const TextStyle(
-                                fontSize: 20, color: CustomColors.gray),
-                            'Aby zaliczyć ten filmu, musisz obejrzeć jeszcze: ${_formatDuration(secondsLeft)}',
+                          Flexible(
+                            child: Text(
+                              style: const TextStyle(
+                                  fontSize: 20, color: CustomColors.gray),
+                              'Aby zaliczyć ten filmu, musisz obejrzeć jeszcze: ${_formatDuration(secondsLeft)}',
+                            ),
                           ),
                           Container(
                             margin: const EdgeInsets.only(left: 8),
