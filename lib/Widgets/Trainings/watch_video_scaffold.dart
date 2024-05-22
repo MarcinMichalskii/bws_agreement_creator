@@ -83,7 +83,7 @@ class WatchVideoScaffold extends HookConsumerWidget {
           showOptions: false,
           videoPlayerController: controller,
           allowFullScreen: true,
-          autoPlay: true,
+          // autoPlay: true,
           fullScreenByDefault: false,
           systemOverlaysOnEnterFullScreen: [],
           showControls: true,
@@ -96,7 +96,7 @@ class WatchVideoScaffold extends HookConsumerWidget {
 
     chewieController.value?.addListener(() {
       if (chewieController.value?.isFullScreen == true) {
-        // document.documentElement?.requestFullscreen();
+        document.documentElement?.requestFullscreen();
       }
     });
 
@@ -237,6 +237,8 @@ class WatchVideoNextButton extends HookConsumerWidget {
         child: PillButton(
             title: isLastVideo ? "Egzamin" : "Następny",
             onPress: () {
+              document.documentElement?.requestFullscreen();
+              return;
               if (isLocked) {
                 return;
               }
