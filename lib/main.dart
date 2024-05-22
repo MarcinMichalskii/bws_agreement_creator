@@ -14,8 +14,10 @@ import 'package:google_sign_in_platform_interface/google_sign_in_platform_interf
 // import 'package:google_sign_in_web/google_sign_in_web.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
-
 import 'firebase_options.dart';
+import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
+import 'package:chewie/chewie.dart';
 
 GoogleSignIn googleSignIn = GoogleSignIn(
   clientId:
@@ -51,12 +53,15 @@ Future<void> main() async {
   //   clientId:
   //       '715847619144-cc8fj2fml7pj820n3p89qg5blcqutkgv.apps.googleusercontent.com',
   // ));
-  runApp(EasyLocalization(
-      supportedLocales: const [Locale('pl')],
-      path: 'assets/translations',
-      fallbackLocale: const Locale('pl'),
-      child: UncontrolledProviderScope(
-          container: container, child: const MyApp())));
+  runApp(MaterialApp(
+    home: VideoPlayerScreen(),
+  ));
+  // runApp(EasyLocalization(
+  //     supportedLocales: const [Locale('pl')],
+  //     path: 'assets/translations',
+  //     fallbackLocale: const Locale('pl'),
+  //     child: UncontrolledProviderScope(
+  //         container: container, child: const MyApp())));
 }
 
 final GlobalKey<ScaffoldMessengerState> scaffoldKey = GlobalKey();
@@ -71,6 +76,50 @@ class MyApp extends HookConsumerWidget {
     return MaterialApp.router(
       routerConfig: router,
       scaffoldMessengerKey: scaffoldKey,
+    );
+  }
+}
+
+class VideoPlayerScreen extends StatefulWidget {
+  @override
+  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
+}
+
+class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+  late VideoPlayerController _videoPlayerController;
+  late ChewieController _chewieController;
+
+  @override
+  void initState() {
+    super.initState();
+    _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(
+        'https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_20mb.mp4'));
+
+    _chewieController = ChewieController(
+      videoPlayerController: _videoPlayerController,
+      autoPlay: true,
+      // looping: true,
+    );
+  }
+
+  @override
+  void dispose() {
+    _chewieController.dispose();
+    _videoPlayerController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Video Player'),
+      ),
+      body: Center(
+        child: Chewie(
+          controller: _chewieController,
+        ),
+      ),
     );
   }
 }
