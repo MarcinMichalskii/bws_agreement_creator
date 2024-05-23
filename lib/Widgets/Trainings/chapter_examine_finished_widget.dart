@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/Model/examine_result.dart';
 import 'package:bws_agreement_creator/Providers/check_examine_provider.dart';
+import 'package:bws_agreement_creator/Providers/get_chapter_questions_provider.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapters_scaffold.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,9 @@ class ChapterExamineFinished extends HookConsumerWidget {
             title: "Powrót",
             onPress: () {
               ref.read(checkExamineProivder(chapterId).notifier).resetState();
+              ref
+                  .read(getChapterQuestionsProvider(chapterId).notifier)
+                  .resetState();
               Navigator.of(context).pop();
             }),
       )

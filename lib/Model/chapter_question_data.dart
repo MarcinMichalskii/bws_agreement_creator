@@ -1,4 +1,5 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
+part 'chapter_question_data.g.dart';
 
 @CopyWith()
 class ChapterQuestionData {

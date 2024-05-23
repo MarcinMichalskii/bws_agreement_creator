@@ -27,41 +27,34 @@ class DefaultListElement extends StatelessWidget {
       opacity: locked ? 0.5 : 1,
       child: TouchableOpacity(
         onTap: locked ? null : onElementTapped,
-        child: Row(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(4),
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  color: CustomColors.almostBlack2,
-                  child: Row(
-                    children: [
-                      Icon(Icons.book,
-                          color: passed
-                              ? CustomColors.green
-                              : CustomColors.darkGray),
-                      Container(
-                        margin: const EdgeInsets.only(left: 8),
-                        child: Text(title,
-                            style: const TextStyle(
-                                fontSize: 20, color: CustomColors.gray)),
-                      ),
-                      const Spacer(),
-                      if (isReordering)
-                        const Icon(Icons.drag_handle,
-                            color: CustomColors.darkGray),
-                      if (onElementDelete != null)
-                        TouchableOpacity(
-                            onTap: onElementDelete,
-                            child: const Icon(Icons.delete,
-                                color: CustomColors.darkGray)),
-                    ],
+        child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            color: CustomColors.almostBlack2,
+            child: Row(
+              children: [
+                Icon(Icons.book,
+                    color: passed ? CustomColors.green : CustomColors.darkGray),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 8),
+                    child: Text(title,
+                        style: const TextStyle(
+                            fontSize: 20, color: CustomColors.gray)),
                   ),
                 ),
-              ),
+                const Spacer(),
+                if (isReordering)
+                  const Icon(Icons.drag_handle, color: CustomColors.darkGray),
+                if (onElementDelete != null)
+                  TouchableOpacity(
+                      onTap: onElementDelete,
+                      child: const Icon(Icons.delete,
+                          color: CustomColors.darkGray)),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
