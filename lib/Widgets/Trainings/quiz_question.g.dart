@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'chapter_examine_scaffold.dart';
+part of 'quiz_question.dart';
 
 // **************************************************************************
 // CopyWithGenerator

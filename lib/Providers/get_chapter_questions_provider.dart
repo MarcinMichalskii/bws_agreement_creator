@@ -48,4 +48,8 @@ class GetChapterQuestionsNotifier
             params: {"chapterId": chapterId});
     state = response;
   }
+
+  void resetState() {
+    state = APIResponseState();
+  }
 }

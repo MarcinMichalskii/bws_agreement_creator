@@ -5,22 +5,12 @@ import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/for
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/touchable_opacity.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapters_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/chapter_examine_finished_widget.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/quiz_question.dart';
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-part 'chapter_examine_scaffold.g.dart';
-
-@CopyWith()
-class QuizQuestion {
-  final ChapterQuestionData question;
-  final String? markedAnswer;
-
-  QuizQuestion({required this.question, this.markedAnswer});
-}
 
 class ChapterExamineScaffold extends HookConsumerWidget {
   final String chapterId;
@@ -29,25 +19,32 @@ class ChapterExamineScaffold extends HookConsumerWidget {
       {super.key, required this.chapterId, required this.chapterName});
 
   List<QuizQuestion> prepareExam(List<ChapterQuestionData> questions) {
-    List<QuizQuestion> filteredOutPassed = questions
-        .where((question) => !question.passed)
-        .map((e) => QuizQuestion(question: e))
-        .toList();
-    if (filteredOutPassed.length >= 5) {
-      return filteredOutPassed.take(5).toList();
-    }
-    final passedQuestions =
-        questions.where((question) => question.passed).toList()..shuffle();
-    final numberOfMissingElements = 5 - filteredOutPassed.length;
-    final examQuestions = [
-      ...filteredOutPassed,
-      ...passedQuestions
-          .take(numberOfMissingElements)
-          .map((e) => QuizQuestion(question: e))
-    ];
+    // List<QuizQuestion> filteredOutPassed = questions
+    //     .where((question) => !question.passed)
+    //     .map((e) => QuizQuestion(question: e))
+    //     .toList();
+    // if (filteredOutPassed.length >= 5) {
+    //   return filteredOutPassed.take(5).toList();
+    // }
+    // final passedQuestions =
+    //     questions.where((question) => question.passed).toList()..shuffle();
+    // final numberOfMissingElements = 5 - filteredOutPassed.length;
+    // final examQuestions = [
+    //   ...filteredOutPassed,
+    //   ...passedQuestions
+    //       .take(numberOfMissingElements)
+    //       .map((e) => QuizQuestion(question: e))
+    // ];
+    // examQuestions.shuffle();
+
+    List<QuizQuestion> examQuestions = questions.map((e) {
+      final answers = e.answers..shuffle();
+      final question = e.copyWith(answers: answers);
+      return QuizQuestion(question: question);
+    }).toList();
     examQuestions.shuffle();
 
-    return examQuestions;
+    return examQuestions.take(5).toList();
   }
 
   @override
@@ -121,32 +118,30 @@ class ChapterExamineScaffold extends HookConsumerWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                                selectedQuestions
-                                    .value[selectedQuestionIndex.value]
-                                    .question
-                                    .questionText,
-                                style: const TextStyle(
-                                    color: CustomColors.gray, fontSize: 20)),
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 12),
+                              child: Text(
+                                  selectedQuestions
+                                      .value[selectedQuestionIndex.value]
+                                      .question
+                                      .questionText,
+                                  style: const TextStyle(
+                                      color: CustomColors.gray, fontSize: 20)),
+                            ),
                             ...selectedQuestions
                                 .value[selectedQuestionIndex.value]
                                 .question
                                 .answers
                                 .map((answer) {
-                              return Row(
-                                children: [
-                                  AnswerButton(
-                                    answer: answer,
-                                    isSelected: selectedQuestions
-                                            .value[selectedQuestionIndex.value]
-                                            .markedAnswer ==
-                                        answer,
-                                    onPress: () {
-                                      updateAnswerForQuestion(answer);
-                                    },
-                                  ),
-                                  const Spacer()
-                                ],
+                              return AnswerButton(
+                                answer: answer,
+                                isSelected: selectedQuestions
+                                        .value[selectedQuestionIndex.value]
+                                        .markedAnswer ==
+                                    answer,
+                                onPress: () {
+                                  updateAnswerForQuestion(answer);
+                                },
                               );
                             }).toList()
                           ],
@@ -157,15 +152,20 @@ class ChapterExamineScaffold extends HookConsumerWidget {
                           margin: const EdgeInsets.only(top: 16),
                           child: Row(
                             children: [
-                              if (canGoToPreviousQuestion())
-                                PillButton(
-                                    title: "Poprzednie pytanie",
-                                    onPress: () {
-                                      selectedQuestionIndex.value--;
-                                    }),
-                              if (canGoToPreviousQuestion()) const Spacer(),
+                              PillButton(
+                                  title: "Poprzednie",
+                                  color: canGoToPreviousQuestion()
+                                      ? CustomColors.applicationColorMain
+                                      : CustomColors.gray,
+                                  onPress: () {
+                                    if (!canGoToPreviousQuestion()) {
+                                      return;
+                                    }
+                                    selectedQuestionIndex.value--;
+                                  }),
+                              const Spacer(),
                               Text(
-                                  "Pytanie ${selectedQuestionIndex.value + 1}/${selectedQuestions.value.length}",
+                                  "${selectedQuestionIndex.value + 1}/${selectedQuestions.value.length}",
                                   style: const TextStyle(
                                       color: CustomColors.gray, fontSize: 20)),
                               const Spacer(),
@@ -174,9 +174,11 @@ class ChapterExamineScaffold extends HookConsumerWidget {
                                     color: answerSelected()
                                         ? CustomColors.applicationColorMain
                                         : CustomColors.gray,
-                                    title: "Następne pytanie",
+                                    title: "Następne",
                                     onPress: () {
-                                      selectedQuestionIndex.value++;
+                                      if (answerSelected()) {
+                                        selectedQuestionIndex.value++;
+                                      }
                                     }),
                               if (finalQuestion())
                                 PillButton(
@@ -210,23 +212,38 @@ class AnswerButton extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     return TouchableOpacity(
-      onTap: () {
-        onPress();
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.check_circle,
-              color: isSelected ? CustomColors.green : CustomColors.gray,
-              size: 24),
-          Container(
-            margin: const EdgeInsets.only(left: 8),
-            child: Text(
-              answer,
-              style: const TextStyle(fontSize: 24, color: CustomColors.gray),
+      onTap: onPress,
+      child: Container(
+        decoration: const BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.grey,
+              width: 0.5,
             ),
-          )
-        ],
+          ),
+        ),
+        margin: const EdgeInsets.symmetric(vertical: 2),
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          child: Row(
+            children: [
+              Icon(Icons.check_circle,
+                  color: isSelected ? CustomColors.green : CustomColors.gray,
+                  size: 24),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(left: 8),
+                  child: Text(
+                    answer,
+                    softWrap: true,
+                    style:
+                        const TextStyle(fontSize: 19, color: CustomColors.gray),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

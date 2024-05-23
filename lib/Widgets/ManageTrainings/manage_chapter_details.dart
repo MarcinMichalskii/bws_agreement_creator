@@ -98,20 +98,22 @@ class ManageChapterDetailsScaffold extends HookConsumerWidget with RouteAware {
                   padding: EdgeInsets.only(right: 16),
                   child: Icon(Icons.video_call_outlined)))
         ],
-        body: Column(
-          children: [
-            VideosListWidget(
-              chapterId: chapterId,
-              isEditing: isEditing.value,
-              videos: videos,
-              onVideoDelete: onVideoDelete,
-            ),
-            QuestionsListWidget(
-              questions: questions,
-              onQuestionDelete: onQuestionDelete,
-              onQuestionEdit: onQuestionEdit,
-            ),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              VideosListWidget(
+                chapterId: chapterId,
+                isEditing: isEditing.value,
+                videos: videos,
+                onVideoDelete: onVideoDelete,
+              ),
+              QuestionsListWidget(
+                questions: questions,
+                onQuestionDelete: onQuestionDelete,
+                onQuestionEdit: onQuestionEdit,
+              ),
+            ],
+          ),
         ));
   }
 }
