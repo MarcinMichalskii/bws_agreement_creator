@@ -33,6 +33,7 @@ class WatchVideoScaffold extends HookConsumerWidget {
     final watchedSeconds = useState(0);
     final secondsToWatch = useState(0);
     final requestSent = useState(false);
+    final videoPassed = useState(false);
 
     final isPlaying = useState(false);
     final onPlayingChanged = useCallback((bool playing) {
@@ -97,63 +98,70 @@ class WatchVideoScaffold extends HookConsumerWidget {
         watchedSeconds.value = next.data!.secondsWatched;
         goToTime.value = next.data!.finishedWatchingAt;
         ref.read(getVideoUserDataProvider(videoId).notifier).reset();
-      } else {
+        if (watchedSeconds.value >= secondsToWatch.value) {
+          videoPassed.value = true;
+        }
+      } else if (next.error != null) {
         goToTime.value = 0;
       }
     });
 
-    return AppScaffold(
-      title: videoTitle,
-      body: SingleChildScrollView(
-        child: Center(
-            child: Column(
-          children: [
-            AspectRatio(
-                aspectRatio: 16 / 9,
-                child: goToTime.value == null
-                    ? Container()
-                    : VideoPlayer(
-                        initialStart: goToTime.value!,
-                        url: videoUrl,
-                        onPlayingChanged: onPlayingChanged,
-                        onTimeUpdate: onTimeUpdate,
-                        onDurationChanged: onDurationChanged,
-                      )),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 12),
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+    return goToTime.value == null
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : AppScaffold(
+            title: videoTitle,
+            body: SingleChildScrollView(
+              child: Center(
+                  child: Column(
                 children: [
-                  Flexible(
-                    child: Text(
-                      style: const TextStyle(
-                          fontSize: 20, color: CustomColors.gray),
-                      'Aby zaliczyć ten filmu, musisz obejrzeć jeszcze: ${secondsLeft.formattedAsDuration()}',
+                  AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: goToTime.value == null
+                          ? Container()
+                          : VideoPlayer(
+                              initialStart: goToTime.value!,
+                              url: videoUrl,
+                              onPlayingChanged: onPlayingChanged,
+                              onTimeUpdate: onTimeUpdate,
+                              onDurationChanged: onDurationChanged,
+                            )),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 12),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            style: const TextStyle(
+                                fontSize: 20, color: CustomColors.gray),
+                            'Aby zaliczyć ten filmu, musisz obejrzeć jeszcze: ${secondsLeft.formattedAsDuration()}',
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 8),
+                          child: Icon(
+                              size: secondsLeft == 0 ? 30 : 20,
+                              Icons.check,
+                              color: secondsLeft == 0
+                                  ? CustomColors.green
+                                  : CustomColors.gray),
+                        ),
+                      ],
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 8),
-                    child: Icon(
-                        size: secondsLeft == 0 ? 30 : 20,
-                        Icons.check,
-                        color: secondsLeft == 0
-                            ? CustomColors.green
-                            : CustomColors.gray),
-                  ),
+                  WatchVideoNextButton(
+                    isLocked: !requestSent.value && !videoPassed.value,
+                    chapterId: chapterId,
+                    videoId: videoId,
+                  )
                 ],
-              ),
+              )),
             ),
-            WatchVideoNextButton(
-              isLocked: !requestSent.value,
-              chapterId: chapterId,
-              videoId: videoId,
-            )
-          ],
-        )),
-      ),
-    );
+          );
   }
 }
 
