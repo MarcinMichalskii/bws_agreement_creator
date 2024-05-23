@@ -184,13 +184,17 @@ class VideoPlayer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final id = useState(UniqueKey().toString());
+    void goToMoment(html.VideoElement videoElement, double moment) async {
+      // await Future.delayed(const Duration(milliseconds: 1000));
+      videoElement.currentTime = moment;
+    }
+
     useEffect(() {
       final videoElement = html.VideoElement()
         ..src = url
         ..controls = true
         ..style.width = '100%';
 
-      videoElement.currentTime = initialStart.toDouble();
       videoElement.onPlaying.listen((event) {
         onPlayingChanged(true);
       });
@@ -203,6 +207,9 @@ class VideoPlayer extends HookConsumerWidget {
         onTimeUpdate(videoElement.currentTime.toInt());
       });
 
+      videoElement.onLoadedMetadata.listen((event) {
+        goToMoment(videoElement, initialStart.toDouble());
+      });
       videoElement.onDurationChange.listen((event) {
         onDurationChanged(videoElement.duration.toInt());
       });
@@ -215,6 +222,8 @@ class VideoPlayer extends HookConsumerWidget {
         'video${id.value}', // Use a unique identifier
         (int viewId) => videoElement,
       );
+
+      // goToMoment(videoElement, initialStart.toDouble());
 
       return null;
     }, []);
