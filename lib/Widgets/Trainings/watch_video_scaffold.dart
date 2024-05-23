@@ -185,7 +185,7 @@ class VideoPlayer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final id = useState(UniqueKey().toString());
     void goToMoment(html.VideoElement videoElement, double moment) async {
-      // await Future.delayed(const Duration(milliseconds: 1000));
+      await Future.delayed(const Duration(milliseconds: 1000));
       videoElement.currentTime = moment;
     }
 
