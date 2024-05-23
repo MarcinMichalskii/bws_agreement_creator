@@ -25,4 +25,8 @@ class GetVideoUserDataNotifier
         url: "$baseUrl/getVideoUserData", params: {"videoId": videoId});
     state = response;
   }
+
+  void reset() {
+    state = APIResponseState();
+  }
 }
