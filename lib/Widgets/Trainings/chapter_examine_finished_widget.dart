@@ -20,41 +20,44 @@ class ChapterExamineFinished extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    return Column(children: [
-      Text(
-        result.passed ? 'Gratulacje!' : 'Spróbuj ponownie!',
-        style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: CustomColors.gray),
-      ),
-      if (result.passed)
-        const Text(
-          'Egzamin zaliczony',
-          style: TextStyle(
-              fontSize: 20,
+    return Container(
+      alignment: Alignment.center,
+      child: Column(children: [
+        Text(
+          result.passed ? 'Gratulacje!' : 'Spróbuj ponownie!',
+          style: const TextStyle(
+              fontSize: 24,
               fontWeight: FontWeight.bold,
               color: CustomColors.gray),
         ),
-      Text(
-        'Zdobyłeś ${result.correctAnswers} / $numberOfQuestions punktów!',
-        style: const TextStyle(
-          color: CustomColors.gray,
-          fontSize: 18,
+        if (result.passed)
+          const Text(
+            'Egzamin zaliczony',
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: CustomColors.gray),
+          ),
+        Text(
+          'Zdobyłeś ${result.correctAnswers} / $numberOfQuestions punktów!',
+          style: const TextStyle(
+            color: CustomColors.gray,
+            fontSize: 18,
+          ),
         ),
-      ),
-      Container(
-        margin: const EdgeInsets.only(top: 16),
-        child: PillButton(
-            title: "Powrót",
-            onPress: () {
-              ref.read(checkExamineProivder(chapterId).notifier).resetState();
-              ref
-                  .read(getChapterQuestionsProvider(chapterId).notifier)
-                  .resetState();
-              Navigator.of(context).pop();
-            }),
-      )
-    ]);
+        Container(
+          margin: const EdgeInsets.only(top: 16),
+          child: PillButton(
+              title: "Powrót",
+              onPress: () {
+                ref.read(checkExamineProivder(chapterId).notifier).resetState();
+                ref
+                    .read(getChapterQuestionsProvider(chapterId).notifier)
+                    .resetState();
+                Navigator.of(context).pop();
+              }),
+        )
+      ]),
+    );
   }
 }
