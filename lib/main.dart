@@ -1,3 +1,5 @@
+import 'dart:html' as html;
+
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/token_refresh_interceptor.dart';
@@ -10,11 +12,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart';
+// import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart';
 // import 'package:google_sign_in_web/google_sign_in_web.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
-
 import 'firebase_options.dart';
 
 GoogleSignIn googleSignIn = GoogleSignIn(
