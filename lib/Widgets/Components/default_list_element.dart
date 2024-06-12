@@ -26,7 +26,7 @@ class DefaultListElement extends StatelessWidget {
     return Opacity(
       opacity: locked ? 0.5 : 1,
       child: TouchableOpacity(
-        onTap: locked ? null : onElementTapped,
+        onTap: onElementTapped,
         child: Padding(
           padding: const EdgeInsets.all(4),
           child: Container(

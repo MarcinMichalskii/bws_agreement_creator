@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/Model/authorization_data.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageUserData {
   const StorageUserData({
@@ -40,5 +41,25 @@ class UserDataHelper {
 
   Future<String?> getRefreshToken() async {
     return storage.read(key: 'refreshToken');
+  }
+
+  Future<void> markAgreementPopup() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('SeenAgreementPopup', true);
+  }
+
+  Future<void> markTrainingsPopup() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('SeenTrainingsPopup', true);
+  }
+
+  Future<bool> seenAgreementPopup() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('SeenAgreementPopup') ?? false;
+  }
+
+  Future<bool> seenTrainingsPopup() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('SeenTrainingsPopup') ?? false;
   }
 }

@@ -1,8 +1,9 @@
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bordered_input.dart';
+import 'package:bws_agreement_creator/Model/video_data.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/generate_pdf_button.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/touchable_opacity.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_question_question_body_ui.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_question_select_videos_ui.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/answer_draft.dart';
-import 'package:bws_agreement_creator/Widgets/ManageTrainings/answer_input_widget.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -16,14 +17,22 @@ class AddQuestionDialogUI extends HookConsumerWidget {
   final ValueSetter<List<AnswerDraft>> onAnswersChanged;
   final String question;
   final bool isLoading;
+  final String title;
+  final List<VideoData> videosList;
+  final List<VideoData> selectedVideos;
+  final ValueSetter<List<VideoData>> onSelectedVideosChanged;
   const AddQuestionDialogUI(
       {super.key,
+      required this.title,
       required this.question,
       required this.answers,
       required this.chapterId,
       required this.onSavedPressed,
       required this.onQuestionChanged,
       required this.onAnswersChanged,
+      required this.videosList,
+      required this.selectedVideos,
+      required this.onSelectedVideosChanged,
       required this.isLoading});
 
   @override
@@ -60,6 +69,12 @@ class AddQuestionDialogUI extends HookConsumerWidget {
       onAnswersChanged(newAnswers);
     }, [answers]);
 
+    final selectingVideos = useState(false);
+
+    final toggleSelectingVideos = useCallback(() {
+      selectingVideos.value = !selectingVideos.value;
+    }, [selectingVideos.value]);
+
     return Dialog(
       backgroundColor: CustomColors.almostBlack3,
       child: Container(
@@ -68,42 +83,43 @@ class AddQuestionDialogUI extends HookConsumerWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Nowe pytanie',
-                style: TextStyle(color: CustomColors.gray, fontSize: 17)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(
+                  width: 24,
+                  height: 24,
+                ),
+                Text(title,
+                    style: const TextStyle(
+                        color: CustomColors.gray, fontSize: 17)),
+                TouchableOpacity(
+                  onTap: () {
+                    toggleSelectingVideos();
+                  },
+                  child: Icon(
+                      !selectingVideos.value
+                          ? Icons.playlist_add_check_circle_outlined
+                          : Icons.not_listed_location_outlined,
+                      color: CustomColors.gray),
+                ),
+              ],
+            ),
             const SizedBox(height: 16),
-            BorderedInput(
-              placeholder: 'Treść pytania',
-              initialValue: question,
-              onChanged: (text) {
-                onQuestionChanged(text ?? '');
-              },
-            ),
-            ...answers.asMap().entries.map((entry) {
-              final index = entry.key;
-              final answer = entry.value;
-              final letter = String.fromCharCode(index + 65);
-              return AnswerInputWidget(
-                onDelete: () {
-                  onDeleteAnswer(index);
-                },
-                onChanged: (newText) {
-                  onAnswerTextChanged(answer, newText);
-                },
-                letter: letter,
-                initialValue: entry.value.text,
-                isCorrect: answer.isCorrect,
-                onCorrectChanged: () {
-                  onCorrectAnswerChanged(answer);
-                },
-              );
-            }),
-            Container(
-              margin: const EdgeInsets.only(top: 8),
-              child: TouchableOpacity(
-                  onTap: onAddAnswer,
-                  child: const Icon(Icons.add,
-                      color: CustomColors.applicationColorMain)),
-            ),
+            if (!selectingVideos.value)
+              AddQuestionQuestionBodyUI(
+                  question: question,
+                  onQuestionChanged: onQuestionChanged,
+                  answers: answers,
+                  onDeleteAnswer: onDeleteAnswer,
+                  onAnswerTextChanged: onAnswerTextChanged,
+                  onCorrectAnswerChanged: onCorrectAnswerChanged,
+                  onAddAnswer: onAddAnswer),
+            if (selectingVideos.value)
+              AddQuestionSelectVideosUI(
+                  videosList: videosList,
+                  selectedVideos: selectedVideos,
+                  onSelectedVideosChanged: onSelectedVideosChanged),
             const SizedBox(height: 16),
             isLoading
                 ? const CircularProgressIndicator(

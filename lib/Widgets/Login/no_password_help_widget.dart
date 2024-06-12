@@ -17,7 +17,7 @@ class NoPasswordHelpWidget extends HookConsumerWidget {
         child: Column(children: [
           if (!isResetPasswordVisible.value)
             const Text(
-                'JEŚLI ZAREJESTROWAŁEŚ SIĘ PRZY POMOCY GOOGLE LUB FACEBOOK, ZRESETUJ SWOJE HASŁO.',
+                'JEŚLI ZAREJESTROWAŁEŚ SIĘ PRZY POMOCY FACEBOOKA, ZRESETUJ SWOJE HASŁO.',
                 style: TextStyle(color: CustomColors.gray, fontSize: 20)),
           if (!isResetPasswordVisible.value)
             TextButton(

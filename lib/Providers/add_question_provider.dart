@@ -20,6 +20,7 @@ class AddQuestionNotifier extends StateNotifier<APIResponseState<String?>> {
   void addQuestion(
       {required String question,
       required List<AnswerDraft> answers,
+      required List<String> videos,
       required String chapterId}) async {
     state = APIResponseState(isLoading: true);
     final correctAnswer = answers.firstWhereOrNull((element) {
@@ -31,6 +32,7 @@ class AddQuestionNotifier extends StateNotifier<APIResponseState<String?>> {
         await ApiController(NoDataResponseParser.parse).performPost(params: {
       'chapterId': chapterId,
       "questionText": question,
+      'videos': videos,
       'answers': answers.map((e) => e.text).toList(),
       'correctAnswer': correctAnswer,
     }, url: "$baseUrl/addQuestionForChapter");

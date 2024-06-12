@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class OnboardingInformation extends StatelessWidget {
-  const OnboardingInformation({
+class TrainingsOnboardingInformation extends StatelessWidget {
+  const TrainingsOnboardingInformation({
     Key? key,
   }) : super(key: key);
 
@@ -25,15 +25,15 @@ class OnboardingInformation extends StatelessWidget {
                   color: CustomColors.almostBlack2,
                   borderRadius: BorderRadius.circular(8)),
               padding: const EdgeInsets.all(16.0),
-              child: const _OnboardingInformationContainer(),
+              child: const _TrainingsOnboardingInformationContainer(),
             )),
       ),
     );
   }
 }
 
-class _OnboardingInformationContainer extends HookConsumerWidget {
-  const _OnboardingInformationContainer({
+class _TrainingsOnboardingInformationContainer extends HookConsumerWidget {
+  const _TrainingsOnboardingInformationContainer({
     Key? key,
   }) : super(key: key);
 
@@ -41,15 +41,15 @@ class _OnboardingInformationContainer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final onConfirm = useCallback(() async {
       Navigator.pop(context);
-      await UserDataHelper().markAgreementPopup();
+      await UserDataHelper().markTrainingsPopup();
     }, []);
     final name = ref.read(profileProvider.notifier).state.data?.name ?? '';
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            'Witaj $name!',
+          const Text(
+            'Witaj na platformie szkoleniowej BWSu!',
             style: const TextStyle(
               fontWeight: FontWeight.w500,
               color: CustomColors.gray,
@@ -59,7 +59,7 @@ class _OnboardingInformationContainer extends HookConsumerWidget {
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
-              'W BWS wszyscy pracują legalnie, zatem podpisują umowy zlecenie. Ta strona przygotuje dla Ciebie wszystkie wymagane dokumenty. ZANIM PODPISZESZ, PRZYCZYTAJ PONIŻSZE 4 punkty',
+              'W tej zakładce znajdziesz szkolenia video oraz quizy, które pomogą Ci w zdobyciu wiedzy i umiejętności potrzebnych do pracy w BWS.\n Poniżej znajdziesz kilka kluczowych informacji:',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: CustomColors.gray,
@@ -72,26 +72,29 @@ class _OnboardingInformationContainer extends HookConsumerWidget {
             children: [
               OnboardingPointWidget(
                   pointNumber: '1. ',
-                  pointTextBold: 'Szanujemy swój czas',
+                  pointTextBold: '',
                   poinText:
-                      ' - za zapisanie się do pracy i nieobecność bez L4 grozi kara 300zł.'),
+                      'Aby zaliczyć rozdział musisz obejrzeć film i zdać quiz'),
               OnboardingPointWidget(
                   pointNumber: '2. ',
-                  pointTextBold: 'Jesteśmy uczciwi',
+                  pointTextBold: '',
                   poinText:
-                      ' - informujemy Cię, że kwoty na bws.onsinch.com to kwoty brutto (netto tylko dla JDG/Spółek)'),
+                      'Aby przejść do kolejnego rozdziału musisz zaliczyć poprzedni'),
               OnboardingPointWidget(
                   pointNumber: '3. ',
-                  pointTextBold:
-                      'Za chwilę będziesz mógł przejrzeć i podpisać umowę z BWS',
+                  pointTextBold: 'To samo tyczy się poszczególnych szkoleń',
                   poinText:
-                      ' - wypełnij formularz zgodnie z prawdą. Za podanie fałszywych danych grozi kara 500zł.'),
+                      ' - aby przejść do kolejnego musisz zaliczyć poprzednie'),
               OnboardingPointWidget(
                   pointNumber: '4. ',
-                  pointTextBold:
-                      'Umowa nie zobowiązuje Cię do podejmowania zleceń ani nie wiąże się z żadnymi opłatami.',
+                  pointTextBold: '',
                   poinText:
-                      ' - Tylko zapis na zlecenie przez Sinch jest wiążący.'),
+                      'Każde szkolenie zakończone jest quizem ze wszystkich rozdziałów'),
+              OnboardingPointWidget(
+                  pointNumber: '5. ',
+                  pointTextBold: '',
+                  poinText:
+                      'Po zakończeniu szkolenia otrzymasz odznakę na swoim profilu SINCH'),
             ],
           ),
           DefaultBorderedButton(

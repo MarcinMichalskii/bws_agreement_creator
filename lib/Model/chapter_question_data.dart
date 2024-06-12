@@ -8,6 +8,7 @@ class ChapterQuestionData {
   List<String> answers;
   String chapterId;
   String correctAnswer;
+  List<String> videos;
   bool passed;
 
   ChapterQuestionData({
@@ -16,6 +17,7 @@ class ChapterQuestionData {
     required this.answers,
     required this.chapterId,
     required this.correctAnswer,
+    required this.videos,
     required this.passed,
   });
 
@@ -26,6 +28,7 @@ class ChapterQuestionData {
       answers: List<String>.from(json['answers']),
       chapterId: json['chapterId'],
       correctAnswer: json['correctAnswer'],
+      videos: json['videos'] == null ? [] : List<String>.from(json['videos']),
       passed: json['passed'],
     );
   }

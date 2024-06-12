@@ -185,15 +185,17 @@ class VideoPlayer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final id = useState(UniqueKey().toString());
     void goToMoment(html.VideoElement videoElement, double moment) async {
-      // await Future.delayed(const Duration(milliseconds: 1000));
       videoElement.currentTime = moment;
     }
 
     useEffect(() {
+      const iner = '<source type="video/webm">';
+
       final videoElement = html.VideoElement()
         ..src = url
         ..controls = true
         ..style.width = '100%';
+      videoElement.setInnerHtml(iner);
 
       videoElement.onPlaying.listen((event) {
         onPlayingChanged(true);
@@ -223,8 +225,6 @@ class VideoPlayer extends HookConsumerWidget {
         'video${id.value}',
         (int viewId) => videoElement,
       );
-
-      // goToMoment(videoElement, initialStart.toDouble());
 
       return null;
     }, []);

@@ -19,6 +19,8 @@ abstract class _$ChapterQuestionDataCWProxy {
 
   ChapterQuestionData questionText(String questionText);
 
+  ChapterQuestionData videos(List<String> videos);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ChapterQuestionData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -32,6 +34,7 @@ abstract class _$ChapterQuestionDataCWProxy {
     String? id,
     bool? passed,
     String? questionText,
+    List<String>? videos,
   });
 }
 
@@ -62,6 +65,9 @@ class _$ChapterQuestionDataCWProxyImpl implements _$ChapterQuestionDataCWProxy {
       this(questionText: questionText);
 
   @override
+  ChapterQuestionData videos(List<String> videos) => this(videos: videos);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ChapterQuestionData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -76,6 +82,7 @@ class _$ChapterQuestionDataCWProxyImpl implements _$ChapterQuestionDataCWProxy {
     Object? id = const $CopyWithPlaceholder(),
     Object? passed = const $CopyWithPlaceholder(),
     Object? questionText = const $CopyWithPlaceholder(),
+    Object? videos = const $CopyWithPlaceholder(),
   }) {
     return ChapterQuestionData(
       answers: answers == const $CopyWithPlaceholder() || answers == null
@@ -104,6 +111,10 @@ class _$ChapterQuestionDataCWProxyImpl implements _$ChapterQuestionDataCWProxy {
               ? _value.questionText
               // ignore: cast_nullable_to_non_nullable
               : questionText as String,
+      videos: videos == const $CopyWithPlaceholder() || videos == null
+          ? _value.videos
+          // ignore: cast_nullable_to_non_nullable
+          : videos as List<String>,
     );
   }
 }

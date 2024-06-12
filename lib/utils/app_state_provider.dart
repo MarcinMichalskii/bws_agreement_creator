@@ -31,4 +31,8 @@ class AppStateNotifier extends StateNotifier<AppState> {
   void setDefaultState() {
     state = AppState();
   }
+
+  void shouldRedirectToTrainingsAfterLogin() {
+    state = state.copyWith(shouldRedirectToTrainingsAfterLogin: true);
+  }
 }

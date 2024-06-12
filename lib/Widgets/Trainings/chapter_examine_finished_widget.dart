@@ -21,6 +21,7 @@ class ChapterExamineFinished extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
       alignment: Alignment.center,
       child: Column(children: [
         Text(
@@ -45,6 +46,12 @@ class ChapterExamineFinished extends HookConsumerWidget {
             fontSize: 18,
           ),
         ),
+        if (!result.passed)
+          const Text(
+            textAlign: TextAlign.center,
+            'Nie zdobyto wymaganej ilości punktów. Żeby zaliczyć musisz mieć przynajmniej 70% prawidłowych odpowiedzi',
+            style: TextStyle(fontSize: 18, color: CustomColors.gray),
+          ),
         Container(
           margin: const EdgeInsets.only(top: 16),
           child: PillButton(
@@ -54,6 +61,9 @@ class ChapterExamineFinished extends HookConsumerWidget {
                 ref
                     .read(getChapterQuestionsProvider(chapterId).notifier)
                     .resetState();
+                if (result.passed) {
+                  Navigator.of(context).pop();
+                }
                 Navigator.of(context).pop();
               }),
         )

@@ -96,7 +96,16 @@ class ManageChapterDetailsScaffold extends HookConsumerWidget with RouteAware {
               },
               child: const Padding(
                   padding: EdgeInsets.only(right: 16),
-                  child: Icon(Icons.video_call_outlined)))
+                  child: Icon(Icons.video_call_outlined))),
+          TouchableOpacity(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (_) => AddVideoDialog(chapterId: chapterId));
+              },
+              child: const Padding(
+                  padding: EdgeInsets.only(right: 16),
+                  child: Icon(Icons.publish_outlined)))
         ],
         body: SingleChildScrollView(
           child: Column(

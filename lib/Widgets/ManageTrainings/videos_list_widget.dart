@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/Model/video_data.dart';
 import 'package:bws_agreement_creator/Providers/get_videos_provider.dart';
+import 'package:bws_agreement_creator/Providers/snackbar_handler.dart';
 import 'package:bws_agreement_creator/Widgets/Components/default_list_element.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -85,6 +86,15 @@ class StandardVideos extends HookConsumerWidget {
                                   .read(videoProvider.notifier)
                                   .isVideoLocked(video.id),
                           onElementTapped: () {
+                            final isLocked = ref
+                                .read(videoProvider.notifier)
+                                .isVideoLocked(video.id);
+                            if (isLocked && lockUnpassed) {
+                              SnackbarHandler.showSnackBar(
+                                  "Aby odblokować ten film, musisz najpierw obejrzeć poprzednie filmy.",
+                                  color: Colors.red);
+                              return;
+                            }
                             onVideoOpen?.call(video);
                           },
                           onElementDelete: onVideoDelete != null

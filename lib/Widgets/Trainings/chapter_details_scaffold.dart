@@ -91,7 +91,7 @@ class StartExamineWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 4),
       child: TouchableOpacity(
         onTap: () {
           if (examAccessState != ExamAccessState.cannotStart) onExamineOpen();
@@ -110,7 +110,7 @@ class StartExamineWidget extends HookConsumerWidget {
                 ),
               ),
             ),
-            Icon(Icons.quiz_outlined,
+            Icon(Icons.school_outlined,
                 color: examAccessState.buttonColor, size: 24),
           ],
         ),
