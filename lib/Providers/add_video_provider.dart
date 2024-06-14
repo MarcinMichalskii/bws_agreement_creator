@@ -15,7 +15,7 @@ class AddVideoNotifier extends StateNotifier<APIResponseState<String?>> {
   AddVideoNotifier(this.ref) : super(APIResponseState());
 
   void addVideo(String videoTitle, String videoUrl, String thumbnailUrl,
-      String chapterId) async {
+      double duration, String chapterId) async {
     state = APIResponseState(isLoading: true);
 
     state =
@@ -23,6 +23,7 @@ class AddVideoNotifier extends StateNotifier<APIResponseState<String?>> {
       "videoName": videoTitle,
       'videoUrl': videoUrl,
       'thumbnailUrl': thumbnailUrl,
+      'duration': duration,
       'chapterId': chapterId,
     }, url: "$baseUrl/addVideo");
 
