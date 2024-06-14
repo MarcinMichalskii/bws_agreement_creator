@@ -1,3 +1,4 @@
+import 'package:bws_agreement_creator/Model/video_data.dart';
 import 'package:bws_agreement_creator/Providers/delete_question_provider.dart';
 import 'package:bws_agreement_creator/Providers/delete_video_provider.dart';
 import 'package:bws_agreement_creator/Providers/get_chapter_questions_provider.dart';
@@ -8,6 +9,8 @@ import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_question_dialo
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_video.dialog.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/confirmation_dialog.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/edit_question_dialog_logic.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/import_questions_dialog_logic.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/select_filtered_videos_dialog_logic.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/videos_list_widget.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/questions_list_widget.dart';
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
@@ -64,12 +67,36 @@ class ManageChapterDetailsScaffold extends HookConsumerWidget with RouteAware {
               ));
     }, [chapterId]);
 
+    final selectedVideos = useState<List<VideoData>>([]);
+    final onSelectedVideoChanged = useCallback((List<VideoData> videos) {
+      selectedVideos.value = videos;
+    }, []);
+
+    final onFilterTapped = useCallback(() {
+      showDialog(
+          context: context,
+          builder: (_) => SelectFilteredVideosDialogLogic(
+              chapterId: chapterId,
+              videosList: videos,
+              selectedVideos: selectedVideos.value,
+              onSelectedVideosChanged: onSelectedVideoChanged));
+    }, [videos]);
+
+    final filteredQuestions = questions.where((element) {
+      if (selectedVideos.value.isEmpty) {
+        return true;
+      }
+      return selectedVideos.value.any((video) {
+        return element.videos.contains(video.id);
+      });
+    }).toList();
+
     useBuildEffect(() {
       ref.read(videosProvider.notifier).getVideos();
       ref.read(questionsProvider.notifier).getChapterQuestions();
     }, []);
     return AppScaffold(
-        title: "Rozdział $chapterTitle",
+        title: "Szkolenie $chapterTitle",
         actions: [
           TouchableOpacity(
               onTap: () {
@@ -101,7 +128,9 @@ class ManageChapterDetailsScaffold extends HookConsumerWidget with RouteAware {
               onTap: () {
                 showDialog(
                     context: context,
-                    builder: (_) => AddVideoDialog(chapterId: chapterId));
+                    builder: (_) => ImportQuestionsDialogLogic(
+                          chapterId: chapterId,
+                        ));
               },
               child: const Padding(
                   padding: EdgeInsets.only(right: 16),
@@ -117,7 +146,8 @@ class ManageChapterDetailsScaffold extends HookConsumerWidget with RouteAware {
                 onVideoDelete: onVideoDelete,
               ),
               QuestionsListWidget(
-                questions: questions,
+                onFilterTapped: onFilterTapped,
+                questions: filteredQuestions,
                 onQuestionDelete: onQuestionDelete,
                 onQuestionEdit: onQuestionEdit,
               ),

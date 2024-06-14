@@ -4,7 +4,7 @@ part 'quiz_question.g.dart';
 
 @CopyWith()
 class QuizQuestion {
-  final ChapterQuestionData question;
+  final QuestionData question;
   final String? markedAnswer;
 
   QuizQuestion({required this.question, this.markedAnswer});

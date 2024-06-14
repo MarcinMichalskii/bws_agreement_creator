@@ -12,7 +12,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EditQuestionDialogLogic extends HookConsumerWidget {
   final String chapterId;
-  final ChapterQuestionData questionData;
+  final QuestionData questionData;
   const EditQuestionDialogLogic(
       {Key? key, required this.chapterId, required this.questionData})
       : super(key: key);

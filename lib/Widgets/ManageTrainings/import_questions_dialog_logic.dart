@@ -1,10 +1,10 @@
+import 'package:bws_agreement_creator/Model/add_chapter_question_data.dart';
 import 'package:bws_agreement_creator/Model/video_data.dart';
-import 'package:bws_agreement_creator/Providers/add_question_provider.dart';
-import 'package:bws_agreement_creator/Providers/add_video_provider.dart';
+import 'package:bws_agreement_creator/Providers/add_multiple_questions_provider.dart';
 import 'package:bws_agreement_creator/Providers/get_videos_provider.dart';
-import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_question_dialog_ui.dart';
-import 'package:bws_agreement_creator/Widgets/ManageTrainings/answer_draft.dart';
-import 'package:bws_agreement_creator/utils/colors.dart';
+import 'package:bws_agreement_creator/Providers/snackbar_handler.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/import_questions_dialog_ui.dart';
+import 'package:bws_agreement_creator/utils/import_questions_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,51 +16,45 @@ class ImportQuestionsDialogLogic extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final question = useState('');
-    final answers = useState<List<AnswerDraft>>([]);
-    final onQuestionChanged = useCallback((String text) {
-      question.value = text;
-    }, [question.value]);
-
-    final onAnswersChanged = useCallback((List<AnswerDraft> newAnswers) {
-      answers.value = newAnswers;
-    }, [answers.value]);
-
-    final List<VideoData> videosList =
-        ref.watch(getVideosProvider(chapterId)).data ?? [];
+    final videoList = ref.watch(getVideosProvider(chapterId)).data ?? [];
     final selectedVideos = useState<List<VideoData>>([]);
-    final onSelectedVideosChanged = useCallback((List<VideoData> selected) {
+    final onSelectedVideosChanged = useCallback((selected) {
       selectedVideos.value = selected;
     }, []);
-    ref.listen(addQuestionProvider, (previous, next) {
-      if (next.data != null) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            backgroundColor: CustomColors.applicationColorMain,
-            content: Text('Dodano nowe pytanie')));
-        Navigator.of(context).pop();
+
+    final importedQuestions = useState<List<AddChapterQuestionData>>([]);
+    final onImportTapped = useCallback(() async {
+      try {
+        final questions = await ImportQuestionsHelper().pickFile(chapterId);
+        importedQuestions.value = questions;
+      } catch (e) {
+        SnackbarHandler.showSnackBar(
+            "Nie udało się zaimportować tego pliku, sprawdź strukturę i spróbuj ponownie",
+            color: Colors.red);
       }
-    });
+    }, []);
 
-    final onSavedPressed = useCallback(() {
-      ref.read(addQuestionProvider.notifier).addQuestion(
-          question: question.value,
-          answers: answers.value,
-          videos: selectedVideos.value.map((e) => e.id).toList(),
-          chapterId: chapterId);
-    }, [question.value, answers.value, selectedVideos.value]);
-    final isLoading = ref.watch(addVideoProvider).isLoading;
+    final onSaveTapped = useCallback(() {
+      importedQuestions.value = importedQuestions.value
+          .toList()
+          .map((e) => e.copyWith(
+              videos: selectedVideos.value.map((e) => e.id).toList()))
+          .toList();
+      ref.read(addMultipleQuestionsProvider.notifier).addQuestions(
+          questions: importedQuestions.value, chapterId: chapterId);
+      Navigator.of(context).pop(importedQuestions.value);
+    }, [importedQuestions.value, selectedVideos.value]);
 
-    return AddQuestionDialogUI(
-        title: 'Dodaj pytanie',
-        question: question.value,
-        answers: answers.value,
+    final isLoading = ref.watch(addMultipleQuestionsProvider).isLoading;
+
+    return ImportQuestionsDialogUI(
+        onImportTapped: onImportTapped,
+        importedQuestions: importedQuestions.value,
         chapterId: chapterId,
-        onSavedPressed: onSavedPressed,
-        onQuestionChanged: onQuestionChanged,
-        onAnswersChanged: onAnswersChanged,
-        isLoading: isLoading,
-        videosList: videosList,
+        videosList: videoList,
         selectedVideos: selectedVideos.value,
-        onSelectedVideosChanged: onSelectedVideosChanged);
+        onSelectedVideosChanged: onSelectedVideosChanged,
+        onSaveTapped: onSaveTapped,
+        isLoading: isLoading);
   }
 }

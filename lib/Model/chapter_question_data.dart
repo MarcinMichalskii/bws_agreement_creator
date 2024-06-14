@@ -2,7 +2,7 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 part 'chapter_question_data.g.dart';
 
 @CopyWith()
-class ChapterQuestionData {
+class QuestionData {
   String id;
   String questionText;
   List<String> answers;
@@ -11,7 +11,7 @@ class ChapterQuestionData {
   List<String> videos;
   bool passed;
 
-  ChapterQuestionData({
+  QuestionData({
     required this.id,
     required this.questionText,
     required this.answers,
@@ -21,8 +21,8 @@ class ChapterQuestionData {
     required this.passed,
   });
 
-  factory ChapterQuestionData.fromJson(Map<String, dynamic> json) {
-    return ChapterQuestionData(
+  factory QuestionData.fromJson(Map<String, dynamic> json) {
+    return QuestionData(
       id: json['id'],
       questionText: json['questionText'],
       answers: List<String>.from(json['answers']),
@@ -33,10 +33,10 @@ class ChapterQuestionData {
     );
   }
 
-  static List<ChapterQuestionData> listFromJson(Map<String, dynamic> json) {
-    List<ChapterQuestionData> chapters = [];
+  static List<QuestionData> listFromJson(Map<String, dynamic> json) {
+    List<QuestionData> chapters = [];
     for (var chapter in json['data']) {
-      chapters.add(ChapterQuestionData.fromJson(chapter));
+      chapters.add(QuestionData.fromJson(chapter));
     }
     return chapters;
   }

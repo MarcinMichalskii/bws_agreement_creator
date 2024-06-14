@@ -24,7 +24,7 @@ class AddQuestionSelectVideosUI extends HookConsumerWidget {
     return SingleChildScrollView(
       child: Column(children: [
         BorderedInput(
-          placeholder: 'Tytuł filmu',
+          placeholder: 'Wyszukaj film',
           initialValue: null,
           onChanged: (text) {
             final filtered = videosList
@@ -52,9 +52,11 @@ class AddQuestionSelectVideosUI extends HookConsumerWidget {
               padding: const EdgeInsets.all(8),
               child: Row(
                 children: [
-                  Text(
-                    video.name,
-                    style: const TextStyle(color: CustomColors.gray),
+                  Expanded(
+                    child: Text(
+                      video.name,
+                      style: const TextStyle(color: CustomColors.gray),
+                    ),
                   ),
                   const Spacer(),
                   Icon(

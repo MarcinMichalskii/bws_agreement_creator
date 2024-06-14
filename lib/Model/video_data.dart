@@ -6,23 +6,34 @@ class VideoData {
   String name;
   String url;
   String chapterId;
-  bool passed;
+  bool watched;
+  bool examinePassed;
+  bool hasExamine;
+  double duration;
+  String thumbnailUrl;
 
-  VideoData({
-    required this.id,
-    required this.name,
-    required this.passed,
-    required this.url,
-    required this.chapterId,
-  });
+  VideoData(
+      {required this.id,
+      required this.name,
+      required this.watched,
+      required this.examinePassed,
+      required this.hasExamine,
+      required this.url,
+      required this.chapterId,
+      required this.duration,
+      required this.thumbnailUrl});
 
   factory VideoData.fromJson(Map<String, dynamic> json) {
     return VideoData(
       id: json['id'],
       name: json['name'],
-      passed: json['passed'],
       url: json['url'],
       chapterId: json['chapterId'],
+      watched: json['watched'],
+      examinePassed: json['examinePassed'],
+      hasExamine: json['hasExamine'],
+      duration: json['duration'],
+      thumbnailUrl: json['thumbnailUrl'],
     );
   }
 

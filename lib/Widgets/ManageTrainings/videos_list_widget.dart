@@ -70,7 +70,7 @@ class StandardVideos extends HookConsumerWidget {
           if (hasSubtitle)
             Container(
               margin: const EdgeInsets.symmetric(vertical: 12),
-              child: const Text("Filmy do rozdziału",
+              child: const Text("Filmy dla szkolenia",
                   style: TextStyle(fontSize: 18, color: CustomColors.gray)),
             ),
           Row(
@@ -102,7 +102,7 @@ class StandardVideos extends HookConsumerWidget {
                                   onVideoDelete!(video.id);
                                 }
                               : null,
-                          passed: video.passed,
+                          passed: video.watched,
                           title: video.name);
                     }).toList(),
                   ),
@@ -136,7 +136,7 @@ class ReordableVideos extends HookConsumerWidget {
           if (hasSubtitle)
             Container(
               margin: const EdgeInsets.symmetric(vertical: 12),
-              child: const Text("Filmy do rozdziału",
+              child: const Text("Filmy dla szkolenia",
                   style: TextStyle(fontSize: 18, color: CustomColors.gray)),
             ),
           ReorderableListView(
@@ -154,7 +154,7 @@ class ReordableVideos extends HookConsumerWidget {
                 child: DefaultListElement(
                     isReordering: true,
                     title: video.name,
-                    passed: video.passed,
+                    passed: video.watched,
                     onElementTapped: () {},
                     onElementDelete: null),
               );

@@ -18,11 +18,11 @@ extension ExamAccessStateExtension on ExamAccessState {
   String get buttonText {
     switch (this) {
       case ExamAccessState.passed:
-        return 'Quiz zaliczony! Sprawdź się ponownie';
+        return 'Test zaliczony! Sprawdź się ponownie';
       case ExamAccessState.notPassed:
-        return 'Rozpocznij test';
+        return 'Rozpocznij test podsumowujący';
       case ExamAccessState.cannotStart:
-        return 'Aby rozpocząć test, musisz najpierw zaliczyć wszystkie rozdziały';
+        return 'Aby rozpocząć test podsumowujący, zalicz wszystkie rozdziały';
     }
   }
 

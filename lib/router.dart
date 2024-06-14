@@ -7,10 +7,11 @@ import 'package:bws_agreement_creator/Widgets/Login/login_widget.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapter_details.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapters_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/SideMenu/side_menu.dart';
-import 'package:bws_agreement_creator/Widgets/Trainings/chapter_details_scaffold.dart';
-import 'package:bws_agreement_creator/Widgets/Trainings/chapter_examine_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/VideosList/chapter_details_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/examine/chapter_examine_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/chapters_list_scaffold.dart';
-import 'package:bws_agreement_creator/Widgets/Trainings/watch_video_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/watch_video_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/examine/video_examine_scaffold.dart';
 import 'package:bws_agreement_creator/utils/app_state_provider.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/foundation.dart';
@@ -173,22 +174,62 @@ final _mainRoutes = [
                             chapterId: chapterId, chapterName: chapterName));
                   }),
               GoRoute(
-                  path: ':id2',
-                  name: 'watchVideo',
+                  path: 'videoExamine',
+                  name: 'videoExamine',
                   pageBuilder: (context, state) {
-                    final videoId = state.pathParameters['id2'] ?? '';
+                    final chapterId = state.pathParameters['id1'] ?? '';
+                    final videoId = state.uri.queryParameters['videoId'] ?? '';
                     final videoTitle = state.uri.queryParameters['title'] ?? '';
-                    final videoUrl = state.uri.queryParameters['url'] ?? '';
+                    final openedFromList =
+                        state.uri.queryParameters['openedFromList'] == 'true';
+
                     return wrapWithPage(
                         context,
                         state,
-                        WatchVideoScaffold(
-                          videoUrl: videoUrl,
-                          videoTitle: videoTitle,
-                          videoId: videoId,
-                          chapterId: state.pathParameters['id1'] ?? '',
-                        ));
+                        VideoExamineScaffold(
+                            chapterId: chapterId,
+                            videoId: videoId,
+                            videoTitle: videoTitle,
+                            openedFromVideosList: openedFromList));
                   }),
+              GoRoute(
+                path: ':id2',
+                name: 'watchVideo',
+                pageBuilder: (context, state) {
+                  final videoId = state.pathParameters['id2'] ?? '';
+                  final videoTitle = state.uri.queryParameters['title'] ?? '';
+                  final videoUrl = state.uri.queryParameters['url'] ?? '';
+                  return wrapWithPage(
+                      context,
+                      state,
+                      WatchVideoScaffold(
+                        videoUrl: videoUrl,
+                        videoTitle: videoTitle,
+                        videoId: videoId,
+                        chapterId: state.pathParameters['id1'] ?? '',
+                      ));
+                },
+                // routes: [
+                //   GoRoute(
+                //       path: 'watchVideoExamine',
+                //       name: 'watchVideoExamine',
+                //       pageBuilder: (context, state) {
+                //         final chapterId = state.pathParameters['id1'] ?? '';
+                //         final videoId = state.pathParameters['id2'] ?? '';
+                //         final videoTitle =
+                //             state.uri.queryParameters['title'] ?? '';
+
+                //         return wrapWithPage(
+                //             context,
+                //             state,
+                //             VideoExamineScaffold(
+                //                 chapterId: chapterId,
+                //                 videoId: videoId,
+                //                 videoTitle: videoTitle,
+                //                 openedFromVideosList: false));
+                //       }),
+                // ]
+              ),
             ]),
       ]),
   GoRoute(
