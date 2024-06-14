@@ -10,6 +10,7 @@ import 'package:bws_agreement_creator/utils/app_state_provider.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
 import 'package:bws_agreement_creator/utils/preview_pdf_generator.dart';
+import 'package:bws_agreement_creator/utils/user_data_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -41,11 +42,18 @@ class EmployeeFormWidget extends HookConsumerWidget {
   const EmployeeFormWidget({super.key});
   @override
   Widget build(BuildContext context, ref) {
+    final showWelcomeMessage = useCallback(() async {
+      final seenAgreementPopup = await UserDataHelper().seenTrainingsPopup();
+      if (!seenAgreementPopup) {
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) => const OnboardingInformation());
+      }
+    }, []);
+
     useBuildEffect(() {
-      showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (_) => const OnboardingInformation());
+      showWelcomeMessage();
     }, []);
 
     final onError = useCallback((String error) {

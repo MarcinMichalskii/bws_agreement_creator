@@ -22,6 +22,7 @@ class UpdateQuestionNotifier extends StateNotifier<APIResponseState<String?>> {
       {required String questionText,
       required String questionId,
       required List<AnswerDraft> answers,
+      required List<String> videos,
       required String chapterId}) async {
     state = APIResponseState(isLoading: true);
     final correctAnswer = answers.firstWhereOrNull((element) {
@@ -33,6 +34,7 @@ class UpdateQuestionNotifier extends StateNotifier<APIResponseState<String?>> {
       'chapterId': chapterId,
       "questionText": questionText,
       'answers': answers.map((e) => e.text).toList(),
+      'videos': videos,
       'correctAnswer': correctAnswer,
       'questionId': questionId
     }, url: "$baseUrl/updateQuestionForChapter");

@@ -2,7 +2,9 @@ import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/generate_pdf_button.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/onboarding_point_widget.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
+import 'package:bws_agreement_creator/utils/user_data_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class OnboardingInformation extends StatelessWidget {
@@ -37,6 +39,10 @@ class _OnboardingInformationContainer extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final onConfirm = useCallback(() async {
+      Navigator.pop(context);
+      await UserDataHelper().markAgreementPopup();
+    }, []);
     final name = ref.read(profileProvider.notifier).state.data?.name ?? '';
     return SingleChildScrollView(
       child: Column(
@@ -90,7 +96,7 @@ class _OnboardingInformationContainer extends HookConsumerWidget {
           ),
           DefaultBorderedButton(
             onTap: () {
-              Navigator.pop(context);
+              onConfirm();
             },
             text: 'ROZUMIEM',
           )

@@ -1,5 +1,7 @@
+import 'package:bws_agreement_creator/Model/video_data.dart';
 import 'package:bws_agreement_creator/Providers/add_question_provider.dart';
 import 'package:bws_agreement_creator/Providers/add_video_provider.dart';
+import 'package:bws_agreement_creator/Providers/get_videos_provider.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_question_dialog_ui.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/answer_draft.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
@@ -24,6 +26,12 @@ class AddQuestionDialogLogic extends HookConsumerWidget {
       answers.value = newAnswers;
     }, [answers.value]);
 
+    final List<VideoData> videosList =
+        ref.watch(getVideosProvider(chapterId)).data ?? [];
+    final selectedVideos = useState<List<VideoData>>([]);
+    final onSelectedVideosChanged = useCallback((List<VideoData> selected) {
+      selectedVideos.value = selected;
+    }, []);
     ref.listen(addQuestionProvider, (previous, next) {
       if (next.data != null) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -37,17 +45,22 @@ class AddQuestionDialogLogic extends HookConsumerWidget {
       ref.read(addQuestionProvider.notifier).addQuestion(
           question: question.value,
           answers: answers.value,
+          videos: selectedVideos.value.map((e) => e.id).toList(),
           chapterId: chapterId);
-    }, [question.value, answers.value]);
+    }, [question.value, answers.value, selectedVideos.value]);
     final isLoading = ref.watch(addVideoProvider).isLoading;
 
     return AddQuestionDialogUI(
+        title: 'Dodaj pytanie',
         question: question.value,
         answers: answers.value,
         chapterId: chapterId,
         onSavedPressed: onSavedPressed,
         onQuestionChanged: onQuestionChanged,
         onAnswersChanged: onAnswersChanged,
-        isLoading: isLoading);
+        isLoading: isLoading,
+        videosList: videosList,
+        selectedVideos: selectedVideos.value,
+        onSelectedVideosChanged: onSelectedVideosChanged);
   }
 }

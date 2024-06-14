@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/Model/chapter_data.dart';
 import 'package:bws_agreement_creator/Providers/get_chapters_provider.dart';
+import 'package:bws_agreement_creator/Providers/snackbar_handler.dart';
 import 'package:bws_agreement_creator/Widgets/Components/default_list_element.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -63,6 +64,15 @@ class StandardChapters extends HookConsumerWidget {
                       title: chapter.name,
                       passed: chapter.passed,
                       onElementTapped: () {
+                        if (lockUnpassed &&
+                            ref
+                                .read(getChaptersProvider.notifier)
+                                .isChapterLocked(chapter.id)) {
+                          SnackbarHandler.showSnackBar(
+                              "Aby odblokować to szkolenie, musisz najpierw zaliczyć wszystkie poprzedzające.",
+                              color: Colors.red);
+                          return;
+                        }
                         onChapterOpen(chapter);
                       },
                       onElementDelete: onChapterDelete != null

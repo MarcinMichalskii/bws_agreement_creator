@@ -2,20 +2,21 @@ import 'package:bws_agreement_creator/Model/examine_result.dart';
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/Providers/get_chapters_provider.dart';
 import 'package:bws_agreement_creator/Providers/snackbar_handler.dart';
-import 'package:bws_agreement_creator/Widgets/Trainings/quiz_question.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/examine/quiz_question.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final checkExamineProivder = StateNotifierProvider.family<CheckExamineNotifier,
-    APIResponseState<ExamineResultData>, String>((ref, chapterId) {
+final checkExamineProivder = StateNotifierProvider.autoDispose
+    .family<CheckExamineNotifier, APIResponseState<ExamineResultData>, String>(
+        (ref, chapterId) {
   return CheckExamineNotifier(ref, chapterId);
 });
 
 class CheckExamineNotifier
     extends StateNotifier<APIResponseState<ExamineResultData>> {
   final String chapterId;
-  StateNotifierProviderRef<CheckExamineNotifier,
+  AutoDisposeStateNotifierProviderRef<CheckExamineNotifier,
       APIResponseState<ExamineResultData>> ref;
   CheckExamineNotifier(this.ref, this.chapterId) : super(APIResponseState());
 

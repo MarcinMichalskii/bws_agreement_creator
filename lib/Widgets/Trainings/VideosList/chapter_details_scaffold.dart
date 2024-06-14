@@ -3,8 +3,8 @@ import 'package:bws_agreement_creator/Providers/get_chapters_provider.dart';
 import 'package:bws_agreement_creator/Providers/get_videos_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/touchable_opacity.dart';
-import 'package:bws_agreement_creator/Widgets/ManageTrainings/videos_list_widget.dart';
-import 'package:bws_agreement_creator/Widgets/Trainings/exam_access_state.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/VideosList/chapter_details_ui.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/examine/exam_access_state.dart';
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:bws_agreement_creator/router.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
@@ -32,7 +32,10 @@ class ChapterDetailsScaffold extends HookConsumerWidget {
     }, []);
     final canStartExamine = videos
                 .where((element) {
-                  return element.passed;
+                  if (element.hasExamine) {
+                    return element.examinePassed;
+                  }
+                  return element.watched;
                 })
                 .toList()
                 .length ==
@@ -60,23 +63,36 @@ class ChapterDetailsScaffold extends HookConsumerWidget {
             .passed ==
         true;
 
+    final onVideoExamineOpen = useCallback((VideoData video) {
+      context.pushScreen('videoExamine', params: {
+        'id1': chapterId,
+      }, queryParams: {
+        'videoTitle': video.name,
+        'videoId': video.id,
+        'openedFromList': 'true'
+      });
+    }, []);
+
     return AppScaffold(
-      title: "Lista filmów dla rozdziału $chapterName",
-      body: Column(
-        children: [
-          VideosListWidget(
-            chapterId: chapterId,
-            isEditing: false,
-            lockUnpassed: true,
-            onVideoOpen: onVideoOpen,
-            videos: videos,
-            hasSubtitle: false,
-          ),
-          StartExamineWidget(
-              examAccessState: ExamAccessStateExtension.getExamAccessState(
-                  chapterPassed, canStartExamine),
-              onExamineOpen: onExamineOpen)
-        ],
+      title: "Lista filmów dla szkolenia $chapterName",
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ChapterDetailsUI(
+              videos: videos,
+              chapterId: chapterId,
+              onVideoOpen: onVideoOpen,
+              onExamineOpen: onVideoExamineOpen,
+            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 64),
+              child: StartExamineWidget(
+                  examAccessState: ExamAccessStateExtension.getExamAccessState(
+                      chapterPassed, canStartExamine),
+                  onExamineOpen: onExamineOpen),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -91,7 +107,7 @@ class StartExamineWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 4),
       child: TouchableOpacity(
         onTap: () {
           if (examAccessState != ExamAccessState.cannotStart) onExamineOpen();
@@ -110,7 +126,7 @@ class StartExamineWidget extends HookConsumerWidget {
                 ),
               ),
             ),
-            Icon(Icons.quiz_outlined,
+            Icon(Icons.school_outlined,
                 color: examAccessState.buttonColor, size: 24),
           ],
         ),

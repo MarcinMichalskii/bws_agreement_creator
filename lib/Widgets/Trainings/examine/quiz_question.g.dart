@@ -9,7 +9,7 @@ part of 'quiz_question.dart';
 abstract class _$QuizQuestionCWProxy {
   QuizQuestion markedAnswer(String? markedAnswer);
 
-  QuizQuestion question(ChapterQuestionData question);
+  QuizQuestion question(QuestionData question);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `QuizQuestion(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -19,7 +19,7 @@ abstract class _$QuizQuestionCWProxy {
   /// ````
   QuizQuestion call({
     String? markedAnswer,
-    ChapterQuestionData? question,
+    QuestionData? question,
   });
 }
 
@@ -34,8 +34,7 @@ class _$QuizQuestionCWProxyImpl implements _$QuizQuestionCWProxy {
       this(markedAnswer: markedAnswer);
 
   @override
-  QuizQuestion question(ChapterQuestionData question) =>
-      this(question: question);
+  QuizQuestion question(QuestionData question) => this(question: question);
 
   @override
 
@@ -57,7 +56,7 @@ class _$QuizQuestionCWProxyImpl implements _$QuizQuestionCWProxy {
       question: question == const $CopyWithPlaceholder() || question == null
           ? _value.question
           // ignore: cast_nullable_to_non_nullable
-          : question as ChapterQuestionData,
+          : question as QuestionData,
     );
   }
 }

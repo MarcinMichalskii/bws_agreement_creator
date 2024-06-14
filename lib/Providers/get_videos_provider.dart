@@ -1,13 +1,14 @@
 import 'package:bws_agreement_creator/Model/video_data.dart';
 import 'package:bws_agreement_creator/Providers/add_video_provider.dart';
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
+import 'package:bws_agreement_creator/Providers/check_examine_provider.dart';
 import 'package:bws_agreement_creator/Providers/delete_video_provider.dart';
+import 'package:bws_agreement_creator/Providers/get_chapters_provider.dart';
 import 'package:bws_agreement_creator/Providers/update_videos_order_provider.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
 import 'package:bws_agreement_creator/utils/move_element_list_extension.dart';
-import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:collection/collection.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final getVideosProvider = StateNotifierProvider.family<GetVideosNotifier,
     APIResponseState<List<VideoData>>, String>((ref, chapterId) {
@@ -75,8 +76,8 @@ class GetVideosNotifier
   }
 
   bool isVideoLocked(String videoId) {
-    final firstIndexUnpassed =
-        state.data?.indexWhere((element) => element.passed == false);
+    final firstIndexUnwatched =
+        state.data?.indexWhere((element) => element.watched == false);
     final videoIndex =
         state.data?.indexWhere((element) => element.id == videoId);
 
@@ -84,11 +85,11 @@ class GetVideosNotifier
       return false;
     }
 
-    if (firstIndexUnpassed == -1 || firstIndexUnpassed == null) {
+    if (firstIndexUnwatched == -1 || firstIndexUnwatched == null) {
       return false;
     }
 
-    if (firstIndexUnpassed >= videoIndex!) {
+    if (firstIndexUnwatched >= videoIndex!) {
       return false;
     }
 

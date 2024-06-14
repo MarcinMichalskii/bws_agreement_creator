@@ -12,18 +12,23 @@ class AddTrainingDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final title = useState('');
+    final badgeId = useState('');
     final onAddChapter = useCallback(() {
-      ref.read(addChapterProvider.notifier).addChapter(title.value);
+      ref
+          .read(addChapterProvider.notifier)
+          .addChapter(chapterTitle: title.value, badgeId: badgeId.value);
     }, [title.value]);
     final isLoading = ref.watch(addChapterProvider).isLoading;
     ref.listen(addChapterProvider, (previous, next) {
       if (next.data != null) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: CustomColors.applicationColorMain,
-            content: Text('Dodano nowy rozdział')));
+            content: Text('Dodano nowe szkolenie')));
         Navigator.of(context).pop();
       }
     });
+
+    final inputsValid = title.value.isNotEmpty && badgeId.value.isNotEmpty;
 
     return Dialog(
       backgroundColor: CustomColors.almostBlack3,
@@ -37,9 +42,15 @@ class AddTrainingDialog extends HookConsumerWidget {
                 style: TextStyle(color: CustomColors.gray, fontSize: 17)),
             const SizedBox(height: 16),
             BorderedInput(
-              placeholder: 'Tytuł rozdziału',
+              placeholder: 'Tytuł szkolenia',
               onChanged: (text) {
                 title.value = text ?? '';
+              },
+            ),
+            BorderedInput(
+              placeholder: 'Identyfikator odznaki',
+              onChanged: (text) {
+                badgeId.value = text ?? '';
               },
             ),
             const SizedBox(height: 16),
@@ -47,11 +58,11 @@ class AddTrainingDialog extends HookConsumerWidget {
                 ? const CircularProgressIndicator(
                     color: CustomColors.applicationColorMain)
                 : DefaultBorderedButton(
-                    text: "Dodaj rozdział",
-                    borderColor: title.value.isEmpty
+                    text: "Dodaj szkolenie",
+                    borderColor: !inputsValid
                         ? CustomColors.gray
                         : CustomColors.applicationColorMain,
-                    onTap: title.value.isEmpty ? null : onAddChapter),
+                    onTap: !inputsValid ? null : onAddChapter),
           ],
         ),
       ),

@@ -1,5 +1,7 @@
 import 'package:bws_agreement_creator/Model/chapter_question_data.dart';
+import 'package:bws_agreement_creator/Model/video_data.dart';
 import 'package:bws_agreement_creator/Providers/add_video_provider.dart';
+import 'package:bws_agreement_creator/Providers/get_videos_provider.dart';
 import 'package:bws_agreement_creator/Providers/update_question_provider.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_question_dialog_ui.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/answer_draft.dart';
@@ -10,7 +12,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EditQuestionDialogLogic extends HookConsumerWidget {
   final String chapterId;
-  final ChapterQuestionData questionData;
+  final QuestionData questionData;
   const EditQuestionDialogLogic(
       {Key? key, required this.chapterId, required this.questionData})
       : super(key: key);
@@ -40,22 +42,36 @@ class EditQuestionDialogLogic extends HookConsumerWidget {
       }
     });
 
+    final List<VideoData> videosList =
+        ref.watch(getVideosProvider(chapterId)).data ?? [];
+    final selectedVideos = useState<List<VideoData>>(videosList
+        .where((element) => questionData.videos.contains(element.id))
+        .toList());
+    final onSelectedVideosChanged = useCallback((List<VideoData> selected) {
+      selectedVideos.value = selected;
+    }, []);
+
     final onSavedPressed = useCallback(() {
       ref.read(updateQuestionProvider.notifier).updateQuestion(
           questionId: questionData.id,
           questionText: question.value,
           answers: answers.value,
+          videos: selectedVideos.value.map((e) => e.id).toList(),
           chapterId: chapterId);
     }, [question.value, answers.value]);
     final isLoading = ref.watch(addVideoProvider).isLoading;
 
     return AddQuestionDialogUI(
+        title: 'Edytuj pytanie',
         question: question.value,
         answers: answers.value,
         chapterId: chapterId,
         onSavedPressed: onSavedPressed,
         onQuestionChanged: onQuestionChanged,
         onAnswersChanged: onAnswersChanged,
+        videosList: videosList,
+        selectedVideos: selectedVideos.value,
+        onSelectedVideosChanged: onSelectedVideosChanged,
         isLoading: isLoading);
   }
 }

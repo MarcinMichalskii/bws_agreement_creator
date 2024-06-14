@@ -16,12 +16,14 @@ class AddVideoDialog extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final title = useState('');
     final url = useState('');
-    final inputsValid = title.value.isNotEmpty && isURL(url.value);
+    final thumbnailUrl = useState('');
+    final inputsValid =
+        title.value.isNotEmpty && isURL(url.value) && isURL(thumbnailUrl.value);
 
     final onAddVideo = useCallback(() {
       ref
           .read(addVideoProvider.notifier)
-          .addVideo(title.value, url.value, chapterId);
+          .addVideo(title.value, url.value, thumbnailUrl.value, chapterId);
     }, [title.value, url.value]);
 
     final isLoading = ref.watch(addVideoProvider).isLoading;
@@ -56,6 +58,13 @@ class AddVideoDialog extends HookConsumerWidget {
               placeholder: 'Adres url filmu',
               onChanged: (text) {
                 url.value = text ?? '';
+              },
+            ),
+            BorderedInput(
+              validator: UrlValidator.isValid,
+              placeholder: 'Adres url miniaturki',
+              onChanged: (text) {
+                thumbnailUrl.value = text ?? '';
               },
             ),
             const SizedBox(height: 16),
