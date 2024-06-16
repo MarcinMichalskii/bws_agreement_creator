@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/Providers/check_examine_provider.dart';
 import 'package:bws_agreement_creator/Providers/get_chapter_examine_provider.dart';
+import 'package:bws_agreement_creator/Providers/get_chapters_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/examine/chapter_examine_finished_widget.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/examine/components/examine_ui.dart';
@@ -21,6 +22,14 @@ class ChapterExamineScaffold extends HookConsumerWidget {
     final questionsList = ref.watch(getChapterExamineProvider(chapterId)).data;
 
     final examQuestions = ref.watch(examineProvider)?.questions ?? [];
+
+    final chapterPassed = ref
+            .read(getChaptersProvider)
+            .data
+            ?.where((element) => element.id == chapterId)
+            .first
+            .passed ==
+        true;
 
     useBuildEffect(() {
       if (questionsList == null) {
@@ -59,8 +68,10 @@ class ChapterExamineScaffold extends HookConsumerWidget {
     return AppScaffold(
         title: "Egzamin dla szkolenia $chapterName",
         body: examResult != null
-            ? ExamineFinishedWidget(
+            ? ChapterExamineFinishedWidget(
+                passingAgain: chapterPassed,
                 title: "Zamknij",
+                chapterName: chapterName,
                 onFinish: onExitExam,
                 result: ref.watch(checkExamineProivder(chapterId)).data!,
                 numberOfQuestions: examQuestions.length)

@@ -4,23 +4,23 @@ import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ChapterExamineFinishedWidget extends HookConsumerWidget {
+class VideoExamineFinishedWidget extends HookConsumerWidget {
   final int numberOfQuestions;
   final ExamineResultData result;
 
   final VoidCallback onFinish;
   final String title;
-  final String chapterName;
   final bool passingAgain;
+  final bool isLastVideo;
 
-  const ChapterExamineFinishedWidget(
+  const VideoExamineFinishedWidget(
       {Key? key,
       required this.passingAgain,
       required this.title,
       required this.result,
       required this.numberOfQuestions,
       required this.onFinish,
-      required this.chapterName})
+      required this.isLastVideo})
       : super(key: key);
 
   @override
@@ -37,7 +37,7 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
           alignment: Alignment.center,
           child: Column(children: [
             Text(
-              result.passed ? 'Gratulacje!' : 'Spróbuj ponownie!',
+              result.passed ? 'Quiz zaliczony!' : 'Spróbuj ponownie!',
               style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -46,23 +46,8 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
             if (result.passed)
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 8),
-                child: const Icon(Icons.rocket_launch_outlined,
-                    size: 110, color: CustomColors.darkGreen),
-              ),
-            if (!result.passed)
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                child: const Icon(Icons.sentiment_very_dissatisfied_outlined,
-                    size: 110, color: CustomColors.mildRed),
-              ),
-            if (result.passed && !passingAgain)
-              Text(
-                textAlign: TextAlign.center,
-                'Ukończyłeś szkolenie "${chapterName}"',
-                style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: CustomColors.gray),
+                child: const Icon(Icons.thumb_up_alt_outlined,
+                    size: 70, color: CustomColors.darkGreen),
               ),
             Container(
               margin: const EdgeInsets.only(top: 4),
@@ -74,12 +59,24 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
                 ),
               ),
             ),
-            if (result.passed && !passingAgain)
+            if (result.passed && !passingAgain && !isLastVideo)
               Container(
                 margin: const EdgeInsets.only(top: 16),
                 child: const Text(
                   textAlign: TextAlign.left,
-                  'Teraz w profilu sinch możesz zapisać się na praktyczną część szkolenia \nDo Twojego profilu została dodana nowa odznaka',
+                  'Możesz teraz przejść do kolejnego filmu',
+                  style: TextStyle(
+                    color: CustomColors.gray,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            if (result.passed && !passingAgain && isLastVideo)
+              Container(
+                margin: const EdgeInsets.only(top: 16),
+                child: const Text(
+                  textAlign: TextAlign.left,
+                  'Możesz teraz przejść do egzaminu podsumowującego',
                   style: TextStyle(
                     color: CustomColors.gray,
                     fontSize: 18,

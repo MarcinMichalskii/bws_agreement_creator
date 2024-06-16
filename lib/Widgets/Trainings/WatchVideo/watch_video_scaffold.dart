@@ -28,11 +28,18 @@ class WatchVideoScaffold extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final videoUserData = ref.watch(getVideoUserDataProvider(videoId)).data;
+
     final watchedSeconds = useState(0);
     final secondsToWatch = useState(0);
     final secondsLeft = (secondsToWatch.value - watchedSeconds.value) <= 0
         ? 0
         : (secondsToWatch.value - watchedSeconds.value);
+
+    useBuildEffect(() {
+      if (videoUserData != null) {
+        watchedSeconds.value = videoUserData.secondsWatched;
+      }
+    }, [videoUserData]);
 
     final isPlaying = useState(false);
     final onPlayingChanged = useCallback((bool playing) {

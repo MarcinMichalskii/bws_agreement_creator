@@ -1,9 +1,7 @@
 import 'package:bws_agreement_creator/Model/video_data.dart';
 import 'package:bws_agreement_creator/Providers/add_video_provider.dart';
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
-import 'package:bws_agreement_creator/Providers/check_examine_provider.dart';
 import 'package:bws_agreement_creator/Providers/delete_video_provider.dart';
-import 'package:bws_agreement_creator/Providers/get_chapters_provider.dart';
 import 'package:bws_agreement_creator/Providers/update_videos_order_provider.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
 import 'package:bws_agreement_creator/utils/move_element_list_extension.dart';

@@ -18,7 +18,7 @@ extension ExamAccessStateExtension on ExamAccessState {
   String get buttonText {
     switch (this) {
       case ExamAccessState.passed:
-        return 'Test zaliczony! Sprawdź się ponownie';
+        return 'Egzamin zaliczony! Sprawdź się ponownie';
       case ExamAccessState.notPassed:
         return 'Rozpocznij test podsumowujący';
       case ExamAccessState.cannotStart:
