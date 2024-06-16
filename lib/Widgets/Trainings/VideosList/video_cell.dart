@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:bws_agreement_creator/Model/video_data.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/VideosList/video_badges_widget.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/VideosList/video_duration_label_widget.dart';
