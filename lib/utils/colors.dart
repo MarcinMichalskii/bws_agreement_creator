@@ -9,7 +9,10 @@ class CustomColors {
   static const almostBlack2 = Color.fromRGBO(33, 33, 33, 1);
   static const almostBlack3 = Color.fromRGBO(15, 15, 15, 1);
   static const green = Color.fromRGBO(136, 200, 10, 1);
+
+  static const darkGreen = Color.fromRGBO(41, 138, 77, 1);
   static const red = Color.fromRGBO(228, 40, 0, 1);
+  static const mildRed = Color.fromRGBO(201, 45, 45, 0.5);
 
   static const mainBackground = Color.fromRGBO(15, 15, 15, 1);
 }

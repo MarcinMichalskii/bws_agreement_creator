@@ -3,9 +3,9 @@ import 'package:bws_agreement_creator/Providers/get_chapters_provider.dart';
 import 'package:bws_agreement_creator/Providers/get_video_examine_provider.dart';
 import 'package:bws_agreement_creator/Providers/get_videos_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
-import 'package:bws_agreement_creator/Widgets/Trainings/examine/chapter_examine_finished_widget.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/examine/components/examine_ui.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/examine/examine_provider.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/examine/video_examine_finished_widget.dart';
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:bws_agreement_creator/router.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +32,14 @@ class VideoExamineScaffold extends HookConsumerWidget {
     final questionsList = ref.watch(getVideoExamineProvider(videoId)).data;
 
     final examQuestions = ref.watch(examineProvider)?.questions ?? [];
+
+    final videoQuizPassed = ref
+            .read(getVideosProvider(chapterId))
+            .data
+            ?.where((element) => element.id == videoId)
+            .first
+            .examinePassed ==
+        true;
 
     useBuildEffect(() {
       if (questionsList == null) {
@@ -125,7 +133,11 @@ class VideoExamineScaffold extends HookConsumerWidget {
     return AppScaffold(
         title: "Egzamin do filmu $videoTitle",
         body: examResult != null
-            ? ExamineFinishedWidget(
+            ? VideoExamineFinishedWidget(
+                isLastVideo: ref
+                    .read(getVideosProvider(chapterId).notifier)
+                    .isLastVideo(videoId),
+                passingAgain: videoQuizPassed,
                 title: "Zakończ",
                 onFinish: onExitExam,
                 result: examResult,

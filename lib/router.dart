@@ -209,26 +209,6 @@ final _mainRoutes = [
                         chapterId: state.pathParameters['id1'] ?? '',
                       ));
                 },
-                // routes: [
-                //   GoRoute(
-                //       path: 'watchVideoExamine',
-                //       name: 'watchVideoExamine',
-                //       pageBuilder: (context, state) {
-                //         final chapterId = state.pathParameters['id1'] ?? '';
-                //         final videoId = state.pathParameters['id2'] ?? '';
-                //         final videoTitle =
-                //             state.uri.queryParameters['title'] ?? '';
-
-                //         return wrapWithPage(
-                //             context,
-                //             state,
-                //             VideoExamineScaffold(
-                //                 chapterId: chapterId,
-                //                 videoId: videoId,
-                //                 videoTitle: videoTitle,
-                //                 openedFromVideosList: false));
-                //       }),
-                // ]
               ),
             ]),
       ]),

@@ -1,6 +1,7 @@
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/Providers/reset_password_provider.dart';
 import 'package:bws_agreement_creator/Providers/snackbar_handler.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_video.dialog.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,9 +16,9 @@ class AddVideoNotifier extends StateNotifier<APIResponseState<String?>> {
   AddVideoNotifier(this.ref) : super(APIResponseState());
 
   void addVideo(String videoTitle, String videoUrl, String thumbnailUrl,
-      double duration, String chapterId) async {
+      String chapterId) async {
     state = APIResponseState(isLoading: true);
-
+    final duration = await VideoDurationFetcher(videoUrl).fetchVideoDuration();
     state =
         await ApiController(NoDataResponseParser.parse).performPost(params: {
       "videoName": videoTitle,

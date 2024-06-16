@@ -47,13 +47,10 @@ class AddVideoDialog extends HookConsumerWidget {
         title.value.isNotEmpty && isURL(url.value) && isURL(thumbnailUrl.value);
 
     final onAddVideo = useCallback(() async {
-      final duration =
-          await VideoDurationFetcher(url.value).fetchVideoDuration();
       ref.read(addVideoProvider.notifier).addVideo(
             title.value,
             url.value,
             thumbnailUrl.value,
-            duration,
             chapterId,
           );
     }, [
