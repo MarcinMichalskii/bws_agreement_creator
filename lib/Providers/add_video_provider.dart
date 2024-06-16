@@ -15,15 +15,13 @@ class AddVideoNotifier extends StateNotifier<APIResponseState<String?>> {
   StateNotifierProviderRef<AddVideoNotifier, APIResponseState<String?>> ref;
   AddVideoNotifier(this.ref) : super(APIResponseState());
 
-  void addVideo(String videoTitle, String videoUrl, String thumbnailUrl,
-      String chapterId) async {
+  void addVideo(String videoTitle, String videoUrl, String chapterId) async {
     state = APIResponseState(isLoading: true);
     final duration = await VideoDurationFetcher(videoUrl).fetchVideoDuration();
     state =
         await ApiController(NoDataResponseParser.parse).performPost(params: {
       "videoName": videoTitle,
       'videoUrl': videoUrl,
-      'thumbnailUrl': thumbnailUrl,
       'duration': duration,
       'chapterId': chapterId,
     }, url: "$baseUrl/addVideo");
