@@ -2,6 +2,7 @@ import 'package:bws_agreement_creator/Model/video_data.dart';
 import 'package:bws_agreement_creator/Providers/add_video_provider.dart';
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/Providers/delete_video_provider.dart';
+import 'package:bws_agreement_creator/Providers/update_video_provider.dart';
 import 'package:bws_agreement_creator/Providers/update_videos_order_provider.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
 import 'package:bws_agreement_creator/utils/move_element_list_extension.dart';
@@ -26,6 +27,14 @@ class GetVideosNotifier
         getVideos();
       }
     });
+
+    ref.listen(updateVideoProvider, (previous, next) {
+      final chapterId = next.params?['chapterId'];
+      if (next.data != null && chapterId == this.chapterId) {
+        getVideos();
+      }
+    });
+
     ref.listen(deleteVideoProvider, (previous, next) {
       if (next.data != null && next.params!['chapterId'] == chapterId) {
         getVideos();

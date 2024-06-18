@@ -9,14 +9,12 @@ class VideoExamineFinishedWidget extends HookConsumerWidget {
   final ExamineResultData result;
 
   final VoidCallback onFinish;
-  final String title;
   final bool passingAgain;
   final bool isLastVideo;
 
   const VideoExamineFinishedWidget(
       {Key? key,
       required this.passingAgain,
-      required this.title,
       required this.result,
       required this.numberOfQuestions,
       required this.onFinish,
@@ -91,7 +89,7 @@ class VideoExamineFinishedWidget extends HookConsumerWidget {
               ),
             Container(
               margin: const EdgeInsets.only(top: 16),
-              child: PillButton(title: title, onPress: onFinish),
+              child: PillButton(title: "Kontynuuj", onPress: onFinish),
             )
           ]),
         ),

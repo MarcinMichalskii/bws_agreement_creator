@@ -6,25 +6,26 @@ import 'package:bws_agreement_creator/utils/base_url.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final addVideoProvider =
-    StateNotifierProvider<AddVideoNotifier, APIResponseState<String?>>((ref) {
-  return AddVideoNotifier(ref);
+final updateVideoProvider =
+    StateNotifierProvider<EditVideoNotifier, APIResponseState<String?>>((ref) {
+  return EditVideoNotifier(ref);
 });
 
-class AddVideoNotifier extends StateNotifier<APIResponseState<String?>> {
-  StateNotifierProviderRef<AddVideoNotifier, APIResponseState<String?>> ref;
-  AddVideoNotifier(this.ref) : super(APIResponseState());
+class EditVideoNotifier extends StateNotifier<APIResponseState<String?>> {
+  StateNotifierProviderRef<EditVideoNotifier, APIResponseState<String?>> ref;
+  EditVideoNotifier(this.ref) : super(APIResponseState());
 
-  void addVideo(String videoTitle, String videoUrl, String chapterId) async {
+  void updateVideo(String videoTitle, String videoUrl, String chapterId,
+      String videoId) async {
     state = APIResponseState(isLoading: true);
     final duration = await VideoDurationFetcher(videoUrl).fetchVideoDuration();
-    state =
-        await ApiController(NoDataResponseParser.parse).performPost(params: {
+    state = await ApiController(NoDataResponseParser.parse).performPut(params: {
       "videoName": videoTitle,
       'videoUrl': videoUrl,
       'duration': duration,
       'chapterId': chapterId,
-    }, url: "$baseUrl/addVideo");
+      'videoId': videoId
+    }, url: "$baseUrl/updateVideo");
 
     if (state.error != null) {
       SnackbarHandler.showSnackBar(state.error!.message, color: Colors.red);

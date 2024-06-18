@@ -23,8 +23,8 @@ class VideoProgressStatusWidget extends HookConsumerWidget {
         getVideoUserData?.videoWatched == true || videoUpdate?.passed == true;
 
     final title = videoWatched
-        ? 'Film zaliczony'
-        : 'Aby zaliczyć ten filmu, musisz obejrzeć jeszcze: ${secondsLeft.formattedAsDuration()}';
+        ? 'Obejrzane!'
+        : 'Aby przejść do quizu musisz jeszcze obejrzeć : ${secondsLeft.formattedAsDuration()}';
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 12),

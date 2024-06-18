@@ -1,15 +1,13 @@
 import 'dart:async';
+import 'dart:html' as html;
 
 import 'package:bws_agreement_creator/Providers/add_video_provider.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bordered_input.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/generate_pdf_button.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_video_dialog_ui.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
-import 'package:bws_agreement_creator/utils/url_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:validators/validators.dart';
-import 'dart:html' as html;
 
 class VideoDurationFetcher {
   String videoUrl;
@@ -44,6 +42,14 @@ class AddVideoDialog extends HookConsumerWidget {
     final url = useState('');
     final inputsValid = title.value.isNotEmpty && isURL(url.value);
 
+    final onVideoTitleChanged = useCallback((String text) {
+      title.value = text;
+    }, []);
+
+    final onUrlChanged = useCallback((String text) {
+      url.value = text;
+    }, []);
+
     final onAddVideo = useCallback(() async {
       ref
           .read(addVideoProvider.notifier)
@@ -63,43 +69,14 @@ class AddVideoDialog extends HookConsumerWidget {
       }
     });
 
-    return Dialog(
-      backgroundColor: CustomColors.almostBlack3,
-      child: Container(
-        constraints: const BoxConstraints(maxWidth: 200),
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Nowe video',
-                style: TextStyle(color: CustomColors.gray, fontSize: 17)),
-            const SizedBox(height: 16),
-            BorderedInput(
-              placeholder: 'Tytuł filmu',
-              onChanged: (text) {
-                title.value = text ?? '';
-              },
-            ),
-            BorderedInput(
-              validator: UrlValidator.isValid,
-              placeholder: 'Adres url filmu',
-              onChanged: (text) {
-                url.value = text ?? '';
-              },
-            ),
-            const SizedBox(height: 16),
-            isLoading
-                ? const CircularProgressIndicator(
-                    color: CustomColors.applicationColorMain)
-                : DefaultBorderedButton(
-                    text: "Dodaj video",
-                    borderColor: !inputsValid
-                        ? CustomColors.gray
-                        : CustomColors.applicationColorMain,
-                    onTap: !inputsValid ? null : onAddVideo),
-          ],
-        ),
-      ),
-    );
+    return AddVideoDialogUI(
+        popupTitle: 'Nowe video',
+        initialVideoTitle: title.value,
+        initialUrl: url.value,
+        onUrlChange: onUrlChanged,
+        onVideoTitleChange: onVideoTitleChanged,
+        isLoading: isLoading,
+        inputsValid: inputsValid,
+        onAddVideo: onAddVideo);
   }
 }
