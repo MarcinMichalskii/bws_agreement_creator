@@ -5,8 +5,8 @@ import 'package:bws_agreement_creator/Providers/delete_chapter_provider.dart';
 import 'package:bws_agreement_creator/Providers/update_chapters_order_provider.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
 import 'package:bws_agreement_creator/utils/move_element_list_extension.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:collection/collection.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final getChaptersProvider = StateNotifierProvider<GetChaptersNotifier,
     APIResponseState<List<ChapterData>>>((ref) {

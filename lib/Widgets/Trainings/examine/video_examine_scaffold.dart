@@ -138,7 +138,6 @@ class VideoExamineScaffold extends HookConsumerWidget {
                     .read(getVideosProvider(chapterId).notifier)
                     .isLastVideo(videoId),
                 passingAgain: videoQuizPassed,
-                title: "Zakończ",
                 onFinish: onExitExam,
                 result: examResult,
                 numberOfQuestions: examQuestions.length)

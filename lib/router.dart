@@ -12,6 +12,7 @@ import 'package:bws_agreement_creator/Widgets/Trainings/examine/chapter_examine_
 import 'package:bws_agreement_creator/Widgets/Trainings/chapters_list_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/watch_video_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/examine/video_examine_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/UsersTrainingsProgress/users_statistics_scaffold.dart';
 import 'package:bws_agreement_creator/utils/app_state_provider.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/foundation.dart';
@@ -230,7 +231,12 @@ final _mainRoutes = [
             }),
       ],
       pageBuilder: (context, state) =>
-          wrapWithPage(context, state, const ManageChaptersScaffold()))
+          wrapWithPage(context, state, const ManageChaptersScaffold())),
+  GoRoute(
+      path: '/usersStatistics',
+      name: 'usersStatistics',
+      pageBuilder: (context, state) =>
+          wrapWithPage(context, state, UsersStatisticsScaffold()))
 ];
 
 Page wrapWithPage(

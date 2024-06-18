@@ -1,3 +1,4 @@
+import 'package:bws_agreement_creator/Model/chapter_question_data.dart';
 import 'package:bws_agreement_creator/Model/video_data.dart';
 import 'package:bws_agreement_creator/Providers/delete_question_provider.dart';
 import 'package:bws_agreement_creator/Providers/delete_video_provider.dart';
@@ -6,13 +7,14 @@ import 'package:bws_agreement_creator/Providers/get_videos_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/touchable_opacity.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_question_dialog_logic.dart';
-import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_video.dialog.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_video_dialog.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/confirmation_dialog.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/edit_question_dialog_logic.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/edit_video_dialog.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/import_questions_dialog_logic.dart';
+import 'package:bws_agreement_creator/Widgets/ManageTrainings/questions_list_widget.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/select_filtered_videos_dialog_logic.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/videos_list_widget.dart';
-import 'package:bws_agreement_creator/Widgets/ManageTrainings/questions_list_widget.dart';
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -82,14 +84,47 @@ class ManageChapterDetailsScaffold extends HookConsumerWidget with RouteAware {
               onSelectedVideosChanged: onSelectedVideoChanged));
     }, [videos]);
 
-    final filteredQuestions = questions.where((element) {
-      if (selectedVideos.value.isEmpty) {
-        return true;
-      }
-      return selectedVideos.value.any((video) {
-        return element.videos.contains(video.id);
-      });
-    }).toList();
+    final filterQuestionText = useState('');
+    final filteredQuestions = useState<List<QuestionData>>([]);
+
+    useBuildEffect(() {
+      final filteredQuestionsData = questions.where((element) {
+        if (selectedVideos.value.isEmpty && filterQuestionText.value.isEmpty) {
+          return true;
+        }
+        var isOnVideosList = false;
+        if (!selectedVideos.value.isEmpty) {
+          isOnVideosList = selectedVideos.value.any((video) {
+            return element.videos.contains(video.id);
+          });
+        } else {
+          isOnVideosList = true;
+        }
+
+        if (filterQuestionText.value.isNotEmpty) {
+          return isOnVideosList &&
+              element.questionText
+                  .toLowerCase()
+                  .contains(filterQuestionText.value.toLowerCase());
+        }
+        return isOnVideosList;
+      }).toList()
+        ..sort((a, b) => a.questionText.compareTo(b.questionText));
+      filteredQuestions.value = filteredQuestionsData;
+    }, [questions, selectedVideos.value, filterQuestionText.value]);
+
+    final onFilterTextChanged = useCallback((String text) {
+      filterQuestionText.value = text;
+    }, []);
+
+    final onOpenVideoEdit = useCallback((VideoData videoData) {
+      showDialog(
+          context: context,
+          builder: (_) => EditVideoDialog(
+                chapterId: chapterId,
+                videoData: videoData,
+              ));
+    }, []);
 
     useBuildEffect(() {
       ref.read(videosProvider.notifier).getVideos();
@@ -140,16 +175,17 @@ class ManageChapterDetailsScaffold extends HookConsumerWidget with RouteAware {
           child: Column(
             children: [
               VideosListWidget(
-                chapterId: chapterId,
-                isEditing: isEditing.value,
-                videos: videos,
-                onVideoDelete: onVideoDelete,
-              ),
+                  chapterId: chapterId,
+                  isEditing: isEditing.value,
+                  videos: videos,
+                  onVideoDelete: onVideoDelete,
+                  onVideoOpen: onOpenVideoEdit),
               QuestionsListWidget(
                 onFilterTapped: onFilterTapped,
-                questions: filteredQuestions,
+                questions: filteredQuestions.value,
                 onQuestionDelete: onQuestionDelete,
                 onQuestionEdit: onQuestionEdit,
+                onFilterTextChanged: onFilterTextChanged,
               ),
             ],
           ),

@@ -51,6 +51,14 @@ class SideMenu extends HookConsumerWidget {
                 onTap: () {
                   context.pushScreen('manageTrainings');
                 }),
+          if (ref.watch(profileProvider).data?.isAdmin == true)
+            DrawerListTile(
+                isCollapsed: false,
+                title: 'Postępy w szkoleniach',
+                icon: Icons.person_outline,
+                onTap: () {
+                  context.pushScreen('usersStatistics');
+                }),
           Container(
             margin: const EdgeInsets.only(bottom: 16),
             child: DrawerListTile(
