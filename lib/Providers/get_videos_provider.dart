@@ -71,6 +71,9 @@ class GetVideosNotifier
   }
 
   bool isLastVideo(String videoId) {
+    if (state.data!.last.isOutro) {
+      return state.data!.length > 1 && state.data!.last.id == videoId;
+    }
     return state.data!.last.id == videoId;
   }
 
@@ -101,5 +104,9 @@ class GetVideosNotifier
     }
 
     return true;
+  }
+
+  String? getOutroUrl() {
+    return state.data?.firstWhereOrNull((element) => element.isOutro)?.url;
   }
 }
