@@ -18,6 +18,7 @@ class EditVideoDialog extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final title = useState(videoData.name);
     final url = useState(videoData.url);
+    final isOutro = useState(videoData.isOutro);
     final inputsValid = title.value.isNotEmpty && isURL(url.value);
 
     final onVideoTitleChanged = useCallback((String text) {
@@ -28,14 +29,14 @@ class EditVideoDialog extends HookConsumerWidget {
       url.value = text;
     }, []);
 
+    final onIsOutroChange = useCallback((bool value) {
+      isOutro.value = value;
+    }, []);
+
     final onSave = useCallback(() async {
-      ref
-          .read(updateVideoProvider.notifier)
-          .updateVideo(title.value, url.value, chapterId, videoData.id);
-    }, [
-      title.value,
-      url.value,
-    ]);
+      ref.read(updateVideoProvider.notifier).updateVideo(
+          title.value, url.value, chapterId, videoData.id, isOutro.value);
+    }, [title.value, url.value, isOutro.value]);
 
     final isLoading = ref.watch(addVideoProvider).isLoading;
     ref.listen(updateVideoProvider, (previous, next) {
@@ -48,13 +49,16 @@ class EditVideoDialog extends HookConsumerWidget {
     });
 
     return AddVideoDialogUI(
-        popupTitle: 'Edytuj film',
-        initialVideoTitle: videoData.name,
-        initialUrl: videoData.url,
-        onUrlChange: onUrlChanged,
-        onVideoTitleChange: onVideoTitleChanged,
-        isLoading: isLoading,
-        inputsValid: inputsValid,
-        onAddVideo: onSave);
+      popupTitle: 'Edytuj film',
+      initialVideoTitle: videoData.name,
+      initialUrl: videoData.url,
+      onUrlChange: onUrlChanged,
+      onVideoTitleChange: onVideoTitleChanged,
+      isLoading: isLoading,
+      inputsValid: inputsValid,
+      onAddVideo: onSave,
+      isOutro: isOutro.value,
+      onIsOutroChange: onIsOutroChange,
+    );
   }
 }

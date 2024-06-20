@@ -32,7 +32,7 @@ class ExamineNavigationUI extends StatelessWidget {
       child: Row(
         children: [
           ExamineNavigationButton(
-              title: "Poprzedenie",
+              title: "Poprzednie",
               enabled: canGoToPreviousQuestion,
               onPress: onPreviousPressed),
           const Spacer(),

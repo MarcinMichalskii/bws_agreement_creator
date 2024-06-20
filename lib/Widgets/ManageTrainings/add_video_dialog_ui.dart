@@ -5,17 +5,18 @@ import 'package:bws_agreement_creator/utils/url_validator.dart';
 import 'package:flutter/material.dart';
 
 class AddVideoDialogUI extends StatelessWidget {
-  const AddVideoDialogUI({
-    super.key,
-    required this.popupTitle,
-    required this.initialVideoTitle,
-    required this.initialUrl,
-    required this.onUrlChange,
-    required this.onVideoTitleChange,
-    required this.isLoading,
-    required this.inputsValid,
-    required this.onAddVideo,
-  });
+  const AddVideoDialogUI(
+      {super.key,
+      required this.popupTitle,
+      required this.initialVideoTitle,
+      required this.initialUrl,
+      required this.onUrlChange,
+      required this.onVideoTitleChange,
+      required this.isLoading,
+      required this.inputsValid,
+      required this.onAddVideo,
+      required this.isOutro,
+      required this.onIsOutroChange});
 
   final String popupTitle;
   final String initialVideoTitle;
@@ -24,7 +25,9 @@ class AddVideoDialogUI extends StatelessWidget {
   final ValueSetter<String> onUrlChange;
   final bool isLoading;
   final bool inputsValid;
+  final bool isOutro;
   final VoidCallback onAddVideo;
+  final ValueSetter<bool> onIsOutroChange;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +56,22 @@ class AddVideoDialogUI extends StatelessWidget {
               onChanged: (text) {
                 onUrlChange(text ?? '');
               },
+            ),
+            // text with toggle
+            Container(
+              margin: const EdgeInsets.only(top: 16),
+              child: Row(
+                children: [
+                  const Text('Outro',
+                      style: TextStyle(color: CustomColors.gray, fontSize: 17)),
+                  const SizedBox(width: 16),
+                  Switch(
+                    value: isOutro,
+                    onChanged: onIsOutroChange,
+                    activeColor: CustomColors.applicationColorMain,
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 16),
             isLoading

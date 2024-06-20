@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/Model/examine_result.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapters_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/video_player_widget.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,6 +13,7 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
   final String title;
   final String chapterName;
   final bool passingAgain;
+  final String? outroUrl;
 
   const ChapterExamineFinishedWidget(
       {Key? key,
@@ -20,7 +22,8 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
       required this.result,
       required this.numberOfQuestions,
       required this.onFinish,
-      required this.chapterName})
+      required this.chapterName,
+      required this.outroUrl})
       : super(key: key);
 
   @override
@@ -89,7 +92,7 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
             if (!result.passed)
               const Text(
                 textAlign: TextAlign.center,
-                'Nie zdobyto wymaganej ilości punktów. Żeby zaliczyć musisz mieć przynajmniej 90% prawidłowych odpowiedzi',
+                'Nie zdobyto wymaganej ilości punktów. Żeby zaliczyć musisz mieć przynajmniej 70% prawidłowych odpowiedzi',
                 style: TextStyle(fontSize: 18, color: CustomColors.gray),
               ),
             Container(
@@ -98,6 +101,16 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
             )
           ]),
         ),
+        if (result.passed && !passingAgain && outroUrl != null)
+          Container(
+            padding: const EdgeInsets.all(16),
+            child: VideoPlayerWidget(
+                url: outroUrl!,
+                onPlayingChanged: (e) {},
+                onTimeUpdate: (e) {},
+                onDurationChanged: (e) {},
+                initialStart: 0),
+          ),
         const Spacer(),
       ],
     );

@@ -11,6 +11,7 @@ class VideoData {
   bool hasExamine;
   double duration;
   String thumbnailUrl;
+  bool isOutro;
 
   VideoData(
       {required this.id,
@@ -21,20 +22,21 @@ class VideoData {
       required this.url,
       required this.chapterId,
       required this.duration,
-      required this.thumbnailUrl});
+      required this.thumbnailUrl,
+      required this.isOutro});
 
   factory VideoData.fromJson(Map<String, dynamic> json) {
     return VideoData(
-      id: json['id'],
-      name: json['name'],
-      url: json['url'],
-      chapterId: json['chapterId'],
-      watched: json['watched'],
-      examinePassed: json['examinePassed'],
-      hasExamine: json['hasExamine'],
-      duration: json['duration'],
-      thumbnailUrl: json['thumbnailUrl'],
-    );
+        id: json['id'],
+        name: json['name'],
+        url: json['url'],
+        chapterId: json['chapterId'],
+        watched: json['watched'],
+        examinePassed: json['examinePassed'],
+        hasExamine: json['hasExamine'],
+        duration: json['duration'],
+        thumbnailUrl: json['thumbnailUrl'],
+        isOutro: json['isOutro']);
   }
 
   static List<VideoData> listFromJson(Map<String, dynamic> json) {

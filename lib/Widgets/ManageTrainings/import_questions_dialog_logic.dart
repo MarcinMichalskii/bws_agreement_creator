@@ -28,9 +28,7 @@ class ImportQuestionsDialogLogic extends HookConsumerWidget {
         final questions = await ImportQuestionsHelper().pickFile(chapterId);
         importedQuestions.value = questions;
       } catch (e) {
-        SnackbarHandler.showSnackBar(
-            "Nie udało się zaimportować tego pliku, sprawdź strukturę i spróbuj ponownie",
-            color: Colors.red);
+        SnackbarHandler.showSnackBar(e.toString(), color: Colors.red);
       }
     }, []);
 

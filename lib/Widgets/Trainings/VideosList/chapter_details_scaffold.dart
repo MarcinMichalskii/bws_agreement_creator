@@ -22,7 +22,11 @@ class ChapterDetailsScaffold extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final videosProvider = getVideosProvider(chapterId);
-    final videos = ref.watch(videosProvider).data ?? [];
+
+    final videos = ref.watch(videosProvider).data?.where((element) {
+          return !element.isOutro;
+        }).toList() ??
+        [];
     final onExamineOpen = useCallback(() {
       context.pushScreen('examine', params: {
         'id1': chapterId,
@@ -100,9 +104,9 @@ class ChapterDetailsScaffold extends HookConsumerWidget {
 
 class StartExamineWidget extends HookConsumerWidget {
   final ExamAccessState examAccessState;
-  VoidCallback onExamineOpen;
+  final VoidCallback onExamineOpen;
 
-  StartExamineWidget(
+  const StartExamineWidget(
       {super.key, required this.examAccessState, required this.onExamineOpen});
   @override
   Widget build(BuildContext context, ref) {

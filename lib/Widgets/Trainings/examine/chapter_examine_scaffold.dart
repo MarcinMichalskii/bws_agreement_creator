@@ -1,6 +1,7 @@
 import 'package:bws_agreement_creator/Providers/check_examine_provider.dart';
 import 'package:bws_agreement_creator/Providers/get_chapter_examine_provider.dart';
 import 'package:bws_agreement_creator/Providers/get_chapters_provider.dart';
+import 'package:bws_agreement_creator/Providers/get_videos_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/examine/chapter_examine_finished_widget.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/examine/components/examine_ui.dart';
@@ -74,7 +75,10 @@ class ChapterExamineScaffold extends HookConsumerWidget {
                 chapterName: chapterName,
                 onFinish: onExitExam,
                 result: ref.watch(checkExamineProivder(chapterId)).data!,
-                numberOfQuestions: examQuestions.length)
+                numberOfQuestions: examQuestions.length,
+                outroUrl: ref
+                    .read(getVideosProvider(chapterId).notifier)
+                    .getOutroUrl())
             : ExamineUI(
                 onExamFinished: onFinishExam,
                 isLoading: isLoading.value,

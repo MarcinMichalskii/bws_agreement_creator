@@ -59,7 +59,8 @@ class ImportQuestionsHelper {
       final correctAnswer = element.correctAnswer.toLowerCase();
       final containsCorrectAnswer = mappedAnswers.contains(correctAnswer);
       if (!containsCorrectAnswer) {
-        throw Exception("Correct answer not in answers");
+        throw Exception(
+            "${element.questionText} Correct answer not in answers");
       }
     });
     return questions;
