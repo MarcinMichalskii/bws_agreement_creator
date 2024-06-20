@@ -43,7 +43,11 @@ class ChapterDetailsScaffold extends HookConsumerWidget {
                 })
                 .toList()
                 .length ==
-            videos.length &&
+            videos
+                .where(
+                  (element) => !element.isOutro,
+                )
+                .length &&
         videos.isNotEmpty;
     useBuildEffect(() {
       ref.read(videosProvider.notifier).getVideos();
