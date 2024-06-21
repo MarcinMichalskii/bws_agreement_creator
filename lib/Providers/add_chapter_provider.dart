@@ -15,13 +15,16 @@ class AddChapterNotifier extends StateNotifier<APIResponseState<String?>> {
   AddChapterNotifier(this.ref) : super(APIResponseState());
 
   void addChapter(
-      {required String chapterTitle, required String badgeId}) async {
+      {required String chapterTitle,
+      required String badgeId,
+      required String surveyUrl}) async {
     state = APIResponseState(isLoading: true);
 
     state =
         await ApiController(NoDataResponseParser.parse).performPost(params: {
       "name": chapterTitle,
       "badgeId": badgeId,
+      "surveyUrl": surveyUrl,
     }, url: "$baseUrl/addChapter");
 
     if (state.error != null) {

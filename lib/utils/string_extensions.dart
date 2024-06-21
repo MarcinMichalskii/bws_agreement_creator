@@ -82,3 +82,21 @@ extension HasNumbers on String {
     return RegExp(r'\d').hasMatch(this);
   }
 }
+
+extension IsValidSurveyUrl on String {
+  bool isValidUrl() {
+    try {
+      var uri = Uri.parse(this);
+      return uri.hasScheme && (uri.isAbsolute || uri.hasAuthority);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool isValidSurveyUrl() {
+    if (isEmpty) {
+      return true;
+    }
+    return isValidUrl();
+  }
+}

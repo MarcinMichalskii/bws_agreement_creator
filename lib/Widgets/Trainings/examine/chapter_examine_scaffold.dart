@@ -78,7 +78,12 @@ class ChapterExamineScaffold extends HookConsumerWidget {
                 numberOfQuestions: examQuestions.length,
                 outroUrl: ref
                     .read(getVideosProvider(chapterId).notifier)
-                    .getOutroUrl())
+                    .getOutroUrl(),
+                surveyUrl: ref
+                    .read(getChaptersProvider.notifier)
+                    .getChapterForId(chapterId)
+                    ?.surveyUrl,
+              )
             : ExamineUI(
                 onExamFinished: onFinishExam,
                 isLoading: isLoading.value,
