@@ -2,8 +2,10 @@ import 'package:bws_agreement_creator/Model/examine_result.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapters_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/video_player_widget.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
+import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ChapterExamineFinishedWidget extends HookConsumerWidget {
   final int numberOfQuestions;
@@ -14,6 +16,7 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
   final String chapterName;
   final bool passingAgain;
   final String? outroUrl;
+  final String? surveyUrl;
 
   const ChapterExamineFinishedWidget(
       {Key? key,
@@ -23,7 +26,8 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
       required this.numberOfQuestions,
       required this.onFinish,
       required this.chapterName,
-      required this.outroUrl})
+      required this.outroUrl,
+      required this.surveyUrl})
       : super(key: key);
 
   @override
@@ -61,7 +65,7 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
             if (result.passed && !passingAgain)
               Text(
                 textAlign: TextAlign.center,
-                'Ukończyłeś szkolenie "${chapterName}"',
+                'Ukończyłeś szkolenie "$chapterName"',
                 style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -101,6 +105,13 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
             )
           ]),
         ),
+        if (result.passed && !passingAgain && surveyUrl?.emptyAsNull() != null)
+          Container(
+              margin: const EdgeInsets.only(top: 16),
+              child: PillButton(
+                title: 'Daj znać co myślisz o tym szkoleniu!',
+                onPress: () => launchUrl(Uri.parse(surveyUrl!)),
+              )),
         if (result.passed && !passingAgain && outroUrl != null)
           Container(
             padding: const EdgeInsets.all(16),

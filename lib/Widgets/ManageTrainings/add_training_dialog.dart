@@ -2,6 +2,7 @@ import 'package:bws_agreement_creator/Providers/add_chapter_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bordered_input.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/generate_pdf_button.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
+import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,10 +14,12 @@ class AddTrainingDialog extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final title = useState('');
     final badgeId = useState('');
+    final surveyUrl = useState('');
     final onAddChapter = useCallback(() {
-      ref
-          .read(addChapterProvider.notifier)
-          .addChapter(chapterTitle: title.value, badgeId: badgeId.value);
+      ref.read(addChapterProvider.notifier).addChapter(
+          chapterTitle: title.value,
+          badgeId: badgeId.value,
+          surveyUrl: surveyUrl.value);
     }, [title.value]);
     final isLoading = ref.watch(addChapterProvider).isLoading;
     ref.listen(addChapterProvider, (previous, next) {
@@ -28,7 +31,9 @@ class AddTrainingDialog extends HookConsumerWidget {
       }
     });
 
-    final inputsValid = title.value.isNotEmpty && badgeId.value.isNotEmpty;
+    final inputsValid = title.value.isNotEmpty &&
+        badgeId.value.isNotEmpty &&
+        surveyUrl.value.isValidSurveyUrl();
 
     return Dialog(
       backgroundColor: CustomColors.almostBlack3,
@@ -51,6 +56,12 @@ class AddTrainingDialog extends HookConsumerWidget {
               placeholder: 'Identyfikator odznaki',
               onChanged: (text) {
                 badgeId.value = text ?? '';
+              },
+            ),
+            BorderedInput(
+              placeholder: 'Adres URL ankiety',
+              onChanged: (text) {
+                surveyUrl.value = text ?? '';
               },
             ),
             const SizedBox(height: 16),
