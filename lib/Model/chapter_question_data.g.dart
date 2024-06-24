@@ -6,7 +6,7 @@ part of 'chapter_question_data.dart';
 // CopyWithGenerator
 // **************************************************************************
 
-abstract class _$ChapterQuestionDataCWProxy {
+abstract class _$QuestionDataCWProxy {
   QuestionData answers(List<String> answers);
 
   QuestionData chapterId(String chapterId);
@@ -21,11 +21,11 @@ abstract class _$ChapterQuestionDataCWProxy {
 
   QuestionData videos(List<String> videos);
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ChapterQuestionData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `QuestionData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// ChapterQuestionData(...).copyWith(id: 12, name: "My name")
+  /// QuestionData(...).copyWith(id: 12, name: "My name")
   /// ````
   QuestionData call({
     List<String>? answers,
@@ -38,11 +38,11 @@ abstract class _$ChapterQuestionDataCWProxy {
   });
 }
 
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfChapterQuestionData.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfChapterQuestionData.copyWith.fieldName(...)`
-class _$ChapterQuestionDataCWProxyImpl implements _$ChapterQuestionDataCWProxy {
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfQuestionData.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfQuestionData.copyWith.fieldName(...)`
+class _$QuestionDataCWProxyImpl implements _$QuestionDataCWProxy {
   final QuestionData _value;
 
-  const _$ChapterQuestionDataCWProxyImpl(this._value);
+  const _$QuestionDataCWProxyImpl(this._value);
 
   @override
   QuestionData answers(List<String> answers) => this(answers: answers);
@@ -69,11 +69,11 @@ class _$ChapterQuestionDataCWProxyImpl implements _$ChapterQuestionDataCWProxy {
 
   @override
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ChapterQuestionData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `QuestionData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// ChapterQuestionData(...).copyWith(id: 12, name: "My name")
+  /// QuestionData(...).copyWith(id: 12, name: "My name")
   /// ````
   QuestionData call({
     Object? answers = const $CopyWithPlaceholder(),
@@ -119,9 +119,8 @@ class _$ChapterQuestionDataCWProxyImpl implements _$ChapterQuestionDataCWProxy {
   }
 }
 
-extension $ChapterQuestionDataCopyWith on QuestionData {
-  /// Returns a callable class that can be used as follows: `instanceOfChapterQuestionData.copyWith(...)` or like so:`instanceOfChapterQuestionData.copyWith.fieldName(...)`.
+extension $QuestionDataCopyWith on QuestionData {
+  /// Returns a callable class that can be used as follows: `instanceOfQuestionData.copyWith(...)` or like so:`instanceOfQuestionData.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$ChapterQuestionDataCWProxy get copyWith =>
-      _$ChapterQuestionDataCWProxyImpl(this);
+  _$QuestionDataCWProxy get copyWith => _$QuestionDataCWProxyImpl(this);
 }
