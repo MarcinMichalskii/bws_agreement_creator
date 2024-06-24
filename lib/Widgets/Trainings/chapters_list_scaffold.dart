@@ -1,8 +1,10 @@
 import 'package:bws_agreement_creator/Model/chapter_data.dart';
 import 'package:bws_agreement_creator/Providers/get_chapters_provider.dart';
+import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/trainings_onboarding_information.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/chapters_list.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/content_no_available.dart';
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:bws_agreement_creator/router.dart';
 import 'package:bws_agreement_creator/utils/user_data_helper.dart';
@@ -39,7 +41,12 @@ class ChaptersListScaffold extends HookConsumerWidget {
       }
     }, []);
 
+    final isUserVerified = ref.watch(profileProvider).data?.verified ?? false;
+
     useBuildEffect(() {
+      if (!isUserVerified) {
+        return;
+      }
       showInitialWelcomeMessage();
     }, []);
 
@@ -55,9 +62,13 @@ class ChaptersListScaffold extends HookConsumerWidget {
           ),
         )
       ],
-      title: "Lista szkoleń",
-      body: ChaptersListWidget(
-          lockUnpassed: true, chapters: chapters, onChapterOpen: onChapterOpen),
+      title: isUserVerified ? "Lista szkoleń" : "",
+      body: isUserVerified
+          ? ChaptersListWidget(
+              lockUnpassed: true,
+              chapters: chapters,
+              onChapterOpen: onChapterOpen)
+          : const ContentNoAvailableWidget(),
     );
   }
 }

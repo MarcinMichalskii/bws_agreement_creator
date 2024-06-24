@@ -29,6 +29,8 @@ abstract class _$ProfileDataCWProxy {
 
   ProfileData studentId(String? studentId);
 
+  ProfileData verified(bool verified);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ProfileData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -47,6 +49,7 @@ abstract class _$ProfileDataCWProxy {
     String? pesel,
     String? phone,
     String? studentId,
+    bool? verified,
   });
 }
 
@@ -91,6 +94,9 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
   ProfileData studentId(String? studentId) => this(studentId: studentId);
 
   @override
+  ProfileData verified(bool verified) => this(verified: verified);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ProfileData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -110,6 +116,7 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
     Object? pesel = const $CopyWithPlaceholder(),
     Object? phone = const $CopyWithPlaceholder(),
     Object? studentId = const $CopyWithPlaceholder(),
+    Object? verified = const $CopyWithPlaceholder(),
   }) {
     return ProfileData(
       address: address == const $CopyWithPlaceholder()
@@ -157,6 +164,10 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
           ? _value.studentId
           // ignore: cast_nullable_to_non_nullable
           : studentId as String?,
+      verified: verified == const $CopyWithPlaceholder() || verified == null
+          ? _value.verified
+          // ignore: cast_nullable_to_non_nullable
+          : verified as bool,
     );
   }
 }
