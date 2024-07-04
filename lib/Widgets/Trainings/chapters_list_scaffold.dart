@@ -63,7 +63,7 @@ class ChaptersListScaffold extends HookConsumerWidget {
         )
       ],
       title: isUserVerified ? "Lista szkoleń" : "",
-      body: !isUserVerified
+      body: isUserVerified
           ? ChaptersListWidget(
               lockUnpassed: true,
               chapters: chapters,
