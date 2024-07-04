@@ -73,6 +73,9 @@ class UsersStatisticsScaffold extends HookConsumerWidget {
           });
     }, []);
 
+    final filtersOn = ref.watch(userStatisticsFilterProvider).filtersOn;
+    final usersToMap = filtersOn ? filteredUsers : users;
+
     return AppScaffold(
       title: 'Postępy w szkoleniach',
       actions: [
@@ -101,7 +104,7 @@ class UsersStatisticsScaffold extends HookConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ...filteredUsers.map((user) {
+              ...usersToMap.map((user) {
                 return UserStatisticsCell(
                   name: user.name,
                   email: user.email,
