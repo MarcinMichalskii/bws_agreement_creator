@@ -42,21 +42,27 @@ class UserStatisticsFilterWidget extends HookConsumerWidget {
           children: [
             const Text("Filtruj dane",
                 style: TextStyle(color: CustomColors.gray, fontSize: 17)),
-            const UserStatisticsSwitch(),
-            const UserStatisticsHeader(
-                title: "Egzamin zaliczony w okresie", topMargin: 8),
-            const UserStatisticsSelectDateRange(),
-            const UserStatisticsHeader(
-              title: "Egzamin dla szkoleń",
-            ),
-            AddQuestionSelectItemsUI(
-                searchVisible: false,
-                itemsList: chapters,
-                selectedItems: selectedChapters,
-                onSelectedItemsChanged: onSelectedItemsChanged,
-                labelExtractor: (chapter) {
-                  return chapter.name;
-                }),
+            const TurnFiltersOnSwitch(),
+            if (ref.watch(userStatisticsFilterProvider).filtersOn)
+              const UserStatisticsSwitch(),
+            if (ref.watch(userStatisticsFilterProvider).filtersOn)
+              const UserStatisticsHeader(
+                  title: "Egzamin zaliczony w okresie", topMargin: 8),
+            if (ref.watch(userStatisticsFilterProvider).filtersOn)
+              const UserStatisticsSelectDateRange(),
+            if (ref.watch(userStatisticsFilterProvider).filtersOn)
+              const UserStatisticsHeader(
+                title: "Egzamin dla szkoleń",
+              ),
+            if (ref.watch(userStatisticsFilterProvider).filtersOn)
+              AddQuestionSelectItemsUI(
+                  searchVisible: false,
+                  itemsList: chapters,
+                  selectedItems: selectedChapters,
+                  onSelectedItemsChanged: onSelectedItemsChanged,
+                  labelExtractor: (chapter) {
+                    return chapter.name;
+                  }),
           ],
         ),
       ),

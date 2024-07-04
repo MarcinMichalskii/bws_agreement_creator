@@ -9,12 +9,14 @@ class UserStatisticsFilterState {
   final DateTime toDate;
   final List<ChapterData> selectedChapters;
   final bool sortByDate;
+  final bool filtersOn;
 
   UserStatisticsFilterState({
     required this.fromDate,
     required this.toDate,
     required this.selectedChapters,
     required this.sortByDate,
+    this.filtersOn = false,
   });
 }
 
@@ -44,6 +46,10 @@ class UserStatisticsFilterNotifier
 
   void toggleSortByDate() {
     state = state.copyWith(sortByDate: !state.sortByDate);
+  }
+
+  void toggleFiltersOn() {
+    state = state.copyWith(filtersOn: !state.filtersOn);
   }
 }
 

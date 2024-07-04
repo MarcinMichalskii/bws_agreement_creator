@@ -34,3 +34,35 @@ class UserStatisticsSwitch extends HookConsumerWidget {
     );
   }
 }
+
+class TurnFiltersOnSwitch extends HookConsumerWidget {
+  const TurnFiltersOnSwitch({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, ref) {
+    return Container(
+      margin: const EdgeInsets.only(top: 16),
+      child: Row(
+        children: [
+          const Text('Użyj filtrów',
+              style: TextStyle(color: CustomColors.gray)),
+          const Spacer(),
+          Container(
+            margin: const EdgeInsets.only(left: 16),
+            child: Switch(
+              value: ref.watch(userStatisticsFilterProvider).filtersOn,
+              activeTrackColor: CustomColors.applicationColorMain,
+              onChanged: (value) {
+                ref
+                    .read(userStatisticsFilterProvider.notifier)
+                    .toggleFiltersOn();
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
