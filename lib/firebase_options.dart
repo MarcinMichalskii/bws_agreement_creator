@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -44,38 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyD1rYy1Xt7fWeHxJtWeUiq8LNRP1pj1u0A',
-    appId: '1:715847619144:web:fe826e063cdd45e9f37e7d',
-    messagingSenderId: '715847619144',
-    projectId: 'bwsapp-d2766',
-    authDomain: 'bwsapp-d2766.firebaseapp.com',
-    storageBucket: 'bwsapp-d2766.appspot.com',
-    measurementId: 'G-1EVKNB5WBT',
+    apiKey: 'AIzaSyDJevhsaaHdB9DTlpHvCsl4bYxGVNnXtdY',
+    appId: '1:214270827161:web:fc15e8db251a1326b5b608',
+    messagingSenderId: '214270827161',
+    projectId: 'bwsappprod',
+    authDomain: 'bwsappprod.firebaseapp.com',
+    storageBucket: 'bwsappprod.appspot.com',
+    measurementId: 'G-SZV9DKMQEV',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDzj3xspJnEhkClb0Uv3XQucgniKgux2qk',
-    appId: '1:715847619144:android:7bf27e733e16ed4cf37e7d',
-    messagingSenderId: '715847619144',
-    projectId: 'bwsapp-d2766',
-    storageBucket: 'bwsapp-d2766.appspot.com',
+    apiKey: 'AIzaSyBxOVprO6Kks6o8WzGC4WjU6VEDSv9fO_w',
+    appId: '1:214270827161:android:c356cc65ef2b46d5b5b608',
+    messagingSenderId: '214270827161',
+    projectId: 'bwsappprod',
+    storageBucket: 'bwsappprod.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAZcVtbFR8tRHxwvlljRaSZ1v3XjBj74i4',
-    appId: '1:715847619144:ios:8dcc5c2022cfa4acf37e7d',
-    messagingSenderId: '715847619144',
-    projectId: 'bwsapp-d2766',
-    storageBucket: 'bwsapp-d2766.appspot.com',
+    apiKey: 'AIzaSyA0z9z3ZZERy1aizT-GYtAhulaifmlV1To',
+    appId: '1:214270827161:ios:bf7bb851e23d90cab5b608',
+    messagingSenderId: '214270827161',
+    projectId: 'bwsappprod',
+    storageBucket: 'bwsappprod.appspot.com',
     iosBundleId: 'com.example.bwsAgreementCreator',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAZcVtbFR8tRHxwvlljRaSZ1v3XjBj74i4',
-    appId: '1:715847619144:ios:8dcc5c2022cfa4acf37e7d',
-    messagingSenderId: '715847619144',
-    projectId: 'bwsapp-d2766',
-    storageBucket: 'bwsapp-d2766.appspot.com',
+    apiKey: 'AIzaSyA0z9z3ZZERy1aizT-GYtAhulaifmlV1To',
+    appId: '1:214270827161:ios:bf7bb851e23d90cab5b608',
+    messagingSenderId: '214270827161',
+    projectId: 'bwsappprod',
+    storageBucket: 'bwsappprod.appspot.com',
     iosBundleId: 'com.example.bwsAgreementCreator',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDJevhsaaHdB9DTlpHvCsl4bYxGVNnXtdY',
+    appId: '1:214270827161:web:93bc1bcf66432724b5b608',
+    messagingSenderId: '214270827161',
+    projectId: 'bwsappprod',
+    authDomain: 'bwsappprod.firebaseapp.com',
+    storageBucket: 'bwsappprod.appspot.com',
+    measurementId: 'G-WKZBBSMWJ1',
+  );
+
 }
