@@ -7,6 +7,8 @@ part of 'user_statistics_filter_provider.dart';
 // **************************************************************************
 
 abstract class _$UserStatisticsFilterStateCWProxy {
+  UserStatisticsFilterState filtersOn(bool filtersOn);
+
   UserStatisticsFilterState fromDate(DateTime fromDate);
 
   UserStatisticsFilterState selectedChapters(
@@ -23,6 +25,7 @@ abstract class _$UserStatisticsFilterStateCWProxy {
   /// UserStatisticsFilterState(...).copyWith(id: 12, name: "My name")
   /// ````
   UserStatisticsFilterState call({
+    bool? filtersOn,
     DateTime? fromDate,
     List<ChapterData>? selectedChapters,
     bool? sortByDate,
@@ -36,6 +39,10 @@ class _$UserStatisticsFilterStateCWProxyImpl
   final UserStatisticsFilterState _value;
 
   const _$UserStatisticsFilterStateCWProxyImpl(this._value);
+
+  @override
+  UserStatisticsFilterState filtersOn(bool filtersOn) =>
+      this(filtersOn: filtersOn);
 
   @override
   UserStatisticsFilterState fromDate(DateTime fromDate) =>
@@ -62,12 +69,17 @@ class _$UserStatisticsFilterStateCWProxyImpl
   /// UserStatisticsFilterState(...).copyWith(id: 12, name: "My name")
   /// ````
   UserStatisticsFilterState call({
+    Object? filtersOn = const $CopyWithPlaceholder(),
     Object? fromDate = const $CopyWithPlaceholder(),
     Object? selectedChapters = const $CopyWithPlaceholder(),
     Object? sortByDate = const $CopyWithPlaceholder(),
     Object? toDate = const $CopyWithPlaceholder(),
   }) {
     return UserStatisticsFilterState(
+      filtersOn: filtersOn == const $CopyWithPlaceholder() || filtersOn == null
+          ? _value.filtersOn
+          // ignore: cast_nullable_to_non_nullable
+          : filtersOn as bool,
       fromDate: fromDate == const $CopyWithPlaceholder() || fromDate == null
           ? _value.fromDate
           // ignore: cast_nullable_to_non_nullable
