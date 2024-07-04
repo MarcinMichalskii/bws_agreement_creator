@@ -42,10 +42,13 @@ class ImportQuestionsDialogUI extends HookConsumerWidget {
           children: [
             const Text("Import pytań",
                 style: TextStyle(color: CustomColors.gray, fontSize: 17)),
-            AddQuestionSelectVideosUI(
-                videosList: videosList,
-                selectedVideos: selectedVideos,
-                onSelectedVideosChanged: onSelectedVideosChanged),
+            AddQuestionSelectItemsUI(
+                itemsList: videosList,
+                selectedItems: selectedVideos,
+                onSelectedItemsChanged: onSelectedVideosChanged,
+                labelExtractor: (element) {
+                  return element.name;
+                }),
             if (importedQuestions.isEmpty)
               DefaultBorderedButton(
                   text: "Wybierz plik CSV",

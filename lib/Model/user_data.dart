@@ -1,11 +1,17 @@
+import 'package:bws_agreement_creator/Model/finished_chapter_data.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'user_data.g.dart';
+
+@JsonSerializable()
 class UserData {
   List<String> completedVideos;
   String email;
   int id;
   String name;
-  List<String> passedChapterExams;
+  List<FinishedChapterData> passedChapterExams;
   List<String> passedQuestions;
   List<String> passedVideoExams;
+  DateTime lastActivity;
 
   UserData({
     required this.completedVideos,
@@ -15,19 +21,11 @@ class UserData {
     required this.passedChapterExams,
     required this.passedQuestions,
     required this.passedVideoExams,
+    required this.lastActivity,
   });
 
-  factory UserData.fromJson(Map<String, dynamic> json) {
-    return UserData(
-      completedVideos: List<String>.from(json['completedVideos']),
-      email: json['email'],
-      id: json['id'],
-      name: json['name'],
-      passedChapterExams: List<String>.from(json['passedChapterExams']),
-      passedQuestions: List<String>.from(json['passedQuestions']),
-      passedVideoExams: List<String>.from(json['passedVideoExams']),
-    );
-  }
+  factory UserData.fromJson(Map<String, dynamic> json) =>
+      _$UserDataFromJson(json);
 
   static List<UserData> listFromJson(Map<String, dynamic> json) {
     List<UserData> users = [];

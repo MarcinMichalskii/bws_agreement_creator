@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 extension CheckIfAdult on DateTime {
   bool isAdult() {
     final birthday = this;
@@ -33,5 +35,11 @@ extension CheckIfAdult on DateTime {
       age--;
     }
     return age <= 26;
+  }
+}
+
+extension ReadableDate on DateTime {
+  String toReadableDate() {
+    return DateFormat('dd MMM yyyy').format(this);
   }
 }

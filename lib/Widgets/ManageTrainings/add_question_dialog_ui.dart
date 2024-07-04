@@ -116,10 +116,13 @@ class AddQuestionDialogUI extends HookConsumerWidget {
                   onCorrectAnswerChanged: onCorrectAnswerChanged,
                   onAddAnswer: onAddAnswer),
             if (selectingVideos.value)
-              AddQuestionSelectVideosUI(
-                  videosList: videosList,
-                  selectedVideos: selectedVideos,
-                  onSelectedVideosChanged: onSelectedVideosChanged),
+              AddQuestionSelectItemsUI(
+                  itemsList: videosList,
+                  selectedItems: selectedVideos,
+                  onSelectedItemsChanged: onSelectedVideosChanged,
+                  labelExtractor: (element) {
+                    return element.name;
+                  }),
             const SizedBox(height: 16),
             isLoading
                 ? const CircularProgressIndicator(

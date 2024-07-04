@@ -29,6 +29,7 @@ class SelectDateButton extends HookWidget {
     return FormButtonUI(
         title: DateFormat('dd.MM.yyyy').format(dateText),
         headerText: headerText,
+        hasHeader: headerText.isNotEmpty,
         onPress: onPress,
         icon:
             const Icon(Icons.calendar_month, color: CustomColors.almostBlack));
