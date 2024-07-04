@@ -13,15 +13,14 @@ final notAStudentTapped = StateProvider((ref) {
 });
 
 final profileProvider =
-    StateNotifierProvider<ProfileNotifier, ParsedResponseState<ProfileData>>(
+    StateNotifierProvider<ProfileNotifier, APIResponseState<ProfileData>>(
         (ref) {
   return ProfileNotifier(ref);
 });
 
-class ProfileNotifier extends StateNotifier<ParsedResponseState<ProfileData>> {
-  StateNotifierProviderRef<ProfileNotifier, ParsedResponseState<ProfileData>>
-      ref;
-  ProfileNotifier(this.ref) : super(ParsedResponseState()) {
+class ProfileNotifier extends StateNotifier<APIResponseState<ProfileData>> {
+  StateNotifierProviderRef<ProfileNotifier, APIResponseState<ProfileData>> ref;
+  ProfileNotifier(this.ref) : super(APIResponseState()) {
     ref.listen(authProvider, (previous, next) {
       if (next.data?.accessToken != null) {
         getProfile();
@@ -31,37 +30,31 @@ class ProfileNotifier extends StateNotifier<ParsedResponseState<ProfileData>> {
   }
 
   void getProfile() async {
-    state = ParsedResponseState(isLoading: true);
-    final response = await ApiController().performGet(
-        url: "$baseUrl/getProfileData",
-        accessToken:
-            ref.read(authProvider.notifier).state.data?.accessToken ?? '');
+    state = APIResponseState(isLoading: true);
+    final response = await ApiController(ProfileData.fromJson).performGet(
+      url: "$baseUrl/getProfileData",
+    );
 
     if (response.error != null) {
-      state = ParsedResponseState(error: response.error);
+      state = APIResponseState(error: response.error);
       return;
     }
 
-    try {
-      final loginData = ProfileData.fromJson(response.data);
-      if (loginData.validationError != null) {
-        state = ParsedResponseState(
-            error: CostRegisterError(loginData.validationError!));
-        return;
-      }
-      state = ParsedResponseState.fromAPIResponseState(response, loginData);
-      ref.read(newFormDataProvider.notifier).setLoginData(loginData);
-      ref.read(appStateProvider.notifier).setIsLoggedIn(true);
-      final studentIdUpdate = shouldUpdateStudentIdNumber(loginData);
-      ref
-          .read(appStateProvider.notifier)
-          .setShouldUpdateStudentIdNumber(studentIdUpdate);
-    } catch (error) {
-      print(error);
-      state = ParsedResponseState(
-          isLoading: false,
-          error: CostRegisterError("Wystąpił problem z pobraniem profilu"));
+    final loginData = response.data!;
+
+    if (loginData.validationError != null) {
+      state = APIResponseState(
+          error: CostRegisterError(loginData.validationError!));
+      return;
     }
+    state = response;
+
+    ref.read(newFormDataProvider.notifier).setLoginData(loginData);
+    ref.read(appStateProvider.notifier).setIsLoggedIn(true);
+    final studentIdUpdate = shouldUpdateStudentIdNumber(loginData);
+    ref
+        .read(appStateProvider.notifier)
+        .setShouldUpdateStudentIdNumber(studentIdUpdate);
   }
 
   bool shouldUpdateStudentIdNumber(ProfileData profileData) {
@@ -77,5 +70,9 @@ class ProfileNotifier extends StateNotifier<ParsedResponseState<ProfileData>> {
     final invalidStudentId =
         RegExp(r'[^0-9\/\s]').hasMatch(profileData.studentId ?? '');
     return hasPhotoWithoutNumber || isPotentialStudent || invalidStudentId;
+  }
+
+  void setDefaultState() {
+    state = APIResponseState();
   }
 }

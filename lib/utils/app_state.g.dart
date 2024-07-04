@@ -11,6 +11,9 @@ abstract class _$AppStateCWProxy {
 
   AppState sentAgreement(bool sentAgreement);
 
+  AppState shouldRedirectToTrainingsAfterLogin(
+      bool shouldRedirectToTrainingsAfterLogin);
+
   AppState shouldUpdateStudentIdNumber(bool shouldUpdateStudentIdNumber);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AppState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -22,6 +25,7 @@ abstract class _$AppStateCWProxy {
   AppState call({
     bool? isLoggedIn,
     bool? sentAgreement,
+    bool? shouldRedirectToTrainingsAfterLogin,
     bool? shouldUpdateStudentIdNumber,
   });
 }
@@ -40,6 +44,13 @@ class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
       this(sentAgreement: sentAgreement);
 
   @override
+  AppState shouldRedirectToTrainingsAfterLogin(
+          bool shouldRedirectToTrainingsAfterLogin) =>
+      this(
+          shouldRedirectToTrainingsAfterLogin:
+              shouldRedirectToTrainingsAfterLogin);
+
+  @override
   AppState shouldUpdateStudentIdNumber(bool shouldUpdateStudentIdNumber) =>
       this(shouldUpdateStudentIdNumber: shouldUpdateStudentIdNumber);
 
@@ -54,6 +65,7 @@ class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
   AppState call({
     Object? isLoggedIn = const $CopyWithPlaceholder(),
     Object? sentAgreement = const $CopyWithPlaceholder(),
+    Object? shouldRedirectToTrainingsAfterLogin = const $CopyWithPlaceholder(),
     Object? shouldUpdateStudentIdNumber = const $CopyWithPlaceholder(),
   }) {
     return AppState(
@@ -67,6 +79,12 @@ class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
               ? _value.sentAgreement
               // ignore: cast_nullable_to_non_nullable
               : sentAgreement as bool,
+      shouldRedirectToTrainingsAfterLogin:
+          shouldRedirectToTrainingsAfterLogin == const $CopyWithPlaceholder() ||
+                  shouldRedirectToTrainingsAfterLogin == null
+              ? _value.shouldRedirectToTrainingsAfterLogin
+              // ignore: cast_nullable_to_non_nullable
+              : shouldRedirectToTrainingsAfterLogin as bool,
       shouldUpdateStudentIdNumber:
           shouldUpdateStudentIdNumber == const $CopyWithPlaceholder() ||
                   shouldUpdateStudentIdNumber == null

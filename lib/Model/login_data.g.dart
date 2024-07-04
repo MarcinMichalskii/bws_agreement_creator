@@ -17,6 +17,8 @@ abstract class _$ProfileDataCWProxy {
 
   ProfileData idNumber(String? idNumber);
 
+  ProfileData isAdmin(bool isAdmin);
+
   ProfileData name(String name);
 
   ProfileData passportId(String? passportId);
@@ -26,6 +28,8 @@ abstract class _$ProfileDataCWProxy {
   ProfileData phone(String phone);
 
   ProfileData studentId(String? studentId);
+
+  ProfileData verified(bool verified);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ProfileData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -39,11 +43,13 @@ abstract class _$ProfileDataCWProxy {
     String? email,
     bool? hasStudentIdPhoto,
     String? idNumber,
+    bool? isAdmin,
     String? name,
     String? passportId,
     String? pesel,
     String? phone,
     String? studentId,
+    bool? verified,
   });
 }
 
@@ -70,6 +76,9 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
   ProfileData idNumber(String? idNumber) => this(idNumber: idNumber);
 
   @override
+  ProfileData isAdmin(bool isAdmin) => this(isAdmin: isAdmin);
+
+  @override
   ProfileData name(String name) => this(name: name);
 
   @override
@@ -85,6 +94,9 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
   ProfileData studentId(String? studentId) => this(studentId: studentId);
 
   @override
+  ProfileData verified(bool verified) => this(verified: verified);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ProfileData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -98,11 +110,13 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
     Object? email = const $CopyWithPlaceholder(),
     Object? hasStudentIdPhoto = const $CopyWithPlaceholder(),
     Object? idNumber = const $CopyWithPlaceholder(),
+    Object? isAdmin = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
     Object? passportId = const $CopyWithPlaceholder(),
     Object? pesel = const $CopyWithPlaceholder(),
     Object? phone = const $CopyWithPlaceholder(),
     Object? studentId = const $CopyWithPlaceholder(),
+    Object? verified = const $CopyWithPlaceholder(),
   }) {
     return ProfileData(
       address: address == const $CopyWithPlaceholder()
@@ -126,6 +140,10 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
           ? _value.idNumber
           // ignore: cast_nullable_to_non_nullable
           : idNumber as String?,
+      isAdmin: isAdmin == const $CopyWithPlaceholder() || isAdmin == null
+          ? _value.isAdmin
+          // ignore: cast_nullable_to_non_nullable
+          : isAdmin as bool,
       name: name == const $CopyWithPlaceholder() || name == null
           ? _value.name
           // ignore: cast_nullable_to_non_nullable
@@ -146,6 +164,10 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
           ? _value.studentId
           // ignore: cast_nullable_to_non_nullable
           : studentId as String?,
+      verified: verified == const $CopyWithPlaceholder() || verified == null
+          ? _value.verified
+          // ignore: cast_nullable_to_non_nullable
+          : verified as bool,
     );
   }
 }

@@ -18,6 +18,8 @@ class ProfileData {
   String? pesel;
   String? studentId;
   bool hasStudentIdPhoto;
+  bool isAdmin;
+  bool verified;
 
   DateTime? get birthDateParsed {
     try {
@@ -37,23 +39,26 @@ class ProfileData {
       required this.idNumber,
       required this.pesel,
       required this.studentId,
-      required this.hasStudentIdPhoto});
+      required this.hasStudentIdPhoto,
+      required this.isAdmin,
+      required this.verified});
 
   factory ProfileData.fromJson(Map<String, dynamic> json) {
     return ProfileData(
-      name: json['name'],
-      birthDate: json['birthDate'],
-      email: json['email'],
-      address: json['address'] != null
-          ? Address.fromJson(json['address']).fullAddress
-          : null,
-      phone: json['phone'],
-      passportId: _cleanString(json['passportId']),
-      idNumber: _cleanString(json['idNumber']),
-      pesel: _cleanString(json['pesel']),
-      studentId: _cleanString(json['studentId']),
-      hasStudentIdPhoto: json['hasStudentIdPhoto'],
-    );
+        name: json['name'],
+        birthDate: json['birthDate'],
+        email: json['email'],
+        address: json['address'] != null
+            ? Address.fromJson(json['address']).fullAddress
+            : null,
+        phone: json['phone'],
+        passportId: _cleanString(json['passportId']),
+        idNumber: _cleanString(json['idNumber']),
+        pesel: _cleanString(json['pesel']),
+        studentId: _cleanString(json['studentId']),
+        hasStudentIdPhoto: json['hasStudentIdPhoto'],
+        isAdmin: json['isAdmin'],
+        verified: json['verified']);
   }
 
   static String? _cleanString(String? value) {
@@ -116,5 +121,6 @@ class ProfileData {
     } else if (invalidStudentId) {
       return 'Numer legitymacji studenckiej (${studentId ?? ''}) w Twoim profilu Sinch zawiera niedozwolone znaki. Popraw go poniżej. Numer może zawierać tylko cyfry spacje i znak "/"';
     }
+    return null;
   }
 }

@@ -17,18 +17,17 @@ final agreementProvider = StateProvider<Uint8List?>((ref) {
 });
 
 final uploadPdfProvider =
-    StateNotifierProvider<UploadPdfNotifier, ParsedResponseState<String?>>(
-        (ref) {
+    StateNotifierProvider<UploadPdfNotifier, APIResponseState<String?>>((ref) {
   return UploadPdfNotifier(ref);
 });
 
-class UploadPdfNotifier extends StateNotifier<ParsedResponseState<String?>> {
-  StateNotifierProviderRef<UploadPdfNotifier, ParsedResponseState<String?>> ref;
-  UploadPdfNotifier(this.ref) : super(ParsedResponseState());
+class UploadPdfNotifier extends StateNotifier<APIResponseState<String?>> {
+  StateNotifierProviderRef<UploadPdfNotifier, APIResponseState<String?>> ref;
+  UploadPdfNotifier(this.ref) : super(APIResponseState());
 
   void uploadPdf() async {
     try {
-      state = ParsedResponseState(isLoading: true);
+      state = APIResponseState(isLoading: true);
       final formData = ref.read(newFormDataProvider.notifier).state;
       final pdf = PdfNormalAgreementNew().generateNormalAgreement(formData);
       final pdfB2b = PdfB2BAgreementNew().generateB2bPdf(formData);
@@ -37,20 +36,19 @@ class UploadPdfNotifier extends StateNotifier<ParsedResponseState<String?>> {
           formData.b2bCompanyName?.emptyAsNull() != null ? pdfB2b : pdf;
       final selectedAgreementData = await selectedAgreement.save();
 
-      state = ParsedResponseState(isLoading: true);
+      state = APIResponseState(isLoading: true);
       final accessToken =
           ref.read(authProvider.notifier).state.data?.accessToken ?? '';
       await _performRequest(
           accessToken: accessToken,
           bytes: selectedAgreementData,
           filename: formData.pdfFileName);
-      state =
-          ParsedResponseState(isLoading: false, data: 'Plik został wysłany');
+      state = APIResponseState(isLoading: false, data: 'Plik został wysłany');
       ref.read(agreementProvider.notifier).state = selectedAgreementData;
       ref.read(appStateProvider.notifier).setSentAgreement(true);
     } catch (e) {
-      state = ParsedResponseState(error: CostRegisterError(e.toString()));
-      state = ParsedResponseState(isLoading: false);
+      state = APIResponseState(error: CostRegisterError(e.toString()));
+      state = APIResponseState(isLoading: false);
     }
   }
 
@@ -58,8 +56,6 @@ class UploadPdfNotifier extends StateNotifier<ParsedResponseState<String?>> {
       {required String accessToken,
       required Uint8List bytes,
       required String filename}) async {
-    Dio dio = Dio();
-
     dio.options.headers['authorization'] = 'Bearer $accessToken';
     FormData formData = FormData();
     final file = MultipartFile.fromBytes(bytes, filename: filename);

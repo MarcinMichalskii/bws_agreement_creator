@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "715847619144",
-    "project_id": "bwsapp-d2766",
-    "storage_bucket": "bwsapp-d2766.appspot.com"
+    "project_number": "214270827161",
+    "project_id": "bwsappprod",
+    "storage_bucket": "bwsappprod.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:715847619144:android:7bf27e733e16ed4cf37e7d",
+        "mobilesdk_app_id": "1:214270827161:android:c356cc65ef2b46d5b5b608",
         "android_client_info": {
           "package_name": "com.example.bws_agreement_creator"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDzj3xspJnEhkClb0Uv3XQucgniKgux2qk"
+          "current_key": "AIzaSyBxOVprO6Kks6o8WzGC4WjU6VEDSv9fO_w"
         }
       ],
       "services": {
