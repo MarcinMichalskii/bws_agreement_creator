@@ -18,9 +18,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'firebase_options.dart';
 
+// GoogleSignIn googleSignIn = GoogleSignIn(
+//   clientId:
+//       '715847619144-cc8fj2fml7pj820n3p89qg5blcqutkgv.apps.googleusercontent.com',
+// );
 GoogleSignIn googleSignIn = GoogleSignIn(
   clientId:
-      '715847619144-cc8fj2fml7pj820n3p89qg5blcqutkgv.apps.googleusercontent.com',
+      '214270827161-8ne85ca8cu35faf3e0cv9mc7h5802f8d.apps.googleusercontent.com',
 );
 
 Future<void> main() async {
