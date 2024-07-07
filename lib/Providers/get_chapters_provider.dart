@@ -2,10 +2,12 @@ import 'package:bws_agreement_creator/Model/chapter_data.dart';
 import 'package:bws_agreement_creator/Providers/add_chapter_provider.dart';
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/Providers/delete_chapter_provider.dart';
+import 'package:bws_agreement_creator/Providers/snackbar_handler.dart';
 import 'package:bws_agreement_creator/Providers/update_chapters_order_provider.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
 import 'package:bws_agreement_creator/utils/move_element_list_extension.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final getChaptersProvider = StateNotifierProvider<GetChaptersNotifier,
@@ -41,7 +43,12 @@ class GetChaptersNotifier
 
     final response = await ApiController(ChapterData.listFromJson)
         .performGet(url: "$baseUrl/getChapters");
+
     state = response;
+
+    if (state.error != null) {
+      SnackbarHandler.showSnackBar(state.error!.message, color: Colors.red);
+    }
   }
 
   void reorderChapters(int oldIndex, int newIndex) {
