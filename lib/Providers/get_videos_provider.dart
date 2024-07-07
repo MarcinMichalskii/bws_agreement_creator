@@ -2,11 +2,13 @@ import 'package:bws_agreement_creator/Model/video_data.dart';
 import 'package:bws_agreement_creator/Providers/add_video_provider.dart';
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/Providers/delete_video_provider.dart';
+import 'package:bws_agreement_creator/Providers/snackbar_handler.dart';
 import 'package:bws_agreement_creator/Providers/update_video_provider.dart';
 import 'package:bws_agreement_creator/Providers/update_videos_order_provider.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
 import 'package:bws_agreement_creator/utils/move_element_list_extension.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final getVideosProvider = StateNotifierProvider.family<GetVideosNotifier,
@@ -53,7 +55,12 @@ class GetVideosNotifier
 
     final response = await ApiController(VideoData.listFromJson).performGet(
         url: "$baseUrl/getVideos", params: {"chapterId": chapterId});
+
     state = response;
+
+    if (state.error != null) {
+      SnackbarHandler.showSnackBar(state.error!.message, color: Colors.red);
+    }
   }
 
   void reorderVideos(int oldIndex, int newIndex) {
