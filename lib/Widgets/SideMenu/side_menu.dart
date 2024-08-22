@@ -29,13 +29,14 @@ class SideMenu extends HookConsumerWidget {
       child: SingleChildScrollView(
         child: Column(children: [
           const SideMenuHeader(),
-          DrawerListTile(
-              isCollapsed: false,
-              title: 'Generator umów',
-              icon: Icons.upload_file_outlined,
-              onTap: () {
-                context.pushScreen('employeeFormWidget');
-              }),
+          if (ref.watch(profileProvider).data?.email != 'demo@demo.demo')
+            DrawerListTile(
+                isCollapsed: false,
+                title: 'Generator umów',
+                icon: Icons.upload_file_outlined,
+                onTap: () {
+                  context.pushScreen('employeeFormWidget');
+                }),
           DrawerListTile(
               isCollapsed: false,
               title: 'Szkolenia',
