@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bws_agreement_creator/Providers/auth_provider.dart';
+import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/Outboarding/agreement_sent_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/update_student_id_widget.dart';
@@ -90,6 +91,15 @@ class RouterNotifier extends ChangeNotifier {
     if (state.matchedLocation == '/demo') {
       shouldRedirectToTrainingsAfterLogin = true;
       _ref.read(authProvider.notifier).login('demo@demo.demo', 'demo');
+      if (appState.isLoggedIn) {
+        return '/trainings';
+      }
+    }
+
+    final userProfile = _ref.read(profileProvider);
+    if (userProfile.data?.email == 'demo@demo.demo' &&
+        state.matchedLocation == '/employeeFormWidget') {
+      return '/trainings';
     }
 
     if (!appState.isLoggedIn) {
