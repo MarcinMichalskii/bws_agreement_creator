@@ -1,4 +1,5 @@
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
+import 'package:bws_agreement_creator/utils/dictionaries/agreement_consts.dart';
 import 'package:intl/intl.dart';
 
 class ContractorStatementDictionary {
@@ -38,7 +39,7 @@ A) ${form.worksInOtherCompany ? 'Pracuję' : 'Nie pracuję'} w innym zakładzie 
 Nazwa zakładu: ${form.otherCompanyName}
 Adres zakładu: adres,
 NIP: ${form.otherCompanyNip}
-Z tytułu zatrudnienia osiągam dochód wyższy niż minimalne wynagrodzenie za pracę 4242zł brutto
+Z tytułu zatrudnienia osiągam dochód wyższy niż minimalne wynagrodzenie za pracę ${AgreementConsts.minimalWage}zł brutto
 ''';
 
   String get otherCompanyContractPeriod => '''

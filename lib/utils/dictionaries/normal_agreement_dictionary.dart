@@ -1,4 +1,5 @@
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
+import 'package:bws_agreement_creator/utils/dictionaries/agreement_consts.dart';
 import 'package:bws_agreement_creator/utils/pdf_widget_set.dart';
 import 'package:pdf/widgets.dart' as pw;
 
@@ -274,7 +275,7 @@ Usługodawca zobowiązuje się do niezwłocznego powiadomienia płatnika o każd
       ]);
 
   String get earnsMoreThanMinimumWage => '''
-gdzie zarabia conajmniej minimalną krajową w skali miesiąca (4242zł brutto).
+gdzie zarabia conajmniej minimalną krajową w skali miesiąca (${AgreementConsts.minimalWage}zł brutto).
 ''';
 
   ParagraphData get confidentiality =>
