@@ -54,6 +54,7 @@ class EmployeeFormWidget extends HookConsumerWidget {
 
     useBuildEffect(() {
       showWelcomeMessage();
+      return null;
     }, []);
 
     final onError = useCallback((String error) {

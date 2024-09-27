@@ -40,6 +40,7 @@ abstract class TranslatedAgreementDictionary {
 }
 
 class PolishAgreementDictionary implements TranslatedAgreementDictionary {
+  @override
   final NewFormData form;
 
   PolishAgreementDictionary(this.form);
@@ -133,9 +134,6 @@ tym w szczególności:
   ParagraphData get specificContractMaking =>
       ParagraphData(title: 'Tryb zawierania umów szczegółowych', points: [
         '''
-Tryb zawierania Umów Szczegółowych
-''',
-        '''
 Umowa Szczegółowa będzie każdorazowo obejmowała świadczenie Usług przez Usługodawcę na rzecz BWS w związku z organizacją, obsługą i zaopatrzeniem technicznym oraz personalnym przez BWS określonego Wydarzenia lub obsługi magazynu.
 ''',
         '''
@@ -162,6 +160,9 @@ Na treść każdej Umowy Szczegółowej będą składały się postanowienia nin
         '''
 Usługodawca może zawrzeć Umowę Szczegółową samodzielnie, za pośrednictwem Sinch lub na swoją prośbę wyrażoną telefonicznie lub za pośrednictwem SMS lub komunikatorów internetowych lub portali społecznościowych może zostać wpisany przez osobę do tego uprawnioną (tj. osobę wyznaczoną do tego przez BWS). Wpisanie Usługodawcy do wykonania Umowy Szczegółowej na jego prośbę przez BWS w systemie Sinch jest równoznaczne z akceptacją przez Usługodawcę wszystkich warunków wykonywania tej Umowy Szczegółowej, które zawarte są zarówno w systemie Sinch (Umowa Szczegółowa) jak i w Umowie.
 ''',
+        '''
+Usługodawca zobowiązuje się, że przy zawieraniu Umów Szczegółowych nie będzie korzystał z żadnego oprogramowania, które ma na celu automatyczne lub zautomatyzowane zawieranie Umów Szczegółowych za pośrednictwem systemu Sinch.
+'''
       ]);
 
   ParagraphData get rulesOfServiceProviding => ParagraphData(

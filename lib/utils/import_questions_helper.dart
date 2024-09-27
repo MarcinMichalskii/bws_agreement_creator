@@ -21,7 +21,7 @@ class ImportQuestionsHelper {
 
   List<AddChapterQuestionData> convertCsvToJson(
       String csvData, String chapterId) {
-    List<List<dynamic>> csvTable = CsvToListConverter().convert(csvData);
+    List<List<dynamic>> csvTable = const CsvToListConverter().convert(csvData);
 
     List<String> headers =
         csvTable[0].map((header) => header.toString()).toList();
@@ -54,7 +54,7 @@ class ImportQuestionsHelper {
       questions.add(question);
     }
 
-    questions.forEach((element) {
+    for (var element in questions) {
       final mappedAnswers = element.answers.map((e) => e.toLowerCase());
       final correctAnswer = element.correctAnswer.toLowerCase();
       final containsCorrectAnswer = mappedAnswers.contains(correctAnswer);
@@ -62,7 +62,7 @@ class ImportQuestionsHelper {
         throw Exception(
             "${element.questionText} Correct answer not in answers");
       }
-    });
+    }
     return questions;
   }
 }

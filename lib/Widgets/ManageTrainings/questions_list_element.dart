@@ -10,7 +10,7 @@ class QuestionListElement extends HookConsumerWidget {
   final ValueSetter<String>? onQuestionDelete;
   final ValueSetter<String>? onQuestionOpen;
   const QuestionListElement(
-      {Key? key,
+      {super.key,
       required this.question,
       this.onQuestionDelete,
       this.onQuestionOpen});

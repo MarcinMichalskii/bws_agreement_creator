@@ -8,8 +8,8 @@ class VideoBadgesWidget extends HookConsumerWidget {
   final VideoData video;
   final ValueSetter<VideoData> onExamineOpen;
 
-  VideoBadgesWidget(
-      {Key? key, required this.video, required this.onExamineOpen});
+  const VideoBadgesWidget(
+      {super.key, required this.video, required this.onExamineOpen});
 
   @override
   Widget build(BuildContext context, ref) {

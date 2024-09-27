@@ -21,6 +21,7 @@ class ManageChaptersScaffold extends HookConsumerWidget {
     final chapters = ref.watch(getChaptersProvider).data ?? [];
     useBuildEffect(() {
       ref.read(getChaptersProvider.notifier).getChapters();
+      return null;
     }, []);
 
     final onChapterOpen = useCallback((ChapterData chapter) {
