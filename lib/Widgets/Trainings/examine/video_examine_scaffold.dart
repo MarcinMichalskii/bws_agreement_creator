@@ -47,12 +47,14 @@ class VideoExamineScaffold extends HookConsumerWidget {
       }
       ref.read(examineProvider.notifier).prepareExam(questionsList);
       isLoading.value = false;
+      return null;
     }, [questionsList]);
 
     useBuildEffect(() {
       ref
           .read(getVideoExamineProvider(videoId).notifier)
           .getExamine(chapterId: chapterId);
+      return null;
     }, []);
 
     final onCheckExamResult = useCallback(() {

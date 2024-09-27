@@ -93,7 +93,7 @@ class ManageChapterDetailsScaffold extends HookConsumerWidget with RouteAware {
           return true;
         }
         var isOnVideosList = false;
-        if (!selectedVideos.value.isEmpty) {
+        if (selectedVideos.value.isNotEmpty) {
           isOnVideosList = selectedVideos.value.any((video) {
             return element.videos.contains(video.id);
           });
@@ -111,6 +111,7 @@ class ManageChapterDetailsScaffold extends HookConsumerWidget with RouteAware {
       }).toList()
         ..sort((a, b) => a.questionText.compareTo(b.questionText));
       filteredQuestions.value = filteredQuestionsData;
+      return null;
     }, [questions, selectedVideos.value, filterQuestionText.value]);
 
     final onFilterTextChanged = useCallback((String text) {
@@ -129,6 +130,7 @@ class ManageChapterDetailsScaffold extends HookConsumerWidget with RouteAware {
     useBuildEffect(() {
       ref.read(videosProvider.notifier).getVideos();
       ref.read(questionsProvider.notifier).getChapterQuestions();
+      return null;
     }, []);
     return AppScaffold(
         title: "Szkolenie $chapterTitle",

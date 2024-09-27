@@ -51,6 +51,7 @@ class ChapterDetailsScaffold extends HookConsumerWidget {
         videos.isNotEmpty;
     useBuildEffect(() {
       ref.read(videosProvider.notifier).getVideos();
+      return null;
     }, []);
 
     final onVideoOpen = useCallback((VideoData video) {

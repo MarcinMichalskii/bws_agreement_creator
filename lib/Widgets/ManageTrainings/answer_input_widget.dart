@@ -10,7 +10,7 @@ class AnswerInputWidget extends HookConsumerWidget {
   final VoidCallback onDelete;
   final bool isCorrect;
 
-  AnswerInputWidget(
+  const AnswerInputWidget(
       {super.key,
       required this.onChanged,
       required this.letter,

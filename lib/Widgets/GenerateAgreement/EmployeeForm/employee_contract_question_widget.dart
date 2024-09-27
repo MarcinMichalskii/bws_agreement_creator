@@ -13,6 +13,7 @@ class ContractTypeQuestionWidget extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     useBuildEffect(() {
       ref.read(newFormDataProvider.notifier).cleanUp();
+      return null;
     }, []);
     return Column(children: [
       const Text("Wybierz formę współpracy z BWS",

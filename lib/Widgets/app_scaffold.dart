@@ -1,9 +1,7 @@
-import 'package:bws_agreement_creator/Providers/snackbar_handler.dart';
 import 'package:bws_agreement_creator/Widgets/SideMenu/side_menu.dart';
 import 'package:bws_agreement_creator/router.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

@@ -24,8 +24,8 @@ class UserStatisticsDetailsWidget extends HookConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: const Text(
+              padding: EdgeInsets.only(bottom: 16.0),
+              child: Text(
                 'Zaliczone egzaminy',
                 style: TextStyle(color: CustomColors.gray, fontSize: 20),
               ),
@@ -48,7 +48,7 @@ class UserStatisticsDetailsWidget extends HookConsumerWidget {
 }
 
 class PassedExamRowWidget extends HookConsumerWidget {
-  PassedExamRowWidget({
+  const PassedExamRowWidget({
     super.key,
     required this.examName,
     required this.date,
@@ -71,7 +71,7 @@ class PassedExamRowWidget extends HookConsumerWidget {
           examName,
           style: const TextStyle(fontSize: 14, color: CustomColors.gray),
         ),
-        Spacer(),
+        const Spacer(),
         Text(
           date,
           style: const TextStyle(fontSize: 12, color: CustomColors.gray),

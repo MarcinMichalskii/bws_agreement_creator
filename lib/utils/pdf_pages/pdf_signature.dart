@@ -14,7 +14,7 @@ class SignatureWidgetPdf {
               crossAxisAlignment: pw.CrossAxisAlignment.center,
               children: [
                 pw.Container(
-                  padding: pw.EdgeInsets.all(4),
+                  padding: const pw.EdgeInsets.all(4),
                   decoration: pw.BoxDecoration(
                       border: pw.Border.all(
                     width: 0.5,
