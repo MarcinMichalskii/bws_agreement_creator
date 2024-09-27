@@ -85,7 +85,7 @@ class _BorderedInputDecorationLabel extends StatelessWidget {
           WidgetSpan(
             child: Text(
               text,
-              style: TextStyle(color: CustomColors.gray),
+              style: const TextStyle(color: CustomColors.gray),
             ),
           ),
         ],

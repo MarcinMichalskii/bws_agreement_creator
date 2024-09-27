@@ -132,13 +132,13 @@ final _mainRoutes = [
       path: '/employeeFormWidget',
       name: 'employeeFormWidget',
       pageBuilder: (context, state) {
-        return wrapWithPage(context, state, EmployeeFormWidget());
+        return wrapWithPage(context, state, const EmployeeFormWidget());
       }),
   GoRoute(
       path: '/updateStudentId',
       name: 'updateStudentId',
       pageBuilder: (context, state) {
-        return wrapWithPage(context, state, UpdateStudentIdWidget());
+        return wrapWithPage(context, state, const UpdateStudentIdWidget());
       }),
   GoRoute(
       path: '/outboarding',
@@ -242,7 +242,7 @@ final _mainRoutes = [
       path: '/usersStatistics',
       name: 'usersStatistics',
       pageBuilder: (context, state) =>
-          wrapWithPage(context, state, UsersStatisticsScaffold()))
+          wrapWithPage(context, state, const UsersStatisticsScaffold()))
 ];
 
 Page wrapWithPage(

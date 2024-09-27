@@ -1,5 +1,4 @@
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/default_signature_widget.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
 import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bordered_input.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';

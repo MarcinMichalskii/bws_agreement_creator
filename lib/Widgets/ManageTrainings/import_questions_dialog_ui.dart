@@ -3,7 +3,6 @@ import 'package:bws_agreement_creator/Model/video_data.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/generate_pdf_button.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_question_select_videos_ui.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
-import 'package:bws_agreement_creator/utils/import_questions_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

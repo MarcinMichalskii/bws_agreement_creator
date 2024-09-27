@@ -25,6 +25,7 @@ class UsersStatisticsScaffold extends HookConsumerWidget {
     useBuildEffect(() {
       ref.read(getUsersProvider.notifier).getUsers();
       ref.read(getChaptersProvider.notifier).getChapters();
+      return null;
     }, []);
 
     final filterText = useState('');

@@ -1,5 +1,3 @@
-import 'dart:html' as html;
-
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/token_refresh_interceptor.dart';

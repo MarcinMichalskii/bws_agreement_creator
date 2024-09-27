@@ -50,7 +50,7 @@ class _TrainingsOnboardingInformationContainer extends HookConsumerWidget {
         children: [
           const Text(
             'Witaj na platformie szkoleniowej BWSu!',
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w500,
               color: CustomColors.gray,
               fontSize: 26,

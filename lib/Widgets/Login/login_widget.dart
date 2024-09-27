@@ -112,7 +112,8 @@ class LoginWidget extends HookConsumerWidget {
                       },
                       text: 'Login'),
               // if (false)
-              Padding(padding: EdgeInsets.all(16), child: googleAuthButton),
+              Padding(
+                  padding: const EdgeInsets.all(16), child: googleAuthButton),
               const NoPasswordHelpWidget()
             ]),
           ),

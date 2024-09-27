@@ -41,7 +41,7 @@ class _ValidationErrorContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
+        const Text(
           'Błąd',
           style: TextStyle(
             fontWeight: FontWeight.w500,
@@ -53,7 +53,7 @@ class _ValidationErrorContainer extends StatelessWidget {
           padding: const EdgeInsets.only(top: 8.0),
           child: Text(
             errorText,
-            style: TextStyle(
+            style: const TextStyle(
               color: CustomColors.gray,
               fontSize: 13,
             ),

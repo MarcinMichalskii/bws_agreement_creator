@@ -39,6 +39,7 @@ class WatchVideoScaffold extends HookConsumerWidget {
       if (videoUserData != null) {
         watchedSeconds.value = videoUserData.secondsWatched;
       }
+      return null;
     }, [videoUserData]);
 
     final isPlaying = useState(false);
