@@ -318,6 +318,9 @@ W przypadku, w którym Usługodawca naruszy zasady świadczenia Usług określon
 W przypadku, w którym Usługodawca naruszy obowiązek zachowania poufności określony w § 7 powyżej, Usługodawca zobowiązany jest bez wezwania do zapłaty na rzecz BWS kary umownej w kwocie 1.000,00 zł (słownie: jeden tysiąc złotych) za każdy przypadek naruszenia.
 ''',
         '''
+W przypadku, w którym Usługodawca naruszy zobowiązanie do niekorzystania z oprogramowania celem zawarcia Umowy Szczegółowej, o którym mowa w § 2 ust. 10 Umowy, Usługodawca zobowiązany jest bez wezwania do zapłaty na rzecz BWS kary umownej w kwocie 1.000,00 zł (słownie: jeden tysiąc złotych) za każdy przypadek naruszenia.
+''',
+        '''
 Zapłata przez Usługodawcę określonych powyżej kar umownych nie pozbawia BWS prawa dochodzenia od Usługodawcy na zasadach ogólnych odszkodowania przekraczającego wysokość zastrzeżonych kar umownych, do wysokości poniesionej przez BWS szkody.
 ''',
       ]);
