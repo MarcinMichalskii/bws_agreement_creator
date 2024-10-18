@@ -23,6 +23,11 @@ jobs:
         flutter pub get
         flutter build web --base-href /https://bws.net.pl/agreement-creator/
 
+
+    - name: Remove <base href> from index.html
+      run: |
+        sed -i '/<base href=/d' build/web/index.html
+
     - name: Deploy to FTP
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
