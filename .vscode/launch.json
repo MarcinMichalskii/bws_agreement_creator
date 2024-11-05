@@ -20,7 +20,7 @@
             "program": "lib/main_production.dart",
             "args": [
                 "--flavor",
-                "development",
+                "production",
                 "--target",
                 "lib/main_production.dart"
             ]

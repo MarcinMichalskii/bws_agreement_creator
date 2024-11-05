@@ -41,12 +41,12 @@ android {
     productFlavors {
         production {
             dimension "default"
-            resValue "string", "app_name", "BWS Agreement Creator"
+            resValue "string", "app_name", "BWS App"
             applicationIdSuffix ""
         }
         development {
             dimension "default"
-            resValue "string", "app_name", "Dev BWS Agreement Creator"
+            resValue "string", "app_name", "Dev BWS App"
             applicationIdSuffix ".dev"
         }
     }
