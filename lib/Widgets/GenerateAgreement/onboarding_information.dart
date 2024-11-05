@@ -9,8 +9,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class OnboardingInformation extends StatelessWidget {
   const OnboardingInformation({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +33,7 @@ class OnboardingInformation extends StatelessWidget {
 }
 
 class _OnboardingInformationContainer extends HookConsumerWidget {
-  const _OnboardingInformationContainer({
-    Key? key,
-  }) : super(key: key);
+  const _OnboardingInformationContainer();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

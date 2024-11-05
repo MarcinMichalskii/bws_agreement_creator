@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 class ValidationError extends StatelessWidget {
   final String errorText;
   const ValidationError({
-    Key? key,
+    super.key,
     required this.errorText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +33,8 @@ class ValidationError extends StatelessWidget {
 class _ValidationErrorContainer extends StatelessWidget {
   final String errorText;
   const _ValidationErrorContainer({
-    Key? key,
     required this.errorText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,11 +1,12 @@
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/token_refresh_interceptor.dart';
+import 'package:bws_agreement_creator/main_development.dart';
 import 'package:bws_agreement_creator/router.dart';
+import 'package:bws_agreement_creator/scaffold_key.dart';
 import 'package:bws_agreement_creator/utils/Fonts.dart';
 import 'package:bws_agreement_creator/utils/user_data_helper.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -14,12 +15,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:google_sign_in_web/google_sign_in_web.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'firebase_options.dart';
-
-GoogleSignIn googleSignIn = GoogleSignIn(
-  clientId:
-      '715847619144-cc8fj2fml7pj820n3p89qg5blcqutkgv.apps.googleusercontent.com',
-);
 
 Future<void> main() async {
   if (kIsWeb) {
@@ -32,16 +27,16 @@ Future<void> main() async {
   final access = await UserDataHelper().getAccessToken();
 
   final container = ProviderContainer();
-  dio.interceptors.add(TokenInterceptor(container.read));
+  dio.interceptors.add(TokenInterceptor(container));
   if (access != null) {
     container.read(profileProvider.notifier).getProfile();
   }
   await defaultFonts.loadFonts();
   await EasyLocalization.ensureInitialized();
   await initializeDateFormatting();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // await Firebase.initializeApp(
+  //   options: prod.DefaultFirebaseOptions.currentPlatform,
+  // );
   // await _plugin.initWithParams(const SignInInitParameters(
   //   scopes: [
   //     'email',
@@ -57,8 +52,6 @@ Future<void> main() async {
       child: UncontrolledProviderScope(
           container: container, child: const MyApp())));
 }
-
-final GlobalKey<ScaffoldMessengerState> scaffoldKey = GlobalKey();
 
 class MyApp extends HookConsumerWidget {
   const MyApp({super.key});

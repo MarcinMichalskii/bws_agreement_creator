@@ -19,7 +19,7 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
   final String? surveyUrl;
 
   const ChapterExamineFinishedWidget(
-      {Key? key,
+      {super.key,
       required this.passingAgain,
       required this.title,
       required this.result,
@@ -27,8 +27,7 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
       required this.onFinish,
       required this.chapterName,
       required this.outroUrl,
-      required this.surveyUrl})
-      : super(key: key);
+      required this.surveyUrl});
 
   @override
   Widget build(BuildContext context, ref) {

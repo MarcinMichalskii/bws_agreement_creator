@@ -14,8 +14,7 @@ class EditQuestionDialogLogic extends HookConsumerWidget {
   final String chapterId;
   final QuestionData questionData;
   const EditQuestionDialogLogic(
-      {Key? key, required this.chapterId, required this.questionData})
-      : super(key: key);
+      {super.key, required this.chapterId, required this.questionData});
 
   @override
   Widget build(BuildContext context, ref) {

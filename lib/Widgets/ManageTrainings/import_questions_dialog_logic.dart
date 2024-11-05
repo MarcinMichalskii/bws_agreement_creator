@@ -11,8 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ImportQuestionsDialogLogic extends HookConsumerWidget {
   final String chapterId;
-  const ImportQuestionsDialogLogic({Key? key, required this.chapterId})
-      : super(key: key);
+  const ImportQuestionsDialogLogic({super.key, required this.chapterId});
 
   @override
   Widget build(BuildContext context, ref) {

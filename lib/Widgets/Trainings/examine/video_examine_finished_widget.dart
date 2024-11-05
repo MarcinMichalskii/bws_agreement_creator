@@ -13,13 +13,12 @@ class VideoExamineFinishedWidget extends HookConsumerWidget {
   final bool isLastVideo;
 
   const VideoExamineFinishedWidget(
-      {Key? key,
+      {super.key,
       required this.passingAgain,
       required this.result,
       required this.numberOfQuestions,
       required this.onFinish,
-      required this.isLastVideo})
-      : super(key: key);
+      required this.isLastVideo});
 
   @override
   Widget build(BuildContext context, ref) {

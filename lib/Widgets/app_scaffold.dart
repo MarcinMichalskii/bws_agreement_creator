@@ -11,11 +11,11 @@ class AppScaffold extends HookConsumerWidget {
   final List<Widget>? actions;
 
   const AppScaffold({
-    Key? key,
+    super.key,
     required this.body,
     this.title,
     this.actions,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

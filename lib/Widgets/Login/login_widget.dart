@@ -11,8 +11,8 @@ import 'package:bws_agreement_creator/utils/nip_validator.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart';
-import 'package:google_sign_in_web/google_sign_in_web.dart' as web;
+// import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart';
+// import 'package:google_sign_in_web/google_sign_in_web.dart' as web;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LoginWidget extends HookConsumerWidget {
@@ -49,10 +49,10 @@ class LoginWidget extends HookConsumerWidget {
     final login = useState('');
     final password = useState('');
 
-    final googleAuthButton = useMemoized(
-        () => (GoogleSignInPlatform.instance as web.GoogleSignInPlugin)
-            .renderButton(),
-        []);
+    // final googleAuthButton = useMemoized(
+    //     () => (GoogleSignInPlatform.instance as web.GoogleSignInPlugin)
+    //         .renderButton(),
+    //     []);
 
     final authorize = useCallback(() {
       ref.read(authProvider.notifier).login(login.value, password.value);
@@ -112,8 +112,8 @@ class LoginWidget extends HookConsumerWidget {
                       },
                       text: 'Login'),
               // if (false)
-              Padding(
-                  padding: const EdgeInsets.all(16), child: googleAuthButton),
+              // Padding(
+              //     padding: const EdgeInsets.all(16), child: googleAuthButton),
               const NoPasswordHelpWidget()
             ]),
           ),

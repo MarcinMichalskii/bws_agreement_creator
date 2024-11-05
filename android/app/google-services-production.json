@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "214270827161",
+    "project_id": "bwsappprod",
+    "storage_bucket": "bwsappprod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214270827161:android:c356cc65ef2b46d5b5b608",
+        "android_client_info": {
+          "package_name": "com.example.bws_agreement_creator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214270827161-8ne85ca8cu35faf3e0cv9mc7h5802f8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxOVprO6Kks6o8WzGC4WjU6VEDSv9fO_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214270827161-8ne85ca8cu35faf3e0cv9mc7h5802f8d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "214270827161-2bnfa5nkj06l718haclvef8luvne3ehv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bwsAgreementCreator"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -19,12 +19,11 @@ class WatchVideoScaffold extends HookConsumerWidget {
   final String chapterId;
 
   const WatchVideoScaffold(
-      {Key? key,
+      {super.key,
       required this.videoUrl,
       required this.videoTitle,
       required this.videoId,
-      required this.chapterId})
-      : super(key: key);
+      required this.chapterId});
   @override
   Widget build(BuildContext context, ref) {
     final videoUserData = ref.watch(getVideoUserDataProvider(videoId)).data;

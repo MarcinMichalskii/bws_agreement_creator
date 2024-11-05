@@ -14,10 +14,10 @@ class WatchVideoNextButton extends HookConsumerWidget {
   final String videoId;
 
   const WatchVideoNextButton({
-    Key? key,
+    super.key,
     required this.chapterId,
     required this.videoId,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, ref) {
