@@ -54,6 +54,8 @@ class PdfB2BAgreementNew {
                 text: dictionary.titlePageConclusion,
                 style: defaultFonts.regularStyle),
             ...dictionary.contractPurpose.toParagraphWidgetRichText('1'),
+            ...dictionary.whistleblowersProtection
+                .toParagraphWidgetRichText('1\''),
             ...dictionary.specificContractMaking.toParagraphWidget('2'),
             ...b2bDictionary.rulesOfServiceProviding.toParagraphWidget('3'),
             ...dictionary.periodOfAgreement.toParagraphWidget('4'),
