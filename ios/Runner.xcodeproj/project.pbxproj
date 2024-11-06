@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -53,24 +53,11 @@
 		98A678E8706D0A471F174FC8 /* Pods-Runner.release-development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-development.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-development.xcconfig"; sourceTree = "<group>"; };
 		AEF3B0A35829922D1B4525DD /* Pods-Runner.debug-production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-production.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-production.xcconfig"; sourceTree = "<group>"; };
 		DEB344AF2CDA5F13009D85C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DEB344D82CDA6856009D85C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DEB344DA2CDA6856009D85C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F4C0E602385C2FD7D079E729 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD4C7EBE1911360BCD7D6D9B /* Pods-Runner.profile-production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-production.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-production.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		DEB344C02CDA6116009D85C4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"development/GoogleService-Info.plist",
-				"production/GoogleService-Info.plist",
-			);
-			target = 97C146ED1CF9000F007C117D /* Runner */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		DEB344BC2CDA60A5009D85C4 /* config */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (DEB344C02CDA6116009D85C4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = config; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		97C146EB1CF9000F007C117D /* Frameworks */ = {
@@ -104,7 +91,7 @@
 				9C110EB73658D956AB40256F /* Pods */,
 				C00B041701ADAAFE751D9C29 /* Frameworks */,
 				DEB344AF2CDA5F13009D85C4 /* GoogleService-Info.plist */,
-				DEB344BC2CDA60A5009D85C4 /* config */,
+				DEB344DC2CDA6856009D85C4 /* config */,
 			);
 			sourceTree = "<group>";
 		};
@@ -155,6 +142,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DEB344D92CDA6856009D85C4 /* development */ = {
+			isa = PBXGroup;
+			children = (
+				DEB344D82CDA6856009D85C4 /* GoogleService-Info.plist */,
+			);
+			path = development;
+			sourceTree = "<group>";
+		};
+		DEB344DB2CDA6856009D85C4 /* production */ = {
+			isa = PBXGroup;
+			children = (
+				DEB344DA2CDA6856009D85C4 /* GoogleService-Info.plist */,
+			);
+			path = production;
+			sourceTree = "<group>";
+		};
+		DEB344DC2CDA6856009D85C4 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				DEB344D92CDA6856009D85C4 /* development */,
+				DEB344DB2CDA6856009D85C4 /* production */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -162,7 +174,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
 			buildPhases = (
-				DEB344BF2CDA60BB009D85C4 /* Copy GoogleService-Info.plist */,
 				ED36D44D343D39D00CD2C386 /* [CP] Check Pods Manifest.lock */,
 				9740EEB61CF901F6004384FC /* Run Script */,
 				97C146EA1CF9000F007C117D /* Sources */,
@@ -172,13 +183,11 @@
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				99A5FF2297B764B802A7DAB2 /* [CP] Embed Pods Frameworks */,
 				2E5B1A63D2B7A11FC3574E5D /* [CP] Copy Pods Resources */,
+				DEB344D02CDA6600009D85C4 /* Copy GoogleService-Info.plist to the correct location */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				DEB344BC2CDA60A5009D85C4 /* config */,
 			);
 			name = Runner;
 			productName = Runner;
@@ -299,7 +308,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DEB344BF2CDA60BB009D85C4 /* Copy GoogleService-Info.plist */ = {
+		DEB344D02CDA6600009D85C4 /* Copy GoogleService-Info.plist to the correct location */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -308,7 +317,7 @@
 			);
 			inputPaths = (
 			);
-			name = "Copy GoogleService-Info.plist";
+			name = "Copy GoogleService-Info.plist to the correct location";
 			outputFileListPaths = (
 			);
 			outputPaths = (
