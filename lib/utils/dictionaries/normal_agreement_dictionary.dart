@@ -131,6 +131,13 @@ tym w szczególności:
 ''',
       ]);
 
+  ParagraphData get whistleblowersProtection =>
+      ParagraphData(title: 'Ochrona sygnalistów', points: [
+        '''
+Usługodawca oświadcza, że wraz z rozpoczęciem negocjacji prowadzących do zawarcia niniejszej Umowy BWS przekazał Usługodawcy informację o procedurze zgłoszeń wewnętrznych obejmującą obowiązującą w BWS wewnętrzną procedurę dokonywania zgłoszeń naruszeń prawa i podejmowania działań następczych w rozumieniu ustawy o ochronie sygnalistów z dnia 14 czerwca 2024 r. oraz udostępnił Usługodawcy możliwość zapoznania się z treścią tej procedury. Usługodawca oświadcza, że zapoznał się z treścią procedury, o której mowa w zdaniu poprzedzającym, przed zawarciem niniejszej Umowy.
+''',
+      ]);
+
   ParagraphData get specificContractMaking =>
       ParagraphData(title: 'Tryb zawierania umów szczegółowych', points: [
         '''
