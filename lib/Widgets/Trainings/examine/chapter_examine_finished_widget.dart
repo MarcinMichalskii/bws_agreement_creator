@@ -1,6 +1,7 @@
 import 'package:bws_agreement_creator/Model/examine_result.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapters_scaffold.dart';
-import 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/video_player_widget.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/video_player_widget_web.dart'
+    if (dart.library.io) 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/video_player_widget_mobile.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:flutter/material.dart';

@@ -2,7 +2,10 @@ import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/Providers/reset_password_provider.dart';
 import 'package:bws_agreement_creator/Providers/snackbar_handler.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
-// import 'package:bws_agreement_creator/utils/video_duration_fetcher.dart';
+import 'package:bws_agreement_creator/utils/video_duration_fetcher_web.dart'
+    if (dart.library.html) 'package:bws_agreement_creator/utils/video_duration_fetcher_web.dart'
+    if (dart.library.io) 'package:bws_agreement_creator/utils/video_duration_fetcher_mobile.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -18,8 +21,7 @@ class EditVideoNotifier extends StateNotifier<APIResponseState<String?>> {
   void updateVideo(String videoTitle, String videoUrl, String chapterId,
       String videoId, bool isOutro) async {
     state = APIResponseState(isLoading: true);
-    // final duration = await VideoDurationFetcher(videoUrl).fetchVideoDuration();
-    final duration = 5;
+    final duration = await VideoDurationFetcher(videoUrl).fetchVideoDuration();
     state = await ApiController(NoDataResponseParser.parse).performPut(params: {
       "videoName": videoTitle,
       'videoUrl': videoUrl,
