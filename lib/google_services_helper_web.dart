@@ -11,9 +11,12 @@ class GoogleServicesHelper {
       GoogleSignInPlatform.instance as GoogleSignInPlugin;
 
   Future<void> initialize() async {
+    print(
+        '${dev.DefaultFirebaseOptions.currentPlatform.messagingSenderId}.apps.googleusercontent.com');
+
     final clientId = isProd
-        ? '${prod.DefaultFirebaseOptions.currentPlatform.messagingSenderId}.apps.googleusercontent.com'
-        : '${dev.DefaultFirebaseOptions.currentPlatform.messagingSenderId}.apps.googleusercontent.com';
+        ? '214270827161-8ne85ca8cu35faf3e0cv9mc7h5802f8d.apps.googleusercontent.com'
+        : '898687624011-mnshqdv6cc20b9nbpcn9ce7hkdu9pnm6.apps.googleusercontent.com';
     await Firebase.initializeApp(
       name: isProd ? 'production' : 'development',
       options: isProd
