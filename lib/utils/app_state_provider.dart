@@ -1,17 +1,18 @@
 import 'package:bws_agreement_creator/Providers/auth_provider.dart';
-import 'package:bws_agreement_creator/main.dart';
+import 'package:bws_agreement_creator/google_sign_in.dart';
 import 'package:bws_agreement_creator/utils/app_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final appStateProvider = StateNotifierProvider<AppStateNotifier, AppState>(
-    (ref) => AppStateNotifier(ref.read));
+    (ref) => AppStateNotifier(ref));
 
 class AppStateNotifier extends StateNotifier<AppState> {
-  Reader read;
-  AppStateNotifier(this.read) : super(AppState()) {
+  final Ref ref;
+  AppStateNotifier(this.ref) : super(AppState()) {
     googleSignIn.onCurrentUserChanged.listen((event) async {
       final googleSignIn = await event?.authentication;
-      read(authProvider.notifier)
+      ref
+          .read(authProvider.notifier)
           .loginWithGoogleToken(googleSignIn?.idToken ?? "");
     });
   }

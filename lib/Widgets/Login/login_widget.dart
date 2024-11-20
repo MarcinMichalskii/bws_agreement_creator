@@ -4,15 +4,17 @@ import 'package:bws_agreement_creator/Providers/reset_password_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bordered_input.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bws_logo.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/generate_pdf_button.dart';
+import 'package:bws_agreement_creator/Widgets/Login/login_google_button_web.dart'
+    if (dart.library.html) 'package:bws_agreement_creator/Widgets/Login/login_google_button_web.dart'
+    if (dart.library.io) 'package:bws_agreement_creator/Widgets/Login/login_google_button_mobile.dart';
 import 'package:bws_agreement_creator/Widgets/Login/no_password_help_widget.dart';
+import 'package:bws_agreement_creator/app_config_helper.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
 import 'package:bws_agreement_creator/utils/nip_validator.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart';
-import 'package:google_sign_in_web/google_sign_in_web.dart' as web;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LoginWidget extends HookConsumerWidget {
@@ -48,11 +50,6 @@ class LoginWidget extends HookConsumerWidget {
     });
     final login = useState('');
     final password = useState('');
-
-    final googleAuthButton = useMemoized(
-        () => (GoogleSignInPlatform.instance as web.GoogleSignInPlugin)
-            .renderButton(),
-        []);
 
     final authorize = useCallback(() {
       ref.read(authProvider.notifier).login(login.value, password.value);
@@ -110,10 +107,8 @@ class LoginWidget extends HookConsumerWidget {
                           authorize();
                         }
                       },
-                      text: 'Login'),
-              // if (false)
-              Padding(
-                  padding: const EdgeInsets.all(16), child: googleAuthButton),
+                      text: isProd ? 'Login' : 'Dev Login'),
+              LoginGoogleButtonWeb(),
               const NoPasswordHelpWidget()
             ]),
           ),

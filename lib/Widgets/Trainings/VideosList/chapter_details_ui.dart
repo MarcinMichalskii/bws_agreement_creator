@@ -6,12 +6,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ChapterDetailsUI extends HookConsumerWidget {
   const ChapterDetailsUI(
-      {Key? key,
+      {super.key,
       required this.videos,
       required this.chapterId,
       required this.onVideoOpen,
-      required this.onExamineOpen})
-      : super(key: key);
+      required this.onExamineOpen});
   final List<VideoData> videos;
   final String chapterId;
   final ValueSetter<VideoData> onVideoOpen;

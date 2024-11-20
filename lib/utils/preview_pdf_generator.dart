@@ -23,7 +23,7 @@ class PreviewPdfGenerator {
     if (webBrowserInfo.browserName.name == 'safari') {
       selectedAgreementData.saveToFiles('podglad_${formData.pdfFileName}');
     } else {
-      selectedAgreementData.openInNewTab('podglad_${formData.pdfFileName}');
+      selectedAgreementData.openInNewTab();
     }
   }
 }

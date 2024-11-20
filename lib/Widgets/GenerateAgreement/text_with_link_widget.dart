@@ -5,14 +5,13 @@ import 'package:url_launcher/url_launcher.dart';
 
 class TextWithLinkWidget extends StatelessWidget {
   const TextWithLinkWidget(
-      {Key? key,
+      {super.key,
       this.textAlign = TextAlign.start,
       this.fontSize = 18,
       required this.left,
       required this.link,
       required this.right,
-      required this.url})
-      : super(key: key);
+      required this.url});
   final TextAlign textAlign;
   final double fontSize;
   final String left;

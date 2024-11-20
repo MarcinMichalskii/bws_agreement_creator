@@ -38,7 +38,7 @@ class ExamineQuestionUI extends StatelessWidget {
                 updateAnswerForQuestion(answer);
               },
             );
-          }).toList()
+          })
         ],
       ),
     );

@@ -36,11 +36,19 @@ class UserDataHelper {
   }
 
   Future<String?> getAccessToken() async {
-    return storage.read(key: 'accessToken');
+    try {
+      return await storage.read(key: 'accessToken');
+    } catch (e) {
+      return null;
+    }
   }
 
   Future<String?> getRefreshToken() async {
-    return storage.read(key: 'refreshToken');
+    try {
+      return await storage.read(key: 'refreshToken');
+    } catch (e) {
+      return null;
+    }
   }
 
   Future<void> markAgreementPopup() async {

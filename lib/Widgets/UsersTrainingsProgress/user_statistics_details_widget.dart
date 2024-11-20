@@ -39,7 +39,7 @@ class UserStatisticsDetailsWidget extends HookConsumerWidget {
                     '',
                 date: exam.date.toReadableDate(),
               );
-            }).toList(),
+            }),
           ],
         ),
       ),
