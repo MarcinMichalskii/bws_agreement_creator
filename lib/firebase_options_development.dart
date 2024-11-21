@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -72,11 +69,22 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAZcVtbFR8tRHxwvlljRaSZ1v3XjBj74i4',
-    appId: '1:715847619144:ios:8dcc5c2022cfa4acf37e7d',
-    messagingSenderId: '715847619144',
-    projectId: 'bwsapp-d2766',
-    storageBucket: 'bwsapp-d2766.appspot.com',
+    apiKey: 'AIzaSyA0z9z3ZZERy1aizT-GYtAhulaifmlV1To',
+    appId: '1:214270827161:ios:bf7bb851e23d90cab5b608',
+    messagingSenderId: '214270827161',
+    projectId: 'bwsappprod',
+    storageBucket: 'bwsappprod.appspot.com',
     iosBundleId: 'com.example.bwsAgreementCreator',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDJevhsaaHdB9DTlpHvCsl4bYxGVNnXtdY',
+    appId: '1:214270827161:web:93bc1bcf66432724b5b608',
+    messagingSenderId: '214270827161',
+    projectId: 'bwsappprod',
+    authDomain: 'bwsappprod.firebaseapp.com',
+    storageBucket: 'bwsappprod.appspot.com',
+    measurementId: 'G-WKZBBSMWJ1',
+  );
+
 }

@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyAZcVtbFR8tRHxwvlljRaSZ1v3XjBj74i4</string>
+	<string>AIzaSyA0z9z3ZZERy1aizT-GYtAhulaifmlV1To</string>
 	<key>GCM_SENDER_ID</key>
-	<string>715847619144</string>
+	<string>214270827161</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.bwsAgreementCreator</string>
 	<key>PROJECT_ID</key>
-	<string>bwsapp-d2766</string>
+	<string>bwsappprod</string>
 	<key>STORAGE_BUCKET</key>
-	<string>bwsapp-d2766.appspot.com</string>
+	<string>bwsappprod.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:715847619144:ios:8dcc5c2022cfa4acf37e7d</string>
+	<string>1:214270827161:ios:bf7bb851e23d90cab5b608</string>
 </dict>
 </plist>
