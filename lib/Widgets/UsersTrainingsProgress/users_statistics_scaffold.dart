@@ -117,7 +117,7 @@ class UsersStatisticsScaffold extends HookConsumerWidget {
                     showDetails(user);
                   },
                 );
-              }).toList(),
+              }),
             ],
           ),
         ),

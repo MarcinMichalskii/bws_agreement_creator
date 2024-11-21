@@ -13,8 +13,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 
 class TokenInterceptor extends Interceptor {
-  TokenInterceptor(this.read);
-  final Reader read;
+  TokenInterceptor(this.container);
+  final ProviderContainer container;
   bool isRefreshing = false;
   late Completer<void> completer;
 
@@ -86,7 +86,7 @@ class TokenInterceptor extends Interceptor {
     if (response.error == null) {
       final data = response.data;
       await UserDataHelper().storeTokens(data!);
-      read(authProvider.notifier).state = response;
+      container.read(authProvider.notifier).state = response;
       return data.accessToken;
     }
     return '';
@@ -94,8 +94,8 @@ class TokenInterceptor extends Interceptor {
 
   void logout() {
     UserDataHelper().cleanupUserData();
-    read(appStateProvider.notifier).setDefaultState();
-    read(notAStudentTapped.notifier).state = false;
-    read(profileProvider.notifier).setDefaultState();
+    container.read(appStateProvider.notifier).setDefaultState();
+    container.read(notAStudentTapped.notifier).state = false;
+    container.read(profileProvider.notifier).setDefaultState();
   }
 }

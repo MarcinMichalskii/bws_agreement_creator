@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:bws_agreement_creator/Providers/get_video_user_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/update_video_user_data_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
-import 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/video_player_widget.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/video_player_widget_web.dart'
+    if (dart.library.io) 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/video_player_widget_mobile.dart';
+
 import 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/video_progress_status_widget.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/watch_video_next_button.dart';
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
@@ -19,12 +21,11 @@ class WatchVideoScaffold extends HookConsumerWidget {
   final String chapterId;
 
   const WatchVideoScaffold(
-      {Key? key,
+      {super.key,
       required this.videoUrl,
       required this.videoTitle,
       required this.videoId,
-      required this.chapterId})
-      : super(key: key);
+      required this.chapterId});
   @override
   Widget build(BuildContext context, ref) {
     final videoUserData = ref.watch(getVideoUserDataProvider(videoId)).data;

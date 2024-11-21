@@ -1,6 +1,7 @@
 import 'package:bws_agreement_creator/Model/examine_result.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapters_scaffold.dart';
-import 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/video_player_widget.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/video_player_widget_web.dart'
+    if (dart.library.io) 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/video_player_widget_mobile.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
   final String? surveyUrl;
 
   const ChapterExamineFinishedWidget(
-      {Key? key,
+      {super.key,
       required this.passingAgain,
       required this.title,
       required this.result,
@@ -27,8 +28,7 @@ class ChapterExamineFinishedWidget extends HookConsumerWidget {
       required this.onFinish,
       required this.chapterName,
       required this.outroUrl,
-      required this.surveyUrl})
-      : super(key: key);
+      required this.surveyUrl});
 
   @override
   Widget build(BuildContext context, ref) {

@@ -10,29 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.22.0' # replace with your Flutter version
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.24.2" # replace with your Flutter version
 
-    - name: Build Flutter App
-      run: |
-        flutter pub get
-        flutter build web --base-href /https://bws.net.pl/agreement-creator/
+      - name: Build Flutter App
+        run: |
+          flutter pub get
+          flutter build web --base-href /https://bws.net.pl/agreement-creator/ --target=lib/main_development.dart
 
-
-    - name: Remove <base href> from index.html
-      run: |
-        sed -i '/<base href=/d' build/web/index.html
-
-    - name: Deploy to FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: build/web/
-        server-dir: /bws.net.pl/bws-app/
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: build/web/
+          server-dir: /bws.net.pl/agreement-creator/
