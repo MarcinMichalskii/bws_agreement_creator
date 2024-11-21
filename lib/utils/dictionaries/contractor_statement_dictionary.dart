@@ -37,7 +37,7 @@ A) ${form.worksInOtherCompany ? 'Pracuję' : 'Nie pracuję'} w innym zakładzie 
 
   String get otherCompanyDescription => '''
 Nazwa zakładu: ${form.otherCompanyName}
-Adres zakładu: adres,
+Adres zakładu: ${form.otherCompanyAddress ?? ''},
 NIP: ${form.otherCompanyNip}
 Z tytułu zatrudnienia osiągam dochód wyższy niż minimalne wynagrodzenie za pracę ${AgreementConsts.minimalWage}zł brutto
 ''';
