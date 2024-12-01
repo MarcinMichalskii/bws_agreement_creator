@@ -1,8 +1,8 @@
 import 'package:bws_agreement_creator/Providers/verify_tax_id.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/action_button.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/action_button.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/default_signature_widget.dart';
 import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/bordered_input.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/nip_validator.dart';
 import 'package:bws_agreement_creator/utils/use_build_effect.dart';

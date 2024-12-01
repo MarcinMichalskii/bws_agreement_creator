@@ -1,6 +1,6 @@
 import 'package:bws_agreement_creator/utils/Fonts.dart';
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
-import 'package:bws_agreement_creator/utils/Dictionaries/contractor_statement_dictionary.dart';
+import 'package:bws_agreement_creator/utils/Dictionaries2/contractor_statement_dictionary.dart';
 import 'package:bws_agreement_creator/utils/PdfPages/pdf_signature.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;

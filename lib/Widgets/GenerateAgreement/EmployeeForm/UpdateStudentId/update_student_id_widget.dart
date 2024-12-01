@@ -1,5 +1,5 @@
 import 'package:bws_agreement_creator/Widgets/Components/loading_indicator.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/bordered_input.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/UpdateStudentId/Components/update_student_id_action_buttons.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/UpdateStudentId/Components/update_student_id_add_photos_row.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/UpdateStudentId/Components/update_student_id_text.dart';

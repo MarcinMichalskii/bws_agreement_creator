@@ -1,5 +1,5 @@
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/touchable_opacity.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/touchable_opacity.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/answer_draft.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/answer_input_widget.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';

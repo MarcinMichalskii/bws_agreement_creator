@@ -1,7 +1,7 @@
 import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/upload_pdf_provider.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bws_logo.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/select_date_button.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/bws_logo.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/select_date_button.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/text_with_link_widget.dart';
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';

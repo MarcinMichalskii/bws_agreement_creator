@@ -1,6 +1,6 @@
 import 'package:bws_agreement_creator/utils/Fonts.dart';
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
-import 'package:bws_agreement_creator/utils/Dictionaries/normal_agreement_dictionary.dart';
+import 'package:bws_agreement_creator/utils/Dictionaries2/normal_agreement_dictionary.dart';
 import 'package:bws_agreement_creator/utils/PdfPages/pdf_contractor_statement_page.dart';
 import 'package:bws_agreement_creator/utils/PdfPages/pdf_data_processing_page.dart';
 import 'package:bws_agreement_creator/utils/PdfPages/pdf_legal_guardian_statement_page.dart';

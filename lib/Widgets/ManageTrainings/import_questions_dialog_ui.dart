@@ -1,6 +1,6 @@
 import 'package:bws_agreement_creator/Model/add_chapter_question_data.dart';
 import 'package:bws_agreement_creator/Model/video_data.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/default_bordered_button.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/default_bordered_button.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_question_select_videos_ui.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
