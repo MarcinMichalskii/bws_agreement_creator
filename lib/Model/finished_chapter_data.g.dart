@@ -25,9 +25,9 @@ abstract class _$FinishedChapterDataCWProxy {
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfFinishedChapterData.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfFinishedChapterData.copyWith.fieldName(...)`
 class _$FinishedChapterDataCWProxyImpl implements _$FinishedChapterDataCWProxy {
-  final FinishedChapterData _value;
-
   const _$FinishedChapterDataCWProxyImpl(this._value);
+
+  final FinishedChapterData _value;
 
   @override
   FinishedChapterData chapterId(String chapterId) => this(chapterId: chapterId);

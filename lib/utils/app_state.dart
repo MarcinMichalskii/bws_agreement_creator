@@ -4,13 +4,11 @@ part 'app_state.g.dart';
 @CopyWith()
 class AppState {
   final bool isLoggedIn;
-  final bool shouldUpdateStudentIdNumber;
   final bool sentAgreement;
   final bool shouldRedirectToTrainingsAfterLogin;
 
   AppState({
     this.isLoggedIn = false,
-    this.shouldUpdateStudentIdNumber = false,
     this.sentAgreement = false,
     this.shouldRedirectToTrainingsAfterLogin = false,
   });

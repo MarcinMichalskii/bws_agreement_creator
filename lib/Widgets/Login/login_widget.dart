@@ -1,9 +1,9 @@
 import 'package:bws_agreement_creator/Providers/auth_provider.dart';
 import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/reset_password_provider.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bordered_input.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bws_logo.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/generate_pdf_button.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bws_logo.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/default_bordered_button.dart';
 import 'package:bws_agreement_creator/Widgets/Login/login_google_button_web.dart'
     if (dart.library.html) 'package:bws_agreement_creator/Widgets/Login/login_google_button_web.dart'
     if (dart.library.io) 'package:bws_agreement_creator/Widgets/Login/login_google_button_mobile.dart';
@@ -13,7 +13,9 @@ import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
 import 'package:bws_agreement_creator/utils/nip_validator.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -58,6 +60,12 @@ class LoginWidget extends HookConsumerWidget {
     final isInputValid =
         login.value.isValidEmail() && password.value.isNotEmpty;
 
+    final onLoginPressed = useCallback(() {
+      if (isInputValid) {
+        authorize();
+      }
+    }, [isInputValid, authorize]);
+
     return Scaffold(
       backgroundColor: CustomColors.mainBackground,
       body: SingleChildScrollView(
@@ -78,6 +86,7 @@ class LoginWidget extends HookConsumerWidget {
                 },
               ),
               BorderedInput(
+                onSubmited: onLoginPressed,
                 sufixIcon: IconButton(
                   icon: Icon(passwordInvisible.value
                       ? Icons.visibility_off
@@ -86,7 +95,7 @@ class LoginWidget extends HookConsumerWidget {
                     passwordInvisible.value = !passwordInvisible.value;
                   },
                 ),
-                placeholder: 'Hasło',
+                placeholder: 'password'.tr(),
                 isSecure: passwordInvisible.value,
                 onChanged: (text) {
                   password.value = text ?? '';
@@ -102,11 +111,7 @@ class LoginWidget extends HookConsumerWidget {
                       borderColor: isInputValid
                           ? CustomColors.applicationColorMain
                           : CustomColors.gray,
-                      onTap: () {
-                        if (isInputValid) {
-                          authorize();
-                        }
-                      },
+                      onTap: onLoginPressed,
                       text: isProd ? 'Login' : 'Dev Login'),
               LoginGoogleButtonWeb(),
               const NoPasswordHelpWidget()

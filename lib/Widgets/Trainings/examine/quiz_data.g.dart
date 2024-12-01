@@ -25,9 +25,9 @@ abstract class _$QuizDataCWProxy {
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfQuizData.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfQuizData.copyWith.fieldName(...)`
 class _$QuizDataCWProxyImpl implements _$QuizDataCWProxy {
-  final QuizData _value;
-
   const _$QuizDataCWProxyImpl(this._value);
+
+  final QuizData _value;
 
   @override
   QuizData questions(List<QuizQuestion> questions) =>

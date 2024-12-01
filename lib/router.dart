@@ -4,15 +4,14 @@ import 'package:bws_agreement_creator/Providers/auth_provider.dart';
 import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/Outboarding/agreement_sent_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/update_student_id_widget.dart';
 import 'package:bws_agreement_creator/Widgets/Login/login_widget.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapter_details.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapters_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/SideMenu/side_menu.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/VideosList/chapter_details_scaffold.dart';
-import 'package:bws_agreement_creator/Widgets/Trainings/examine/chapter_examine_scaffold.dart';
-import 'package:bws_agreement_creator/Widgets/Trainings/chapters_list_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/watch_video_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/chapters_list_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/Trainings/examine/chapter_examine_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/examine/video_examine_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/UsersTrainingsProgress/users_statistics_scaffold.dart';
 import 'package:bws_agreement_creator/utils/app_state_provider.dart';
@@ -62,7 +61,6 @@ class RouterNotifier extends ChangeNotifier {
     _ref.listen(
       appStateProvider.select((value) => Object.hashAll([
             value.isLoggedIn,
-            value.shouldUpdateStudentIdNumber,
           ])),
       (_, __) {
         notifyListeners();
@@ -104,11 +102,8 @@ class RouterNotifier extends ChangeNotifier {
 
     if (!appState.isLoggedIn) {
       return _getRedirectScreenIfNeeded(state, '/login');
-    } else if (appState.isLoggedIn && state.fullPath == '/login' ||
-        state.fullPath == '/updateStudentId') {
-      if (appState.shouldUpdateStudentIdNumber) {
-        return '/updateStudentId';
-      } else if (shouldRedirectToTrainingsAfterLogin) {
+    } else if (appState.isLoggedIn && state.fullPath == '/login') {
+      if (shouldRedirectToTrainingsAfterLogin) {
         return '/trainings';
       } else {
         return '/employeeFormWidget';
@@ -143,12 +138,6 @@ final _mainRoutes = [
       name: 'employeeFormWidget',
       pageBuilder: (context, state) {
         return wrapWithPage(context, state, const EmployeeFormWidget());
-      }),
-  GoRoute(
-      path: '/updateStudentId',
-      name: 'updateStudentId',
-      pageBuilder: (context, state) {
-        return wrapWithPage(context, state, const UpdateStudentIdWidget());
       }),
   GoRoute(
       path: '/outboarding',

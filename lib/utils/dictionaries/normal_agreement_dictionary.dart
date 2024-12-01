@@ -1,5 +1,5 @@
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
-import 'package:bws_agreement_creator/utils/dictionaries/agreement_consts.dart';
+import 'package:bws_agreement_creator/utils/Dictionaries/agreement_consts.dart';
 import 'package:bws_agreement_creator/utils/pdf_widget_set.dart';
 import 'package:pdf/widgets.dart' as pw;
 
@@ -212,6 +212,9 @@ Usługodawca oświadcza niniejszym, że wyraża zgodę na nieograniczone czasowo
       ParagraphData(title: 'Okres obowiązywania Umowy', points: [
         '''
 Umowa zostaje zawarta na czas nieokreślony.
+''',
+        '''
+Strony postanawiają, że dniem rozpoczęcia wykonywania niniejszej Umowy w rozumieniu art. 13 pkt 2 ustawy o systemie ubezpieczeń społecznych jest dzień, w którym Usługodawca faktycznie przystąpi do wykonywania pierwszej Umowy Szczegółowej zawartej pomiędzy Stronami stosownie do postanowień niniejszej Umowy.
 ''',
         '''
 Niniejsza Umowa w każdym czasie może ulec rozwiązaniu za porozumieniem Stron wyrażonym w formie pisemnej pod rygorem nieważności.

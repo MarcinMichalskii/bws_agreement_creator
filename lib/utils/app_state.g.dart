@@ -14,8 +14,6 @@ abstract class _$AppStateCWProxy {
   AppState shouldRedirectToTrainingsAfterLogin(
       bool shouldRedirectToTrainingsAfterLogin);
 
-  AppState shouldUpdateStudentIdNumber(bool shouldUpdateStudentIdNumber);
-
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AppState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -26,15 +24,14 @@ abstract class _$AppStateCWProxy {
     bool? isLoggedIn,
     bool? sentAgreement,
     bool? shouldRedirectToTrainingsAfterLogin,
-    bool? shouldUpdateStudentIdNumber,
   });
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfAppState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfAppState.copyWith.fieldName(...)`
 class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
-  final AppState _value;
-
   const _$AppStateCWProxyImpl(this._value);
+
+  final AppState _value;
 
   @override
   AppState isLoggedIn(bool isLoggedIn) => this(isLoggedIn: isLoggedIn);
@@ -51,10 +48,6 @@ class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
               shouldRedirectToTrainingsAfterLogin);
 
   @override
-  AppState shouldUpdateStudentIdNumber(bool shouldUpdateStudentIdNumber) =>
-      this(shouldUpdateStudentIdNumber: shouldUpdateStudentIdNumber);
-
-  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AppState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -66,7 +59,6 @@ class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
     Object? isLoggedIn = const $CopyWithPlaceholder(),
     Object? sentAgreement = const $CopyWithPlaceholder(),
     Object? shouldRedirectToTrainingsAfterLogin = const $CopyWithPlaceholder(),
-    Object? shouldUpdateStudentIdNumber = const $CopyWithPlaceholder(),
   }) {
     return AppState(
       isLoggedIn:
@@ -85,12 +77,6 @@ class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
               ? _value.shouldRedirectToTrainingsAfterLogin
               // ignore: cast_nullable_to_non_nullable
               : shouldRedirectToTrainingsAfterLogin as bool,
-      shouldUpdateStudentIdNumber:
-          shouldUpdateStudentIdNumber == const $CopyWithPlaceholder() ||
-                  shouldUpdateStudentIdNumber == null
-              ? _value.shouldUpdateStudentIdNumber
-              // ignore: cast_nullable_to_non_nullable
-              : shouldUpdateStudentIdNumber as bool,
     );
   }
 }

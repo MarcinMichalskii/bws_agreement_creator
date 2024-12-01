@@ -1,5 +1,5 @@
 import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
-import 'package:bws_agreement_creator/Model/login_data.dart';
+import 'package:bws_agreement_creator/Model/profile_data.dart';
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
