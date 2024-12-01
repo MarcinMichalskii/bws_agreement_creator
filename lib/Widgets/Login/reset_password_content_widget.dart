@@ -1,6 +1,6 @@
 import 'package:bws_agreement_creator/Providers/reset_password_provider.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/bordered_input.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/default_bordered_button.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/default_bordered_button.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
 import 'package:bws_agreement_creator/utils/nip_validator.dart';

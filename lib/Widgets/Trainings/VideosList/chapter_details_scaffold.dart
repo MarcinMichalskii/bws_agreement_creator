@@ -2,7 +2,7 @@ import 'package:bws_agreement_creator/Model/video_data.dart';
 import 'package:bws_agreement_creator/Providers/get_chapters_provider.dart';
 import 'package:bws_agreement_creator/Providers/get_videos_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/touchable_opacity.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/touchable_opacity.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/VideosList/chapter_details_ui.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/examine/exam_access_state.dart';
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
