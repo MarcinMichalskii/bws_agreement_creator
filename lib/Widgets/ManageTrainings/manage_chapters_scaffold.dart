@@ -2,7 +2,7 @@ import 'package:bws_agreement_creator/Model/chapter_data.dart';
 import 'package:bws_agreement_creator/Providers/delete_chapter_provider.dart';
 import 'package:bws_agreement_creator/Providers/get_chapters_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/touchable_opacity.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/touchable_opacity.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_training_dialog.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/chapters_list.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/confirmation_dialog.dart';

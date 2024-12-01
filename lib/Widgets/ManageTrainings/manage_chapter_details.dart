@@ -5,7 +5,7 @@ import 'package:bws_agreement_creator/Providers/delete_video_provider.dart';
 import 'package:bws_agreement_creator/Providers/get_chapter_questions_provider.dart';
 import 'package:bws_agreement_creator/Providers/get_videos_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/touchable_opacity.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/touchable_opacity.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_question_dialog_logic.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/add_video_dialog.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/confirmation_dialog.dart';
