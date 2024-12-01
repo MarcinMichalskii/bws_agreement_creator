@@ -1,6 +1,6 @@
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/signature_widget.dart';
 import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/nip_validator.dart';
 import 'package:flutter/material.dart';

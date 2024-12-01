@@ -1,9 +1,9 @@
 import 'package:bws_agreement_creator/Providers/auth_provider.dart';
 import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/reset_password_provider.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/bordered_input.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/bws_logo.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/default_bordered_button.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bws_logo.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/default_bordered_button.dart';
 import 'package:bws_agreement_creator/Widgets/Login/login_google_button_web.dart'
     if (dart.library.html) 'package:bws_agreement_creator/Widgets/Login/login_google_button_web.dart'
     if (dart.library.io) 'package:bws_agreement_creator/Widgets/Login/login_google_button_mobile.dart';

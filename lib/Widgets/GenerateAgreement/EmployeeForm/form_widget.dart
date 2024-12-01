@@ -2,7 +2,7 @@ import 'package:bws_agreement_creator/Model/selected_page_data.dart';
 import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/selected_page_provider.dart';
 import 'package:bws_agreement_creator/Providers/upload_pdf_provider.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/bws_logo.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bws_logo.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/Components/exapmle_agreement_button.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/Components/form_navigation_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/Components/generate_agreement_button.dart';

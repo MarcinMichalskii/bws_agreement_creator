@@ -1,5 +1,5 @@
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
-import 'package:bws_agreement_creator/utils/Dictionaries2/normal_agreement_dictionary.dart';
+import 'package:bws_agreement_creator/utils/Dictionaries/normal_agreement_dictionary.dart';
 
 class PolishB2BAgreementDictionary {
   final NewFormData form;
