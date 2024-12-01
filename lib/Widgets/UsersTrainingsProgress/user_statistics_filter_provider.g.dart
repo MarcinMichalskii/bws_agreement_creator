@@ -7,16 +7,16 @@ part of 'user_statistics_filter_provider.dart';
 // **************************************************************************
 
 abstract class _$UserStatisticsFilterStateCWProxy {
-  UserStatisticsFilterState filtersOn(bool filtersOn);
-
   UserStatisticsFilterState fromDate(DateTime fromDate);
+
+  UserStatisticsFilterState toDate(DateTime toDate);
 
   UserStatisticsFilterState selectedChapters(
       List<ChapterData> selectedChapters);
 
   UserStatisticsFilterState sortByDate(bool sortByDate);
 
-  UserStatisticsFilterState toDate(DateTime toDate);
+  UserStatisticsFilterState filtersOn(bool filtersOn);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `UserStatisticsFilterState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -25,28 +25,27 @@ abstract class _$UserStatisticsFilterStateCWProxy {
   /// UserStatisticsFilterState(...).copyWith(id: 12, name: "My name")
   /// ````
   UserStatisticsFilterState call({
-    bool? filtersOn,
     DateTime? fromDate,
+    DateTime? toDate,
     List<ChapterData>? selectedChapters,
     bool? sortByDate,
-    DateTime? toDate,
+    bool? filtersOn,
   });
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfUserStatisticsFilterState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfUserStatisticsFilterState.copyWith.fieldName(...)`
 class _$UserStatisticsFilterStateCWProxyImpl
     implements _$UserStatisticsFilterStateCWProxy {
-  final UserStatisticsFilterState _value;
-
   const _$UserStatisticsFilterStateCWProxyImpl(this._value);
 
-  @override
-  UserStatisticsFilterState filtersOn(bool filtersOn) =>
-      this(filtersOn: filtersOn);
+  final UserStatisticsFilterState _value;
 
   @override
   UserStatisticsFilterState fromDate(DateTime fromDate) =>
       this(fromDate: fromDate);
+
+  @override
+  UserStatisticsFilterState toDate(DateTime toDate) => this(toDate: toDate);
 
   @override
   UserStatisticsFilterState selectedChapters(
@@ -58,7 +57,8 @@ class _$UserStatisticsFilterStateCWProxyImpl
       this(sortByDate: sortByDate);
 
   @override
-  UserStatisticsFilterState toDate(DateTime toDate) => this(toDate: toDate);
+  UserStatisticsFilterState filtersOn(bool filtersOn) =>
+      this(filtersOn: filtersOn);
 
   @override
 
@@ -69,21 +69,21 @@ class _$UserStatisticsFilterStateCWProxyImpl
   /// UserStatisticsFilterState(...).copyWith(id: 12, name: "My name")
   /// ````
   UserStatisticsFilterState call({
-    Object? filtersOn = const $CopyWithPlaceholder(),
     Object? fromDate = const $CopyWithPlaceholder(),
+    Object? toDate = const $CopyWithPlaceholder(),
     Object? selectedChapters = const $CopyWithPlaceholder(),
     Object? sortByDate = const $CopyWithPlaceholder(),
-    Object? toDate = const $CopyWithPlaceholder(),
+    Object? filtersOn = const $CopyWithPlaceholder(),
   }) {
     return UserStatisticsFilterState(
-      filtersOn: filtersOn == const $CopyWithPlaceholder() || filtersOn == null
-          ? _value.filtersOn
-          // ignore: cast_nullable_to_non_nullable
-          : filtersOn as bool,
       fromDate: fromDate == const $CopyWithPlaceholder() || fromDate == null
           ? _value.fromDate
           // ignore: cast_nullable_to_non_nullable
           : fromDate as DateTime,
+      toDate: toDate == const $CopyWithPlaceholder() || toDate == null
+          ? _value.toDate
+          // ignore: cast_nullable_to_non_nullable
+          : toDate as DateTime,
       selectedChapters: selectedChapters == const $CopyWithPlaceholder() ||
               selectedChapters == null
           ? _value.selectedChapters
@@ -94,10 +94,10 @@ class _$UserStatisticsFilterStateCWProxyImpl
               ? _value.sortByDate
               // ignore: cast_nullable_to_non_nullable
               : sortByDate as bool,
-      toDate: toDate == const $CopyWithPlaceholder() || toDate == null
-          ? _value.toDate
+      filtersOn: filtersOn == const $CopyWithPlaceholder() || filtersOn == null
+          ? _value.filtersOn
           // ignore: cast_nullable_to_non_nullable
-          : toDate as DateTime,
+          : filtersOn as bool,
     );
   }
 }

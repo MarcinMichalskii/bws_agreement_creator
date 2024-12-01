@@ -1,14 +1,14 @@
 import 'package:bws_agreement_creator/utils/Fonts.dart';
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
-import 'package:bws_agreement_creator/utils/dictionaries/contractor_statement_dictionary.dart';
-import 'package:bws_agreement_creator/utils/pdf_pages/pdf_signature.dart';
+import 'package:bws_agreement_creator/utils/Dictionaries/legal_guardian_consent_dictionary.dart';
+import 'package:bws_agreement_creator/utils/PdfPages/pdf_signature.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-class PdfContractorStatementPage {
+class PdfLegalGuardianStatementPage {
   pw.Page generate(NewFormData form) {
-    ContractorStatementDictionary dictionary =
-        ContractorStatementDictionary(form);
+    LegalGuardianConsentDictionary dictionary =
+        LegalGuardianConsentDictionary(form);
     return pw.Page(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
@@ -23,34 +23,35 @@ class PdfContractorStatementPage {
                       style: defaultFonts.regularStyle),
                 ]),
                 pw.Paragraph(
-                    text: dictionary.contractorData,
+                    text: dictionary.guardianData,
+                    textAlign: pw.TextAlign.left,
+                    style: defaultFonts.regularStyle),
+                pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.center,
+                    children: [
+                      pw.Paragraph(
+                          text: dictionary.title,
+                          style: defaultFonts.boldStyle,
+                          textAlign: pw.TextAlign.center),
+                    ]),
+                pw.Paragraph(
+                    text: dictionary.childData,
                     textAlign: pw.TextAlign.left,
                     style: defaultFonts.regularStyle),
                 pw.Paragraph(
-                    text: dictionary.statement,
+                    text: dictionary.guardianConsent,
                     textAlign: pw.TextAlign.left,
                     style: defaultFonts.regularStyle),
                 pw.Paragraph(
-                    text: dictionary.workInOtherCompany,
-                    textAlign: pw.TextAlign.left,
-                    style: defaultFonts.regularStyle),
-                if (form.worksInOtherCompany)
-                  pw.Paragraph(
-                      text: dictionary.otherCompanyDescription,
-                      textAlign: pw.TextAlign.left,
-                      style: defaultFonts.regularStyle),
+                    text: dictionary.bwsData,
+                    style: defaultFonts.boldStyle,
+                    textAlign: pw.TextAlign.left),
                 pw.Paragraph(
-                    text: dictionary.hasOwnCompany,
-                    textAlign: pw.TextAlign.left,
-                    style: defaultFonts.regularStyle),
-                pw.Paragraph(
-                    text: form.isStudent
-                        ? dictionary.hasStudentStatus
-                        : dictionary.doesntHaveStudentStatus,
+                    text: dictionary.period,
                     textAlign: pw.TextAlign.left,
                     style: defaultFonts.regularStyle),
                 SignatureWidgetPdf().generate(
-                    signatureData: form.signatureData!,
+                    signatureData: form.legalGuardianSignatureData!,
                     bwsSignatureData: form.bwsSignatureData!),
               ]);
         });

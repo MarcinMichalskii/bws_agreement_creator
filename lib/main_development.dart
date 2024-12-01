@@ -30,9 +30,10 @@ Future<void> main() async {
     container.read(profileProvider.notifier).getProfile();
   }
   await defaultFonts.loadFonts();
-  await EasyLocalization.ensureInitialized();
   await initializeDateFormatting();
   await GoogleServicesHelper().initialize();
+  await EasyLocalization.ensureInitialized();
+
   runApp(EasyLocalization(
       supportedLocales: const [Locale('pl')],
       path: 'assets/translations',
@@ -51,6 +52,11 @@ class MyApp extends HookConsumerWidget {
     return MaterialApp.router(
       routerConfig: router,
       scaffoldMessengerKey: scaffoldKey,
+      localizationsDelegates: [
+        ...context.localizationDelegates,
+      ],
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
     );
   }
 }

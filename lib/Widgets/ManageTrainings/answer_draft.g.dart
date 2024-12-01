@@ -7,9 +7,9 @@ part of 'answer_draft.dart';
 // **************************************************************************
 
 abstract class _$AnswerDraftCWProxy {
-  AnswerDraft isCorrect(bool isCorrect);
-
   AnswerDraft text(String text);
+
+  AnswerDraft isCorrect(bool isCorrect);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AnswerDraft(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -18,22 +18,22 @@ abstract class _$AnswerDraftCWProxy {
   /// AnswerDraft(...).copyWith(id: 12, name: "My name")
   /// ````
   AnswerDraft call({
-    bool? isCorrect,
     String? text,
+    bool? isCorrect,
   });
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfAnswerDraft.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfAnswerDraft.copyWith.fieldName(...)`
 class _$AnswerDraftCWProxyImpl implements _$AnswerDraftCWProxy {
-  final AnswerDraft _value;
-
   const _$AnswerDraftCWProxyImpl(this._value);
 
-  @override
-  AnswerDraft isCorrect(bool isCorrect) => this(isCorrect: isCorrect);
+  final AnswerDraft _value;
 
   @override
   AnswerDraft text(String text) => this(text: text);
+
+  @override
+  AnswerDraft isCorrect(bool isCorrect) => this(isCorrect: isCorrect);
 
   @override
 
@@ -44,18 +44,18 @@ class _$AnswerDraftCWProxyImpl implements _$AnswerDraftCWProxy {
   /// AnswerDraft(...).copyWith(id: 12, name: "My name")
   /// ````
   AnswerDraft call({
-    Object? isCorrect = const $CopyWithPlaceholder(),
     Object? text = const $CopyWithPlaceholder(),
+    Object? isCorrect = const $CopyWithPlaceholder(),
   }) {
     return AnswerDraft(
-      isCorrect: isCorrect == const $CopyWithPlaceholder() || isCorrect == null
-          ? _value.isCorrect
-          // ignore: cast_nullable_to_non_nullable
-          : isCorrect as bool,
       text: text == const $CopyWithPlaceholder() || text == null
           ? _value.text
           // ignore: cast_nullable_to_non_nullable
           : text as String,
+      isCorrect: isCorrect == const $CopyWithPlaceholder() || isCorrect == null
+          ? _value.isCorrect
+          // ignore: cast_nullable_to_non_nullable
+          : isCorrect as bool,
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:bws_agreement_creator/Model/login_data.dart';
+import 'package:bws_agreement_creator/Model/profile_data.dart';
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
 import 'package:bws_agreement_creator/utils/date_extensions.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
@@ -81,9 +81,9 @@ class NewFormData {
 
     if (page == SelectedPage.b2bContract) {
       if (b2bCompanyName?.emptyAsNull() == null) {
-        return "Nazwa firmy jest wymagana";
+        return "Nazwa firmy jest wymagana, pobierz dane firmy podając nip";
       } else if (b2bCompanyAddress?.emptyAsNull() == null) {
-        return "Adres firmy jest wymagany";
+        return "Adres firmy jest pobierz dane firmy podając nip";
       } else if (b2bCompanyNip?.isValidNip() == false) {
         return "NIP firmy jest wymagany";
       } else if (signatureData == null) {

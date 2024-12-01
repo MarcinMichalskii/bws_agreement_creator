@@ -1,6 +1,6 @@
 import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/generate_pdf_button.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/onboarding_point_widget.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/default_bordered_button.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/Components/onboarding_point_widget.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/user_data_helper.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +83,7 @@ class _OnboardingInformationContainer extends HookConsumerWidget {
                   pointTextBold:
                       'Za chwilę będziesz mógł przejrzeć i podpisać umowę z BWS',
                   poinText:
-                      ' - wypełnij formularz zgodnie z prawdą. Za podanie fałszywych danych grozi kara 500zł.'),
+                      ' - wypełnij formularz zgodnie z prawdą. Za podanie fałszywych danych grozi kara 2500zł.'),
               OnboardingPointWidget(
                   pointNumber: '4. ',
                   pointTextBold:

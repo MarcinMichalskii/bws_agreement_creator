@@ -95,7 +95,6 @@ class TokenInterceptor extends Interceptor {
   void logout() {
     UserDataHelper().cleanupUserData();
     container.read(appStateProvider.notifier).setDefaultState();
-    container.read(notAStudentTapped.notifier).state = false;
     container.read(profileProvider.notifier).setDefaultState();
   }
 }

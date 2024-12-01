@@ -1,8 +1,11 @@
+import 'package:bws_agreement_creator/Providers/verify_tax_id.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/action_button.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/default_signature_widget.dart';
 import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/nip_validator.dart';
+import 'package:bws_agreement_creator/utils/use_build_effect.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hand_signature/signature.dart';
@@ -17,9 +20,6 @@ class B2bContractQuestionWidget extends HookConsumerWidget {
   B2bContractQuestionWidget({super.key});
   @override
   Widget build(BuildContext context, ref) {
-    final initialAddress = useState(
-        ref.read(newFormDataProvider.notifier).state.b2bCompanyAddress);
-
     void updateAddress(String text) {
       ref.read(newFormDataProvider.notifier).setB2bAddress(text);
     }
@@ -32,7 +32,20 @@ class B2bContractQuestionWidget extends HookConsumerWidget {
       ref.read(newFormDataProvider.notifier).updateCompanyName(text);
     }
 
-    return Column(children: [
+    void checkNip() {
+      final taxId = ref.read(newFormDataProvider.notifier).state.b2bCompanyNip;
+      ref.read(verifyTaxIdProvider.notifier).verify(taxId: taxId ?? '');
+    }
+
+    final companyDataFetched = ref.watch(verifyTaxIdProvider).data != null;
+    final fetchedData = ref.watch(verifyTaxIdProvider).data;
+
+    useBuildEffect(() {
+      updateAddress(fetchedData?.address ?? '');
+      updateCompanyName(fetchedData?.name ?? '');
+    }, [fetchedData]);
+
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -46,23 +59,36 @@ class B2bContractQuestionWidget extends HookConsumerWidget {
           ),
         ],
       ),
-      BorderedInput(
-          placeholder: "Nazwa",
-          onChanged: (value) {
-            updateCompanyName(value ?? '');
-          }),
-      BorderedInput(
-          validator: NipValidator.validate,
-          placeholder: "NIP",
-          onChanged: (value) {
-            updateNip(value ?? '');
-          }),
-      BorderedInput(
-          initialValue: initialAddress.value,
-          placeholder: "Adres",
-          onChanged: (value) {
-            updateAddress(value ?? '');
-          }),
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: BorderedInput(
+                validator: NipValidator.validate,
+                margin: EdgeInsets.fromLTRB(0, 4, 8, 4),
+                placeholder: "NIP",
+                onChanged: (value) {
+                  updateNip(value ?? '');
+                }),
+          ),
+          ActionButton(
+            isDisabled: false,
+            isLoading: ref.watch(verifyTaxIdProvider).isLoading,
+            icon: Icons.download,
+            onTap: checkNip,
+          )
+        ],
+      ),
+      if (companyDataFetched)
+        Text(fetchedData!.name,
+            style: TextStyle(
+              color: CustomColors.gray,
+            )),
+      if (companyDataFetched)
+        Text(fetchedData!.address,
+            style: TextStyle(
+              color: CustomColors.gray,
+            )),
       const DefaultSignatureWidget()
     ]);
   }

@@ -21,10 +21,6 @@ class AppStateNotifier extends StateNotifier<AppState> {
     state = state.copyWith(isLoggedIn: value);
   }
 
-  void setShouldUpdateStudentIdNumber(bool value) {
-    state = state.copyWith(shouldUpdateStudentIdNumber: value);
-  }
-
   void setSentAgreement(bool value) {
     state = state.copyWith(sentAgreement: value);
   }

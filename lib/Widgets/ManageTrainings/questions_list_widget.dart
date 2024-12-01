@@ -1,7 +1,7 @@
 import 'package:bws_agreement_creator/Model/chapter_question_data.dart';
 import 'package:bws_agreement_creator/Widgets/Components/default_list_element.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bordered_input.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/touchable_opacity.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/touchable_opacity.dart';
 import 'package:bws_agreement_creator/router.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';

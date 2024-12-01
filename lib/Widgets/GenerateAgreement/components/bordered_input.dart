@@ -16,7 +16,8 @@ class BorderedInput extends StatelessWidget {
       this.errorText,
       this.onSaved,
       this.sufixIcon,
-      this.validator});
+      this.validator,
+      this.margin = const EdgeInsets.fromLTRB(0, 16, 0, 4)});
 
   final String placeholder;
   final bool isSecure;
@@ -30,11 +31,12 @@ class BorderedInput extends StatelessWidget {
   final FormFieldSetter<String>? onSaved;
   final FormFieldValidator<String>? validator;
   final IconButton? sufixIcon;
+  final EdgeInsets margin;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.fromLTRB(0, 16, 0, 4),
+        margin: margin,
         child: TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator,

@@ -7,6 +7,7 @@ import 'package:bws_agreement_creator/Widgets/ManageTrainings/chapters_list.dart
 import 'package:bws_agreement_creator/Widgets/Trainings/content_no_available.dart';
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:bws_agreement_creator/router.dart';
+import 'package:bws_agreement_creator/utils/use_build_effect.dart';
 import 'package:bws_agreement_creator/utils/user_data_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';

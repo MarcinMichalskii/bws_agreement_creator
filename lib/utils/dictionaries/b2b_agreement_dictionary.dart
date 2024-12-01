@@ -1,5 +1,5 @@
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
-import 'package:bws_agreement_creator/utils/dictionaries/normal_agreement_dictionary.dart';
+import 'package:bws_agreement_creator/utils/Dictionaries/normal_agreement_dictionary.dart';
 
 class PolishB2BAgreementDictionary {
   final NewFormData form;
@@ -48,6 +48,33 @@ W przypadku, o którym mowa w ust. 11 powyżej, Usługodawca ponosi względem BW
 Usługodawca zobowiązuje się do naprawy wszelkich szkód wyrządzonych przez podmioty, którym powierzone zostało świadczenie Usług przez Usługodawcę, a w szczególności do naprawy tych szkód, które poniesie BWS lub jego kontrahenci w związku z powierzeniem przez Usługodawcę świadczenia Usług innym podmiotom. 
 ''',
           ]);
+
+  ParagraphData get periodOfAgreement =>
+      ParagraphData(title: 'Okres obowiązywania Umowy', points: [
+        '''
+Umowa zostaje zawarta na czas nieokreślony.
+''',
+        '''
+Niniejsza Umowa w każdym czasie może ulec rozwiązaniu za porozumieniem Stron wyrażonym w formie pisemnej pod rygorem nieważności.
+''',
+        '''
+Każda ze Stron może, z zachowaniem formy pisemnej pod rygorem nieważności, wypowiedzieć Umowę, z zachowaniem 14-dniowego (słownie: czternastodniowego) okresu wypowiedzenia.
+''',
+        '''
+BWS może, z zachowaniem formy pisemnej pod rygorem nieważności, wypowiedzieć Umowę ze skutkiem natychmiastowym w przypadku, gdy Usługodawca:
+    1) nie wykonał Umowy Szczegółowej,
+    2) niewłaściwie wykonał Umowę Szczegółową lub naruszył zasady wskazane w niniejszej
+Umowie,
+    3) przy wykonywaniu Umowy Szczegółowej spowodował umyślnie szkodę w mieniu BWS lub osoby trzeciej,
+''',
+        '''
+Usługodawca może, z zachowaniem formy pisemnej pod rygorem nieważności, wypowiedzieć
+Umowę ze skutkiem natychmiastowym w przypadku, gdy BWS pozostaje w zwłoce przez okres 14 (słownie: czternastu) dni w zapłacie Wynagrodzenia określonego w § 5 Umowy, z tym jednak, że Usługodawca przed złożeniem oświadczenia o wypowiedzeniu Umowy ze skutkiem natychmiastowym zobowiązany jest wezwać BWS do zapłaty i wyznaczyć mu dodatkowy termin na wykonanie zobowiązania, który nie może być krótszy niż 5 (słownie: pięć) dni.
+''',
+        '''
+Po zakończeniu Umowy, Strony zobowiązane są do niezwłocznego rozliczenia się, w tym w szczególności rozliczenia udostępnionych Usługodawcy przez BWS narzędzi, obuwia lub odzieży.
+''',
+      ]);
 
   ParagraphData get salary {
     List<String> points = PolishAgreementDictionary(form).salary.points;

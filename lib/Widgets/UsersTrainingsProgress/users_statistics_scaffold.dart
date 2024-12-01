@@ -2,8 +2,8 @@ import 'package:bws_agreement_creator/Model/user_data.dart';
 import 'package:bws_agreement_creator/Providers/get_chapters_provider.dart';
 import 'package:bws_agreement_creator/Providers/get_users_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bordered_input.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/touchable_opacity.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/touchable_opacity.dart';
 import 'package:bws_agreement_creator/Widgets/UsersTrainingsProgress/user_statistics_cell.dart';
 import 'package:bws_agreement_creator/Widgets/UsersTrainingsProgress/user_statistics_details_widget.dart';
 import 'package:bws_agreement_creator/Widgets/UsersTrainingsProgress/user_statistics_filter_provider.dart';
@@ -11,6 +11,7 @@ import 'package:bws_agreement_creator/Widgets/UsersTrainingsProgress/user_statis
 import 'package:bws_agreement_creator/Widgets/app_scaffold.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/date_extensions.dart';
+import 'package:bws_agreement_creator/utils/use_build_effect.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
