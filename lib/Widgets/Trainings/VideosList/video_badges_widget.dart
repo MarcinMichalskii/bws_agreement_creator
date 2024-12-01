@@ -1,5 +1,5 @@
 import 'package:bws_agreement_creator/Model/video_data.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/touchable_opacity.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/touchable_opacity.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

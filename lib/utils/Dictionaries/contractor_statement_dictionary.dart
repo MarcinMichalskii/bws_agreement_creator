@@ -1,5 +1,5 @@
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
-import 'package:bws_agreement_creator/utils/Dictionaries2/agreement_consts.dart';
+import 'package:bws_agreement_creator/utils/Dictionaries/agreement_consts.dart';
 import 'package:intl/intl.dart';
 
 class ContractorStatementDictionary {

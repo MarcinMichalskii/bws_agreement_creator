@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/test/bws_logo.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bws_logo.dart';
 import 'package:bws_agreement_creator/router.dart';
 import 'package:bws_agreement_creator/utils/app_state_provider.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
