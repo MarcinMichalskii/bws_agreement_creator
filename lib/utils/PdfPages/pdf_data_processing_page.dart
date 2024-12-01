@@ -1,5 +1,5 @@
 import 'package:bws_agreement_creator/utils/Fonts.dart';
-import 'package:bws_agreement_creator/utils/Dictionaries/data_processing_dictionary.dart';
+import 'package:bws_agreement_creator/utils/Dictionaries2/data_processing_dictionary.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 class PdfDataProcessingPage {
