@@ -1,3 +1,14 @@
 {
-"cancel": "Anuluj"
+"cancel": "Anuluj",
+"password": "Hasło",
+"send": "Wyślij",
+"studentIdNumber": "Numer legitymacji studenckiej",
+"studentIdFront": "Przód legitymacji",
+"studentIdBack": "Tył legitymacji",
+"expiryDate": "Data ważności",
+"studentIdDataUpdated": "Dane legitymacji zaktualizowane",
+"back": "Wstecz",
+"generateAndSend": "Generuj i wyślij umowę",
+"openPreview": "Otwórz wersję do przeglądnięcia (z danymi przykładowymi)",
+"warning": "Uwaga!"
 }

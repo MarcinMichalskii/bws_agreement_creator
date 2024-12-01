@@ -7,13 +7,13 @@ part of 'add_chapter_question_data.dart';
 // **************************************************************************
 
 abstract class _$AddChapterQuestionDataCWProxy {
+  AddChapterQuestionData questionText(String questionText);
+
   AddChapterQuestionData answers(List<String> answers);
 
   AddChapterQuestionData chapterId(String chapterId);
 
   AddChapterQuestionData correctAnswer(String correctAnswer);
-
-  AddChapterQuestionData questionText(String questionText);
 
   AddChapterQuestionData videos(List<String> videos);
 
@@ -24,10 +24,10 @@ abstract class _$AddChapterQuestionDataCWProxy {
   /// AddChapterQuestionData(...).copyWith(id: 12, name: "My name")
   /// ````
   AddChapterQuestionData call({
+    String? questionText,
     List<String>? answers,
     String? chapterId,
     String? correctAnswer,
-    String? questionText,
     List<String>? videos,
   });
 }
@@ -35,9 +35,13 @@ abstract class _$AddChapterQuestionDataCWProxy {
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfAddChapterQuestionData.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfAddChapterQuestionData.copyWith.fieldName(...)`
 class _$AddChapterQuestionDataCWProxyImpl
     implements _$AddChapterQuestionDataCWProxy {
+  const _$AddChapterQuestionDataCWProxyImpl(this._value);
+
   final AddChapterQuestionData _value;
 
-  const _$AddChapterQuestionDataCWProxyImpl(this._value);
+  @override
+  AddChapterQuestionData questionText(String questionText) =>
+      this(questionText: questionText);
 
   @override
   AddChapterQuestionData answers(List<String> answers) =>
@@ -52,10 +56,6 @@ class _$AddChapterQuestionDataCWProxyImpl
       this(correctAnswer: correctAnswer);
 
   @override
-  AddChapterQuestionData questionText(String questionText) =>
-      this(questionText: questionText);
-
-  @override
   AddChapterQuestionData videos(List<String> videos) => this(videos: videos);
 
   @override
@@ -67,13 +67,18 @@ class _$AddChapterQuestionDataCWProxyImpl
   /// AddChapterQuestionData(...).copyWith(id: 12, name: "My name")
   /// ````
   AddChapterQuestionData call({
+    Object? questionText = const $CopyWithPlaceholder(),
     Object? answers = const $CopyWithPlaceholder(),
     Object? chapterId = const $CopyWithPlaceholder(),
     Object? correctAnswer = const $CopyWithPlaceholder(),
-    Object? questionText = const $CopyWithPlaceholder(),
     Object? videos = const $CopyWithPlaceholder(),
   }) {
     return AddChapterQuestionData(
+      questionText:
+          questionText == const $CopyWithPlaceholder() || questionText == null
+              ? _value.questionText
+              // ignore: cast_nullable_to_non_nullable
+              : questionText as String,
       answers: answers == const $CopyWithPlaceholder() || answers == null
           ? _value.answers
           // ignore: cast_nullable_to_non_nullable
@@ -87,11 +92,6 @@ class _$AddChapterQuestionDataCWProxyImpl
               ? _value.correctAnswer
               // ignore: cast_nullable_to_non_nullable
               : correctAnswer as String,
-      questionText:
-          questionText == const $CopyWithPlaceholder() || questionText == null
-              ? _value.questionText
-              // ignore: cast_nullable_to_non_nullable
-              : questionText as String,
       videos: videos == const $CopyWithPlaceholder() || videos == null
           ? _value.videos
           // ignore: cast_nullable_to_non_nullable

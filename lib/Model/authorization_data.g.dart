@@ -25,9 +25,9 @@ abstract class _$AuthorizationDataCWProxy {
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfAuthorizationData.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfAuthorizationData.copyWith.fieldName(...)`
 class _$AuthorizationDataCWProxyImpl implements _$AuthorizationDataCWProxy {
-  final AuthorizationData _value;
-
   const _$AuthorizationDataCWProxyImpl(this._value);
+
+  final AuthorizationData _value;
 
   @override
   AuthorizationData accessToken(String accessToken) =>

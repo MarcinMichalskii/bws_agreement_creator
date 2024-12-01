@@ -1,5 +1,5 @@
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bordered_input.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/generate_pdf_button.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/default_bordered_button.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/url_validator.dart';
 import 'package:flutter/material.dart';

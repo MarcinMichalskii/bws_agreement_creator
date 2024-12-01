@@ -1,10 +1,12 @@
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/UpdateStudentId/update_student_id_logic.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/b2b_contract_question_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/default_signature_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/employee_contract_question_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/legal_guardian_questions_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/other_company_details_question_widget.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/UpdateStudentId/update_student_id_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/works_in_other_company_question_widget.dart';
-import 'package:bws_agreement_creator/Model/login_data.dart';
+import 'package:bws_agreement_creator/Model/profile_data.dart';
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +19,7 @@ enum SelectedPage {
   b2bContract,
   signature,
   student,
+  fillStudentData,
 }
 
 extension SelectedPageExtension on SelectedPage {
@@ -36,6 +39,8 @@ extension SelectedPageExtension on SelectedPage {
         return const DefaultSignatureWidget();
       case SelectedPage.student:
         return const DefaultSignatureWidget();
+      case SelectedPage.fillStudentData:
+        return const UpdateStudentIdLogic();
     }
   }
 
@@ -54,6 +59,8 @@ extension SelectedPageExtension on SelectedPage {
       case SelectedPage.signature:
         return SelectedPage.worksInOtherCompany;
       case SelectedPage.student:
+        return null;
+      case SelectedPage.fillStudentData:
         return null;
     }
   }
@@ -74,6 +81,8 @@ extension SelectedPageExtension on SelectedPage {
         return true;
       case SelectedPage.student:
         return true;
+      case SelectedPage.fillStudentData:
+        return false;
     }
   }
 }
@@ -96,7 +105,8 @@ extension TempalteDataForPage on SelectedPage {
         idNumber: 'FED XDDDD',
         hasStudentIdPhoto: false,
         isAdmin: false,
-        verified: true);
+        verified: true,
+        markedAsNotAStudent: false);
     final newFormData = NewFormData(
         loginData: loginData,
         bwsSignatureData: signatureData,
@@ -131,7 +141,9 @@ extension TempalteDataForPage on SelectedPage {
         return newFormData;
       case SelectedPage.student:
         return newFormData.copyWith(
-            loginData: loginData.copyWith(studentId: 'STUDENT001'));
+            loginData: loginData.copyWith(studentId: '001/001'));
+      case SelectedPage.fillStudentData:
+        return null;
     }
   }
 }

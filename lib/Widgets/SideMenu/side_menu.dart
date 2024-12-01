@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:bws_agreement_creator/Providers/profile_data_provider.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/components/bws_logo.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bws_logo.dart';
 import 'package:bws_agreement_creator/router.dart';
 import 'package:bws_agreement_creator/utils/app_state_provider.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
@@ -69,7 +69,6 @@ class SideMenu extends HookConsumerWidget {
                 onTap: () {
                   UserDataHelper().cleanupUserData();
                   ref.read(appStateProvider.notifier).setDefaultState();
-                  ref.read(notAStudentTapped.notifier).state = false;
                   ref.read(profileProvider.notifier).setDefaultState();
                 }),
           ),

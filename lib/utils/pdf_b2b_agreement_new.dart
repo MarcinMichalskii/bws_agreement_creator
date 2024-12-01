@@ -1,9 +1,9 @@
 import 'package:bws_agreement_creator/utils/Fonts.dart';
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
-import 'package:bws_agreement_creator/utils/dictionaries/b2b_agreement_dictionary.dart';
-import 'package:bws_agreement_creator/utils/dictionaries/normal_agreement_dictionary.dart';
-import 'package:bws_agreement_creator/utils/pdf_pages/pdf_data_processing_page.dart';
-import 'package:bws_agreement_creator/utils/pdf_pages/pdf_signature.dart';
+import 'package:bws_agreement_creator/utils/Dictionaries/b2b_agreement_dictionary.dart';
+import 'package:bws_agreement_creator/utils/Dictionaries/normal_agreement_dictionary.dart';
+import 'package:bws_agreement_creator/utils/PdfPages/pdf_data_processing_page.dart';
+import 'package:bws_agreement_creator/utils/PdfPages/pdf_signature.dart';
 import 'package:bws_agreement_creator/utils/pdf_widget_set.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -58,7 +58,7 @@ class PdfB2BAgreementNew {
                 .toParagraphWidgetRichText('1\''),
             ...dictionary.specificContractMaking.toParagraphWidget('2'),
             ...b2bDictionary.rulesOfServiceProviding.toParagraphWidget('3'),
-            ...dictionary.periodOfAgreement.toParagraphWidget('4'),
+            ...b2bDictionary.periodOfAgreement.toParagraphWidget('4'),
             ...b2bDictionary.salary.toParagraphWidget('5'),
             ...dictionary.conflictResolving.toParagraphWidget('6'),
             ...dictionary.confidentiality.toParagraphWidget('7'),

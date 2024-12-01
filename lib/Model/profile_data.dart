@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/Model/address_data.dart';
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
+import 'package:bws_agreement_creator/utils/Enums/student_status_error_reason.dart';
 import 'package:bws_agreement_creator/utils/date_extensions.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
@@ -20,6 +21,7 @@ class ProfileData {
   bool hasStudentIdPhoto;
   bool isAdmin;
   bool verified;
+  bool markedAsNotAStudent;
 
   DateTime? get birthDateParsed {
     try {
@@ -41,7 +43,8 @@ class ProfileData {
       required this.studentId,
       required this.hasStudentIdPhoto,
       required this.isAdmin,
-      required this.verified});
+      required this.verified,
+      required this.markedAsNotAStudent});
 
   factory ProfileData.fromJson(Map<String, dynamic> json) {
     return ProfileData(
@@ -58,7 +61,8 @@ class ProfileData {
         studentId: _cleanString(json['studentId']),
         hasStudentIdPhoto: json['hasStudentIdPhoto'],
         isAdmin: json['isAdmin'],
-        verified: json['verified']);
+        verified: json['verified'],
+        markedAsNotAStudent: json['markedAsNotAStudent']);
   }
 
   static String? _cleanString(String? value) {
@@ -97,29 +101,33 @@ class ProfileData {
   }
 
   SelectedPage pageBasedOnData() {
+    if (studentStatusErrorReason != null && markedAsNotAStudent == false) {
+      return SelectedPage.fillStudentData;
+    }
     if (!birthDateParsed!.isAdult()) {
       return SelectedPage.legalGuardian;
-    } else if (studentId != null && birthDateParsed!.isBelow26()) {
+    } else if (studentId != null &&
+        studentStatusErrorReason == null &&
+        birthDateParsed!.isBelow26()) {
       return SelectedPage.student;
     } else {
       return SelectedPage.contractType;
     }
   }
 
-  String? updateStudentIdReason() {
-    final hasPhotoWithoutNumber =
-        hasStudentIdPhoto && studentId?.emptyAsNull() == null;
-    final isPotentialStudent = (birthDateParsed?.isBelow26() == true) &&
-        studentId?.emptyAsNull() == null;
+  StudentStatusErrorReason? get studentStatusErrorReason {
+    if (birthDateParsed?.isBelow26() == true) {
+      if (!hasStudentIdPhoto) {
+        return StudentStatusErrorReason.noPhoto;
+      }
 
-    final invalidStudentId = RegExp(r'[^0-9\/\s]').hasMatch(studentId ?? '');
+      if (studentId?.emptyAsNull() == null) {
+        return StudentStatusErrorReason.photoWithouNumber;
+      }
 
-    if (hasPhotoWithoutNumber) {
-      return 'W Twoim profilu dodałeś zdjęcie legitymacji studenckiej, ale nie podałeś jej numeru, uzupełnij go poniżej.\nNumer może zawierać tylko cyfry spacje i znak "/"';
-    } else if (isPotentialStudent) {
-      return 'W swoim profilu Sinch nie podałeś numeru legitymacji ani jej zdjęcia. Osoby poniżej 26 roku życia najczęściej podpisują umowę ze statusem studenta. \nCzy na pewno nie jesteś studentem? Jeśli tak, uzupełnij numer legitymacji poniżej.\n Numer może zawierać tylko cyfry spacje i znak "/"';
-    } else if (invalidStudentId) {
-      return 'Numer legitymacji studenckiej (${studentId ?? ''}) w Twoim profilu Sinch zawiera niedozwolone znaki. Popraw go poniżej. Numer może zawierać tylko cyfry spacje i znak "/"';
+      if (RegExp(r'[^0-9\/\s]').hasMatch(studentId ?? '')) {
+        return StudentStatusErrorReason.invalidStudentId;
+      }
     }
     return null;
   }

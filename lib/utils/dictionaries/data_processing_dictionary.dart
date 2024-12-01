@@ -1,4 +1,4 @@
-import 'package:bws_agreement_creator/utils/dictionaries/normal_agreement_dictionary.dart';
+import 'package:bws_agreement_creator/utils/Dictionaries/normal_agreement_dictionary.dart';
 import 'package:bws_agreement_creator/utils/pdf_widget_set.dart';
 import 'package:pdf/widgets.dart' as pw;
 

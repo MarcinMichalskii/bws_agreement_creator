@@ -1,6 +1,12 @@
 extension NipValidator on String {
   bool isValidNip() {
     try {
+      if (length != 10) {
+        return false;
+      }
+      if (RegExp(r'^[0-9]*$').hasMatch(this) == false) {
+        return false;
+      }
       final nip = replaceAll(RegExp(r'[\ \-]'), '');
 
       List<int> weight = [6, 5, 7, 2, 3, 4, 5, 6, 7];
