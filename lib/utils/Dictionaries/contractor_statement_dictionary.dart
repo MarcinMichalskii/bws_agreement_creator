@@ -1,5 +1,6 @@
 import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:bws_agreement_creator/utils/Dictionaries/agreement_consts.dart';
+import 'package:bws_agreement_creator/utils/user_data_validator.dart';
 import 'package:intl/intl.dart';
 
 class ContractorStatementDictionary {
@@ -16,11 +17,14 @@ $documentId
 ''';
 
   String get documentId {
-    if (form.loginData?.studentId != null) {
+    if (form.loginData?.studentId != null &&
+        form.loginData?.markedAsNotAStudent == false) {
       return 'Nr legitymacji studenckiej: ${form.loginData?.studentId}';
-    } else if (form.loginData?.idNumber != null) {
+    } else if (form.loginData?.idNumber != null &&
+        IDNUmberValidator.validate(form.loginData?.idNumber) == null) {
       return 'Dowód osobisty: ${form.loginData?.idNumber}';
-    } else if (form.loginData?.passportId != null) {
+    } else if (form.loginData?.passportId != null &&
+        PassportValidator.validate(form.loginData?.passportId) == null) {
       return 'Paszport: ${form.loginData?.passportId}';
     } else {
       return '';
@@ -31,7 +35,9 @@ $documentId
 Oświadczam że:
 ''';
 
-  String get workInOtherCompany => '''
+  String get workInOtherCompany => form.isStudent
+      ? 'A) - '
+      : '''
 A) ${form.worksInOtherCompany ? 'Pracuję' : 'Nie pracuję'} w innym zakładzie pracy
 ''';
 

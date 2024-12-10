@@ -8,6 +8,8 @@ class BorderedInput extends StatelessWidget {
       required this.placeholder,
       this.isSecure = false,
       this.onChanged,
+      this.controller,
+      this.focusNode,
       this.onSubmited,
       this.inputFormatters = const <TextInputFormatter>[],
       this.initialValue,
@@ -32,12 +34,16 @@ class BorderedInput extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final IconButton? sufixIcon;
   final EdgeInsets margin;
+  final FocusNode? focusNode;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: margin,
         child: TextFormField(
+          controller: controller,
+          focusNode: focusNode,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator,
           onSaved: onSaved,

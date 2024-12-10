@@ -15,6 +15,8 @@ abstract class _$ProfileDataCWProxy {
 
   ProfileData address(String? address);
 
+  ProfileData street(String? street);
+
   ProfileData phone(String phone);
 
   ProfileData passportId(String? passportId);
@@ -33,6 +35,10 @@ abstract class _$ProfileDataCWProxy {
 
   ProfileData markedAsNotAStudent(bool markedAsNotAStudent);
 
+  ProfileData isFromPoland(bool isFromPoland);
+
+  ProfileData hasPermanentResidence(bool hasPermanentResidence);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ProfileData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -44,6 +50,7 @@ abstract class _$ProfileDataCWProxy {
     String? birthDate,
     String? email,
     String? address,
+    String? street,
     String? phone,
     String? passportId,
     String? idNumber,
@@ -53,6 +60,8 @@ abstract class _$ProfileDataCWProxy {
     bool? isAdmin,
     bool? verified,
     bool? markedAsNotAStudent,
+    bool? isFromPoland,
+    bool? hasPermanentResidence,
   });
 }
 
@@ -73,6 +82,9 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
 
   @override
   ProfileData address(String? address) => this(address: address);
+
+  @override
+  ProfileData street(String? street) => this(street: street);
 
   @override
   ProfileData phone(String phone) => this(phone: phone);
@@ -104,6 +116,14 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
       this(markedAsNotAStudent: markedAsNotAStudent);
 
   @override
+  ProfileData isFromPoland(bool isFromPoland) =>
+      this(isFromPoland: isFromPoland);
+
+  @override
+  ProfileData hasPermanentResidence(bool hasPermanentResidence) =>
+      this(hasPermanentResidence: hasPermanentResidence);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ProfileData(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -116,6 +136,7 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
     Object? birthDate = const $CopyWithPlaceholder(),
     Object? email = const $CopyWithPlaceholder(),
     Object? address = const $CopyWithPlaceholder(),
+    Object? street = const $CopyWithPlaceholder(),
     Object? phone = const $CopyWithPlaceholder(),
     Object? passportId = const $CopyWithPlaceholder(),
     Object? idNumber = const $CopyWithPlaceholder(),
@@ -125,6 +146,8 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
     Object? isAdmin = const $CopyWithPlaceholder(),
     Object? verified = const $CopyWithPlaceholder(),
     Object? markedAsNotAStudent = const $CopyWithPlaceholder(),
+    Object? isFromPoland = const $CopyWithPlaceholder(),
+    Object? hasPermanentResidence = const $CopyWithPlaceholder(),
   }) {
     return ProfileData(
       name: name == const $CopyWithPlaceholder() || name == null
@@ -143,6 +166,10 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
           ? _value.address
           // ignore: cast_nullable_to_non_nullable
           : address as String?,
+      street: street == const $CopyWithPlaceholder()
+          ? _value.street
+          // ignore: cast_nullable_to_non_nullable
+          : street as String?,
       phone: phone == const $CopyWithPlaceholder() || phone == null
           ? _value.phone
           // ignore: cast_nullable_to_non_nullable
@@ -182,6 +209,17 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
               ? _value.markedAsNotAStudent
               // ignore: cast_nullable_to_non_nullable
               : markedAsNotAStudent as bool,
+      isFromPoland:
+          isFromPoland == const $CopyWithPlaceholder() || isFromPoland == null
+              ? _value.isFromPoland
+              // ignore: cast_nullable_to_non_nullable
+              : isFromPoland as bool,
+      hasPermanentResidence:
+          hasPermanentResidence == const $CopyWithPlaceholder() ||
+                  hasPermanentResidence == null
+              ? _value.hasPermanentResidence
+              // ignore: cast_nullable_to_non_nullable
+              : hasPermanentResidence as bool,
     );
   }
 }
