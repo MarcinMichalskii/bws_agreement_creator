@@ -104,7 +104,8 @@ class NewFormData {
     if (!loginData!.birthDateParsed!.isAdult()) {
       return 'uz_student_niepelnoletni.pdf';
     } else if (loginData?.studentId != null &&
-        loginData?.birthDateParsed?.isBelow26() == true) {
+        loginData?.birthDateParsed?.isBelow26() == true &&
+        loginData?.markedAsNotAStudent == false) {
       return 'uz_student.pdf';
     } else if (worksInOtherCompany && otherCompanyEndDate == null) {
       return 'uz_kolejna_nieokreslony.pdf';
@@ -125,5 +126,6 @@ class NewFormData {
   bool get worksInOtherCompany => otherCompanyName != null;
   bool get isStudent =>
       loginData?.studentId != null &&
-      loginData?.birthDateParsed?.isBelow26() == true;
+      loginData?.birthDateParsed?.isBelow26() == true &&
+      !loginData!.markedAsNotAStudent;
 }

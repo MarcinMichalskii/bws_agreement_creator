@@ -53,7 +53,7 @@ class ActionButton extends StatelessWidget {
       style: const TextStyle(
           fontSize: 20,
           color: CustomColors.darkGray,
-          fontWeight: FontWeight.w400));
+          fontWeight: FontWeight.w500));
 
   Widget get iconWidget => Icon(
         icon,

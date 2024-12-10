@@ -65,7 +65,8 @@ Adres: ${form.loginData?.address}',
 ''';
 
   String get documentId {
-    if (form.loginData?.studentId != null) {
+    if (form.loginData?.studentId != null &&
+        form.loginData?.markedAsNotAStudent == false) {
       return 'Nr legitymacji studenckiej: ${form.loginData?.studentId}';
     } else if (form.loginData?.idNumber != null) {
       return 'Dowód osobisty: ${form.loginData?.idNumber}';
