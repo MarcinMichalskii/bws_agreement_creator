@@ -48,7 +48,7 @@ class UpdateStudentIdAddPhotosRow extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             PhotoBoxWidget(
-              label: 'studentIdFront'.tr(),
+              label: 'frontPhoto'.tr(),
               photo: frontPhoto,
               onTap: () => pickImage(true),
             ),
@@ -56,7 +56,7 @@ class UpdateStudentIdAddPhotosRow extends HookConsumerWidget {
               width: 16,
             ),
             PhotoBoxWidget(
-              label: 'studentIdBack'.tr(),
+              label: 'backPhoto'.tr(),
               photo: backPhoto,
               onTap: () => pickImage(false),
             ),

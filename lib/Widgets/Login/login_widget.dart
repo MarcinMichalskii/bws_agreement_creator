@@ -11,7 +11,7 @@ import 'package:bws_agreement_creator/Widgets/Login/no_password_help_widget.dart
 import 'package:bws_agreement_creator/app_config_helper.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/consts.dart';
-import 'package:bws_agreement_creator/utils/nip_validator.dart';
+import 'package:bws_agreement_creator/utils/user_data_validator.dart';
 import 'package:bws_agreement_creator/utils/string_extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

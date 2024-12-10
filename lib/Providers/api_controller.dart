@@ -44,6 +44,23 @@ class ApiController<T> {
     }
   }
 
+  Future<APIResponseState<T>> performPatch(
+      {required Map<String, dynamic> params, required String url}) async {
+    try {
+      Response response = await dio.patch(url,
+          data: params,
+          options: Options(headers: {'Content-Type': 'application/json'}));
+      if (response.statusCode != 200) {
+        return APIResponseState(
+            error: CostRegisterError.fromJson(response.data), params: params);
+      }
+      return APIResponseState(
+          data: fromJsonFunction(response.data), params: params);
+    } catch (error) {
+      return handleError(error);
+    }
+  }
+
   Future<APIResponseState<T>> performPut(
       {required Map<String, dynamic> params, required String url}) async {
     try {

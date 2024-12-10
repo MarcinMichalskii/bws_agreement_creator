@@ -1,13 +1,14 @@
+import 'package:bws_agreement_creator/Model/new_form_data.dart';
+import 'package:bws_agreement_creator/Model/profile_data.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/UpdatePermanentResidence/update_permanent_residence_logic.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/UpdatePersonalData/update_personal_data_logic.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/UpdateStudentId/update_student_id_logic.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/b2b_contract_question_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/default_signature_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/employee_contract_question_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/legal_guardian_questions_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/other_company_details_question_widget.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/UpdateStudentId/update_student_id_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/works_in_other_company_question_widget.dart';
-import 'package:bws_agreement_creator/Model/profile_data.dart';
-import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -20,6 +21,8 @@ enum SelectedPage {
   signature,
   student,
   fillStudentData,
+  fillPermanentResidence,
+  updatePersonalData
 }
 
 extension SelectedPageExtension on SelectedPage {
@@ -41,6 +44,10 @@ extension SelectedPageExtension on SelectedPage {
         return const DefaultSignatureWidget();
       case SelectedPage.fillStudentData:
         return const UpdateStudentIdLogic();
+      case SelectedPage.fillPermanentResidence:
+        return const UpdatePermanentResidenceLogic();
+      case SelectedPage.updatePersonalData:
+        return const UpdatePersonalDataLogic();
     }
   }
 
@@ -62,6 +69,8 @@ extension SelectedPageExtension on SelectedPage {
         return null;
       case SelectedPage.fillStudentData:
         return null;
+      case SelectedPage.updatePersonalData:
+        return null;
     }
   }
 
@@ -82,6 +91,10 @@ extension SelectedPageExtension on SelectedPage {
       case SelectedPage.student:
         return true;
       case SelectedPage.fillStudentData:
+        return false;
+      case SelectedPage.updatePersonalData:
+        return false;
+      case SelectedPage.fillPermanentResidence:
         return false;
     }
   }
@@ -106,7 +119,9 @@ extension TempalteDataForPage on SelectedPage {
         hasStudentIdPhoto: false,
         isAdmin: false,
         verified: true,
-        markedAsNotAStudent: false);
+        markedAsNotAStudent: false,
+        isFromPoland: true,
+        hasPermanentResidence: false);
     final newFormData = NewFormData(
         loginData: loginData,
         bwsSignatureData: signatureData,
@@ -143,6 +158,10 @@ extension TempalteDataForPage on SelectedPage {
         return newFormData.copyWith(
             loginData: loginData.copyWith(studentId: '001/001'));
       case SelectedPage.fillStudentData:
+        return null;
+      case SelectedPage.updatePersonalData:
+        return null;
+      case SelectedPage.fillPermanentResidence:
         return null;
     }
   }
