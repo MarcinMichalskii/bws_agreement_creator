@@ -1,5 +1,5 @@
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/signature_widget.dart';
-import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/Components/Signature/signature_widget.dart';
+import 'package:bws_agreement_creator/Providers/agreement_generator_data_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/user_data_validator.dart';
@@ -41,38 +41,42 @@ class LegalGuardianQuestionsWidget extends HookConsumerWidget {
       BorderedInput(
         placeholder: "Imię i nazwisko",
         onChanged: (value) {
-          ref.read(newFormDataProvider.notifier).setLegalGuardianName(value);
+          ref
+              .read(agreementGeneratorDataProvider.notifier)
+              .setLegalGuardianName(value);
         },
       ),
       BorderedInput(
           placeholder: "Pesel",
           validator: PeselValidator.validate,
           onChanged: (value) {
-            ref.read(newFormDataProvider.notifier).setLegalGuardianPesel(value);
+            ref
+                .read(agreementGeneratorDataProvider.notifier)
+                .setLegalGuardianPesel(value);
           }),
       BorderedInput(
           placeholder: "Numer dowodu",
           onChanged: (value) {
             ref
-                .read(newFormDataProvider.notifier)
+                .read(agreementGeneratorDataProvider.notifier)
                 .setLegalGuardianIdNumber(value);
           }),
       BorderedInput(
           placeholder: "Adres",
           onChanged: (value) {
             ref
-                .read(newFormDataProvider.notifier)
+                .read(agreementGeneratorDataProvider.notifier)
                 .setLegalGuardianAddress(value);
           }),
       SignatureWidget(
           label: 'Podpis opiekuna',
           onSignatureChanged: (data) {
             ref
-                .read(newFormDataProvider.notifier)
+                .read(agreementGeneratorDataProvider.notifier)
                 .setLegalGuardianSignature(data);
           }),
       SignatureWidget(onSignatureChanged: (data) {
-        ref.read(newFormDataProvider.notifier).setSignature(data);
+        ref.read(agreementGeneratorDataProvider.notifier).setSignature(data);
       }),
     ]);
   }

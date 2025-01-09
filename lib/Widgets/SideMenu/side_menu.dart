@@ -6,6 +6,8 @@ import 'package:bws_agreement_creator/router.dart';
 import 'package:bws_agreement_creator/utils/app_state_provider.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:bws_agreement_creator/utils/user_data_helper.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -37,13 +39,14 @@ class SideMenu extends HookConsumerWidget {
                 onTap: () {
                   context.pushScreen('employeeFormWidget');
                 }),
-          DrawerListTile(
-              isCollapsed: false,
-              title: 'Szkolenia',
-              icon: Icons.school_outlined,
-              onTap: () {
-                context.pushScreen('trainings');
-              }),
+          if (kIsWeb)
+            DrawerListTile(
+                isCollapsed: false,
+                title: 'Szkolenia',
+                icon: Icons.school_outlined,
+                onTap: () {
+                  context.pushScreen('trainings');
+                }),
           if (ref.watch(profileProvider).data?.isAdmin == true)
             DrawerListTile(
                 isCollapsed: false,
@@ -59,6 +62,14 @@ class SideMenu extends HookConsumerWidget {
                 icon: Icons.person_outline,
                 onTap: () {
                   context.pushScreen('usersStatistics');
+                }),
+          if (ref.watch(profileProvider).data?.isRaportCreator == true)
+            DrawerListTile(
+                isCollapsed: false,
+                title: 'raportsGenerator'.tr(),
+                icon: Icons.receipt_long_outlined,
+                onTap: () {
+                  context.pushScreen('raportsGenerator');
                 }),
           Container(
             margin: const EdgeInsets.only(bottom: 16),

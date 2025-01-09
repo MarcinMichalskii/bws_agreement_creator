@@ -1,13 +1,12 @@
+import 'package:bws_agreement_creator/Providers/agreement_generator_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/verify_tax_id.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/action_button.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/default_signature_widget.dart';
-import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
+import 'package:bws_agreement_creator/Widgets/Components/action_button.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/Components/Signature/agreement_creator_signature_widget.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
-import 'package:bws_agreement_creator/utils/user_data_validator.dart';
 import 'package:bws_agreement_creator/utils/use_build_effect.dart';
+import 'package:bws_agreement_creator/utils/user_data_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hand_signature/signature.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -21,19 +20,20 @@ class B2bContractQuestionWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     void updateAddress(String text) {
-      ref.read(newFormDataProvider.notifier).setB2bAddress(text);
+      ref.read(agreementGeneratorDataProvider.notifier).setB2bAddress(text);
     }
 
     void updateNip(String text) {
-      ref.read(newFormDataProvider.notifier).setNip(text);
+      ref.read(agreementGeneratorDataProvider.notifier).setNip(text);
     }
 
     void updateCompanyName(String text) {
-      ref.read(newFormDataProvider.notifier).updateCompanyName(text);
+      ref.read(agreementGeneratorDataProvider.notifier).updateCompanyName(text);
     }
 
     void checkNip() {
-      final taxId = ref.read(newFormDataProvider.notifier).state.b2bCompanyNip;
+      final taxId =
+          ref.read(agreementGeneratorDataProvider.notifier).state.b2bCompanyNip;
       ref.read(verifyTaxIdProvider.notifier).verify(taxId: taxId ?? '');
     }
 
@@ -89,7 +89,7 @@ class B2bContractQuestionWidget extends HookConsumerWidget {
             style: TextStyle(
               color: CustomColors.gray,
             )),
-      const DefaultSignatureWidget()
+      const AgreementCreatorSignatureWidget()
     ]);
   }
 }

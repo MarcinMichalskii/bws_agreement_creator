@@ -42,8 +42,11 @@ class ActionButton extends StatelessWidget {
               : CustomColors.applicationColorMain,
         ),
         child: Container(
+          alignment: Alignment.center,
           padding: const EdgeInsets.all(12),
-          child: text != null ? textWidget : iconWidget,
+          child: (text != null && icon != null)
+              ? TextIconWidget(text: text!, icon: icon!)
+              : (text != null ? textWidget : iconWidget),
         ),
       ),
     );
@@ -60,4 +63,30 @@ class ActionButton extends StatelessWidget {
         color: CustomColors.almostBlack,
         size: 24,
       );
+
+  Widget get textIconWidget =>
+      Row(children: [iconWidget, Container(width: 8), textWidget]);
+}
+
+class TextIconWidget extends StatelessWidget {
+  const TextIconWidget({super.key, required this.text, required this.icon});
+  final IconData icon;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Icon(
+        icon,
+        color: CustomColors.almostBlack,
+        size: 24,
+      ),
+      Container(width: 8),
+      Text(text,
+          style: const TextStyle(
+              fontSize: 20,
+              color: CustomColors.darkGray,
+              fontWeight: FontWeight.w500))
+    ]);
+  }
 }

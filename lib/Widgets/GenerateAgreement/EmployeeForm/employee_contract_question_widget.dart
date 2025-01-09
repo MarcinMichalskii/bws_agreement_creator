@@ -1,5 +1,5 @@
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
-import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
+import 'package:bws_agreement_creator/Providers/agreement_generator_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/selected_page_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/select_date_button.dart';
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
@@ -13,7 +13,7 @@ class ContractTypeQuestionWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     useBuildEffect(() {
-      ref.read(newFormDataProvider.notifier).cleanUp();
+      ref.read(agreementGeneratorDataProvider.notifier).cleanUp();
       return null;
     }, []);
     return Column(children: [
@@ -34,12 +34,12 @@ class ContractTypeQuestionWidget extends HookConsumerWidget {
                 textColor: CustomColors.darkGray,
                 onPress: () {
                   final address = ref
-                      .read(newFormDataProvider.notifier)
+                      .read(agreementGeneratorDataProvider.notifier)
                       .state
                       .loginData
                       ?.address;
                   ref
-                      .read(newFormDataProvider.notifier)
+                      .read(agreementGeneratorDataProvider.notifier)
                       .setB2bAddress(address ?? '');
 
                   ref

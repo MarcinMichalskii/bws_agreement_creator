@@ -1,12 +1,11 @@
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/default_signature_widget.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/form_widget.dart';
-import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
+import 'package:bws_agreement_creator/Providers/agreement_generator_data_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/form_toggle.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/select_date_button.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/Components/Signature/agreement_creator_signature_widget.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
-import 'package:bws_agreement_creator/utils/user_data_validator.dart';
 import 'package:bws_agreement_creator/utils/use_build_effect.dart';
+import 'package:bws_agreement_creator/utils/user_data_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,10 +16,10 @@ class OtherCompanyDetailsQuestionWidget extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     useBuildEffect(() {
       ref
-          .read(newFormDataProvider.notifier)
+          .read(agreementGeneratorDataProvider.notifier)
           .updateOtherCompanyContractStartDate(DateTime.now());
       ref
-          .read(newFormDataProvider.notifier)
+          .read(agreementGeneratorDataProvider.notifier)
           .updateOtherCompanyContractEndDate(DateTime.now());
       return;
     }, []);
@@ -44,7 +43,7 @@ class OtherCompanyDetailsQuestionWidget extends HookConsumerWidget {
         placeholder: "Nazwa firmy",
         onChanged: (value) {
           ref
-              .read(newFormDataProvider.notifier)
+              .read(agreementGeneratorDataProvider.notifier)
               .updateOtherCompanyName(value ?? '');
         },
       ),
@@ -53,14 +52,14 @@ class OtherCompanyDetailsQuestionWidget extends HookConsumerWidget {
           validator: NipValidator.validate,
           onChanged: (value) {
             ref
-                .read(newFormDataProvider.notifier)
+                .read(agreementGeneratorDataProvider.notifier)
                 .updateOtherCompanyNip(value ?? '');
           }),
       BorderedInput(
           placeholder: "Adres firmy",
           onChanged: (value) {
             ref
-                .read(newFormDataProvider.notifier)
+                .read(agreementGeneratorDataProvider.notifier)
                 .updateOtherCompanyAddress(value ?? '');
           }),
       FormToggle(
@@ -69,7 +68,7 @@ class OtherCompanyDetailsQuestionWidget extends HookConsumerWidget {
           contractWithoutTime.value = toggleValue;
           if (toggleValue) {
             ref
-                .read(newFormDataProvider.notifier)
+                .read(agreementGeneratorDataProvider.notifier)
                 .updateOtherCompanyContractEndDate(null);
           }
         },
@@ -81,13 +80,14 @@ class OtherCompanyDetailsQuestionWidget extends HookConsumerWidget {
             child: Container(
               margin: const EdgeInsets.only(right: 8),
               child: SelectDateButton(
-                dateText:
-                    ref.watch(newFormDataProvider).otherCompanyStartDate ??
-                        DateTime.now(),
+                dateText: ref
+                        .watch(agreementGeneratorDataProvider)
+                        .otherCompanyStartDate ??
+                    DateTime.now(),
                 headerText: 'Data rozpoczęcia umowy',
                 onDateSelected: (date) {
                   ref
-                      .read(newFormDataProvider.notifier)
+                      .read(agreementGeneratorDataProvider.notifier)
                       .updateOtherCompanyContractStartDate(date);
                 },
               ),
@@ -98,13 +98,14 @@ class OtherCompanyDetailsQuestionWidget extends HookConsumerWidget {
               child: Container(
                 margin: const EdgeInsets.only(left: 8),
                 child: SelectDateButton(
-                    dateText:
-                        ref.watch(newFormDataProvider).otherCompanyEndDate ??
-                            DateTime.now(),
+                    dateText: ref
+                            .watch(agreementGeneratorDataProvider)
+                            .otherCompanyEndDate ??
+                        DateTime.now(),
                     headerText: 'Data zakończenia umowy',
                     onDateSelected: (date) {
                       ref
-                          .read(newFormDataProvider.notifier)
+                          .read(agreementGeneratorDataProvider.notifier)
                           .updateOtherCompanyContractEndDate(date);
                     }),
               ),
@@ -112,7 +113,7 @@ class OtherCompanyDetailsQuestionWidget extends HookConsumerWidget {
         ],
       ),
       Container(height: 20),
-      const DefaultSignatureWidget(),
+      const AgreementCreatorSignatureWidget(),
     ]);
   }
 }

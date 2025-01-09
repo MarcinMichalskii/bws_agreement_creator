@@ -1,5 +1,5 @@
 import 'package:bws_agreement_creator/Model/selected_page_data.dart';
-import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
+import 'package:bws_agreement_creator/Providers/agreement_generator_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/selected_page_provider.dart';
 import 'package:bws_agreement_creator/Providers/upload_pdf_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bws_logo.dart';
@@ -15,6 +15,7 @@ import 'package:bws_agreement_creator/utils/consts.dart';
 import 'package:bws_agreement_creator/utils/preview_pdf_generator.dart';
 import 'package:bws_agreement_creator/utils/use_build_effect.dart';
 import 'package:bws_agreement_creator/utils/user_data_helper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -65,7 +66,7 @@ class EmployeeFormWidget extends HookConsumerWidget {
     });
 
     void onAgreementSend() {
-      final formData = ref.read(newFormDataProvider.notifier).state;
+      final formData = ref.read(agreementGeneratorDataProvider.notifier).state;
 
       final SelectedPage page = ref.read(selectedPageProvider.notifier).state;
 
@@ -78,7 +79,7 @@ class EmployeeFormWidget extends HookConsumerWidget {
     }
 
     void onGeneratePress() {
-      final isStudent = ref.read(newFormDataProvider).isStudent;
+      final isStudent = ref.read(agreementGeneratorDataProvider).isStudent;
       final isB2b = ref.read(selectedPageProvider.notifier).state ==
           SelectedPage.b2bContract;
 
@@ -96,10 +97,16 @@ class EmployeeFormWidget extends HookConsumerWidget {
               ));
     }
 
-    void onPreviewSelected() {
-      final SelectedPage page = ref.read(selectedPageProvider.notifier).state;
+    void onPreviewSelected() async {
+      final SelectedPage selectedPage =
+          ref.read(selectedPageProvider.notifier).state;
 
-      PreviewPdfGenerator.generatePreview(page);
+      if (kIsWeb) {
+        PreviewPdfGenerator.generatePreview(selectedPage);
+      } else {
+        PreviewPdfGenerator.showSelectedPagePreviewForMobile(
+            context, selectedPage);
+      }
     }
 
     return AppScaffold(

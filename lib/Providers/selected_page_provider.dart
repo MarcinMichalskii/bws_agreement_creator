@@ -8,7 +8,7 @@ final selectedPageProvider =
 });
 
 class SelectedPageNotifier extends StateNotifier<SelectedPage> {
-  StateNotifierProviderRef<SelectedPageNotifier, SelectedPage> ref;
+  Ref<SelectedPage> ref;
   SelectedPageNotifier(this.ref)
       : super(ref.read(profileProvider.notifier).state.data!.pageBasedOnData());
 
