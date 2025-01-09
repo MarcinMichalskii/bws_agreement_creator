@@ -31,6 +31,8 @@ abstract class _$ProfileDataCWProxy {
 
   ProfileData isAdmin(bool isAdmin);
 
+  ProfileData isRaportCreator(bool isRaportCreator);
+
   ProfileData verified(bool verified);
 
   ProfileData markedAsNotAStudent(bool markedAsNotAStudent);
@@ -58,6 +60,7 @@ abstract class _$ProfileDataCWProxy {
     String? studentId,
     bool? hasStudentIdPhoto,
     bool? isAdmin,
+    bool? isRaportCreator,
     bool? verified,
     bool? markedAsNotAStudent,
     bool? isFromPoland,
@@ -109,6 +112,10 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
   ProfileData isAdmin(bool isAdmin) => this(isAdmin: isAdmin);
 
   @override
+  ProfileData isRaportCreator(bool isRaportCreator) =>
+      this(isRaportCreator: isRaportCreator);
+
+  @override
   ProfileData verified(bool verified) => this(verified: verified);
 
   @override
@@ -144,6 +151,7 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
     Object? studentId = const $CopyWithPlaceholder(),
     Object? hasStudentIdPhoto = const $CopyWithPlaceholder(),
     Object? isAdmin = const $CopyWithPlaceholder(),
+    Object? isRaportCreator = const $CopyWithPlaceholder(),
     Object? verified = const $CopyWithPlaceholder(),
     Object? markedAsNotAStudent = const $CopyWithPlaceholder(),
     Object? isFromPoland = const $CopyWithPlaceholder(),
@@ -199,6 +207,11 @@ class _$ProfileDataCWProxyImpl implements _$ProfileDataCWProxy {
           ? _value.isAdmin
           // ignore: cast_nullable_to_non_nullable
           : isAdmin as bool,
+      isRaportCreator: isRaportCreator == const $CopyWithPlaceholder() ||
+              isRaportCreator == null
+          ? _value.isRaportCreator
+          // ignore: cast_nullable_to_non_nullable
+          : isRaportCreator as bool,
       verified: verified == const $CopyWithPlaceholder() || verified == null
           ? _value.verified
           // ignore: cast_nullable_to_non_nullable

@@ -28,6 +28,7 @@ class ProfileData {
   String? studentId;
   bool hasStudentIdPhoto;
   bool isAdmin;
+  bool isRaportCreator;
   bool verified;
   bool markedAsNotAStudent;
   final bool isFromPoland;
@@ -54,6 +55,7 @@ class ProfileData {
       required this.studentId,
       required this.hasStudentIdPhoto,
       required this.isAdmin,
+      required this.isRaportCreator,
       required this.verified,
       required this.markedAsNotAStudent,
       required this.isFromPoland,
@@ -77,6 +79,7 @@ class ProfileData {
         studentId: _cleanString(json['studentId']),
         hasStudentIdPhoto: json['hasStudentIdPhoto'],
         isAdmin: json['isAdmin'],
+        isRaportCreator: json['isRaportCreator'],
         verified: json['verified'],
         markedAsNotAStudent: json['markedAsNotAStudent'],
         isFromPoland: json['isFromPoland'],

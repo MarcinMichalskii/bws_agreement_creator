@@ -3,10 +3,10 @@ import 'dart:typed_data';
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/Providers/auth_provider.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
+import 'package:bws_agreement_creator/utils/multipart_file_creator.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:mime/mime.dart';
 
 final updatePermanentResidencePhotosProvider = StateNotifierProvider<
     UpdatePermanentResidencePhotoNotifier, APIResponseState<String?>>((ref) {
@@ -29,8 +29,10 @@ class UpdatePermanentResidencePhotoNotifier
 
       final formData = FormData.fromMap({
         "expirationDate": formattedDate,
-        "frontPhoto": await _createMultipartFile(frontPhoto, "front_photo"),
-        "backPhoto": await _createMultipartFile(backPhoto, "back_photo"),
+        "frontPhoto": await MultipartFileCreator.createMultipartFile(
+            frontPhoto, "front_photo"),
+        "backPhoto": await MultipartFileCreator.createMultipartFile(
+            backPhoto, "back_photo"),
       });
 
       final accessToken =
@@ -42,19 +44,6 @@ class UpdatePermanentResidencePhotoNotifier
         error: CostRegisterError("Failed to upload photos $e"),
       );
     }
-  }
-
-  Future<MultipartFile> _createMultipartFile(
-      Uint8List fileBytes, String name) async {
-    final mimeType = lookupMimeType('', headerBytes: fileBytes) ??
-        'application/octet-stream';
-    final fileExtension = mimeType.split('/').last;
-
-    return MultipartFile.fromBytes(
-      fileBytes,
-      filename: "$name.$fileExtension",
-      contentType: DioMediaType(mimeType.split('/')[0], mimeType.split('/')[1]),
-    );
   }
 
   Future<APIResponseState<String>> _performRequest(

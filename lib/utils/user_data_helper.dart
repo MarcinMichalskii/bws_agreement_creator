@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:bws_agreement_creator/Model/authorization_data.dart';
+import 'package:bws_agreement_creator/Model/raport_generator_data.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,6 +20,8 @@ class UserDataHelper {
   Future<void> cleanupUserData() async {
     await storage.write(key: 'accessToken', value: null);
     await storage.write(key: 'refreshToken', value: null);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('GenerateRaportData');
   }
 
   Future<void> storeTokens(AuthorizationData data) async {
@@ -69,5 +74,29 @@ class UserDataHelper {
   Future<bool> seenTrainingsPopup() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool('SeenTrainingsPopup') ?? false;
+  }
+
+  Future<void> storeGenerateRaportData(RaportGeneratorData? data) async {
+    if (data == null) {
+      return;
+    }
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final jsonString = jsonEncode(data.toJson());
+
+    await prefs.setString('GenerateRaportData', jsonString);
+  }
+
+  Future<RaportGeneratorData> getGenerateRaportData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final jsonString = prefs.getString('GenerateRaportData');
+
+    if (jsonString == null) {
+      return RaportGeneratorData();
+    }
+
+    final jsonMap = jsonDecode(jsonString) as Map<String, dynamic>;
+    return RaportGeneratorData.fromJson(jsonMap);
   }
 }

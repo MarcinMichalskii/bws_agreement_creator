@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/Providers/auth_provider.dart';
-import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
+import 'package:bws_agreement_creator/Providers/agreement_generator_data_provider.dart';
 import 'package:bws_agreement_creator/utils/app_state_provider.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
 import 'package:bws_agreement_creator/utils/pdf_b2b_agreement_new.dart';
@@ -27,7 +27,7 @@ class UploadPdfNotifier extends StateNotifier<APIResponseState<String?>> {
   void uploadPdf() async {
     try {
       state = APIResponseState(isLoading: true);
-      final formData = ref.read(newFormDataProvider.notifier).state;
+      final formData = ref.read(agreementGeneratorDataProvider.notifier).state;
       final pdf = PdfNormalAgreementNew().generateNormalAgreement(formData);
       final pdfB2b = PdfB2BAgreementNew().generateB2bPdf(formData);
 
