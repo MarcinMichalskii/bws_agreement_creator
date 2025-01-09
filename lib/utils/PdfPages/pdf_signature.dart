@@ -5,7 +5,9 @@ import 'package:pdf/widgets.dart' as pw;
 
 class SignatureWidgetPdf {
   pw.Widget generate(
-      {required Uint8List signatureData, required Uint8List bwsSignatureData}) {
+      {required Uint8List signatureData,
+      required Uint8List bwsSignatureData,
+      String title = 'Podpis'}) {
     return pw.Row(
         mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
         children: [
@@ -24,7 +26,7 @@ class SignatureWidgetPdf {
                 ),
                 pw.Padding(
                     padding: const pw.EdgeInsets.only(top: 4),
-                    child: pw.Text('Podpis', style: defaultFonts.boldStyle))
+                    child: pw.Text(title, style: defaultFonts.boldStyle))
               ]),
           pw.Column(
               mainAxisAlignment: pw.MainAxisAlignment.center,

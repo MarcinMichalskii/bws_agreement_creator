@@ -19,6 +19,7 @@ class BorderedInput extends StatelessWidget {
       this.onSaved,
       this.sufixIcon,
       this.validator,
+      this.maxLines = 1,
       this.margin = const EdgeInsets.fromLTRB(0, 16, 0, 4)});
 
   final String placeholder;
@@ -36,6 +37,7 @@ class BorderedInput extends StatelessWidget {
   final EdgeInsets margin;
   final FocusNode? focusNode;
   final TextEditingController? controller;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +58,7 @@ class BorderedInput extends StatelessWidget {
           smartDashesType: SmartDashesType.disabled,
           enableIMEPersonalizedLearning: false,
           style: const TextStyle(color: Colors.white),
+          maxLines: maxLines,
           decoration: InputDecoration(
               prefixIcon: prefixIcon,
               suffixIcon: sufixIcon,
@@ -63,7 +66,7 @@ class BorderedInput extends StatelessWidget {
               fillColor: backgroundColor,
               errorText: errorText,
               label: _BorderedInputDecorationLabel(placeholder),
-              contentPadding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+              contentPadding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
               focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
                       color: CustomColors.applicationColorMain, width: 1)),

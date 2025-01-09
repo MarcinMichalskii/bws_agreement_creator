@@ -40,6 +40,6 @@ extension CheckIfAdult on DateTime {
 
 extension ReadableDate on DateTime {
   String toReadableDate() {
-    return DateFormat('dd MMM yyyy').format(this);
+    return DateFormat('dd.MM.yyyy').format(this);
   }
 }

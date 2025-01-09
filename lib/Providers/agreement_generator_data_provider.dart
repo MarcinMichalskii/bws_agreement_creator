@@ -4,14 +4,14 @@ import 'package:bws_agreement_creator/Model/new_form_data.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final newFormDataProvider =
-    StateNotifierProvider<NewFormNotifier, NewFormData>((ref) {
-  return NewFormNotifier(ref);
+final agreementGeneratorDataProvider =
+    StateNotifierProvider<AgreementGeneratorDataNotifier, NewFormData>((ref) {
+  return AgreementGeneratorDataNotifier(ref);
 });
 
-class NewFormNotifier extends StateNotifier<NewFormData> {
-  StateNotifierProviderRef<NewFormNotifier, NewFormData> ref;
-  NewFormNotifier(this.ref) : super(NewFormData());
+class AgreementGeneratorDataNotifier extends StateNotifier<NewFormData> {
+  Ref<NewFormData> ref;
+  AgreementGeneratorDataNotifier(this.ref) : super(NewFormData());
 
   void setLoginData(ProfileData loginData) async {
     String fileName = 'assets/podpis.png';

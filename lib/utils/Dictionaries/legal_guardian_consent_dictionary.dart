@@ -34,7 +34,7 @@ wyrażam zgodę na wykonywanie przez niego na podstawie umowy cywilnoprawnej us�
 BWS Event Support Sp. z o.o.
 NIP 6751759898
 KRS 0000944605
-ul. Na Szaniec 7, 31-559 Kraków
+Stoczniowców 3, 30-709 Kraków
 ''';
 
   String get period => '''

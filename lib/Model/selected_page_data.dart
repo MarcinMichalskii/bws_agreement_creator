@@ -4,7 +4,7 @@ import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/Upd
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/UpdatePersonalData/update_personal_data_logic.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/UpdateStudentId/update_student_id_logic.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/b2b_contract_question_widget.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/default_signature_widget.dart';
+import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/Components/Signature/agreement_creator_signature_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/employee_contract_question_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/legal_guardian_questions_widget.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/other_company_details_question_widget.dart';
@@ -39,9 +39,9 @@ extension SelectedPageExtension on SelectedPage {
       case SelectedPage.b2bContract:
         return B2bContractQuestionWidget();
       case SelectedPage.signature:
-        return const DefaultSignatureWidget();
+        return const AgreementCreatorSignatureWidget();
       case SelectedPage.student:
-        return const DefaultSignatureWidget();
+        return const AgreementCreatorSignatureWidget();
       case SelectedPage.fillStudentData:
         return const UpdateStudentIdLogic();
       case SelectedPage.fillPermanentResidence:
@@ -118,6 +118,7 @@ extension TempalteDataForPage on SelectedPage {
         idNumber: 'FED XDDDD',
         hasStudentIdPhoto: false,
         isAdmin: false,
+        isRaportCreator: false,
         verified: true,
         markedAsNotAStudent: false,
         isFromPoland: true,

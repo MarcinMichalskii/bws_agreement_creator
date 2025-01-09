@@ -11,8 +11,7 @@ final authProvider =
 });
 
 class AuthNotifier extends StateNotifier<APIResponseState<AuthorizationData>> {
-  StateNotifierProviderRef<AuthNotifier, APIResponseState<AuthorizationData>>
-      ref;
+  Ref<APIResponseState<AuthorizationData>> ref;
   AuthNotifier(this.ref) : super(APIResponseState());
 
   void login(String login, String password) async {

@@ -1,8 +1,9 @@
 import 'package:bws_agreement_creator/Model/profile_data.dart';
 import 'package:bws_agreement_creator/Providers/api_controller.dart';
 import 'package:bws_agreement_creator/Providers/auth_provider.dart';
+import 'package:bws_agreement_creator/Providers/get_raport_config_provider.dart';
 import 'package:bws_agreement_creator/Providers/mark_not_a_student.dart';
-import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
+import 'package:bws_agreement_creator/Providers/agreement_generator_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/selected_page_provider.dart';
 import 'package:bws_agreement_creator/utils/app_state_provider.dart';
 import 'package:bws_agreement_creator/utils/base_url.dart';
@@ -14,8 +15,12 @@ final profileProvider =
   return ProfileNotifier(ref);
 });
 
+final appInitializerProvider = StateProvider<bool>((ref) {
+  return false;
+});
+
 class ProfileNotifier extends StateNotifier<APIResponseState<ProfileData>> {
-  StateNotifierProviderRef<ProfileNotifier, APIResponseState<ProfileData>> ref;
+  Ref<APIResponseState<ProfileData>> ref;
   ProfileNotifier(this.ref) : super(APIResponseState()) {
     ref.listen(authProvider, (previous, next) {
       if (next.data?.accessToken != null) {
@@ -51,8 +56,9 @@ class ProfileNotifier extends StateNotifier<APIResponseState<ProfileData>> {
     }
     state = response;
 
-    ref.read(newFormDataProvider.notifier).setLoginData(loginData);
+    ref.read(agreementGeneratorDataProvider.notifier).setLoginData(loginData);
     ref.read(appStateProvider.notifier).setIsLoggedIn(true);
+    ref.read(appInitializerProvider.notifier).state = false;
 
     var page = state.data?.pageBasedOnData();
     if (page != null) {

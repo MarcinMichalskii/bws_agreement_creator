@@ -1,5 +1,4 @@
-import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapters_scaffold.dart';
-import 'package:bws_agreement_creator/utils/colors.dart';
+import 'package:bws_agreement_creator/Widgets/Components/yes_no_dialog.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmationDialog extends StatelessWidget {
@@ -8,25 +7,6 @@ class ConfirmationDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      backgroundColor: CustomColors.almostBlack2,
-      title: const Text('Czy na pewno usunąć?',
-          style: TextStyle(color: CustomColors.gray)),
-      actions: <Widget>[
-        PillButton(
-            title: 'Tak',
-            onPress: () {
-              onConfirm();
-              Navigator.of(context).pop();
-            }),
-        PillButton(
-          title: 'Nie',
-          onPress: () {
-            Navigator.of(context).pop();
-          },
-          color: CustomColors.gray,
-        )
-      ],
-    );
+    return YesNoDialog(onConfirm: onConfirm, text: 'Czy na pewno usunąć?');
   }
 }

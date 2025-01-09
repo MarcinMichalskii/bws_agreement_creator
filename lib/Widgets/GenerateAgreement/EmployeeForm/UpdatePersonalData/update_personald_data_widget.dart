@@ -1,5 +1,5 @@
 import 'package:bws_agreement_creator/Model/profile_data.dart';
-import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/action_button.dart';
+import 'package:bws_agreement_creator/Widgets/Components/action_button.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bordered_input.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/Components/information_frame_widget.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';

@@ -7,6 +7,7 @@ import 'package:bws_agreement_creator/Widgets/GenerateAgreement/EmployeeForm/for
 import 'package:bws_agreement_creator/Widgets/Login/login_widget.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapter_details.dart';
 import 'package:bws_agreement_creator/Widgets/ManageTrainings/manage_chapters_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/RaportsGenerator/raports_generator_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/SideMenu/side_menu.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/VideosList/chapter_details_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/WatchVideo/watch_video_scaffold.dart';
@@ -14,6 +15,7 @@ import 'package:bws_agreement_creator/Widgets/Trainings/chapters_list_scaffold.d
 import 'package:bws_agreement_creator/Widgets/Trainings/examine/chapter_examine_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/Trainings/examine/video_examine_scaffold.dart';
 import 'package:bws_agreement_creator/Widgets/UsersTrainingsProgress/users_statistics_scaffold.dart';
+import 'package:bws_agreement_creator/Widgets/onboarding_scaffold.dart';
 import 'package:bws_agreement_creator/utils/app_state_provider.dart';
 import 'package:bws_agreement_creator/utils/colors.dart';
 import 'package:flutter/foundation.dart';
@@ -58,6 +60,10 @@ var shouldRedirectToTrainingsAfterLogin = false;
 
 class RouterNotifier extends ChangeNotifier {
   RouterNotifier(this._ref) {
+    _ref.listen(appInitializerProvider, (previous, next) {
+      notifyListeners();
+    });
+
     _ref.listen(
       appStateProvider.select((value) => Object.hashAll([
             value.isLoggedIn,
@@ -80,6 +86,10 @@ class RouterNotifier extends ChangeNotifier {
 
   FutureOr<String?> _redirectLogic(BuildContext context, GoRouterState state) {
     final appState = _ref.read(appStateProvider);
+    final isInitializing = _ref.read(appInitializerProvider);
+    if (isInitializing) {
+      return '/initializing';
+    }
 
     final redirectionValue = state.matchedLocation == '/trainings';
     if (redirectionValue) {
@@ -102,7 +112,8 @@ class RouterNotifier extends ChangeNotifier {
 
     if (!appState.isLoggedIn) {
       return _getRedirectScreenIfNeeded(state, '/login');
-    } else if (appState.isLoggedIn && state.fullPath == '/login') {
+    } else if (appState.isLoggedIn && state.fullPath == '/login' ||
+        state.fullPath == '/initializing') {
       if (shouldRedirectToTrainingsAfterLogin) {
         return '/trainings';
       } else {
@@ -117,6 +128,12 @@ class RouterNotifier extends ChangeNotifier {
 final _routes = <GoRoute>[..._loginRoutes, ..._mainRoutes];
 
 final _loginRoutes = [
+  GoRoute(
+    path: '/initializing',
+    pageBuilder: (context, state) {
+      return wrapWithPage(context, state, const OnboardingScaffold());
+    },
+  ),
   GoRoute(
     path: '/',
     pageBuilder: (context, state) {
@@ -241,7 +258,12 @@ final _mainRoutes = [
       path: '/usersStatistics',
       name: 'usersStatistics',
       pageBuilder: (context, state) =>
-          wrapWithPage(context, state, const UsersStatisticsScaffold()))
+          wrapWithPage(context, state, const UsersStatisticsScaffold())),
+  GoRoute(
+      path: '/raportsGenerator',
+      name: 'raportsGenerator',
+      pageBuilder: (context, state) =>
+          wrapWithPage(context, state, const RaportsGeneratorScaffold()))
 ];
 
 Page wrapWithPage(

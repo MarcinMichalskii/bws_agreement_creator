@@ -1,4 +1,4 @@
-import 'package:bws_agreement_creator/Providers/new_form_data_provider.dart';
+import 'package:bws_agreement_creator/Providers/agreement_generator_data_provider.dart';
 import 'package:bws_agreement_creator/Providers/upload_pdf_provider.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/bws_logo.dart';
 import 'package:bws_agreement_creator/Widgets/GenerateAgreement/Components/select_date_button.dart';
@@ -46,8 +46,9 @@ class AgreementSentWidget extends HookConsumerWidget {
                     title: "Pobierz",
                     headerText: "",
                     onPress: () {
-                      final formData =
-                          ref.read(newFormDataProvider.notifier).state;
+                      final formData = ref
+                          .read(agreementGeneratorDataProvider.notifier)
+                          .state;
                       ref
                           .read(agreementProvider.notifier)
                           .state

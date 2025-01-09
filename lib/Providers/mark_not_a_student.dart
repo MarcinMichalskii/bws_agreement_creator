@@ -12,8 +12,7 @@ final markNotAStudentProvider =
 });
 
 class MarkNotAStudentNotifier extends StateNotifier<APIResponseState<String?>> {
-  StateNotifierProviderRef<MarkNotAStudentNotifier, APIResponseState<String?>>
-      ref;
+  Ref<APIResponseState<String?>> ref;
   MarkNotAStudentNotifier(this.ref) : super(APIResponseState());
 
   void markNotAStudent() async {
